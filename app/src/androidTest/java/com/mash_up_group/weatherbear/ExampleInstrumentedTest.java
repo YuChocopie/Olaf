@@ -1,4 +1,4 @@
-package com.mash_up_group.olaf;
+package com.mash_up_group.weatherbear;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.mash_up_group.olaf;
+package com.mash_up_group.weatherbear;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,3 +11,4 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 }
+
