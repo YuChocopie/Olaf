@@ -1,4 +1,4 @@
-package com.mash_up_group.weatherbear;
+package com.mashupgroup.weatherbear;
 
 import org.junit.Test;
 
