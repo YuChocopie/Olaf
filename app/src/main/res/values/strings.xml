@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeatherBear</string>
+    <string name="today_weather">오늘의 날씨</string>
+    <string name="today_temperatures">오늘의 시간대별 기온</string>
+    <string name="tomorrow_weather">내일은 오늘보다</string>
+    <string name="weekly_weather">주간날씨</string>
 </resources>
