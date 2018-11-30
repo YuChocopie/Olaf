@@ -5,4 +5,32 @@
     <string name="tomorrow_weather">내일은 오늘보다</string>
     <string name="weekly_weather">주간날씨</string>
     <string name="unable_get_locaiton">위치정보를 받아올 수 없습니다.</string>
+    <string name="ultrafine_dust">초미세먼지</string>
+    <string name="fine_dust">미세먼지</string>
+    <string name="fine_dust_very_bed">매우 나쁨</string>
+    <string name="fine_dust_bed">나쁨</string>
+    <string name="fine_dust_normal">보통</string>
+    <string name="msg_snow">눈 내림</string>
+    <string name="msg_wind">바람</string>
+    <string name="msg_sunny">맑음 (낮)</string>
+    <string name="msg_sunny_night">맑음 (밤)</string>
+    <string name="msg_cloud">구름 낀 날(낮)</string>
+    <string name="msg_cloud_night">구름 낀 날(밤)</string>
+    <string name="msg_rain">비옴</string>
+    <string name="msg_thunder">번개</string>
+    <string name="msg_thunder_rainy">비와번개</string>
+    <string name="c">℃</string>
+    <string name="body_temperature">체감온도 </string>
+    <string name="now">현재</string>
+
 </resources>
+
+
+
+
+
+
+
+
+
+
