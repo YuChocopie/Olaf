@@ -4,4 +4,5 @@
     <string name="today_temperatures">오늘의 시간대별 기온</string>
     <string name="tomorrow_weather">내일은 오늘보다</string>
     <string name="weekly_weather">주간날씨</string>
+    <string name="unable_get_locaiton">위치정보를 받아올 수 없습니다.</string>
 </resources>
