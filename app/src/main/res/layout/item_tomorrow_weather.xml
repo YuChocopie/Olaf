@@ -4,7 +4,7 @@
     android:id="@+id/tomorrowWeather"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_weather_box_hight"
-    android:layout_marginTop="@dimen/item_weather_box_margin_top"
+    android:layout_marginBottom="@dimen/item_weather_box_margin_bottom"
     android:background="@drawable/weather_box">
 
     <TextView
