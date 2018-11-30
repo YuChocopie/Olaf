@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_weather_box_hight">150dp</dimen>
+    <dimen name="weather_box_tv_margin_top">16dp</dimen>
+    <dimen name="item_weather_box_margin_top">16dp</dimen>
+</resources>
