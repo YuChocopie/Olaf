@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/todayWeather"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_weather_box_hight"
+    android:layout_marginTop="@dimen/item_weather_box_margin_top"
+    android:background="@drawable/weather_box"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+
+    <TextView
+        android:id="@+id/TodayWeatherText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/weather_box_tv_margin_top"
+        android:text="@string/today_weather"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivTodayWeatherShape"
+        android:layout_width="62dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TodayWeatherText"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvTodayWeatherShape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="눈내림"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ivTodayWeatherShape"
+        app:layout_constraintStart_toStartOf="@+id/ivTodayWeatherShape"
+        app:layout_constraintTop_toBottomOf="@+id/ivTodayWeatherShape" />
+
+    <TextView
+        android:id="@+id/tvTodayWeatherTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="-8"
+        app:layout_constraintStart_toEndOf="@+id/ivTodayWeatherShape"
+        app:layout_constraintTop_toTopOf="@+id/ivTodayWeatherShape" />
+
+    <TextView
+        android:id="@+id/TodayWeatherTemperatureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:text="'c"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTodayWeatherTemperature"
+        app:layout_constraintStart_toEndOf="@+id/tvTodayWeatherTemperature" />
+
+    <TextView
+        android:id="@+id/TodayWeatherSensibleTemperatureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="체감온도"
+        app:layout_constraintBottom_toBottomOf="@+id/TodayWeatherTemperatureText"
+        app:layout_constraintStart_toEndOf="@+id/TodayWeatherTemperatureText" />
+
+    <TextView
+        android:id="@+id/tvTodayWeatherSensibleTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="-10"
+        app:layout_constraintBottom_toBottomOf="@+id/TodayWeatherSensibleTemperatureText"
+        app:layout_constraintStart_toEndOf="@+id/TodayWeatherSensibleTemperatureText" />
+
+    <TextView
+        android:id="@+id/TodayWeatherFineDustText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="미세먼지"
+        app:layout_constraintStart_toStartOf="@+id/tvTodayWeatherTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/tvTodayWeatherTemperature" />
+
+    <TextView
+        android:id="@+id/UltrafineDustText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="초미세먼지"
+        app:layout_constraintStart_toStartOf="@+id/TodayWeatherFineDustText"
+        app:layout_constraintTop_toBottomOf="@+id/TodayWeatherFineDustText" />
+
+    <TextView
+        android:id="@+id/tvTodayWeatherFineDust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="100 나쁨"
+        app:layout_constraintBottom_toBottomOf="@+id/TodayWeatherFineDustText"
+        app:layout_constraintStart_toEndOf="@+id/TodayWeatherFineDustText" />
+
+    <TextView
+        android:id="@+id/tvUltrafineDust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="45 나쁨"
+        app:layout_constraintBottom_toBottomOf="@+id/UltrafineDustText"
+        app:layout_constraintStart_toEndOf="@+id/UltrafineDustText" />
+
+
+</android.support.constraint.ConstraintLayout>
