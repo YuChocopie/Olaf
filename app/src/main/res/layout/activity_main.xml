@@ -14,7 +14,7 @@
         android:layout_height="@dimen/main_bear_height"
         android:fitsSystemWindows="true"
         android:theme="@style/Base.ThemeOverlay.AppCompat"
-        android:background="@drawable/background">
+        android:background="@drawable/ic_bg_snow">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"

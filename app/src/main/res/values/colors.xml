@@ -21,4 +21,12 @@
     <color name="now">#748ffc</color>
     <color name="white0">#ffffff</color>
 
+    <color name="bearSnowGood">#f2f2f2</color>
+    <color name="bearSnowbed">#fff</color>
+
+    <color name="bearGood">#fff</color>
+    <color name="bearNomal">#efefef</color>
+    <color name="bearBed">#e5ded6</color>
+    <color name="bearVeryBed">#bcafa0</color>
+
 </resources>
