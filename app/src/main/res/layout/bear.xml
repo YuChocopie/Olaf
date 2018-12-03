@@ -69,6 +69,18 @@
         app:srcCompat="@drawable/ic_msg_bear_face_good" />
 
 
+    <ImageView
+        android:id="@+id/bear_head_snow"
+        android:layout_width="123dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="4dp"
+        android:tint="@color/bearSnowGood"
+        android:tintMode="multiply"
+        app:layout_constraintBottom_toTopOf="@+id/handkerchief"
+        app:layout_constraintEnd_toEndOf="@+id/bear_head"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="@+id/bear_head"
+        app:srcCompat="@drawable/ic_msg_bear_head_snow" />
 
     <ImageView
         android:id="@+id/bear_scarf"
@@ -133,13 +145,14 @@
         app:srcCompat="@drawable/ic_msg_bear_umbrella" />
 
     <ImageView
+        android:visibility="invisible"
         android:id="@+id/bear_leg_front_good"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="55dp"
         android:tint="@color/bearGood"
         android:tintMode="multiply"
-        app:layout_constraintEnd_toStartOf="@+id/bear_leg_front_bed"
+        app:layout_constraintEnd_toEndOf="@+id/bear_leg_front_bed"
         app:layout_constraintTop_toTopOf="@+id/bear_leg"
         app:srcCompat="@drawable/ic_msg_bear_leg_2" />
 
@@ -157,24 +170,12 @@
         app:srcCompat="@drawable/ic_msg_bear_leg" />
 
     <ImageView
-        android:id="@+id/bear_head_snow"
-        android:layout_width="123dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="4dp"
-        android:tint="@color/bearSnowGood"
-        android:tintMode="multiply"
-        app:layout_constraintBottom_toTopOf="@+id/handkerchief"
-        app:layout_constraintEnd_toEndOf="@+id/bear_head"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintStart_toStartOf="@+id/bear_head"
-        app:srcCompat="@drawable/ic_msg_bear_head_snow" />
-
-    <ImageView
         android:id="@+id/bear_sunglasses"
         android:layout_width="105dp"
         android:layout_height="64dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="18dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/bear_body"
         app:layout_constraintStart_toStartOf="@+id/bear_body"
         app:layout_constraintTop_toTopOf="@+id/bear_head"
