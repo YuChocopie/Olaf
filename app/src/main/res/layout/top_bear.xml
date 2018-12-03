@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/main_bear_height">
+
+    <FrameLayout
+        android:id="@+id/bearWrapper"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/ivBear"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_bear_height"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:src="@drawable/msg_bear_body"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_topbar_height"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_far_mountain"
+        android:layout_gravity="bottom|center"
+        tools:ignore="ContentDescription" />
+
+
+</FrameLayout>
