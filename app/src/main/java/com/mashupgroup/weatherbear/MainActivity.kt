@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val bear_ear_r: Animation = AnimationUtils.loadAnimation(this, R.anim.bear_ear_right)
+        val bear_ear_l: Animation = AnimationUtils.loadAnimation(this, R.anim.bear_ear_left)
         val leg_frong: Animation = AnimationUtils.loadAnimation(this, R.anim.leg_frong)
         val leg_frong_good: Animation = AnimationUtils.loadAnimation(this, R.anim.leg_frong_good)
         val leg_frong_bed: Animation = AnimationUtils.loadAnimation(this, R.anim.leg_frong_bed)
@@ -20,6 +22,9 @@ class MainActivity : AppCompatActivity() {
         val scarh_high: Animation = AnimationUtils.loadAnimation(this, R.anim.scarf_high)
         val scarh_low: Animation = AnimationUtils.loadAnimation(this, R.anim.scarf_low)
         val pet: Animation = AnimationUtils.loadAnimation(this, R.anim.pet)
+        //양 귀 흔들기
+        bear_ear_right.startAnimation(bear_ear_r)
+        bear_ear_left.startAnimation(bear_ear_l)
         // 양 팔 흔들기
         bear_leg.startAnimation(leg_frong)
         bear_leg_front_good.startAnimation(leg_frong_good)

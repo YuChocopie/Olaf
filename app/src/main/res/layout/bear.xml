@@ -145,7 +145,6 @@
         app:srcCompat="@drawable/ic_msg_bear_umbrella" />
 
     <ImageView
-        android:visibility="invisible"
         android:id="@+id/bear_leg_front_good"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
