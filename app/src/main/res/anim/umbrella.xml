@@ -1,0 +1,11 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/cycle_interpolator">
+    <rotate
+        android:fromDegrees="0"
+        android:toDegrees="7"
+        android:pivotX="100%"
+        android:pivotY="175%"
+        android:repeatCount="100"
+        android:duration="8000"
+        />
+</set>
