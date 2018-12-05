@@ -19,83 +19,65 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvTodayTemperature1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="1시"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/SIZE_120"
+        android:layout_margin="@dimen/SIZE_5"
+        android:orientation="horizontal"
+        android:weightSum="8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/tvTodayTemperature2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="2시"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTodayTemperature1"
-        app:layout_constraintStart_toEndOf="@+id/tvTodayTemperature1" />
+        <include
+            layout="@layout/item_today_time_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/tvTodayTemperatures3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="3시"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTodayTemperature2"
-        app:layout_constraintStart_toEndOf="@+id/tvTodayTemperature2" />
+        <include
+            layout="@layout/item_today_time_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/tvTodayTemperatures4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="6시"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTodayTemperatures3"
-        app:layout_constraintStart_toEndOf="@+id/tvTodayTemperatures3" />
+        <include
+            layout="@layout/item_today_time_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/tvTodayTemperatures5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="9시"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTodayTemperatures4"
-        app:layout_constraintStart_toEndOf="@+id/tvTodayTemperatures4" />
+        <include
+            layout="@layout/item_today_time_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/tvTodayTemperatures6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="12시"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTodayTemperatures5"
-        app:layout_constraintStart_toEndOf="@+id/tvTodayTemperatures5" />
+        <include
+            layout="@layout/item_today_time_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/tvTodayTemperatures7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="15시"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTodayTemperatures6"
-        app:layout_constraintStart_toEndOf="@+id/tvTodayTemperatures6" />
+        <include
+            layout="@layout/item_today_time_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/tvTodayTemperatures8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="18시"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTodayTemperatures7"
-        app:layout_constraintStart_toEndOf="@+id/tvTodayTemperatures7" />
+        <include
+            layout="@layout/item_today_time_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <include
+            layout="@layout/item_today_time_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

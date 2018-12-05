@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="item_weather_box_hight">160dp</dimen>
+    <dimen name="item_weather_box_hight2">200dp</dimen>
     <dimen name="item_weather_box_margin_bottom">15dp</dimen>
     <dimen name="item_weather_box_margin_top">16dp</dimen>
 
@@ -16,6 +17,7 @@
     <dimen name="SIZE_2">2dp</dimen>
     <dimen name="SIZE_5">5dp</dimen>
     <dimen name="SIZE_7">7dp</dimen>
+    <dimen name="SIZE_8">8dp</dimen>
     <dimen name="SIZE_9">9dp</dimen>
     <dimen name="SIZE_10">10dp</dimen>
     <dimen name="SIZE_13">13dp</dimen>
@@ -23,10 +25,13 @@
     <dimen name="SIZE_15">15dp</dimen>
     <dimen name="SIZE_16">16dp</dimen>
     <dimen name="SIZE_30">30dp</dimen>
+    <dimen name="SIZE_24">24dp</dimen>
     <dimen name="SIZE_40">40dp</dimen>
+    <dimen name="SIZE_45">45dp</dimen>
     <dimen name="SIZE_50">50dp</dimen>
     <dimen name="SIZE_56">56dp</dimen>
     <dimen name="SIZE_110">110dp</dimen>
+    <dimen name="SIZE_120">120dp</dimen>
 
     <dimen name="TEXT_SIZE_5">5sp</dimen>
     <dimen name="TEXT_SIZE_6">6sp</dimen>
@@ -38,4 +43,5 @@
     <dimen name="TEXT_SIZE_22">22dp</dimen>
     <dimen name="TEXT_SIZE_23">23dp</dimen>
     <dimen name="TEXT_SIZE_40">40sp</dimen>
+    <dimen name="TEXT_SIZE_8">8sp</dimen>
 </resources>

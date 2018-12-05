@@ -1,0 +1,23 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/cycle_interpolator"
+    >
+    <alpha
+        android:repeatCount="-1"
+        android:duration="10000"
+        android:fromAlpha="0.85"
+        android:toAlpha="1.0" />
+    <scale
+        android:repeatCount="-1"
+        android:duration="20000"
+        android:fromXScale="0.98"
+        android:fromYScale="0.98"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="1.1"
+        android:toYScale="1.1" />
+    <translate
+        android:repeatCount="-1"
+        android:duration="4000"
+        android:fromYDelta="-10%"
+        android:toYDelta="10%" />
+</set>
