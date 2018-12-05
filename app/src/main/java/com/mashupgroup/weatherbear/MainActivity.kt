@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         val api = retrofit.create(WeatherInterface::class.java)
 
-        // lat, lon 값 수정 필요
+        //TODO: lat, lon 값 수정 필요
         api.getWeather(35.0, 135.0, OpenWeatherMapKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
