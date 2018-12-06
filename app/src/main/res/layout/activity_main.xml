@@ -56,7 +56,6 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </com.mashupgroup.weatherbear.MainAppbarLayout>
 
-    <!-- Main content nested scroll view -->
     <android.support.v4.widget.NestedScrollView
         android:background="@color/gray2"
         android:layout_width="match_parent"
@@ -73,3 +72,8 @@
             android:id="@+id/viewPager" />
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
+    <include
+        android:visibility="@{bear.name}"
+
+        layout="@layout/item_weather" />
+</layout>
