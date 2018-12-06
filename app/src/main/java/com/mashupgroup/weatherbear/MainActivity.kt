@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.mashupgroup.weatherbear.models.weather.Weather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.item_today_weather.*
 import retrofit2.Retrofit
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -13,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bear.*
 import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
-import kotlinx.android.synthetic.main.item_oneday_weather.*
+import kotlinx.android.synthetic.main.item_today_time_weather.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -57,11 +56,8 @@ class MainActivity : AppCompatActivity() {
         bear_pet.startAnimation(pet)
         bear_pet_small.startAnimation(pet)
         bear_pet_w.startAnimation(pet)
-
-
         /*시간
             - 밤/낮 : 곰의 얼굴 변경 //밤에 무조건 잠. */
-
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
         viewPager.adapter = mainPagerAdapter
@@ -82,7 +78,8 @@ class MainActivity : AppCompatActivity() {
                 .subscribe({ weather : Weather? ->
                     if(weather != null) {
                         // 현재 기온
-                        tvDayWeatherTemperature.text = String.format("%.1f",(weather.main.temp-273))
+                        tvTodayTime.text = String.format("%.1f",(weather.main
+                                .temp-273))
                     }
                 }, {
                     error -> error.printStackTrace()

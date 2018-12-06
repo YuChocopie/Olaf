@@ -9,8 +9,8 @@
         <import type="android.graphics.drawable.Drawable"/>
         <import type="android.view.View"/>
         <variable
-            name="bear"
-            type="com.mashupgroup.weatherbear.BearViewModel" />
+            type="com.mashupgroup.weatherbear.BearViewModel"
+            name="bear" />
     </data>
 
     <android.support.constraint.ConstraintLayout
