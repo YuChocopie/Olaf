@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="bear"
+            type="com.mashupgroup.weatherbear.BearViewModel" />
+    </data>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".MainActivity">
 
     <com.mashupgroup.weatherbear.MainAppbarLayout
         android:id="@+id/app_bar"
@@ -33,11 +41,15 @@
 
             <!-- Top Bear&Background FrameLayout -->
             <include
-                layout="@layout/top_bear" />
+                layout="@layout/top_bear"
+                bind:bear="@{bear}"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </com.mashupgroup.weatherbear.MainAppbarLayout>
 
     <include
+        android:visibility="@{bear.name}"
+
         layout="@layout/item_weather" />
 </android.support.design.widget.CoordinatorLayout>
+</layout>
