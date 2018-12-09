@@ -4,9 +4,11 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bear.*
 
 class MainActivity : AppCompatActivity() {
+    var mainPagerAdapter : MainPagerAdapter = MainPagerAdapter(this);
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,12 @@ class MainActivity : AppCompatActivity() {
 
         시간
             - 밤/낮 : 곰의 얼굴 변경 //밤에 무조건 잠. */
+
+        // ViewPager 초기화
+        viewPager.initialize(mainIndicator)
+        viewPager.adapter = mainPagerAdapter
+
+        viewPager.initIndicator()
     }
 }
 
