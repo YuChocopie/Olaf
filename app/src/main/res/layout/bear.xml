@@ -1,214 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/main_bear_height"
-    android:background="@drawable/ic_bg_snow">
+    xmlns:tools="http://schemas.android.com/tools">
 
 
-    <ImageView
-        android:id="@+id/bear_body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:tint="@color/bearGood"
-        android:tintMode="src_atop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_msg_bear_body" />
+    <data>
 
-    <ImageView
-        android:id="@+id/bear_ear_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="70dp"
-        android:tint="@color/bearGood"
-        android:tintMode="multiply"
-        app:layout_constraintEnd_toEndOf="@+id/bear_head"
-        app:layout_constraintTop_toTopOf="@+id/bear_head"
-        app:srcCompat="@drawable/ic_msg_bear_ear_left" />
+        <import type="android.graphics.drawable.Drawable"/>
+        <import type="android.view.View"/>
+        <variable
+            name="bear"
+            type="com.mashupgroup.weatherbear.BearViewModel" />
+    </data>
 
-    <ImageView
-        android:id="@+id/bear_ear_right"
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:tint="@color/bearGood"
-        android:tintMode="multiply"
-        app:layout_constraintStart_toStartOf="@+id/bear_head"
-        app:layout_constraintTop_toTopOf="@+id/bear_head"
-        app:srcCompat="@drawable/ic_msg_bear_ear_right" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bear_height"
+        android:background="@drawable/ic_bg_snow">
 
 
+        <ImageView
+            android:id="@+id/bear_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:tint="@{bear.bearSkinColor}"
+            android:tintMode="multiply"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_msg_bear_body" />
 
-    <ImageView
-        android:id="@+id/bear_head"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="180dp"
-        android:tint="@color/bearGood"
-        android:tintMode="multiply"
-        app:layout_constraintBottom_toBottomOf="@+id/bear_body"
-        app:layout_constraintEnd_toEndOf="@+id/bear_body"
-        app:layout_constraintStart_toStartOf="@+id/bear_body"
-        app:srcCompat="@drawable/ic_msg_bear_head"
-        tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/bear_ear_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="70dp"
+            android:tint="@{bear.bearSkinColor}"
+            android:tintMode="multiply"
+            app:layout_constraintEnd_toEndOf="@+id/bear_head"
+            app:layout_constraintTop_toTopOf="@+id/bear_head"
+            app:srcCompat="@drawable/ic_msg_bear_ear_left" />
 
-
-    <ImageView
-        android:id="@+id/bear_face"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/bear_head"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="@+id/bear_head"
-        app:layout_constraintTop_toTopOf="@+id/bear_head"
-        app:srcCompat="@drawable/ic_msg_bear_face_good" />
-
-
-    <ImageView
-        android:id="@+id/bear_head_snow"
-        android:layout_width="123dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="4dp"
-        android:tint="@color/bearSnowGood"
-        android:tintMode="multiply"
-        app:layout_constraintBottom_toTopOf="@+id/handkerchief"
-        app:layout_constraintEnd_toEndOf="@+id/bear_head"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintStart_toStartOf="@+id/bear_head"
-        app:srcCompat="@drawable/ic_msg_bear_head_snow" />
-
-    <ImageView
-        android:id="@+id/bear_scarf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        app:layout_constraintEnd_toEndOf="@+id/bear_body"
-        app:layout_constraintStart_toStartOf="@+id/bear_body"
-        app:layout_constraintTop_toTopOf="@+id/bear_head"
-        app:srcCompat="@drawable/ic_msg_bear_snow_scarf" />
-
-    <ImageView
-        android:id="@+id/bear_scarf_high"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bear_scarf"
-        app:layout_constraintStart_toStartOf="@+id/bear_scarf"
-        app:srcCompat="@drawable/ic_msg_bear_snow_scarf_high" />
-
-    <ImageView
-        android:id="@+id/bear_scarf_low"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="35dp"
-        app:layout_constraintStart_toStartOf="@+id/bear_scarf_high"
-        app:layout_constraintTop_toTopOf="@+id/bear_scarf_high"
-        app:srcCompat="@drawable/ic_msg_bear_snow_scarf_low" />
-
-    <ImageView
-        android:id="@+id/handkerchief"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        app:layout_constraintEnd_toEndOf="@+id/bear_head"
-        app:layout_constraintStart_toStartOf="@+id/bear_head"
-        app:layout_constraintTop_toTopOf="@+id/bear_head"
-        app:srcCompat="@drawable/ic_msg_handkerchief" />
-
-    <ImageView
-        android:id="@+id/bear_leg_front_bed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:tint="@color/bearGood"
-        android:tintMode="multiply"
-        app:layout_constraintStart_toStartOf="@+id/bear_body"
-        app:layout_constraintTop_toTopOf="@+id/bear_scarf_low"
-        app:srcCompat="@drawable/ic_msg_bear_leg_front" />
+        <ImageView
+            android:id="@+id/bear_ear_right"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:tint="@{bear.bearSkinColor}"
+            android:tintMode="multiply"
+            app:layout_constraintStart_toStartOf="@+id/bear_head"
+            app:layout_constraintTop_toTopOf="@+id/bear_head"
+            app:srcCompat="@drawable/ic_msg_bear_ear_right" />
 
 
-    <ImageView
-        android:id="@+id/bear_umbrella"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="90dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bear_leg_front_good"
-        app:layout_constraintEnd_toEndOf="@+id/bear_leg_front_good"
-        app:srcCompat="@drawable/ic_msg_bear_umbrella" />
-
-    <ImageView
-        android:id="@+id/bear_leg_front_good"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="55dp"
-        android:tint="@color/bearGood"
-        android:tintMode="multiply"
-        app:layout_constraintEnd_toEndOf="@+id/bear_leg_front_bed"
-        app:layout_constraintTop_toTopOf="@+id/bear_leg"
-        app:srcCompat="@drawable/ic_msg_bear_leg_2" />
+        <ImageView
+            android:id="@+id/bear_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="180dp"
+            android:tint="@{bear.bearSkinColor}"
+            android:tintMode="multiply"
+            app:layout_constraintBottom_toBottomOf="@+id/bear_body"
+            app:layout_constraintEnd_toEndOf="@+id/bear_body"
+            app:layout_constraintStart_toStartOf="@+id/bear_body"
+            app:srcCompat="@drawable/ic_msg_bear_head"
+            tools:ignore="MissingConstraints" />
 
 
-    <ImageView
-        android:id="@+id/bear_leg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="106dp"
-        android:tint="@color/bearGood"
-        android:tintMode="multiply"
-        app:layout_constraintBottom_toBottomOf="@+id/bear_body"
-        app:layout_constraintEnd_toEndOf="@+id/bear_scarf_low"
-        app:srcCompat="@drawable/ic_msg_bear_leg" />
-
-    <ImageView
-        android:id="@+id/bear_sunglasses"
-        android:layout_width="105dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="18dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/bear_body"
-        app:layout_constraintStart_toStartOf="@+id/bear_body"
-        app:layout_constraintTop_toTopOf="@+id/bear_head"
-        app:srcCompat="@drawable/ic_bear_sunglasses" />
-
-    <ImageView
-        android:id="@+id/bear_pet_small"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="42dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bear_pet"
-        app:layout_constraintEnd_toEndOf="@+id/bear_pet"
-        app:srcCompat="@drawable/ic_msg_dirt" />
-
-    <ImageView
-        android:id="@+id/bear_pet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bear_leg_front_good"
-        app:layout_constraintEnd_toStartOf="@+id/bear_head"
-        app:srcCompat="@drawable/ic_msg_dirt" />
-
-    <ImageView
-        android:id="@+id/bear_pet_w"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bear_scarf_high"
-        app:layout_constraintStart_toEndOf="@+id/bear_ear_right"
-        app:srcCompat="@drawable/ic_msg_dirt_w" />
+        <ImageView
+            android:id="@+id/bear_face"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:src="@{bear.bearFaceImage}"
+            app:layout_constraintEnd_toEndOf="@+id/bear_head"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="@+id/bear_head"
+            app:layout_constraintTop_toTopOf="@+id/bear_head" />
 
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/bear_head_snow"
+            android:layout_width="123dp"
+            android:layout_height="66dp"
+            android:layout_marginBottom="36dp"
+            android:tint="@{bear.bearSnowColor}"
+            android:tintMode="multiply"
+            android:visibility="@{bear.bearSnowVisibilty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/bear_head"
+            app:layout_constraintEnd_toEndOf="@+id/bear_head"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintStart_toStartOf="@+id/bear_head"
+            app:srcCompat="@drawable/ic_msg_bear_head_snow" />
+
+        <ImageView
+            android:id="@+id/bear_scarf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="84dp"
+            app:layout_constraintEnd_toEndOf="@+id/bear_body"
+            app:layout_constraintStart_toStartOf="@+id/bear_body"
+            app:layout_constraintTop_toTopOf="@+id/bear_head"
+            app:srcCompat="@drawable/ic_msg_bear_snow_scarf" />
+
+        <ImageView
+            android:id="@+id/bear_scarf_high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bear_scarf"
+            app:layout_constraintStart_toStartOf="@+id/bear_scarf"
+            app:srcCompat="@drawable/ic_msg_bear_snow_scarf_high" />
+
+        <ImageView
+            android:id="@+id/bear_scarf_low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="35dp"
+            app:layout_constraintStart_toStartOf="@+id/bear_scarf_high"
+            app:layout_constraintTop_toTopOf="@+id/bear_scarf_high"
+            app:srcCompat="@drawable/ic_msg_bear_snow_scarf_low" />
+
+        <ImageView
+            android:id="@+id/handkerchief"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:visibility="@{bear.bearLegVisibilty ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@+id/bear_head"
+            app:layout_constraintStart_toStartOf="@+id/bear_head"
+            app:layout_constraintTop_toTopOf="@+id/bear_head"
+            app:srcCompat="@drawable/ic_msg_handkerchief" />
+
+        <ImageView
+            android:id="@+id/bear_leg_front_bad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:tint="@{bear.bearSkinColor}"
+            android:tintMode="multiply"
+            android:visibility="@{bear.bearLegVisibilty ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="@+id/bear_body"
+            app:layout_constraintTop_toTopOf="@+id/bear_scarf_low"
+            app:srcCompat="@drawable/ic_msg_bear_leg_front" />
+
+
+        <ImageView
+            android:id="@+id/bear_umbrella"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/SIZE_13"
+            android:layout_marginBottom="194dp"
+            android:visibility="@{bear.bearumbrellaVisibilty  ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/bear_body"
+            app:layout_constraintEnd_toStartOf="@+id/bear_head"
+            app:srcCompat="@drawable/ic_msg_bear_umbrella" />
+
+        <ImageView
+            android:id="@+id/bear_leg_front_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="78dp"
+            android:tint="@{bear.bearSkinColor}"
+            android:tintMode="multiply"
+            android:visibility="@{bear.bearLegVisibilty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toStartOf="@+id/bear_leg"
+            app:layout_constraintTop_toTopOf="@+id/bear_leg"
+            app:srcCompat="@drawable/ic_msg_bear_leg_2" />
+
+
+        <ImageView
+            android:id="@+id/bear_leg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="106dp"
+            android:tint="@{bear.bearSkinColor}"
+            android:tintMode="multiply"
+            app:layout_constraintBottom_toBottomOf="@+id/bear_body"
+            app:layout_constraintEnd_toEndOf="@+id/bear_scarf_low"
+            app:srcCompat="@drawable/ic_msg_bear_leg" />
+
+        <ImageView
+            android:id="@+id/bear_sunglasses"
+            android:layout_width="105dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="18dp"
+            android:visibility="@{bear.bearSunglesesVisibilty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="@+id/bear_body"
+            app:layout_constraintStart_toStartOf="@+id/bear_body"
+            app:layout_constraintTop_toTopOf="@+id/bear_head"
+            app:srcCompat="@drawable/ic_bear_sunglasses" />
+
+        <ImageView
+            android:id="@+id/bear_pet_small"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="68dp"
+            android:layout_marginBottom="252dp"
+            android:visibility="@{bear.bearPetVisibilty ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/bear_body"
+            app:layout_constraintEnd_toStartOf="@+id/bear_head"
+            app:srcCompat="@drawable/ic_msg_dirt" />
+
+        <ImageView
+            android:id="@+id/bear_pet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="@{bear.bearPetVisibilty ? View.INVISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/bear_leg"
+            app:layout_constraintEnd_toStartOf="@+id/bear_head"
+            app:srcCompat="@drawable/ic_msg_dirt" />
+
+        <ImageView
+            android:id="@+id/bear_pet_w"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="@{bear.bearPetVisibilty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/bear_scarf_high"
+            app:layout_constraintStart_toEndOf="@+id/bear_ear_right"
+            app:srcCompat="@drawable/ic_msg_dirt_w" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

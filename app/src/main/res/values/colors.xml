@@ -11,8 +11,8 @@
     <color name="gray1">#ebebeb</color>
     <color name="gray2">#f2f2f2</color>
 
-    <color name="fineDustVeryBed">#c62828</color>
-    <color name="fineDustBed">#ff8f00</color>
+    <color name="fineDustVeryBad">#c62828</color>
+    <color name="fineDustBad">#ff8f00</color>
     <color name="fineDustNormal">#1eac5a</color>
     <color name="fineDustGood">#0277bd</color>
     <color name="fineDustText">#ff9966</color>
@@ -23,12 +23,12 @@
     <color name="white0">#ffffff</color>
 
     <color name="bearSnowGood">#f2f2f2</color>
-    <color name="bearSnowbed">#fff</color>
+    <color name="bearSnowbad">#fff</color>
 
     <color name="bearGood">#fff</color>
     <color name="bearNomal">#efefef</color>
-    <color name="bearBed">#e5ded6</color>
-    <color name="bearVeryBed">#bcafa0</color>
+    <color name="bearBad">#e5ded6</color>
+    <color name="bearVeryBad">#bcafa0</color>
 
     <color name="indicator_selected">#ffffffff</color>
     <color name="indicator_unselected">#80ffffff</color>

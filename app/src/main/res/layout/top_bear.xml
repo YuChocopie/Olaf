@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/main_bear_height">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_topbar_height"
-        android:layout_gravity="bottom|center"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background_far_mountain"
-        tools:ignore="ContentDescription" />
+        <variable
+            name="bear"
+            type="com.mashupgroup.weatherbear.BearViewModel" />
+    </data>
 
     <FrameLayout
-        android:id="@+id/bearWrapper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_height="@dimen/main_bear_height">
 
-        <include layout="@layout/bear" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_topbar_height"
+            android:layout_gravity="bottom|center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_far_mountain"
+            tools:ignore="ContentDescription" />
+
+        <FrameLayout
+            android:id="@+id/bearWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <include
+                layout="@layout/bear"
+                bind:bear="@{bear}" />
+
+        </FrameLayout>
 
     </FrameLayout>
-
-</FrameLayout>
+</layout>
