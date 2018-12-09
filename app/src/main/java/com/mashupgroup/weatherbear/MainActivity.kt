@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
-        binding.setVariable(BR.bear,BearModel())
+        binding.setVariable(BR.bear,BearViewModel())
 
 
         requestTodayWeather()

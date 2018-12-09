@@ -1,7 +1,6 @@
 package com.mashupgroup.weatherbear
 
 import android.util.Log
-import com.mashupgroup.weatherbear.R.id.tvTodayWeatherTemperature
 import com.mashupgroup.weatherbear.models.weather.Weather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

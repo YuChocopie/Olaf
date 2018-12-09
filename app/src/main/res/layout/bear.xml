@@ -10,7 +10,7 @@
         <import type="android.view.View"/>
         <variable
             name="bear"
-            type="com.mashupgroup.weatherbear.BearModel" />
+            type="com.mashupgroup.weatherbear.BearViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

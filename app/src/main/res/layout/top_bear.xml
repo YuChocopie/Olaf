@@ -8,7 +8,7 @@
 
         <variable
             name="bear"
-            type="com.mashupgroup.weatherbear.BearModel" />
+            type="com.mashupgroup.weatherbear.BearViewModel" />
     </data>
 
     <FrameLayout

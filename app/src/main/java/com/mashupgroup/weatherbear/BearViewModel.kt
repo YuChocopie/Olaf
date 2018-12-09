@@ -1,12 +1,7 @@
 package com.mashupgroup.weatherbear
 
-import android.util.Log
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 
-
-class BearModel {
+class BearViewModel {
     /*
         미세먼지 단계 4단계
             - 곰의 색
@@ -30,9 +25,14 @@ class BearModel {
       날씨 : 눈(snow), 비(rainy), 천둥번개(thunder_rainy), 바람(wind), 구름(cloud),맑음(sunny), 폭설(heavy_snow)
       시간 : 낮="true" 밤="false"       */
 
+    enum class Weather {
+        SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
+
+    }
+
     private var fineDust: Int = 1
-    private var weather: String = "snow"
-    private var time: Boolean = true
+    private var weather: Weather = Weather.SNOW
+    private var isDayTime: Boolean = true
 
     var resource = WeatherBearApp.appContext.resources
     var bearSkinColor = resource.getColor(R.color.bearBad)
@@ -47,13 +47,13 @@ class BearModel {
     //폭설일 경우 눈사람으로 변경
     private fun snowMan() {
         //TODO: change snowman... include && animation 혹은 모든 visibility 를 gone 으로 바꾸고 눈사람 추가
-        if (weather == "heavySnow") {
+        if (weather == Weather.HEAVY_SNOW) {
         } else {
-            setBear()
+            updeteBear()
         }
     }
 
-    private fun setBear() {
+    private fun updeteBear() {
         bearSkin()
         bearSnow()
         bearLeg()
@@ -72,19 +72,22 @@ class BearModel {
     }
 
     private fun bearSnow() {
-        if (weather == "heavy_snow" || weather == "snow") {
-            bearSnowVisibilty = true
-            when (fineDust) {
-                1 -> bearSnowColor = resource.getColor((R.color.bearSnowGood))
-                2, 3, 4 -> bearSnowColor = resource.getColor((R.color.bearSnowbad))
+        when (weather) {
+            Weather.HEAVY_SNOW, Weather.SNOW -> {
+                bearSnowVisibilty = true
+                when (fineDust) {
+                    1 -> bearSnowColor = resource.getColor((R.color.bearSnowGood))
+                    2, 3, 4 -> bearSnowColor = resource.getColor((R.color.bearSnowbad))
+                }
             }
-        } else {
-            bearSnowVisibilty = false
+            else -> {
+                bearSnowVisibilty = false
+            }
         }
     }
 
     private fun bearFace() {
-        if (time) {
+        if (isDayTime) {
             when (fineDust) {
                 1, 2 -> bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_good)
                 3, 4 -> bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_bad)
@@ -96,12 +99,12 @@ class BearModel {
     }
 
     private fun bearLeg() {
-        if (weather == "rainy" || weather == "thunder_rainy") {
+        if (weather == Weather.RAINY || weather == Weather.THUNDER_RAINY) {
             //TODO: 우산 애니매이션 시작, 비옴
             bearumbrellaVisibilty = true
             bearLegVisibilty = true
         } else {
-            if (time) {
+            if (isDayTime) {
                 if (fineDust >= 3) {
                     bearLegVisibilty = false
                 }
@@ -117,15 +120,12 @@ class BearModel {
     }
 
     private fun bearSunglesses() {
-        if (time) {
-            if (weather == "wind" || weather == "cloud" || weather == "sunny") {
-                bearSunglesesVisibilty = true
+        if (isDayTime) {
+            when (weather) {
+                Weather.WIND, Weather.CLOUD, Weather.SUNNY -> bearSunglesesVisibilty = true
             }
-
         } else {
             bearSunglesesVisibilty = false
         }
-
     }
-
 }
