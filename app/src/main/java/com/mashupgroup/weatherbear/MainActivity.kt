@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.item_today_weather.*
 import retrofit2.Retrofit
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bear.*
 import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.item_oneday_weather.*
 
 
 class MainActivity : AppCompatActivity() {
+    var mainPagerAdapter : MainPagerAdapter = MainPagerAdapter(this);
     val OpenWeatherMapKey = "926ab2fea6549951c324d1dc64014bdb"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +59,14 @@ class MainActivity : AppCompatActivity() {
         bear_pet_w.startAnimation(pet)
 
 
+        시간
+            - 밤/낮 : 곰의 얼굴 변경 //밤에 무조건 잠. */
+
+        // ViewPager 초기화
+        viewPager.initialize(mainIndicator)
+        viewPager.adapter = mainPagerAdapter
+
+        viewPager.initIndicator()
     }
 
     fun requestTodayWeather() {

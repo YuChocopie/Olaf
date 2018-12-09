@@ -30,4 +30,6 @@
     <color name="bearBad">#e5ded6</color>
     <color name="bearVeryBad">#bcafa0</color>
 
+    <color name="indicator_selected">#ffffffff</color>
+    <color name="indicator_unselected">#80ffffff</color>
 </resources>

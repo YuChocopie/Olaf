@@ -13,6 +13,10 @@
     <dimen name="weather_box_tv_margin_top">7dp</dimen>
     <dimen name="weather_box_tv_height">25dp</dimen>
 
+    <dimen name="indicator_wrap_size">11dp</dimen>
+    <dimen name="indicator_sel_padding">2dp</dimen>
+    <dimen name="indicator_unsel_padding">3dp</dimen>
+
     <dimen name="SIZE_1">1dp</dimen>
     <dimen name="SIZE_2">2dp</dimen>
     <dimen name="SIZE_5">5dp</dimen>

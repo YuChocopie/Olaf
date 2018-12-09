@@ -44,12 +44,32 @@
                 layout="@layout/top_bear"
                 bind:bear="@{bear}"/>
 
+            <!-- ViewPager indicator -->
+            <com.mashupgroup.weatherbear.MainIndicator
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center|bottom"
+                android:gravity="center"
+                android:layout_marginBottom="7dp"
+                android:id="@+id/mainIndicator"/>
         </android.support.design.widget.CollapsingToolbarLayout>
     </com.mashupgroup.weatherbear.MainAppbarLayout>
 
-    <include
-        android:visibility="@{bear.name}"
-
-        layout="@layout/item_weather" />
+    <!-- Main content nested scroll view -->
+    <android.support.v4.widget.NestedScrollView
+        android:background="@color/gray2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.mashupgroup.weatherbear.MainActivity"
+        android:scrollbars="vertical"
+        android:fillViewport="true"
+        tools:showIn="@layout/activity_main">
+        <!-- Main contents viewPager -->
+        <com.mashupgroup.weatherbear.MainViewPager
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewPager" />
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
-</layout>
