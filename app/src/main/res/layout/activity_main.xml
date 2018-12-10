@@ -16,60 +16,61 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
-    <com.mashupgroup.weatherbear.MainAppbarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_bear_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/Base.ThemeOverlay.AppCompat"
-        android:background="@drawable/ic_bg_snow">
+        <com.mashupgroup.weatherbear.MainAppbarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_bear_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/Base.ThemeOverlay.AppCompat"
+            android:background="@drawable/ic_bg_snow">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@+id/toolbar">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_topbar_height"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@id/toolbar" />
+
+                <!-- Top Bear&Background FrameLayout -->
+                <include
+                    layout="@layout/top_bear"
+                    bind:bear="@{bear}"/>
+
+                <!-- ViewPager indicator -->
+                <com.mashupgroup.weatherbear.MainIndicator
+                    android:layout_width="match_parent"
+                    android:layout_height="7dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center|bottom"
+                    android:gravity="center"
+                    android:layout_marginBottom="7dp"
+                    android:id="@+id/mainIndicator"/>
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </com.mashupgroup.weatherbear.MainAppbarLayout>
+
+        <!-- Main content nested scroll view -->
+        <android.support.v4.widget.NestedScrollView
+            android:background="@color/gray2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.mashupgroup.weatherbear.MainActivity"
+            android:scrollbars="vertical"
+            android:fillViewport="true"
+            tools:showIn="@layout/activity_main">
+            <!-- Main contents viewPager -->
+            <com.mashupgroup.weatherbear.MainViewPager
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/main_topbar_height"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@id/toolbar" />
-
-            <!-- Top Bear&Background FrameLayout -->
-            <include
-                layout="@layout/top_bear"
-                bind:bear="@{bear}"/>
-
-            <!-- ViewPager indicator -->
-            <com.mashupgroup.weatherbear.MainIndicator
-                android:layout_width="match_parent"
-                android:layout_height="7dp"
-                android:orientation="horizontal"
-                android:layout_gravity="center|bottom"
-                android:gravity="center"
-                android:layout_marginBottom="7dp"
-                android:id="@+id/mainIndicator"/>
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </com.mashupgroup.weatherbear.MainAppbarLayout>
-
-    <!-- Main content nested scroll view -->
-    <android.support.v4.widget.NestedScrollView
-        android:background="@color/gray2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.mashupgroup.weatherbear.MainActivity"
-        android:scrollbars="vertical"
-        android:fillViewport="true"
-        tools:showIn="@layout/activity_main">
-        <!-- Main contents viewPager -->
-        <com.mashupgroup.weatherbear.MainViewPager
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewPager" />
-    </android.support.v4.widget.NestedScrollView>
-</android.support.design.widget.CoordinatorLayout>
+                android:layout_height="wrap_content"
+                android:id="@+id/viewPager" />
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
