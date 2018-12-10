@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         bear_pet_w.startAnimation(pet)
 
 
-        시간
+        /*시간
             - 밤/낮 : 곰의 얼굴 변경 //밤에 무조건 잠. */
 
         // ViewPager 초기화
