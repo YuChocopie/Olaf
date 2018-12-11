@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <data>
-
         <import type="android.graphics.drawable.Drawable"/>
         <import type="android.view.View"/>
         <variable
@@ -15,9 +13,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/main_bear_height"
-        android:background="@drawable/ic_bg_snow">
-
+        android:layout_height="@dimen/main_bear_height" >
 
         <ImageView
             android:id="@+id/bear_body"
