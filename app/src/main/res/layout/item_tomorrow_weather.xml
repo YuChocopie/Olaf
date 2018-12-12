@@ -1,56 +1,303 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tomorrowWeather"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/item_weather_box_hight2"
-    android:layout_marginTop="@dimen/item_weather_box_margin_top"
-    android:background="@drawable/weather_box"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <TextView
-        android:id="@+id/TomorrowWeatherText"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/weather_box_tv_height"
-        android:layout_marginTop="@dimen/weather_box_tv_margin_top"
-        android:gravity="center"
-        android:lineSpacingExtra="8sp"
-        android:text="@string/tomorrow_weather"
-        android:textColor="@color/black2"
-        android:textSize="@dimen/TEXT_SIZE_16"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <import type="android.graphics.drawable.Drawable" />
 
-    <TextView
-        android:id="@+id/tvTomorrowWeatherText"
+    <import type="android.view.View" />
+
+    <variable
+        name="isDayData"
+        type="com.mashupgroup.weatherbear.IsDayViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/SIZE_45"
-        android:layout_marginTop="@dimen/SIZE_8"
-        android:layout_marginEnd="@dimen/SIZE_45"
-        android:background="@drawable/weather_now_box"
-        android:backgroundTint="@color/softnow"
-        android:gravity="center_horizontal"
-        android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
-        android:textColor="@color/black6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TomorrowWeatherText"
-        tools:text="내일은 오늘보다 2도 높아요" />
+        android:layout_height="@dimen/item_weather_box_hight_2"
+        android:layout_marginTop="@dimen/item_weather_box_margin_top"
+        android:background="@drawable/weather_box">
 
-    <include
-        android:id="@id/tomorrowWeather"
-        layout="@layout/item_oneday_weather"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTomorrowWeatherText" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/TomorrowWeatherText"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/weather_box_tv_height"
+            android:layout_marginTop="@dimen/weather_box_tv_margin_top"
+            android:gravity="center"
+            android:lineSpacingExtra="8sp"
+            android:text="@string/tomorrow_weather"
+            android:textColor="@color/black2"
+            android:textSize="@dimen/TEXT_SIZE_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTomorrowWeatherText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/SIZE_45"
+            android:layout_marginTop="@dimen/SIZE_8"
+            android:layout_marginEnd="@dimen/SIZE_45"
+            android:background="@drawable/weather_now_box"
+            android:backgroundTint="@color/softnow"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
+            android:text="@{isDayData.tomorrowWetherText}"
+            android:textColor="@color/black6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TomorrowWeatherText"
+            tools:text="내일은 오늘보다 2도 높아요" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/WeatherConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_weather_box_hight"
+            app:layout_constraintTop_toBottomOf="@+id/tvTomorrowWeatherText">
+
+            <ImageView
+                android:id="@+id/ivDayWeatherShape"
+                android:layout_width="@dimen/today_weather_shape"
+                android:layout_height="@dimen/today_weather_shape"
+                android:src="@{isDayData.tomorrowWeatherShape}"
+                app:layout_constraintEnd_toStartOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/msg_sunny" />
+
+            <TextView
+                android:id="@+id/tvDayWeatherShape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="8sp"
+                android:text="@{isDayData.tomorrowWeatherText}"
+                android:textSize="@dimen/TEXT_SIZE_16"
+                app:layout_constraintEnd_toEndOf="@+id/ivDayWeatherShape"
+                app:layout_constraintStart_toStartOf="@+id/ivDayWeatherShape"
+                app:layout_constraintTop_toBottomOf="@+id/ivDayWeatherShape"
+                tools:text="@string/msg_sunny" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="@dimen/SIZE_1"
+                android:layout_height="@dimen/SIZE_110"
+                android:layout_marginEnd="8dp"
+                android:background="@color/gray0"
+                android:foregroundGravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.33"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDayWeatherTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/SIZE_50"
+                android:layout_marginStart="@dimen/SIZE_16"
+                android:gravity="end"
+                android:lineSpacingExtra="19sp"
+                android:text="@{isDayData.tomorrowTemperature}"
+                android:textColor="@color/black2"
+                android:textSize="@dimen/TEXT_SIZE_40"
+                app:layout_constraintStart_toEndOf="@id/view"
+                app:layout_constraintTop_toTopOf="@id/ivDayWeatherShape"
+                tools:text="-80" />
+
+            <TextView
+                android:id="@+id/DayWeatherTemperatureText"
+                android:layout_width="@dimen/TEXT_SIZE_22"
+                android:layout_height="@dimen/SIZE_30"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="9sp"
+                android:text="@string/c"
+                android:textColor="@color/black2"
+                android:textSize="@dimen/TEXT_SIZE_20"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDayWeatherTemperature"
+                app:layout_constraintStart_toEndOf="@+id/tvDayWeatherTemperature" />
+
+            <TextView
+                android:id="@+id/DayWeatherSensibleTemperatureText"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/TEXT_SIZE_20"
+                android:layout_marginStart="@dimen/SIZE_10"
+                android:gravity="end"
+                android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
+                android:text="@string/body_temperature"
+                android:textColor="@color/black6"
+                app:layout_constraintBottom_toBottomOf="@+id/DayWeatherTemperatureText"
+                app:layout_constraintStart_toEndOf="@+id/DayWeatherTemperatureText" />
+
+            <TextView
+                android:id="@+id/tvDayWeatherSensibleTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/TEXT_SIZE_20"
+                android:layout_marginStart="@dimen/SIZE_2"
+                android:gravity="end"
+                android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
+                android:text="@{isDayData.tomorrowBodyTemperature}"
+                android:textColor="@color/black6"
+                app:layout_constraintBottom_toBottomOf="@+id/DayWeatherTemperatureText"
+                app:layout_constraintStart_toEndOf="@+id/DayWeatherSensibleTemperatureText"
+                tools:text="-12" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/dayWeatherFineDustBox"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/TEXT_SIZE_23"
+                android:layout_marginTop="@dimen/SIZE_10"
+                android:layout_marginEnd="@dimen/SIZE_15"
+                android:background="@drawable/weather_dust_box"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvDayWeatherTemperature"
+                app:layout_constraintTop_toBottomOf="@+id/tvDayWeatherTemperature">
+
+                <ImageView
+                    android:id="@+id/ivFineDust"
+                    android:layout_width="@dimen/SIZE_15"
+                    android:layout_height="@dimen/SIZE_15"
+                    android:layout_marginStart="@dimen/SIZE_15"
+                    android:tint="@{isDayData.tomorrowDustColor}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/circle" />
+
+                <TextView
+                    android:id="@+id/TodayWeatherFineDustText"
+                    android:layout_width="@dimen/SIZE_56"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/SIZE_1"
+                    android:gravity="right"
+                    android:lineSpacingExtra="6sp"
+                    android:text="@string/fine_dust"
+                    android:textColor="@color/black6"
+                    android:textSize="@dimen/TEXT_SIZE_11"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivFineDust"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvFineDust"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/SIZE_2"
+                    android:gravity="center"
+                    android:lineSpacingExtra="6sp"
+                    android:text="@{isDayData.tomorrowDust}"
+                    android:textColor="@color/fineDustText"
+                    android:textSize="@dimen/TEXT_SIZE_11"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/TodayWeatherFineDustText"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="100㎍/m³" />
+
+                <TextView
+                    android:id="@+id/tvFineDustText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/SIZE_2"
+                    android:gravity="center"
+                    android:lineSpacingExtra="6sp"
+                    android:text="@{isDayData.tomorrowDustText}"
+                    android:textColor="@color/fineDustText"
+                    android:textSize="@dimen/TEXT_SIZE_11"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvFineDust"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/fine_dust_bad" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/UltrafineDustBox"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/TEXT_SIZE_23"
+                android:layout_marginTop="@dimen/SIZE_5"
+                android:background="@drawable/weather_dust_box"
+                app:layout_constraintEnd_toEndOf="@+id/dayWeatherFineDustBox"
+                app:layout_constraintStart_toStartOf="@+id/dayWeatherFineDustBox"
+                app:layout_constraintTop_toBottomOf="@+id/dayWeatherFineDustBox">
+
+                <ImageView
+                    android:id="@+id/ivUltrafineDust"
+                    android:layout_width="@dimen/SIZE_15"
+                    android:layout_height="@dimen/SIZE_15"
+                    android:layout_marginStart="@dimen/SIZE_15"
+                    android:tint="@{isDayData.tomorrowUltraDustColor}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/circle" />
+
+                <TextView
+                    android:id="@+id/UltrafineDustText"
+                    android:layout_width="@dimen/SIZE_56"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/SIZE_1"
+                    android:gravity="right"
+                    android:lineSpacingExtra="6sp"
+                    android:text="@string/ultrafine_dust"
+                    android:textColor="@color/black6"
+                    android:textSize="@dimen/TEXT_SIZE_11"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivUltrafineDust"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvUltrafineDust"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/SIZE_2"
+                    android:gravity="center"
+                    android:lineSpacingExtra="6sp"
+                    android:text="@{isDayData.tomorrowUltraDust}"
+                    android:textColor="@color/fineDustVeryBad"
+                    android:textSize="@dimen/TEXT_SIZE_11"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/UltrafineDustText"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="100㎍/m³" />
+
+                <TextView
+                    android:id="@+id/tvUltrafineDustText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/SIZE_2"
+                    android:gravity="center"
+                    android:lineSpacingExtra="6sp"
+                    android:text="@{isDayData.tomorrowUltraDustText}"
+                    android:textColor="@color/fineDustVeryBad"
+                    android:textSize="@dimen/TEXT_SIZE_11"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvUltrafineDust"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/fine_dust_very_bad" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tvIsDay"
+                android:layout_width="@dimen/SIZE_40"
+                android:layout_height="@dimen/SIZE_13"
+                android:layout_marginBottom="@dimen/SIZE_2"
+                android:background="@drawable/ic_msg_now"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/TEXT_SIZE_5"
+                android:text="@string/tomorrow"
+                android:textColor="@color/white0"
+                android:textSize="@dimen/TEXT_SIZE_10"
+                app:layout_constraintBottom_toTopOf="@+id/DayWeatherSensibleTemperatureText"
+                app:layout_constraintStart_toStartOf="@+id/DayWeatherSensibleTemperatureText" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

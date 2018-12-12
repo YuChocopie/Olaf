@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="item_weather_box_hight">160dp</dimen>
-    <dimen name="item_weather_box_hight2">200dp</dimen>
+    <dimen name="item_weather_box_hight_2">200dp</dimen>
     <dimen name="item_weather_box_margin_bottom">15dp</dimen>
     <dimen name="item_weather_box_margin_top">16dp</dimen>
 
@@ -28,6 +28,7 @@
     <dimen name="SIZE_12">12dp</dimen>
     <dimen name="SIZE_15">15dp</dimen>
     <dimen name="SIZE_16">16dp</dimen>
+    <dimen name="SIZE_20">20dp</dimen>
     <dimen name="SIZE_30">30dp</dimen>
     <dimen name="SIZE_24">24dp</dimen>
     <dimen name="SIZE_40">40dp</dimen>
