@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.mashupgroup.weatherbear.models.weather.Weather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.item_today_weather.*
 import retrofit2.Retrofit
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -16,18 +15,20 @@ import android.databinding.ViewDataBinding
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.item_oneday_weather.*
-
+import com.mashupgroup.weatherbear.R.id.viewPager
+import kotlinx.android.synthetic.main.item_today_time_weather.*
 
 class MainActivity : AppCompatActivity() {
-    var mainPagerAdapter : MainPagerAdapter = MainPagerAdapter(this);
+    var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this);
+    private val model = IsDayViewModel()
+
     val OpenWeatherMapKey = "926ab2fea6549951c324d1dc64014bdb"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
-        binding.setVariable(BR.bear,BearViewModel())
-
+        var binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
+        binding.setVariable(BR.bear, BearViewModel())
 
         requestTodayWeather()
 
@@ -59,8 +60,6 @@ class MainActivity : AppCompatActivity() {
         bear_pet.startAnimation(pet)
         bear_pet_small.startAnimation(pet)
         bear_pet_w.startAnimation(pet)
-
-
         /*시간
             - 밤/낮 : 곰의 얼굴 변경 //밤에 무조건 잠. */
 
@@ -70,6 +69,12 @@ class MainActivity : AppCompatActivity() {
         viewPager.initialize(mainIndicator)
         viewPager.adapter = mainPagerAdapter
 
+        var vm1 = IsDayViewModel()
+        var vm2 = IsDayViewModel()
+
+        vm2.todayTemperature = "-30"
+        mainPagerAdapter.addData(vm1)
+        mainPagerAdapter.addData(vm2)
         viewPager.initIndicator()
     }
 
@@ -81,8 +86,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun requestTodayWeather() {
-        val weatherAPI : WeatherAPI = WeatherAPI()
-        val retrofit : Retrofit = weatherAPI.createTodayWeatherRetrofit()
+        val weatherAPI: WeatherAPI = WeatherAPI()
+        val retrofit: Retrofit = weatherAPI.createTodayWeatherRetrofit()
 
         val api = retrofit.create(WeatherInterface::class.java)
 
@@ -90,13 +95,14 @@ class MainActivity : AppCompatActivity() {
         api.getWeather(35.0, 135.0, OpenWeatherMapKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ weather : Weather? ->
-                    if(weather != null) {
+                .subscribe({ weather: Weather? ->
+                    if (weather != null) {
                         // 현재 기온
-                        tvDayWeatherTemperature.text = String.format("%.1f",(weather.main.temp-273))
+                        tvTodayTime.text = String.format("%.1f", (weather.main
+                                .temp - 273))
                     }
-                }, {
-                    error -> error.printStackTrace()
+                }, { error ->
+                    error.printStackTrace()
                 })
     }
 

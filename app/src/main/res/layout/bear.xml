@@ -7,19 +7,19 @@
         <import type="android.graphics.drawable.Drawable"/>
         <import type="android.view.View"/>
         <variable
-            name="bear"
-            type="com.mashupgroup.weatherbear.BearViewModel" />
+            type="com.mashupgroup.weatherbear.BearViewModel"
+            name="bear" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bear_height" >
 
-        <ImageView
+      <ImageView
             android:id="@+id/bear_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="@dimen/SIZE_20"
             android:tint="@{bear.bearSkinColor}"
             android:tintMode="multiply"
             app:layout_constraintBottom_toBottomOf="parent"
