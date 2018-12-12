@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bear.*
 import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
+import com.mashupgroup.weatherbear.R.id.viewPager
 import kotlinx.android.synthetic.main.item_today_time_weather.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
         binding.setVariable(BR.bear, BearViewModel())
-        binding.setVariable(BR.isDayData, IsDayViewModel())
 
         requestTodayWeather()
 
@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         bear_pet_w.startAnimation(pet)
         /*시간
             - 밤/낮 : 곰의 얼굴 변경 //밤에 무조건 잠. */
+
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
         viewPager.adapter = mainPagerAdapter

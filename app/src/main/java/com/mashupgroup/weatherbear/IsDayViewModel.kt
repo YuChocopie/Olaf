@@ -70,7 +70,6 @@ class IsDayViewModel {
     var tomorrowUltraDustText = DustLevel.BAD.text
     var tomorrowUltraDustColor = DustLevel.BAD.color
 
-
     private fun updateTodayWeather() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -12,7 +12,6 @@ import android.support.design.widget.CoordinatorLayout.Behavior.setTag
 import com.mashupgroup.weatherbear.R.id.view
 import com.mashupgroup.weatherbear.databinding.ItemWeatherBinding
 
-
 class MainPagerAdapter : PagerAdapter {
     private var context: Context
     private var itemList = ArrayList<IsDayViewModel>()

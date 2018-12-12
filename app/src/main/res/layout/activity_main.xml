@@ -25,9 +25,9 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/main_bear_height"
+            android:background="@drawable/ic_bg_snow"
             android:fitsSystemWindows="true"
-            android:theme="@style/Base.ThemeOverlay.AppCompat"
-            android:background="@drawable/ic_bg_snow">
+            android:theme="@style/Base.ThemeOverlay.AppCompat">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -43,6 +43,7 @@
                     android:layout_height="@dimen/main_topbar_height"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@id/toolbar" />
+
                 <include
                     layout="@layout/top_bear"
                     bind:bear="@{bear}" />
@@ -75,4 +76,5 @@
                 android:layout_height="wrap_content" />
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
+
 </layout>

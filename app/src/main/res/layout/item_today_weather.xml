@@ -270,6 +270,7 @@
                 android:id="@+id/tvIsDay"
                 android:layout_width="@dimen/SIZE_40"
                 android:layout_height="@dimen/SIZE_13"
+                android:layout_marginBottom="@dimen/SIZE_2"
                 android:background="@drawable/ic_msg_now"
                 android:gravity="center"
                 android:lineSpacingExtra="@dimen/TEXT_SIZE_5"
