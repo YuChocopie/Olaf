@@ -12,7 +12,9 @@
     </data>
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:background="@drawable/ic_bg_snow"
+        android:paddingBottom="@dimen/SIZE_24"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/main_bear_height">
 
 
@@ -20,9 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/main_topbar_height"
             android:layout_gravity="bottom|center"
-            android:scaleType="centerCrop"
-            android:src="@drawable/background_far_mountain"
-            tools:ignore="ContentDescription" />
+            android:scaleType="fitEnd"
+            android:src="@drawable/background_far_mountain" />
 
         <FrameLayout
             android:id="@+id/bearWrapper"
@@ -32,7 +33,9 @@
 
             <include
                 layout="@layout/bear"
-                bind:bear="@{bear}" />
+                bind:bear="@{bear}"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent" />
 
         </FrameLayout>
 
