@@ -5,18 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="bear"
             type="com.mashupgroup.weatherbear.BearViewModel" />
     </data>
 
     <FrameLayout
+        android:fitsSystemWindows="true"
         android:background="@drawable/ic_bg_snow"
         android:paddingBottom="@dimen/SIZE_24"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/main_bear_height">
-
 
         <ImageView
             android:layout_width="match_parent"

@@ -12,6 +12,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bear.*
 import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
+import android.view.Menu
+import android.view.MenuItem
+import kotlinx.android.synthetic.main.item_oneday_weather.*
 import com.mashupgroup.weatherbear.R.id.viewPager
 import kotlinx.android.synthetic.main.item_today_time_weather.*
 
@@ -60,6 +63,8 @@ class MainActivity : AppCompatActivity() {
         /*시간
             - 밤/낮 : 곰의 얼굴 변경 //밤에 무조건 잠. */
 
+        setToolbar()
+
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
         viewPager.adapter = mainPagerAdapter
@@ -73,6 +78,12 @@ class MainActivity : AppCompatActivity() {
         viewPager.initIndicator()
     }
 
+    private fun setToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.let {
+            it.title = ""
+        }
+    }
 
     fun requestTodayWeather() {
         val weatherAPI: WeatherAPI = WeatherAPI()
@@ -95,5 +106,22 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.mnu_select_location -> {
+                // 위치 선택 메뉴 클릭됨
+            }
+            R.id.mnu_info -> {
+                // 앱 정보 메뉴 클릭됨
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 }
 

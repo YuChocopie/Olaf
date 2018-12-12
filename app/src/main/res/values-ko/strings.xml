@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WeatherBear</string>
+    <string name="c">℃</string>
+    <string name="today_weather">오늘의 날씨</string>
+    <string name="tomorrow_weather">내일의 날씨</string>
+    <string name="weekly_weather">주간 날씨</string>
+    <string name="fine_dust_very_bad">아주 나쁨</string>
+    <string name="fine_dust_bad">나쁨</string>
+    <string name="fine_dust_normal">보통</string>
+    <string name="now">현재</string>
+    <string name="mnu_location">지역 설정</string>
+    <string name="mnu_info">앱 정보</string>
+    <string name="msg_rain">비</string>
+    <string name="msg_wind">바람</string>
+</resources>

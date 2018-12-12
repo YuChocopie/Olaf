@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="bear"
             type="com.mashupgroup.weatherbear.BearViewModel" />
@@ -36,6 +35,11 @@
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@+id/toolbar">
+
+                <!-- Top Bear&Background FrameLayout -->
+                <include
+                    layout="@layout/top_bear"
+                    bind:bear="@{bear}"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
