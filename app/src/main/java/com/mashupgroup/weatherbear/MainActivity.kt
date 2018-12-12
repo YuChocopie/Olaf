@@ -14,8 +14,6 @@ import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.item_oneday_weather.*
-import com.mashupgroup.weatherbear.R.id.viewPager
 import kotlinx.android.synthetic.main.item_today_time_weather.*
 
 class MainActivity : AppCompatActivity() {

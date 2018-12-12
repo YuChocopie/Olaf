@@ -13,6 +13,7 @@
     <string name="fine_dust_very_bad">Very bad</string>
     <string name="fine_dust_bad">Bad</string>
     <string name="fine_dust_normal">Normal</string>
+    <string name="fine_dust_good">Good</string>
     <string name="now">Now</string>
     <string name="msg_snow">눈 내림</string>
     <string name="msg_wind">Windy</string>

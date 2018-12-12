@@ -29,7 +29,7 @@ class IsDayViewModel {
         CLOUDNIGHT(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_cloudy_night),
                 WeatherBearApp.appContext.resources.getString(R.string.msg_cloud_night)),
         RAINY(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_rainy), WeatherBearApp
-                .appContext.resources.getString(R.string.msg_rainy)),
+                .appContext.resources.getString(R.string.msg_rain)),
         THUNDER(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_thunder),
                 WeatherBearApp.appContext.resources.getString(R.string.msg_thunder)),
         THUNDER_RAINY(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_thunder_rainy),
