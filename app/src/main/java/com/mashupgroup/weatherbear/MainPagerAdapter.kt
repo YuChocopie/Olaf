@@ -1,23 +1,28 @@
 package com.mashupgroup.weatherbear
 
 import android.content.Context
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mashupgroup.weatherbear.models.weather.Weather
+import android.support.design.widget.CoordinatorLayout.Behavior.setTag
+import com.mashupgroup.weatherbear.R.id.view
+import com.mashupgroup.weatherbear.databinding.ItemWeatherBinding
+
 
 class MainPagerAdapter : PagerAdapter {
-    private var context : Context
-    // Todo : 아이템 타입을 Weather로 해도 될지 모르겠다. 될 것 같긴한데..만약 안될 경우 적절한 타입으로 바꿀 것
-    private var itemList = ArrayList<Weather>()
+    private var context: Context
+    private var itemList = ArrayList<IsDayViewModel>()
 
-    constructor(context : Context) {
+    constructor(context: Context) {
         this.context = context
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view==`object`
+        return view == `object`
     }
 
     override fun getCount(): Int {
@@ -25,12 +30,14 @@ class MainPagerAdapter : PagerAdapter {
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        var layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var view = layoutInflater.inflate(R.layout.item_weather, container, false)
+        val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+                as LayoutInflater
 
-        container.addView(view)
-
-        return view
+        val binding:ItemWeatherBinding = DataBindingUtil.inflate(layoutInflater, R.layout
+                .item_weather, container, false)
+        binding.isDayData = itemList[position]
+        container.addView(binding.getRoot())
+        return binding.getRoot()
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
@@ -41,7 +48,7 @@ class MainPagerAdapter : PagerAdapter {
      * 어뎁터의 모든 데이터를 바꾼다. 기존의 데이터는 사라진다.
      * @param dataList 새로 바꿀 데이터 리스트
      */
-    fun resetData(dataList : ArrayList<Weather>) {
+    fun resetData(dataList: ArrayList<IsDayViewModel>) {
         itemList = dataList
         notifyDataSetChanged()
     }
@@ -49,7 +56,7 @@ class MainPagerAdapter : PagerAdapter {
     /**
      * 현재 어뎁터에 1개 아이템을 추가한다.
      */
-    fun addData(data : Weather) {
+    fun addData(data: IsDayViewModel) {
         itemList.add(data)
         notifyDataSetChanged()
     }

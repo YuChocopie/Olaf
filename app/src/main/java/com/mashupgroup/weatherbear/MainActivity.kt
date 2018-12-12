@@ -14,17 +14,18 @@ import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
 import kotlinx.android.synthetic.main.item_today_time_weather.*
 
-
 class MainActivity : AppCompatActivity() {
-    var mainPagerAdapter : MainPagerAdapter = MainPagerAdapter(this);
+    var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this);
+    private val model = IsDayViewModel()
+
     val OpenWeatherMapKey = "926ab2fea6549951c324d1dc64014bdb"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
-        binding.setVariable(BR.bear,BearViewModel())
-
+        var binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
+        binding.setVariable(BR.bear, BearViewModel())
+        binding.setVariable(BR.isDayData, IsDayViewModel())
 
         requestTodayWeather()
 
@@ -62,12 +63,19 @@ class MainActivity : AppCompatActivity() {
         viewPager.initialize(mainIndicator)
         viewPager.adapter = mainPagerAdapter
 
+        var vm1 = IsDayViewModel()
+        var vm2 = IsDayViewModel()
+
+        vm2.todayTemperature = "-30"
+        mainPagerAdapter.addData(vm1)
+        mainPagerAdapter.addData(vm2)
         viewPager.initIndicator()
     }
 
+
     fun requestTodayWeather() {
-        val weatherAPI : WeatherAPI = WeatherAPI()
-        val retrofit : Retrofit = weatherAPI.createTodayWeatherRetrofit()
+        val weatherAPI: WeatherAPI = WeatherAPI()
+        val retrofit: Retrofit = weatherAPI.createTodayWeatherRetrofit()
 
         val api = retrofit.create(WeatherInterface::class.java)
 
@@ -75,14 +83,14 @@ class MainActivity : AppCompatActivity() {
         api.getWeather(35.0, 135.0, OpenWeatherMapKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ weather : Weather? ->
-                    if(weather != null) {
+                .subscribe({ weather: Weather? ->
+                    if (weather != null) {
                         // 현재 기온
-                        tvTodayTime.text = String.format("%.1f",(weather.main
-                                .temp-273))
+                        tvTodayTime.text = String.format("%.1f", (weather.main
+                                .temp - 273))
                     }
-                }, {
-                    error -> error.printStackTrace()
+                }, { error ->
+                    error.printStackTrace()
                 })
     }
 

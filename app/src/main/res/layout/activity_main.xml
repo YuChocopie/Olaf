@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="bear"
             type="com.mashupgroup.weatherbear.BearViewModel" />
+
+        <variable
+            name="isDayData"
+            type="com.mashupgroup.weatherbear.IsDayViewModel" />
     </data>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,36 +43,36 @@
                     android:layout_height="@dimen/main_topbar_height"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@id/toolbar" />
-
                 <include
                     layout="@layout/top_bear"
-                    bind:bear="@{bear}"/>
+                    bind:bear="@{bear}" />
+
+                <!-- ViewPager indicator -->
                 <com.mashupgroup.weatherbear.MainIndicator
+                    android:id="@+id/mainIndicator"
                     android:layout_width="match_parent"
                     android:layout_height="7dp"
-                    android:orientation="horizontal"
                     android:layout_gravity="center|bottom"
-                    android:gravity="center"
                     android:layout_marginBottom="7dp"
-                    android:id="@+id/mainIndicator"/>
+                    android:gravity="center"
+                    android:orientation="horizontal" />
             </android.support.design.widget.CollapsingToolbarLayout>
         </com.mashupgroup.weatherbear.MainAppbarLayout>
 
         <android.support.v4.widget.NestedScrollView
-            android:background="@color/gray2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/gray2"
+            android:fillViewport="true"
+            android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context="com.mashupgroup.weatherbear.MainActivity"
-            android:scrollbars="vertical"
-            android:fillViewport="true"
             tools:showIn="@layout/activity_main">
             <!-- Main contents viewPager -->
             <com.mashupgroup.weatherbear.MainViewPager
+                android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/viewPager" />
+                android:layout_height="wrap_content" />
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
-
 </layout>
