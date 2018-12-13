@@ -25,7 +25,7 @@ object SharedPrefHelper {
 
         val addrSet = HashSet<String>()
         for (addr in addrList) {
-            val strLatLong = String.format("%d|%d", addr.latitude, addr.longitude)
+            val strLatLong = String.format("%f|%f", addr.latitude, addr.longitude)
             addrSet.add(strLatLong)
         }
 
