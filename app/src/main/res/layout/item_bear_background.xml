@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.graphics.drawable.Drawable" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="bg"
+            type="com.mashupgroup.weatherbear.BackgroundViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bear_height">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_bear_height"
+            android:background="@{bg.bg}"
+            android:fitsSystemWindows="true">
+
+            <ImageView
+                android:id="@+id/ivSnow1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/SIZE_1000"
+                android:layout_marginBottom="@dimen/SIZE_240"
+                android:visibility="@{bg.SnowVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_snow_01" />
+
+            <ImageView
+                android:id="@+id/ivSnow1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/SIZE_1000"
+                android:layout_marginBottom="@dimen/SIZE_240"
+                android:visibility="@{bg.SnowVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_snow_01" />
+
+            <ImageView
+                android:id="@+id/ivRain1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/SIZE_700"
+                android:visibility="@{bg.RainVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_rain_01" />
+
+            <ImageView
+                android:id="@+id/ivRain2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/SIZE_800"
+                android:layout_marginEnd="@dimen/SIZE_24"
+                android:visibility="@{bg.RainVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_rain_02" />
+
+            <ImageView
+                android:id="@+id/ivRain2_3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/SIZE_800"
+                android:visibility="@{bg.RainVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_rain_02" />
+
+            <ImageView
+                android:id="@+id/ivCloud3"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/SIZE_36"
+                android:layout_margin="@dimen/SIZE_8"
+                android:visibility="@{bg.CloudVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCloud2_2"
+                app:layout_constraintEnd_toStartOf="@+id/ivCloud2_2"
+                app:layout_constraintStart_toEndOf="@+id/ivCloud2"
+                app:layout_constraintTop_toBottomOf="@+id/ivCloud2"
+                app:srcCompat="@drawable/ic_msg_cloud" />
+
+            <ImageView
+                android:id="@+id/ivCloud2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/SIZE_50"
+                android:layout_marginTop="@dimen/SIZE_8"
+                android:visibility="@{bg.CloudVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_msg_cloud" />
+
+            <ImageView
+                android:id="@+id/ivCloud2_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/SIZE_40"
+                android:layout_marginStart="@dimen/SIZE_170"
+                android:layout_marginTop="@dimen/SIZE_56"
+                android:visibility="@{bg.CloudVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toEndOf="@+id/ivCloud2"
+                app:layout_constraintTop_toBottomOf="@+id/ivCloud2"
+                app:srcCompat="@drawable/ic_msg_cloud" />
+
+            <ImageView
+                android:id="@+id/ivCloud1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/SIZE_70"
+                android:layout_marginEnd="@dimen/SIZE_30"
+                android:visibility="@{bg.CloudVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivCloud2"
+                app:layout_constraintVertical_bias="0.23000002"
+                app:srcCompat="@drawable/ic_msg_cloud" />
+
+            <ImageView
+                android:id="@+id/ivCloud1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/SIZE_50"
+                android:layout_marginStart="@dimen/SIZE_140"
+                android:visibility="@{bg.CloudVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivCloud1"
+                app:layout_constraintTop_toBottomOf="@+id/ivCloud1"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/ic_msg_cloud" />
+
+            <ImageView
+                android:id="@+id/ivMountain"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/main_topbar_height"
+                android:layout_gravity="bottom|center"
+                android:scaleType="fitEnd"
+                android:src="@{bg.farMountain}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/Mountain"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/SIZE_8"
+                android:scaleType="centerCrop"
+                android:src="@drawable/msg_bg_mountatin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ivMountain"
+                app:layout_constraintVertical_bias="0.69" />
+
+            <ImageView
+                android:id="@+id/ivMountainSnow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/SIZE_43"
+                android:layout_marginTop="@dimen/SIZE_2"
+                android:layout_marginEnd="@dimen/SIZE_24"
+                android:scaleType="centerCrop"
+                android:src="@{bg.mountainSnow}"
+                android:visibility="@{bg.mountainSnowVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="@+id/Mountain"
+                app:layout_constraintHorizontal_bias="0.66"
+                app:layout_constraintStart_toStartOf="@+id/Mountain"
+                app:layout_constraintTop_toTopOf="@+id/Mountain" />
+
+            <ImageView
+                android:id="@+id/ivSnow2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{bg.SnowVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_snow_02" />
+
+            <ImageView
+                android:id="@+id/ivSnow2_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{bg.SnowVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_snow_02" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

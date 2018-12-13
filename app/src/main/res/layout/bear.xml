@@ -4,18 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.graphics.drawable.Drawable"/>
-        <import type="android.view.View"/>
+
+        <import type="android.graphics.drawable.Drawable" />
+
+        <import type="android.view.View" />
+
         <variable
-            type="com.mashupgroup.weatherbear.BearViewModel"
-            name="bear" />
+            name="bear"
+            type="com.mashupgroup.weatherbear.BearViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/main_bear_height" >
+        android:layout_height="@dimen/main_bear_height">
 
-      <ImageView
+        <ImageView
             android:id="@+id/bear_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -209,7 +212,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
-            android:visibility="@{bear.bearPetVisibilty ? View.INVISIBLE : View.GONE}"
+            android:visibility="@{bear.bearPetVisibilty ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/bear_leg"
             app:layout_constraintEnd_toStartOf="@+id/bear_head"
             app:srcCompat="@drawable/ic_msg_dirt" />

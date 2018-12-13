@@ -30,6 +30,7 @@ class BearViewModel {
 
     }
 
+
     private var fineDust: Int = 1
     private var weather: Weather = Weather.SNOW
     private var isDayTime: Boolean = true
@@ -39,10 +40,10 @@ class BearViewModel {
     var bearSnowColor = resource.getColor(R.color.bearSnowbad)
     var bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_bad)
     var bearSnowVisibilty = true
-    var bearLegVisibilty = true
+    var bearLegVisibilty = false
     var bearPetVisibilty = true
     var bearSunglesesVisibilty = false
-    var bearumbrellaVisibilty = true
+    var bearumbrellaVisibilty = false
 
     //폭설일 경우 눈사람으로 변경
     private fun snowMan() {

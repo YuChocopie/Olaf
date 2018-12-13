@@ -5,13 +5,13 @@
 
     <data>
 
-    <import type="android.graphics.drawable.Drawable" />
+        <import type="android.graphics.drawable.Drawable" />
 
-    <import type="android.view.View" />
+        <import type="android.view.View" />
 
-    <variable
-        name="isDayData"
-        type="com.mashupgroup.weatherbear.IsDayViewModel" />
+        <variable
+            name="isDayData"
+            type="com.mashupgroup.weatherbear.IsDayViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -27,7 +27,7 @@
             android:layout_height="@dimen/weather_box_tv_height"
             android:layout_marginTop="@dimen/weather_box_tv_margin_top"
             android:gravity="center"
-            android:lineSpacingExtra="8sp"
+            android:lineSpacingExtra="@dimen/TEXT_SIZE_8"
             android:text="@string/tomorrow_weather"
             android:textColor="@color/black2"
             android:textSize="@dimen/TEXT_SIZE_16"
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:lineSpacingExtra="8sp"
+                android:lineSpacingExtra="@dimen/TEXT_SIZE_8"
                 android:text="@{isDayData.tomorrowWeatherText}"
                 android:textSize="@dimen/TEXT_SIZE_16"
                 app:layout_constraintEnd_toEndOf="@+id/ivDayWeatherShape"
@@ -87,7 +87,7 @@
                 android:id="@+id/view"
                 android:layout_width="@dimen/SIZE_1"
                 android:layout_height="@dimen/SIZE_110"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/SIZE_8"
                 android:background="@color/gray0"
                 android:foregroundGravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -102,10 +102,11 @@
                 android:layout_height="@dimen/SIZE_50"
                 android:layout_marginStart="@dimen/SIZE_16"
                 android:gravity="end"
-                android:lineSpacingExtra="19sp"
+                android:lineSpacingExtra="@dimen/TEXT_SIZE_19"
                 android:text="@{isDayData.tomorrowTemperature}"
                 android:textColor="@color/black2"
                 android:textSize="@dimen/TEXT_SIZE_40"
+                app:layout_constraintEnd_toStartOf="@+id/DayWeatherTemperatureText"
                 app:layout_constraintStart_toEndOf="@id/view"
                 app:layout_constraintTop_toTopOf="@id/ivDayWeatherShape"
                 tools:text="-80" />
@@ -115,11 +116,12 @@
                 android:layout_width="@dimen/TEXT_SIZE_22"
                 android:layout_height="@dimen/SIZE_30"
                 android:gravity="center_horizontal"
-                android:lineSpacingExtra="9sp"
+                android:lineSpacingExtra="@dimen/TEXT_SIZE_9"
                 android:text="@string/c"
                 android:textColor="@color/black2"
                 android:textSize="@dimen/TEXT_SIZE_20"
                 app:layout_constraintBottom_toBottomOf="@+id/tvDayWeatherTemperature"
+                app:layout_constraintEnd_toStartOf="@+id/DayWeatherSensibleTemperatureText"
                 app:layout_constraintStart_toEndOf="@+id/tvDayWeatherTemperature" />
 
             <TextView
@@ -175,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/SIZE_1"
                     android:gravity="right"
-                    android:lineSpacingExtra="6sp"
+                    android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@string/fine_dust"
                     android:textColor="@color/black6"
                     android:textSize="@dimen/TEXT_SIZE_11"
@@ -189,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/SIZE_2"
                     android:gravity="center"
-                    android:lineSpacingExtra="6sp"
+                    android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.tomorrowDust}"
                     android:textColor="@color/fineDustText"
                     android:textSize="@dimen/TEXT_SIZE_11"
@@ -204,7 +206,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/SIZE_2"
                     android:gravity="center"
-                    android:lineSpacingExtra="6sp"
+                    android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.tomorrowDustText}"
                     android:textColor="@color/fineDustText"
                     android:textSize="@dimen/TEXT_SIZE_11"

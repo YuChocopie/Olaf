@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="bear"
             type="com.mashupgroup.weatherbear.BearViewModel" />
 
         <variable
-            name="isDayData"
-            type="com.mashupgroup.weatherbear.IsDayViewModel" />
+            name="bg"
+            type="com.mashupgroup.weatherbear.BackgroundViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -39,7 +40,8 @@
                 <!-- Top Bear&Background FrameLayout -->
                 <include
                     layout="@layout/top_bear"
-                    bind:bear="@{bear}"/>
+                    bind:bear="@{bear}"
+                    bind:bg="@{bg}" />
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -48,17 +50,13 @@
                     app:layout_collapseMode="pin"
                     app:popupTheme="@id/toolbar" />
 
-                <include
-                    layout="@layout/top_bear"
-                    bind:bear="@{bear}" />
-
                 <!-- ViewPager indicator -->
                 <com.mashupgroup.weatherbear.MainIndicator
                     android:id="@+id/mainIndicator"
                     android:layout_width="match_parent"
-                    android:layout_height="7dp"
+                    android:layout_height="@dimen/SIZE_7"
                     android:layout_gravity="center|bottom"
-                    android:layout_marginBottom="7dp"
+                    android:layout_marginBottom="@dimen/SIZE_7"
                     android:gravity="center"
                     android:orientation="horizontal" />
             </android.support.design.widget.CollapsingToolbarLayout>
