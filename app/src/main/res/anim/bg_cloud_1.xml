@@ -1,0 +1,17 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha
+        android:duration="2000"
+        android:fromAlpha="0.75"
+        android:repeatCount="-1"
+        android:startOffset="2000"
+        android:toAlpha="0.85" />
+
+
+    <translate
+        android:duration="15000"
+        android:fillAfter="true"
+        android:fromXDelta="230%"
+        android:repeatCount="-1"
+        android:toXDelta="-265%" />
+
+</set>

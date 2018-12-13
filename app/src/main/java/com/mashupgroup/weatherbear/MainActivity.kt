@@ -14,6 +14,7 @@ import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
 import android.view.Menu
 import android.view.MenuItem
+import kotlinx.android.synthetic.main.item_bear_background.*
 import kotlinx.android.synthetic.main.item_today_time_weather.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
         binding.setVariable(BR.bear, BearViewModel())
+        binding.setVariable(BR.bg, BackgroundViewModel())
 
         requestTodayWeather()
 
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         val scarh_high: Animation = AnimationUtils.loadAnimation(this, R.anim.scarf_high)
         val scarh_low: Animation = AnimationUtils.loadAnimation(this, R.anim.scarf_low)
         val pet: Animation = AnimationUtils.loadAnimation(this, R.anim.pet)
+
         //양 귀 흔들기
         bear_ear_right.startAnimation(bear_ear_r)
         bear_ear_left.startAnimation(bear_ear_l)
@@ -58,8 +61,35 @@ class MainActivity : AppCompatActivity() {
         bear_pet.startAnimation(pet)
         bear_pet_small.startAnimation(pet)
         bear_pet_w.startAnimation(pet)
-        /*시간
-            - 밤/낮 : 곰의 얼굴 변경 //밤에 무조건 잠. */
+
+        ///눈내림
+        val snow1: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_snow_1)
+        val snow1_1: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_snow_1_2)
+        val snow2: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_snow_2)
+        val snow2_2: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_snow_2_2)
+        ivSnow1.startAnimation(snow1)
+        ivSnow1_2.startAnimation(snow1_1)
+        ivSnow2.startAnimation(snow2)
+        ivSnow2_2.startAnimation(snow2_2)
+
+        //비내림
+        val rain1: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_rainy_1)
+        val rain2: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_rainy_2)
+        val rain3: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_rainy_3)
+        ivRain1.startAnimation(rain1)
+        ivRain2.startAnimation(rain2)
+        ivRain2_3.startAnimation(rain3)
+
+        //눈내림
+        val cloud1: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_cloud_1)
+        val cloud2: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_cloud_2)
+        val cloud3: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_cloud_3)
+        ivCloud1.startAnimation(cloud1)
+        ivCloud1_2.startAnimation(cloud1)
+        ivCloud2.startAnimation(cloud2)
+        ivCloud2_2.startAnimation(cloud2)
+        ivCloud3.startAnimation(cloud3)
+
 
         setToolbar()
 
@@ -70,9 +100,9 @@ class MainActivity : AppCompatActivity() {
         var vm1 = IsDayViewModel()
         var vm2 = IsDayViewModel()
 
-        vm2.todayTemperature = "-30"
         mainPagerAdapter.addData(vm1)
         mainPagerAdapter.addData(vm2)
+        vm2.todayTemperature = "0"
         viewPager.initIndicator()
     }
 
@@ -110,7 +140,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
+        when (item?.itemId) {
             R.id.mnu_select_location -> {
                 // 위치 선택 메뉴 클릭됨
             }
@@ -118,7 +148,6 @@ class MainActivity : AppCompatActivity() {
                 // 앱 정보 메뉴 클릭됨
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 }

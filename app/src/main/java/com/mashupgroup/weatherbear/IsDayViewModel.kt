@@ -2,6 +2,7 @@ package com.mashupgroup.weatherbear
 
 import android.graphics.drawable.Drawable
 import com.mashupgroup.weatherbear.models.weather.Clouds
+import com.mashupgroup.weatherbear.models.weather.Sys
 
 
 class IsDayViewModel {
@@ -14,6 +15,7 @@ class IsDayViewModel {
         초미세먼지 ultrafine_dust
         초미세먼지 ultrafine_dust_lavel
          */
+
 
     enum class Weather(var image: Drawable, var text: String) {
         SNOW(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_snow), WeatherBearApp
