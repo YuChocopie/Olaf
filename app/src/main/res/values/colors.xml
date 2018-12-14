@@ -32,4 +32,7 @@
 
     <color name="indicator_selected">#ffffffff</color>
     <color name="indicator_unselected">#80ffffff</color>
+
+    <color name="location_list_bg">#748ffc</color>
+    <color name="location_list_fabtn_bg">#001363</color>
 </resources>

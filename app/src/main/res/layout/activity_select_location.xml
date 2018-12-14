@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/location_list_bg"
+    tools:context=".location.SelectLocationActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvLocationList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabtnAddLocation"
+        android:layout_width="70dp"
+        android:layout_height="@dimen/location_list_fabtn_size"
+        android:layout_marginEnd="@dimen/location_list_fabtn_margin"
+        android:layout_marginBottom="@dimen/location_list_fabtn_margin"
+        android:backgroundTint="@color/location_list_fabtn_bg"
+        android:src="@android:drawable/ic_input_add"
+        android:tint="@color/white0"
+        app:backgroundTint="@color/location_list_fabtn_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</android.support.constraint.ConstraintLayout>
