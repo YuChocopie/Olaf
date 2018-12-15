@@ -1,5 +1,6 @@
 package com.mashupgroup.weatherbear
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.mashupgroup.weatherbear.models.weather.Weather
@@ -14,6 +15,7 @@ import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
 import android.view.Menu
 import android.view.MenuItem
+import com.mashupgroup.weatherbear.location.SelectLocationActivity
 import kotlinx.android.synthetic.main.item_bear_background.*
 import kotlinx.android.synthetic.main.item_today_time_weather.*
 
@@ -143,6 +145,8 @@ class MainActivity : AppCompatActivity() {
         when (item?.itemId) {
             R.id.mnu_select_location -> {
                 // 위치 선택 메뉴 클릭됨
+                val intent = Intent(this, SelectLocationActivity::class.java)
+                startActivity(intent)
             }
             R.id.mnu_info -> {
                 // 앱 정보 메뉴 클릭됨
