@@ -29,6 +29,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val permissionModule = PermissionModule()
+        permissionModule.setupPermissions(this, this)
+
         var binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
         binding.setVariable(BR.bear, BearViewModel())
         binding.setVariable(BR.bg, BackgroundViewModel())
