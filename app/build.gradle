@@ -22,6 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        it.buildConfigField 'String', 'WEATHER_API_TOKEN', WeatherApiToken
+        it.buildConfigField 'String', 'AIR_API_TOKEN', WeatherApiToken
+    }
+
     productFlavors {
     }
 }
