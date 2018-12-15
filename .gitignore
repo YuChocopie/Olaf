@@ -1,5 +1,8 @@
 # https://github.com/github/gitignore/blob/master/Android.gitignore
 
+# API Key
+gradle.properties
+
 # Built application files
 *.apk
 *.ap_
@@ -17,7 +20,7 @@ gen/
 out/
 
 # Gradle files
-.gradle/
+.gradle
 build/
 
 # Local configuration file (sdk path, etc)
