@@ -23,7 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".location.SelectLocationActivity"></activity>
+        <activity android:name=".location.SelectLocationActivity" />
+        <activity android:name=".location.SearchLocationActivity"></activity>
     </application>
 
 </manifest>
