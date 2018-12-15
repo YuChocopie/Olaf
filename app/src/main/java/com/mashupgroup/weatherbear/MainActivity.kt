@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this);
     private val model = IsDayViewModel()
 
-    val OpenWeatherMapKey = "926ab2fea6549951c324d1dc64014bdb"
+    val weatherApiToken = BuildConfig.WEATHER_API_TOKEN
+    val airApiToken = BuildConfig.AIR_API_TOKEN
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,7 +123,7 @@ class MainActivity : AppCompatActivity() {
         val api = retrofit.create(WeatherInterface::class.java)
 
         //TODO: lat, lon 값 수정 필요
-        api.getWeather(35.0, 135.0, OpenWeatherMapKey)
+        api.getWeather(35.0, 135.0, weatherApiToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ weather: Weather? ->
