@@ -24,6 +24,7 @@ import com.mashupgroup.weatherbear.location.LocationHelper
 import com.mashupgroup.weatherbear.location.SelectLocationActivity
 import kotlinx.android.synthetic.main.item_bear_background.*
 import kotlinx.android.synthetic.main.item_today_time_weather.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this);
@@ -125,12 +126,12 @@ class MainActivity : AppCompatActivity() {
         viewPager.initialize(mainIndicator)
         viewPager.adapter = mainPagerAdapter
 
-        var vm1 = IsDayViewModel()
-        var vm2 = IsDayViewModel()
+        var vm1 = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
+        var vm2 = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
 
         mainPagerAdapter.addData(vm1)
         mainPagerAdapter.addData(vm2)
-        vm2.todayTemperature = "0"
+        vm2.vmInfo.todayTemperature = "0"
         viewPager.initIndicator()
     }
 
