@@ -125,7 +125,10 @@ class MainActivity : AppCompatActivity() {
         ivCloud2_2.startAnimation(cloud2)
         ivCloud3.startAnimation(cloud3)
 
+        // 유저가 저장했었던 주소를 Global.addressList에 불러오기
+        Global.loadAddressList()
 
+        // 툴바 초기 세팅
         setToolbar()
 
         // ViewPager 초기화
