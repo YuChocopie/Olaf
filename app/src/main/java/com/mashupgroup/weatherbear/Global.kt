@@ -10,21 +10,22 @@ const val SP_ADDR_SAVE_KEY = "AddressSaveKey"
 const val SP_SEETING_SAVE_KEY = "SeetingSaveKey"
 
 /**
- * SharedPreferences를 이용하여 설정을 저장하고 불러오는 도우미 싱글톤 클래스
+ * 모든 클래스에서 참조할 수 있는 도우미 싱글톤 클래스
  */
-object SharedPrefHelper {
+object Global {
+    var addressList = ArrayList<Address>()
 
     /**
-     * 사용자가 설정한 위치 목록을 핸드폰에 저장
+     * SharedPref를 사용하여 사용자가 설정한 위치 목록을 핸드폰에 저장
      * @param addrList 위치 목록
      */
-    fun saveAddressList(addrList : List<Address>) {
+    fun saveAddressList() {
         val context = WeatherBearApp.appContext
         val prefs = context.getSharedPreferences(SP_WEATHERBEAR_KEY, MODE_PRIVATE)
         val editor = prefs.edit()
 
         val addrSet = HashSet<String>()
-        for (addr in addrList) {
+        for (addr in addressList) {
             val strLatLong = String.format("%f|%f", addr.latitude, addr.longitude)
             addrSet.add(strLatLong)
         }
@@ -35,7 +36,7 @@ object SharedPrefHelper {
     }
 
     /**
-     * 핸드폰에 저장된 사용자의 위치 목록을 불러옴
+     * SharedPref로부터 핸드폰에 저장된 사용자의 위치 목록을 불러옴
      * @return 저장된 위치 목록
      */
     fun loadAddressList() : List<Address>? {
@@ -57,6 +58,18 @@ object SharedPrefHelper {
             lstAddr.add(savedAddr[0])
         }
 
+        addressList = lstAddr
         return lstAddr
+    }
+
+    /**
+     * Address객체를 주소 string (가장 근접한애)으로 변경
+     */
+    fun createLocationString(address : Address) : String {
+        var result = "No result"
+        if(address.maxAddressLineIndex > 0) {
+            result = address.getAddressLine(0)
+        }
+        return result
     }
 }
