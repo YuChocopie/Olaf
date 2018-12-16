@@ -22,7 +22,8 @@
 
     <dimen name="location_search_header_height">60dp</dimen>
     <dimen name="location_search_button_size">60dp</dimen>
-    <dimen name="location_search_list_item_height">40dp</dimen>
+    <dimen name="location_search_list_item_height">60dp</dimen>
+    <dimen name="location_search_edittext_side_margin">14dp</dimen>
 
     <dimen name="top_selected_location_height">21dp</dimen>
     <dimen name="top_selected_location_icon_size">13dp</dimen>
