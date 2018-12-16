@@ -1,6 +1,8 @@
 package com.mashupgroup.weatherbear
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.mashupgroup.weatherbear.models.weather.Weather
@@ -15,7 +17,8 @@ import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
 import android.location.Address
 import android.location.Location
-import android.util.Log
+import android.os.Build
+import android.support.v4.app.ActivityCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -182,6 +185,38 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    //ACCESS_COARSE_LOCATION,ACCESS_FINE_LOCATION
+    fun checkLocationPermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if ((ActivityCompat.checkSelfPermission(this@MainActivity
+                            , Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED)
+                    || (ActivityCompat.checkSelfPermission(this@MainActivity
+                            , Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED)) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this
+                                , Manifest.permission.ACCESS_COARSE_LOCATION)
+                        || ActivityCompat.shouldShowRequestPermissionRationale(this
+                                , Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    val mToast = Toast.makeText(this, "위치정보 접근 권한이 없음"
+                            , Toast.LENGTH_SHORT)
+                    mToast.show()
+                    //  권한을 한번 취소한적이 있다.
+                } else {
+                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission
+                            .ACCESS_FINE_LOCATION, Manifest.permission
+                            .ACCESS_COARSE_LOCATION), 1000)
+                    val mToast = Toast.makeText(this, "위치정보 접근 권한을 허용"
+                            , Toast.LENGTH_SHORT)
+                    mToast.show()
+                }
+            } else {
+                //권한이 있음
+            }
+        }
     }
 }
 
