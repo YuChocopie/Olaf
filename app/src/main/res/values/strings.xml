@@ -26,5 +26,6 @@
     <string name="msg_thunder_rainy">비와번개</string>
     <string name="mnu_location">Select location</string>
     <string name="mnu_info">About this app</string>
+    <string name="err_str_location_ready">위치 오류 발생</string>
 
 </resources>

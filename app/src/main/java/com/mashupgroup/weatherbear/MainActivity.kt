@@ -13,8 +13,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bear.*
 import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
+import android.location.Address
+import android.location.Location
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import com.mashupgroup.weatherbear.location.ILocationResultListener
+import com.mashupgroup.weatherbear.location.LocationHelper
 import com.mashupgroup.weatherbear.location.SelectLocationActivity
 import kotlinx.android.synthetic.main.item_bear_background.*
 import kotlinx.android.synthetic.main.item_today_time_weather.*
@@ -22,9 +28,10 @@ import kotlinx.android.synthetic.main.item_today_time_weather.*
 class MainActivity : AppCompatActivity() {
     var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this);
     private val model = IsDayViewModel()
-
-    val weatherApiToken = BuildConfig.WEATHER_API_TOKEN
-    val airApiToken = BuildConfig.AIR_API_TOKEN
+    private val weatherApiToken = BuildConfig.WEATHER_API_TOKEN
+    private val airApiToken = BuildConfig.AIR_API_TOKEN
+    private var lat = 0.0
+    private var lon = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +42,21 @@ class MainActivity : AppCompatActivity() {
         var binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
         binding.setVariable(BR.bear, BearViewModel())
         binding.setVariable(BR.bg, BackgroundViewModel())
+
+        var loactionListener = object : ILocationResultListener {
+            override fun onLocationReady(location: Location?, address: Address?) {
+
+                if(location == null) {
+                    Toast.makeText(this@MainActivity, R.string.err_str_location_ready, Toast.LENGTH_SHORT).show()
+                } else {
+                    lat = location.latitude
+                    lon = location.longitude
+                }
+            }
+        }
+
+        LocationHelper.addLocationResultListener(listener = loactionListener)
+        LocationHelper.requestLocation(this, true)
 
         requestTodayWeather()
 
@@ -118,6 +140,8 @@ class MainActivity : AppCompatActivity() {
             it.title = ""
         }
     }
+
+
 
     fun requestTodayWeather() {
         val weatherAPI: WeatherAPI = WeatherAPI()
