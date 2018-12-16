@@ -53,9 +53,12 @@ object Global {
             val savedAddr = geocoder.getFromLocation(
                     lat0long1[0].toDouble(),
                     lat0long1[1].toDouble(),
-                    0
+                    1
             )
-            lstAddr.add(savedAddr[0])
+
+            if(savedAddr.size > 0) {
+                lstAddr.add(savedAddr[0])
+            }
         }
 
         addressList = lstAddr
