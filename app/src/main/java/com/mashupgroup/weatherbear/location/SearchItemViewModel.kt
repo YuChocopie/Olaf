@@ -1,3 +1,5 @@
 package com.mashupgroup.weatherbear.location
 
-class SearchItemViewModel(var locationName: String)
+import android.location.Address
+
+class SearchItemViewModel(var locationName: String, var address: Address)

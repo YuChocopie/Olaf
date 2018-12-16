@@ -27,5 +27,9 @@
     <string name="mnu_location">Select location</string>
     <string name="mnu_info">About this app</string>
     <string name="err_str_location_ready">위치 오류 발생</string>
+    <string name="search_location_error">Temporary cannot search locations</string>
+    <string name="search_location_letssearch">Let\'s search your location :)</string>
+    <string name="search_location_no_result">No result.\nTry again with another keyword.</string>
+    <string name="search_location_type_here">Type your location here to search.</string>
 
 </resources>
