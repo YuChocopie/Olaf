@@ -23,6 +23,7 @@ import android.support.v4.app.ActivityCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.mashupgroup.weatherbear.Global.createLocationString
 import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
 import com.mashupgroup.weatherbear.location.ILocationResultListener
 import com.mashupgroup.weatherbear.location.LocationHelper
@@ -207,14 +208,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun createLocationString(address : Address) : String {
-        val sb = StringBuilder()
-        sb.append(address.countryName)
-        sb.append(address.subAdminArea)
-
-        return sb.toString()
     }
   
     //ACCESS_COARSE_LOCATION,ACCESS_FINE_LOCATION
