@@ -14,7 +14,7 @@ import com.mashupgroup.weatherbear.databinding.ItemWeatherBinding
 
 class MainPagerAdapter : PagerAdapter {
     private var context: Context
-    private var itemList = ArrayList<MainPagerItem>()
+    var itemList = ArrayList<MainPagerItem>(); private set
 
     constructor(context: Context) {
         this.context = context

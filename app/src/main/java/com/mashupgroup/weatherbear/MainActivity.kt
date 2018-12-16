@@ -15,24 +15,28 @@ import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
 import android.location.Address
 import android.location.Location
+import android.support.v4.view.ViewPager.SimpleOnPageChangeListener
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
 import com.mashupgroup.weatherbear.location.ILocationResultListener
 import com.mashupgroup.weatherbear.location.LocationHelper
 import com.mashupgroup.weatherbear.location.SelectLocationActivity
 import kotlinx.android.synthetic.main.item_bear_background.*
 import kotlinx.android.synthetic.main.item_today_time_weather.*
+import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this);
+    var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this)
     private val model = IsDayViewModel()
     private val weatherApiToken = BuildConfig.WEATHER_API_TOKEN
     private val airApiToken = BuildConfig.AIR_API_TOKEN
     private var lat = 0.0
     private var lon = 0.0
+    lateinit var mainViewDataBinding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +44,7 @@ class MainActivity : AppCompatActivity() {
         val permissionModule = PermissionModule()
         permissionModule.setupPermissions(this, this)
 
-        var binding: ViewDataBinding = setContentView(this, R.layout.activity_main)
-        binding.setVariable(BR.bear, BearViewModel())
-        binding.setVariable(BR.bg, BackgroundViewModel())
+        mainViewDataBinding = setContentView(this, R.layout.activity_main)
 
         var loactionListener = object : ILocationResultListener {
             override fun onLocationReady(location: Location?, address: Address?) {
@@ -124,6 +126,12 @@ class MainActivity : AppCompatActivity() {
 
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
+        viewPager.addOnPageChangeListener(object : SimpleOnPageChangeListener() {
+            override fun onPageSelected(position : Int) {
+                // ViewPager 페이지가 바뀔 때마다 불림. 데이터 갱신
+                setTopViewModelData(position)
+            }
+        })
         viewPager.adapter = mainPagerAdapter
 
         var vm1 = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
@@ -133,6 +141,22 @@ class MainActivity : AppCompatActivity() {
         mainPagerAdapter.addData(vm2)
         vm2.vmInfo.todayTemperature = "0"
         viewPager.initIndicator()
+
+        // ViewModel업데이트 (처음 아이템으로)
+        setTopViewModelData(viewPager.currentItem)
+    }
+
+    /**
+     *  화면 상단 곰, 바탕화면, 메시지 등을 갱신해주는 메서드
+     *  ViewPager.adapter 안에있는 아이템의 뷰모델을 사용하여 갱신
+     *  @param position MainPageAdapter에서 가져올 아이템 position
+     */
+    private fun setTopViewModelData(position : Int) {
+        val data = mainPagerAdapter.itemList[position]
+        mainViewDataBinding.setVariable(BR.bear, data.vmBear)
+        mainViewDataBinding.setVariable(BR.bg, data.vmBG)
+        tvSelectedLocation.text = createLocationString(data.address)
+        // Todo : 현재 메시지 (오늘은 미세먼지가 심해요! 등) 갱신하는 코드도 있어야함
     }
 
     private fun setToolbar() {
@@ -182,6 +206,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun createLocationString(address : Address) : String {
+        val sb = StringBuilder()
+        sb.append(address.countryName)
+        sb.append(address.subAdminArea)
+
+        return sb.toString()
     }
 }
 
