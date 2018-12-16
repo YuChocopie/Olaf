@@ -13,4 +13,8 @@
     <string name="mnu_info">앱 정보</string>
     <string name="msg_rain">비</string>
     <string name="msg_wind">바람</string>
+    <string name="search_location_error">일시적으로 검색할 수 없습니다.</string>
+    <string name="search_location_letssearch">장소를 검색해보세요 :)</string>
+    <string name="search_location_no_result">결과가 없어요.\n다른 키워드로 검색해주세요.</string>
+    <string name="search_location_type_here">여기에 장소를 입력해주세요.</string>
 </resources>
