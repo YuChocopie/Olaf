@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <!-- Search -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <import type="android.databinding.ObservableArrayList" />
+        <import type="com.mashupgroup.weatherbear.location.SearchItemViewModel" />
+        <variable
+            name="searchResultList"
+            type="ObservableArrayList&lt;SearchItemViewModel&gt;" />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/location_search_header_height"
-        android:background="@color/location_list_bg"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!-- Search -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/location_search_header_height"
+            android:background="@color/location_list_bg"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvSearchLocation"
-            android:layout_width="0dp"
+            <EditText
+                android:id="@+id/etSearchLocation"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/location_search_edittext_side_margin"
+                android:layout_marginEnd="@dimen/location_search_edittext_side_margin"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:textColor="@color/white0" />
+
+            <Button
+                android:id="@+id/btnSearchLocation"
+                android:layout_weight="0"
+                android:layout_width="@dimen/location_search_button_size"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <!-- Result list -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvSearchLocationResult"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:textColor="@color/white0" />
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            />
 
-        <Button
-            android:id="@+id/btnSearchLocation"
-            android:layout_width="@dimen/location_search_button_size"
-            android:layout_height="match_parent" />
     </LinearLayout>
-
-    <!-- Result list -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvSearchLocationResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</layout>
