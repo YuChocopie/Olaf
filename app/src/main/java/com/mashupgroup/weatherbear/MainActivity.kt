@@ -14,7 +14,6 @@ import android.view.animation.AnimationUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bear.*
 import android.databinding.DataBindingUtil.setContentView
-import android.databinding.ViewDataBinding
 import android.location.Address
 import android.location.Location
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener
@@ -30,6 +29,7 @@ import com.mashupgroup.weatherbear.location.LocationHelper
 import com.mashupgroup.weatherbear.location.SelectLocationActivity
 import kotlinx.android.synthetic.main.item_bear_background.*
 import kotlinx.android.synthetic.main.item_today_time_weather.*
+import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
 
@@ -67,69 +67,14 @@ class MainActivity : AppCompatActivity() {
 
         requestTodayWeather()
 
-        val bear_ear_r: Animation = AnimationUtils.loadAnimation(this, R.anim.bear_ear_right)
-        val bear_ear_l: Animation = AnimationUtils.loadAnimation(this, R.anim.bear_ear_left)
-        val leg_frong: Animation = AnimationUtils.loadAnimation(this, R.anim.leg_frong)
-        val leg_frong_good: Animation = AnimationUtils.loadAnimation(this, R.anim.leg_frong_good)
-        val leg_frong_bad: Animation = AnimationUtils.loadAnimation(this, R.anim.leg_frong_bad)
-        val umbrella: Animation = AnimationUtils.loadAnimation(this, R.anim.umbrella)
-        val bear_mask: Animation = AnimationUtils.loadAnimation(this, R.anim.bear_mask)
-        val scarh_high: Animation = AnimationUtils.loadAnimation(this, R.anim.scarf_high)
-        val scarh_low: Animation = AnimationUtils.loadAnimation(this, R.anim.scarf_low)
-        val pet: Animation = AnimationUtils.loadAnimation(this, R.anim.pet)
-
-        //양 귀 흔들기
-        bear_ear_right.startAnimation(bear_ear_r)
-        bear_ear_left.startAnimation(bear_ear_l)
-        // 양 팔 흔들기
-        bear_leg.startAnimation(leg_frong)
-        bear_leg_front_good.startAnimation(leg_frong_good)
-        //스카프 흔들리기
-        bear_scarf_high.startAnimation(scarh_high)
-        bear_scarf_low.startAnimation(scarh_low)
-        // 비올 때 우산과 팔 동시움직임
-        bear_umbrella.startAnimation(umbrella)
-        //미세먼지 농도 높을 때 마스크와 마스크 발 동시.
-        bear_leg_front_bad.startAnimation(leg_frong_bad)
-        handkerchief.startAnimation(bear_mask)
-        //먼지 펫 움직이기
-        bear_pet.startAnimation(pet)
-        bear_pet_small.startAnimation(pet)
-        bear_pet_w.startAnimation(pet)
-
-        ///눈내림
-        val snow1: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_snow_1)
-        val snow1_1: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_snow_1_2)
-        val snow2: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_snow_2)
-        val snow2_2: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_snow_2_2)
-        ivSnow1.startAnimation(snow1)
-        ivSnow1_2.startAnimation(snow1_1)
-        ivSnow2.startAnimation(snow2)
-        ivSnow2_2.startAnimation(snow2_2)
-
-        //비내림
-        val rain1: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_rainy_1)
-        val rain2: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_rainy_2)
-        val rain3: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_rainy_3)
-        ivRain1.startAnimation(rain1)
-        ivRain2.startAnimation(rain2)
-        ivRain2_3.startAnimation(rain3)
-
-        //눈내림
-        val cloud1: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_cloud_1)
-        val cloud2: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_cloud_2)
-        val cloud3: Animation = AnimationUtils.loadAnimation(this, R.anim.bg_cloud_3)
-        ivCloud1.startAnimation(cloud1)
-        ivCloud1_2.startAnimation(cloud1)
-        ivCloud2.startAnimation(cloud2)
-        ivCloud2_2.startAnimation(cloud2)
-        ivCloud3.startAnimation(cloud3)
-
         // 유저가 저장했었던 주소를 Global.addressList에 불러오기
         Global.loadAddressList()
 
         // 툴바 초기 세팅
         setToolbar()
+
+        // 곰돌이 애니메이션 초기화 및 시작
+        BearAnimator.startAnimation(topBearBgWrapper)
 
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
