@@ -7,6 +7,8 @@ import kotlinx.android.synthetic.main.bear.view.*
 import kotlinx.android.synthetic.main.item_bear_background.view.*
 
 object BearAnimator {
+    //눈사람
+    val snow_bear: Animation
     // 고옴
     val bear_ear_r: Animation
     val bear_ear_l: Animation
@@ -61,9 +63,13 @@ object BearAnimator {
         cloud1 = AnimationUtils.loadAnimation(appContext, R.anim.bg_cloud_1)
         cloud2 = AnimationUtils.loadAnimation(appContext, R.anim.bg_cloud_2)
         cloud3 = AnimationUtils.loadAnimation(appContext, R.anim.bg_cloud_3)
+
+        snow_bear = AnimationUtils.loadAnimation(appContext, R.anim.snow_bear)
     }
 
     fun startAnimation(topBearViewGroup: ViewGroup) {
+        //snowman
+        topBearViewGroup.snowBear?.startAnimation(snow_bear)
         //양 귀 흔들기
         topBearViewGroup.bear_ear_right?.startAnimation(bear_ear_r)
         topBearViewGroup.bear_ear_left?.startAnimation(bear_ear_l)
@@ -73,6 +79,9 @@ object BearAnimator {
         //스카프 흔들리기
         topBearViewGroup.bear_scarf_high?.startAnimation(scarh_high)
         topBearViewGroup.bear_scarf_low?.startAnimation(scarh_low)
+        //snowman 스카프 흔들리기
+        topBearViewGroup.snowBearScarfHigh?.startAnimation(scarh_high)
+        topBearViewGroup.snowBearScarfLow?.startAnimation(scarh_low)
         // 비올 때 우산과 팔 동시움직임
         topBearViewGroup.bear_umbrella?.startAnimation(umbrella)
         //미세먼지 농도 높을 때 마스크와 마스크 발 동시.
@@ -103,6 +112,8 @@ object BearAnimator {
     }
 
     fun stopAnimation(topBearViewGroup: ViewGroup) {
+        //눈사람 흔들리기
+        topBearViewGroup.snowBear?.clearAnimation()
         //양 귀 흔들기
         topBearViewGroup.bear_ear_right?.clearAnimation()
         topBearViewGroup.bear_ear_left?.clearAnimation()
@@ -112,6 +123,9 @@ object BearAnimator {
         //스카프 흔들리기
         topBearViewGroup.bear_scarf_high?.clearAnimation()
         topBearViewGroup.bear_scarf_low?.clearAnimation()
+         //snowman 스카프 흔들리기
+        topBearViewGroup.snowBearScarfHigh?.clearAnimation()
+        topBearViewGroup.snowBearScarfLow?.clearAnimation()
         // 비올 때 우산과 팔 동시움직임
         topBearViewGroup.bear_umbrella?.clearAnimation()
         //미세먼지 농도 높을 때 마스크와 마스크 발 동시.

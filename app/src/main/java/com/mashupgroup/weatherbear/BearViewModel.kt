@@ -43,12 +43,14 @@ class BearViewModel {
     var bearPetVisibilty = true
     var bearSunglesesVisibilty = false
     var bearumbrellaVisibilty = false
+    var snowBearVisibilty = true
 
     //폭설일 경우 눈사람으로 변경
     private fun snowMan() {
-        //TODO: change snowman... include && animation 혹은 모든 visibility 를 gone 으로 바꾸고 눈사람 추가
+        snowBearVisibilty = true
         if (weather == Weather.HEAVY_SNOW) {
         } else {
+            snowBearVisibilty = false
             updeteBear()
         }
     }

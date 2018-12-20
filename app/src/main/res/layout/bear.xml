@@ -13,8 +13,59 @@
             name="bear"
             type="com.mashupgroup.weatherbear.BearViewModel" />
     </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bear_height">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/snowBear"
+        android:visibility="@{bear.snowBearVisibilty ? View.VISIBLE : View.GONE}"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bear_height">
+
+        <ImageView
+            android:id="@+id/snowBearBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/SIZE_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_msg_bear_snowbear" />
+
+        <ImageView
+            android:id="@+id/snowBearScarf"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            app:layout_constraintEnd_toEndOf="@+id/snowBearBody"
+            app:layout_constraintStart_toStartOf="@+id/snowBearBody"
+            app:layout_constraintTop_toTopOf="@+id/snowBearBody"
+            app:srcCompat="@drawable/ic_msg_bear_snow_scarf" />
+
+        <ImageView
+            android:id="@+id/snowBearScarfHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="102dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/snowBearScarf"
+            app:layout_constraintStart_toStartOf="@+id/snowBearScarf"
+            app:srcCompat="@drawable/ic_msg_bear_snow_scarf_high" />
+
+        <ImageView
+            android:id="@+id/snowBearScarfLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="35dp"
+            app:layout_constraintStart_toStartOf="@+id/snowBearScarfHigh"
+            app:layout_constraintTop_toTopOf="@+id/snowBearScarfHigh"
+            app:srcCompat="@drawable/ic_msg_bear_snow_scarf_low" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/bear"
+        android:visibility="@{bear.snowBearVisibilty ? View.GONE : View.VISIBLE}"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bear_height">
 
@@ -226,6 +277,6 @@
             app:layout_constraintStart_toEndOf="@+id/bear_ear_right"
             app:srcCompat="@drawable/ic_msg_dirt_w" />
 
-
     </android.support.constraint.ConstraintLayout>
+    </FrameLayout>
 </layout>
