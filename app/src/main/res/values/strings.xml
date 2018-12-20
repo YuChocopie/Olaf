@@ -31,5 +31,8 @@
     <string name="search_location_letssearch">Let\'s search your location :)</string>
     <string name="search_location_no_result">No result.\nTry again with another keyword.</string>
     <string name="search_location_type_here">Type your location here to search.</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="configure">Configure</string>
 
 </resources>

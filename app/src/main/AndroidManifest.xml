@@ -24,7 +24,26 @@
             </intent-filter>
         </activity>
         <activity android:name=".location.SelectLocationActivity" />
-        <activity android:name=".location.SearchLocationActivity"></activity>
+        <activity android:name=".location.SearchLocationActivity" />
+
+        <receiver android:name=".widget.WeatherBoxWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/wether_box_widget_info" />
+        </receiver>
+        <receiver android:name=".widget.WeatherBearHeadWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/weather_bear_head_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

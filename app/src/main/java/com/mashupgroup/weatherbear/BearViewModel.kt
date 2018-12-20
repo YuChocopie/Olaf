@@ -27,7 +27,6 @@ class BearViewModel {
 
     enum class Weather {
         SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
-
     }
 
 
