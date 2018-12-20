@@ -1,0 +1,182 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin">
+
+
+    <RelativeLayout
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/circle"
+        android:backgroundTint="#43000000">
+
+        <RelativeLayout
+            android:id="@+id/weatherImageLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/widgetBearHead"
+                android:layout_width="@dimen/SIZE_50"
+                android:layout_height="@dimen/SIZE_50"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/SIZE_3"
+                android:padding="@dimen/SIZE_2">
+
+
+                <ImageView
+                    android:id="@+id/widgetBearHeadBase"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_bear_head_03" />
+
+                <ImageView
+                    android:id="@+id/widgetBearFace"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_msg_bear_face_good" />
+
+                <ImageView
+                    android:id="@+id/widgetBearFaceSnow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_msg_bear_head_snow" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/widgetLocationIcon"
+                android:layout_width="@dimen/SIZE_20"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/widgetBearHead"
+                android:layout_alignStart="@+id/widgetBearHead"
+                android:layout_alignTop="@id/tvWidgetLocation"
+                android:layout_alignBottom="@id/tvWidgetLocation"
+                android:src="@android:drawable/btn_star_big_on" />
+
+            <TextView
+                android:id="@+id/tvWidgetLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/widgetBearHead"
+                android:layout_alignEnd="@id/widgetBearHead"
+                android:layout_toEndOf="@id/widgetLocationIcon"
+                android:gravity="center"
+                android:text="서울"
+                android:textColor="#ffffff"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/weatherTextLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/weatherImageLayout"
+            android:layout_marginStart="@dimen/SIZE_8"
+            android:layout_marginTop="@dimen/SIZE_5"
+            android:layout_marginBottom="@dimen/SIZE_10"
+            android:layout_toEndOf="@+id/weatherImageLayout"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvWidgetTemperature"
+                android:layout_width="@dimen/SIZE_35"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/widgetView1"
+                android:layout_alignBottom="@+id/widgetView1"
+                android:layout_alignParentStart="true"
+                android:gravity="bottom|end"
+                android:lineSpacingExtra="12sp"
+                android:text="-10"
+                android:textColor="@color/white0"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/widgetTemperatures"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/tvWidgetTemperature"
+                android:lineSpacingExtra="12sp"
+                android:text="@string/c"
+                android:textColor="@color/white0"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/widgetView1"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/SIZE_36"
+                android:layout_marginStart="@dimen/SIZE_6"
+                android:layout_toEndOf="@+id/widgetTemperatures"
+                android:backgroundTint="@color/white0"
+                android:src="@drawable/circle" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/SIZE_36"
+                android:layout_alignStart="@id/widgetView1"
+                android:layout_alignParentEnd="true"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/widgetFineDust"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/fine_dust"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvWidgetFineDust"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/SIZE_5"
+                    android:layout_toEndOf="@+id/widgetFineDust"
+                    android:gravity="center"
+                    android:text="매우나쁨"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/widgetView2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/widgetView1"
+                android:layout_alignStart="@id/tvWidgetTemperature"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/SIZE_5"
+                android:layout_marginEnd="@dimen/SIZE_5"
+                android:layout_marginBottom="@dimen/SIZE_3"
+                android:backgroundTint="@color/white0"
+                android:src="@drawable/circle" />
+
+            <TextView
+                android:id="@+id/tvWidgetWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/widgetView2"
+                android:layout_alignStart="@id/widgetView2"
+                android:layout_alignEnd="@id/widgetView2"
+                android:gravity="center"
+                android:lineSpacingExtra="7sp"
+                android:text="구름,천둥번개,폭우"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
