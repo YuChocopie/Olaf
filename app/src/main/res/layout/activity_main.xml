@@ -8,11 +8,11 @@
 
         <variable
             name="bear"
-            type="com.mashupgroup.weatherbear.BearViewModel" />
+            type="com.mashupgroup.weatherbear.viewmodel.BearViewModel" />
 
         <variable
             name="bg"
-            type="com.mashupgroup.weatherbear.BackgroundViewModel" />
+            type="com.mashupgroup.weatherbear.viewmodel.BackgroundViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout

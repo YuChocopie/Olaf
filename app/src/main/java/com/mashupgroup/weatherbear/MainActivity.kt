@@ -28,6 +28,9 @@ import com.mashupgroup.weatherbear.location.ILocationResultListener
 import com.mashupgroup.weatherbear.location.LocationHelper
 import com.mashupgroup.weatherbear.location.SelectLocationActivity
 import com.mashupgroup.weatherbear.models.air.Air
+import com.mashupgroup.weatherbear.viewmodel.BackgroundViewModel
+import com.mashupgroup.weatherbear.viewmodel.BearViewModel
+import com.mashupgroup.weatherbear.viewmodel.IsDayViewModel
 import kotlinx.android.synthetic.main.item_bear_background.*
 import kotlinx.android.synthetic.main.item_today_time_weather.*
 import kotlinx.android.synthetic.main.top_bear.*

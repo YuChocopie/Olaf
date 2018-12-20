@@ -11,7 +11,7 @@
 
         <variable
             name="bear"
-            type="com.mashupgroup.weatherbear.BearViewModel" />
+            type="com.mashupgroup.weatherbear.viewmodel.BearViewModel" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"

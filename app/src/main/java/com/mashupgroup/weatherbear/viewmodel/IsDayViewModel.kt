@@ -1,8 +1,8 @@
-package com.mashupgroup.weatherbear
+package com.mashupgroup.weatherbear.viewmodel
 
 import android.graphics.drawable.Drawable
-import com.mashupgroup.weatherbear.models.weather.Clouds
-import com.mashupgroup.weatherbear.models.weather.Sys
+import com.mashupgroup.weatherbear.R
+import com.mashupgroup.weatherbear.WeatherBearApp
 
 
 class IsDayViewModel {
@@ -18,20 +18,15 @@ class IsDayViewModel {
 
 
     enum class Weather(var image: Drawable, var text: String) {
-        SNOW(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_snow), WeatherBearApp
-                .appContext.resources.getString(R.string.msg_snow)),
-        WIND(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_wind), WeatherBearApp
-                .appContext.resources.getString(R.string.msg_wind)),
-        SUNNY(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_sunny), WeatherBearApp
-                .appContext.resources.getString(R.string.msg_sunny)),
+        SNOW(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_snow), WeatherBearApp.appContext.resources.getString(R.string.msg_snow)),
+        WIND(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_wind), WeatherBearApp.appContext.resources.getString(R.string.msg_wind)),
+        SUNNY(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_sunny), WeatherBearApp.appContext.resources.getString(R.string.msg_sunny)),
         SUNNYNIGHT(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_sunny_night),
                 WeatherBearApp.appContext.resources.getString(R.string.msg_sunny_night)),
-        CLOUD(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_cloud), WeatherBearApp
-                .appContext.resources.getString(R.string.msg_cloud)),
+        CLOUD(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_cloud), WeatherBearApp.appContext.resources.getString(R.string.msg_cloud)),
         CLOUDNIGHT(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_cloudy_night),
                 WeatherBearApp.appContext.resources.getString(R.string.msg_cloud_night)),
-        RAINY(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_rainy), WeatherBearApp
-                .appContext.resources.getString(R.string.msg_rain)),
+        RAINY(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_rainy), WeatherBearApp.appContext.resources.getString(R.string.msg_rain)),
         THUNDER(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_thunder),
                 WeatherBearApp.appContext.resources.getString(R.string.msg_thunder)),
         THUNDER_RAINY(WeatherBearApp.appContext.resources.getDrawable(R.drawable.msg_thunder_rainy),

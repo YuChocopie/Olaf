@@ -11,7 +11,7 @@
 
         <variable
             name="isDayData"
-            type="com.mashupgroup.weatherbear.IsDayViewModel" />
+            type="com.mashupgroup.weatherbear.viewmodel.IsDayViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
