@@ -20,7 +20,9 @@
 
     <color name="now">#748ffc</color>
     <color name="softnow">#38748ffc</color>
+
     <color name="white0">#ffffff</color>
+    <color name="whiteTransparent">#79ffffff</color>
 
     <color name="bearSnowGood">#f2f2f2</color>
     <color name="bearSnowbad">#fff</color>
