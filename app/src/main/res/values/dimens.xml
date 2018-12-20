@@ -93,4 +93,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="TEXT_SIZE_21">21dp</dimen>
     <dimen name="SIZE_3">3dp</dimen>
     <dimen name="SIZE_35">35dp</dimen>
+    <dimen name="top_ballon_height">83dp</dimen>
 </resources>
