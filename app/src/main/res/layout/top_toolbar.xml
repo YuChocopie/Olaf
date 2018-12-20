@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <!-- 위쪽 현재 선택된 위치 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_selected_location_height"
         android:layout_marginTop="@dimen/top_selected_location_top_margin"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <ImageView
-            android:background="@color/white0"
             android:layout_width="@dimen/top_selected_location_icon_size"
-            android:layout_height="@dimen/top_selected_location_icon_size" />
+            android:layout_height="@dimen/top_selected_location_icon_size"
+            android:background="@color/white0" />
+
         <TextView
             android:id="@+id/tvSelectedLocation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/white0"
             android:textSize="@dimen/top_selected_location_text_size"
-            tools:text="서울,송파구(현재위치)"/>
+            tools:text="서울,송파구(현재위치)" />
     </LinearLayout>
+
 
     <!-- 메세지 -->
     <TextView
-        android:background="@color/white0"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/top_current_message_height"
-        android:layout_marginTop="@dimen/top_current_message_top_margin"
-        android:layout_marginStart="@dimen/top_current_message_side_margin"
-        android:layout_marginEnd="@dimen/top_current_message_side_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/top_ballon_height"
+        android:layout_marginStart="@dimen/SIZE_30"
+        android:layout_marginTop="@dimen/SIZE_12"
+        android:layout_marginEnd="@dimen/SIZE_30"
+        android:paddingBottom="@dimen/SIZE_20"
+        android:background="@drawable/ic_ballon"
+        android:lineSpacingExtra="8sp"
+        android:shadowColor="#29000000"
+        android:shadowDy="2"
+        android:gravity="center"
+        android:shadowRadius="3"
         android:textColor="@color/white0"
         android:textSize="@dimen/top_current_message_text_size"
-        tools:text="오늘은 미세먼지가 심해요!"/>
+        tools:text="오늘은 미세먼지가 심해요!" />
 </LinearLayout>
