@@ -27,11 +27,13 @@ import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
 import com.mashupgroup.weatherbear.location.ILocationResultListener
 import com.mashupgroup.weatherbear.location.LocationHelper
 import com.mashupgroup.weatherbear.location.SelectLocationActivity
+import com.mashupgroup.weatherbear.models.air.Air
 import kotlinx.android.synthetic.main.item_bear_background.*
 import kotlinx.android.synthetic.main.item_today_time_weather.*
 import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
+import java.util.regex.MatchResult
 
 class MainActivity : AppCompatActivity() {
     var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this)
@@ -58,6 +60,8 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     lat = location.latitude
                     lon = location.longitude
+
+                    updateTodayAir(IsDayViewModel(), lat,lon)
                 }
             }
         }
@@ -74,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         setToolbar()
 
         // 곰돌이 애니메이션 초기화 및 시작
-        BearAnimator.startAnimation(topBearBgWrapper)
+        //BearAnimator.startAnimation(topBearBgWrapper)
 
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
@@ -134,6 +138,44 @@ class MainActivity : AppCompatActivity() {
                         tvTodayTime.text = String.format("%.1f", (weather.main
                                 .temp - 273))
                     }
+                }, { error ->
+                    error.printStackTrace()
+                })
+    }
+
+    private fun updateTodayAirResponse(isDayViewModel : IsDayViewModel, air: Air, address: String) {
+        var pm10 = -1
+        var pm25 = -1
+
+        for (i in air.list) {
+            if(i.cityName.toRegex().find(address) != null) {
+                pm10 = i.pm10Value.toInt()
+                pm25 = i.pm25Value.toInt()
+                break;
+            }
+        }
+
+        if(pm10 != -1) {
+            // TODO:isDayViewModel에 pm10, pm25 적용 필요
+        }
+    }
+
+    private fun updateTodayAir(isDayViewModel : IsDayViewModel, lat : Double, lon : Double) {
+        val airAPI = AirAPI()
+        val retrofit: Retrofit = airAPI.createTodayAirRetrofit()
+
+        val addressChanger = AddressGetter()
+        val (state, address) = addressChanger.getStateAddress(this, lat,lon)
+
+        val api = retrofit.create(AirInterface::class.java)
+        api.getAir("JSON",state, "100","HOUR", airApiToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({air: Air? ->
+                    if (air != null)
+                        updateTodayAirResponse(isDayViewModel , air, address)
+                    else
+                        Toast.makeText(this@MainActivity, R.string.request_fail, Toast.LENGTH_SHORT).show()
                 }, { error ->
                     error.printStackTrace()
                 })
