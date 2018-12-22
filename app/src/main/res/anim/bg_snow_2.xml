@@ -11,7 +11,6 @@
         android:pivotX="50%"
         android:pivotY="50%"
         android:repeatCount="-1"
-        android:startOffset="2000"
         android:toDegrees="4" />
     <translate
         android:duration="10000"

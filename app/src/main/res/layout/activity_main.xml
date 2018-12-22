@@ -25,7 +25,6 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/main_bear_height"
-            android:background="@drawable/ic_bg_snow"
             android:fitsSystemWindows="true"
             android:theme="@style/Base.ThemeOverlay.AppCompat">
 
