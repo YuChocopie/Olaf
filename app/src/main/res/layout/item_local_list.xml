@@ -11,7 +11,7 @@
 
         <variable
             name="localData"
-            type="com.mashupgroup.weatherbear.viewmodel.LocalViewModel" />
+            type="com.mashupgroup.weatherbear.viewmodels.LocalViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

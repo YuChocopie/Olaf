@@ -1,4 +1,4 @@
-package com.mashupgroup.weatherbear.viewmodel
+package com.mashupgroup.weatherbear.viewmodels
 
 import android.graphics.drawable.Drawable
 import com.mashupgroup.weatherbear.R
