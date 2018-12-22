@@ -2,6 +2,7 @@ package com.mashupgroup.weatherbear.location
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.mashupgroup.weatherbear.viewmodels.LocationListItemViewModel
 
 class LocationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var itemList : ArrayList<LocationListItemViewModel> = ArrayList()

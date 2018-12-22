@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.mashupgroup.weatherbear.Global
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.databinding.ActivitySearchLocationBinding
+import com.mashupgroup.weatherbear.viewmodels.SearchItemViewModel
 import kotlinx.android.synthetic.main.activity_search_location.*
 import java.io.IOException
 import java.util.*

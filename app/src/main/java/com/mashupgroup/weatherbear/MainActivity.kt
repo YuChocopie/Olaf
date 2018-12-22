@@ -9,10 +9,7 @@ import com.mashupgroup.weatherbear.models.weather.Weather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.bear.*
 import android.databinding.DataBindingUtil.setContentView
 import android.location.Address
 import android.location.Location
@@ -28,12 +25,12 @@ import com.mashupgroup.weatherbear.location.ILocationResultListener
 import com.mashupgroup.weatherbear.location.LocationHelper
 import com.mashupgroup.weatherbear.location.SelectLocationActivity
 import com.mashupgroup.weatherbear.models.air.Air
-import kotlinx.android.synthetic.main.item_bear_background.*
+import com.mashupgroup.weatherbear.viewmodels.BackgroundViewModel
+import com.mashupgroup.weatherbear.viewmodels.BearViewModel
+import com.mashupgroup.weatherbear.viewmodels.IsDayViewModel
 import kotlinx.android.synthetic.main.item_today_time_weather.*
-import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
-import java.util.regex.MatchResult
 
 class MainActivity : AppCompatActivity() {
     var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this)
