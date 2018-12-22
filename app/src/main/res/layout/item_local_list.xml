@@ -94,7 +94,7 @@
                 android:layout_height="@dimen/item_local_list_temperature_height"
                 android:layout_marginStart="@dimen/SIZE_5"
                 android:layout_marginEnd="@dimen/SIZE_7"
-                android:gravity="end||bottom"
+                android:gravity="end|bottom"
                 android:lineSpacingExtra="21sp"
                 android:text="@{localData.localTemperature}"
                 android:textColor="@color/black2"
