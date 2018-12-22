@@ -26,8 +26,8 @@
 
             <ImageView
                 android:id="@+id/ivSnow1"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/SIZE_1000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/SIZE_240"
                 android:visibility="@{bg.SnowVisibility ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -38,8 +38,8 @@
 
             <ImageView
                 android:id="@+id/ivSnow1_2"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/SIZE_1000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/SIZE_240"
                 android:visibility="@{bg.SnowVisibility ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -50,8 +50,9 @@
 
             <ImageView
                 android:id="@+id/ivRain1"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/SIZE_700"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:scaleType="center"
                 android:visibility="@{bg.RainVisibility ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,9 +62,10 @@
 
             <ImageView
                 android:id="@+id/ivRain2"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/SIZE_800"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginEnd="@dimen/SIZE_24"
+                android:scaleType="center"
                 android:visibility="@{bg.RainVisibility ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,8 +75,9 @@
 
             <ImageView
                 android:id="@+id/ivRain2_3"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/SIZE_800"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:scaleType="center"
                 android:visibility="@{bg.RainVisibility ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

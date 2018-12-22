@@ -14,29 +14,33 @@
             type="com.mashupgroup.weatherbear.BackgroundViewModel" />
     </data>
 
-    <FrameLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/topBearBgWrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bear_height"
         android:fitsSystemWindows="true">
 
         <include
+            android:id="@+id/bearBg"
             layout="@layout/item_bear_background"
             bind:bg="@{bg}" />
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/bearWrapper"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toStartOf="parent">
 
             <include
                 layout="@layout/bear"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 bind:bear="@{bear}" />
 
-        </FrameLayout>
+        </LinearLayout>
 
-    </FrameLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>
