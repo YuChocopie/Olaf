@@ -3,7 +3,7 @@
     <data>
         <variable
             name="item"
-            type="com.mashupgroup.weatherbear.location.SearchItemViewModel" />
+            type="com.mashupgroup.weatherbear.viewmodels.SearchItemViewModel" />
     </data>
     <LinearLayout
         android:orientation="vertical"

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.databinding.ItemSearchLocationBinding
+import com.mashupgroup.weatherbear.viewmodels.SearchItemViewModel
 
 class SearchLocationAdapter(var itemClickListener: ISearchResultItemClickListener) : RecyclerView.Adapter<SearchLocationAdapter.Companion.SearchItemVH>() {
     var itemList = ArrayList<SearchItemViewModel>()

@@ -1,6 +1,8 @@
-package com.mashupgroup.weatherbear
+package com.mashupgroup.weatherbear.viewmodels
 
 import android.graphics.drawable.Drawable
+import com.mashupgroup.weatherbear.R
+import com.mashupgroup.weatherbear.WeatherBearApp
 
 class BackgroundViewModel {
     /*
@@ -18,15 +20,12 @@ class BackgroundViewModel {
         SUNNY(WeatherBearApp.appContext.resources.getDrawable(R.drawable.ic_bg_snunny),
                 WeatherBearApp.appContext.resources.getDrawable(R.drawable.bg_sunny_blue), false),
         SNOW(WeatherBearApp.appContext.resources.getDrawable(R.drawable.ic_bg_snow),
-                WeatherBearApp.appContext.resources.getDrawable(R.drawable
-                        .background_far_mountain), true)
+                WeatherBearApp.appContext.resources.getDrawable(R.drawable.background_far_mountain), true)
     }
 
     enum class Snow(var mountainSnow: Drawable, var mountainSnowVisibility: Boolean) {
-        SNOW(WeatherBearApp.appContext.resources.getDrawable(R.drawable
-                .ic_msg_bg_mountatin_snow), true),
-        RAINY(WeatherBearApp.appContext.resources.getDrawable(R.drawable
-                .ic_msg_bg_mountatin_rainy), false)
+        SNOW(WeatherBearApp.appContext.resources.getDrawable(R.drawable.ic_msg_bg_mountatin_snow), true),
+        RAINY(WeatherBearApp.appContext.resources.getDrawable(R.drawable.ic_msg_bg_mountatin_rainy), false)
     }
 
     var weather: Weather = Weather.SNOW

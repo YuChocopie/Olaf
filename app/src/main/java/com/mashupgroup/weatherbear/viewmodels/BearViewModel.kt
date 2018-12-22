@@ -1,4 +1,7 @@
-package com.mashupgroup.weatherbear
+package com.mashupgroup.weatherbear.viewmodels
+
+import com.mashupgroup.weatherbear.R
+import com.mashupgroup.weatherbear.WeatherBearApp
 
 
 class BearViewModel {

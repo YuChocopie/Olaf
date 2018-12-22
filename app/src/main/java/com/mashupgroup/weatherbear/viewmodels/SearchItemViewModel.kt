@@ -1,4 +1,4 @@
-package com.mashupgroup.weatherbear.location
+package com.mashupgroup.weatherbear.viewmodels
 
 import android.location.Address
 

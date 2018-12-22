@@ -11,7 +11,7 @@
 
         <variable
             name="bear"
-            type="com.mashupgroup.weatherbear.BearViewModel" />
+            type="com.mashupgroup.weatherbear.viewmodels.BearViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
