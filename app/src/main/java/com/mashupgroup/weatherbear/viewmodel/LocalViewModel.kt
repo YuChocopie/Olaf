@@ -30,7 +30,7 @@ class LocalViewModel {
 
     var localTime = "오전 5:33"
     var localName = "강남구"
-    var localWeatherShape = WeatherShape.CLOUD
+    var localWeatherShape = WeatherShape.CLOUD.image
     var localTemperature = "-3"
     var localFineDust="100up"
     var localFineDustColor = FineDustLevel.BAD.color
