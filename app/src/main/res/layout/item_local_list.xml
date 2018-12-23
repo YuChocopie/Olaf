@@ -17,6 +17,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_local_list_height"
+        android:layout_marginBottom="@dimen/location_list_item_between_margin"
         android:background="@drawable/circle"
         android:backgroundTint="@color/whiteTransparent">
 
