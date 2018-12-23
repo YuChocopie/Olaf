@@ -17,6 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="첫 페이지에 실시간 현재위치 표시하기"
+            android:textColor="@color/white0"
+            android:buttonTint="@color/white0"
             android:layout_marginStart="@dimen/location_list_item_side_margin"
             android:layout_marginEnd="@dimen/location_list_item_side_margin"
             android:layout_weight="0"/>
