@@ -29,6 +29,7 @@ import com.mashupgroup.weatherbear.viewmodels.BackgroundViewModel
 import com.mashupgroup.weatherbear.viewmodels.BearViewModel
 import com.mashupgroup.weatherbear.viewmodels.IsDayViewModel
 import kotlinx.android.synthetic.main.item_today_time_weather.*
+import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
 
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         setToolbar()
 
         // 곰돌이 애니메이션 초기화 및 시작
-        //BearAnimator.startAnimation(topBearBgWrapper)
+        BearAnimator.startAnimation(topBearBgWrapper)
 
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
@@ -101,6 +102,12 @@ class MainActivity : AppCompatActivity() {
 
         // ViewModel업데이트 (처음 아이템으로)
         setTopViewModelData(viewPager.currentItem)
+
+        // 하단 nestedScrollView 여기 touchDown시 스크롤상태 reset (좌우스크롤에 포커스를 줘서 더 좌우스크롤이 잘되게하기위해.. 잘 되는게 실제로 체감이 되나..?)
+        mainScrollView.setOnTouchListener { v, event ->
+            mainScrollView.scrollBy(0,0)
+            false
+        }
     }
 
     /**

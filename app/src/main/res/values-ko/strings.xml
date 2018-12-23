@@ -17,4 +17,7 @@
     <string name="search_location_letssearch">장소를 검색해보세요 :)</string>
     <string name="search_location_no_result">결과가 없어요.\n다른 키워드로 검색해주세요.</string>
     <string name="search_location_type_here">여기에 장소를 입력해주세요.</string>
+    <string name="msg_delete_this_address_q">이 위치를 지울까요?</string>
+    <string name="yes">네</string>
+    <string name="no">아뇨</string>
 </resources>

@@ -3,7 +3,12 @@ package com.mashupgroup.weatherbear
 import android.content.Context.MODE_PRIVATE
 import android.location.Address
 import android.location.Geocoder
+import com.google.gson.Gson
+import java.lang.Exception
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashSet
+import kotlin.collections.LinkedHashSet
 
 const val SP_WEATHERBEAR_KEY = "WeatherBearKey"
 const val SP_ADDR_SAVE_KEY = "AddressSaveKey"
@@ -24,13 +29,15 @@ object Global {
         val prefs = context.getSharedPreferences(SP_WEATHERBEAR_KEY, MODE_PRIVATE)
         val editor = prefs.edit()
 
-        val addrSet = HashSet<String>()
-        for (addr in addressList) {
-            val strLatLong = String.format("%f|%f", addr.latitude, addr.longitude)
-            addrSet.add(strLatLong)
+        // gson을 이용하여 addressList를 각각 json으로 직렬화한 후, 직렬화된 문자열을 저장한다
+        val gson = Gson()
+        val saveJsonSet = LinkedHashSet<String>()
+        for(address in addressList) {
+            val addrJson = gson.toJson(address)
+            saveJsonSet.add(addrJson)
         }
 
-        editor.putStringSet(SP_ADDR_SAVE_KEY, addrSet)
+        editor.putStringSet(SP_ADDR_SAVE_KEY, saveJsonSet)
 
         editor.apply()
     }
@@ -40,29 +47,23 @@ object Global {
      * @return 저장된 위치 목록
      */
     fun loadAddressList() : List<Address>? {
+        addressList.clear()
         val context = WeatherBearApp.appContext
-        val geocoder = Geocoder(context, Locale.getDefault())
 
         val prefs = context.getSharedPreferences(SP_WEATHERBEAR_KEY, MODE_PRIVATE)
-        val savedStrSet = prefs.getStringSet(SP_ADDR_SAVE_KEY, null) ?: return null
+        val addrJsonSet = prefs.getStringSet(SP_ADDR_SAVE_KEY, null) ?: return addressList
 
-        val lstAddr = ArrayList<Address>()
-
-        for(set in savedStrSet) {
-            val lat0long1 = set.split('|')
-            val savedAddr = geocoder.getFromLocation(
-                    lat0long1[0].toDouble(),
-                    lat0long1[1].toDouble(),
-                    1
-            )
-
-            if(savedAddr.size > 0) {
-                lstAddr.add(savedAddr[0])
+        val gson = Gson()
+        for(addrJson in addrJsonSet) {
+            try {
+                val addr = gson.fromJson(addrJson, Address::class.java) ?: continue
+                addressList.add(addr)
+            } catch (e : Exception) {
+                e.printStackTrace()
             }
         }
 
-        addressList = lstAddr
-        return lstAddr
+        return addressList
     }
 
     /**
@@ -70,8 +71,21 @@ object Global {
      */
     fun createLocationString(address : Address) : String {
         var result = "No result"
-        if(address.maxAddressLineIndex > 0) {
-            result = address.getAddressLine(0)
+        val stringBuilder = StringBuilder()
+
+        if(address.maxAddressLineIndex >= 0) {
+            if(!address.countryName.isNullOrEmpty()) stringBuilder.append(address.countryName)
+            if(!address.adminArea.isNullOrEmpty()) stringBuilder.append(' ').append(address.adminArea)
+            if(!stringBuilder.isEmpty()) stringBuilder.append('\n')
+
+            if(!address.subAdminArea.isNullOrEmpty()) stringBuilder.append(' ').append(address.subAdminArea)
+            if(!address.locality.isNullOrEmpty()) stringBuilder.append(' ').append(address.locality)
+            if(!address.subLocality.isNullOrEmpty()) stringBuilder.append(' ').append(address.subLocality)
+
+            if(!address.thoroughfare.isNullOrEmpty()) stringBuilder.append(' ').append(address.thoroughfare)
+            else if(!address.featureName.isNullOrEmpty()) stringBuilder.append(' ').append(address.featureName)
+            //if(!address.subThoroughfare.isNullOrEmpty()) stringBuilder.append(' ').append(address.subThoroughfare)
+            result = stringBuilder.toString()
         }
         return result
     }
