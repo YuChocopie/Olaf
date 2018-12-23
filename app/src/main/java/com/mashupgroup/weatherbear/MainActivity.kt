@@ -91,6 +91,10 @@ class MainActivity : AppCompatActivity() {
         var vm1 = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
         var vm2 = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
 
+        vm1.vmBG.setBackground()
+        vm1.vmBear.setBear()
+        vm1.vmInfo.setDayView()
+
         mainPagerAdapter.addData(vm1)
         mainPagerAdapter.addData(vm2)
         vm2.vmInfo.todayTemperature = "0"

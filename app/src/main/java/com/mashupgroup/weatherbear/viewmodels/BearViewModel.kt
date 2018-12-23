@@ -5,6 +5,11 @@ import com.mashupgroup.weatherbear.WeatherBearApp
 
 
 class BearViewModel {
+
+    var fineDustData: Int = 1
+    // SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
+    var weatherData = "SNOW"
+
     /*
         미세먼지 단계 4단계
             - 곰의 색
@@ -26,17 +31,13 @@ class BearViewModel {
 
 /*    미세먼지 : 좋음, 보통, 나쁨, 매우나쁨을 1,2,3,4(int)
       날씨 : 눈(snow), 비(rainy), 천둥번개(thunder_rainy), 바람(wind), 구름(cloud),맑음(sunny), 폭설(heavy_snow)
-      시간 : 낮="true" 밤="false"       */
+      시간 : 낮="true" 밤="false" */
 
-    enum class Weather {
-        SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
-    }
+    enum class Weather(var text: String) {
+        SNOW("snow"), RAINY("rainy"), THUNDER_RAINY("thunder rainy"),
+        WIND("wind"), CLOUD("cloud"), SUNNY("sunny"),HEAVY_SNOW("heavy_snow")}
 
-
-    private var fineDust: Int = 1
-    private var weather: Weather = Weather.SNOW
-    private var isDayTime: Boolean = true
-
+    var weather = Weather.SNOW.text
     var resource = WeatherBearApp.appContext.resources
     var bearSkinColor = resource.getColor(R.color.bearBad)
     var bearSnowColor = resource.getColor(R.color.bearSnowbad)
@@ -47,18 +48,19 @@ class BearViewModel {
     var bearSunglesesVisibilty = false
     var bearumbrellaVisibilty = false
     var snowBearVisibilty = true
+    var isDayTime: Boolean = true
 
     //폭설일 경우 눈사람으로 변경
-    private fun snowMan() {
+    fun setBear() {
         snowBearVisibilty = true
-        if (weather == Weather.HEAVY_SNOW) {
+        if (weatherData == Weather.HEAVY_SNOW.text) {
         } else {
             snowBearVisibilty = false
             updeteBear()
         }
     }
 
-    private fun updeteBear() {
+    fun updeteBear() {
         bearSkin()
         bearSnow()
         bearLeg()
@@ -68,7 +70,7 @@ class BearViewModel {
     }
 
     fun bearSkin() {
-        when (fineDust) {
+        when (fineDustData) {
             1 -> bearSkinColor = resource.getColor(R.color.bearGood)
             2 -> bearSkinColor = resource.getColor(R.color.bearNomal)
             3 -> bearSkinColor = resource.getColor(R.color.bearBad)
@@ -77,10 +79,10 @@ class BearViewModel {
     }
 
     private fun bearSnow() {
-        when (weather) {
-            Weather.HEAVY_SNOW, Weather.SNOW -> {
+        when (weatherData) {
+            Weather.HEAVY_SNOW.text, Weather.SNOW.text -> {
                 bearSnowVisibilty = true
-                when (fineDust) {
+                when (fineDustData) {
                     1 -> bearSnowColor = resource.getColor((R.color.bearSnowGood))
                     2, 3, 4 -> bearSnowColor = resource.getColor((R.color.bearSnowbad))
                 }
@@ -93,7 +95,7 @@ class BearViewModel {
 
     private fun bearFace() {
         if (isDayTime) {
-            when (fineDust) {
+            when (fineDustData) {
                 1, 2 -> bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_good)
                 3, 4 -> bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_bad)
             }
@@ -104,13 +106,13 @@ class BearViewModel {
     }
 
     private fun bearLeg() {
-        if (weather == Weather.RAINY || weather == Weather.THUNDER_RAINY) {
+        if (weatherData == Weather.RAINY.text || weatherData == Weather.THUNDER_RAINY.text) {
             //TODO: 우산 애니매이션 시작, 비옴
             bearumbrellaVisibilty = true
             bearLegVisibilty = true
         } else {
             if (isDayTime) {
-                if (fineDust >= 3) {
+                if (fineDustData >= 3) {
                     bearLegVisibilty = false
                 }
             } else {
@@ -120,14 +122,15 @@ class BearViewModel {
     }
 
     private fun bearPet() {
-        bearPetVisibilty = fineDust == 4
+        bearPetVisibilty = fineDustData == 4
 
     }
 
     private fun bearSunglesses() {
         if (isDayTime) {
-            when (weather) {
-                Weather.WIND, Weather.CLOUD, Weather.SUNNY -> bearSunglesesVisibilty = true
+            when (weatherData) {
+                Weather.WIND.text, Weather.CLOUD.text, Weather.SUNNY.text
+                -> bearSunglesesVisibilty = true
             }
         } else {
             bearSunglesesVisibilty = false

@@ -68,7 +68,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/msg_sunny" />
+                android:tint="@{isDayData.tomorrowWeatherShapeTint}"/>
 
             <TextView
                 android:id="@+id/tvDayWeatherShape"
