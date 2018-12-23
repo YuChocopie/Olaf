@@ -7,13 +7,14 @@ import java.util.*
 
 const val SP_WEATHERBEAR_KEY = "WeatherBearKey"
 const val SP_ADDR_SAVE_KEY = "AddressSaveKey"
-const val SP_SEETING_SAVE_KEY = "SeetingSaveKey"
+const val SP_FIRSTSCREEN_CURRENTLOC_SAVE_KEY = "FirstScreenCurrentLocationSaveKey"
 
 /**
  * 모든 클래스에서 참조할 수 있는 도우미 싱글톤 클래스
  */
 object Global {
     var addressList = ArrayList<Address>()
+    var isFirstPageCurrentLocation = false
 
     /**
      * SharedPref를 사용하여 사용자가 설정한 위치 목록을 핸드폰에 저장
@@ -63,6 +64,27 @@ object Global {
 
         addressList = lstAddr
         return lstAddr
+    }
+
+    /**
+     * SharedPref에 '첫번째 페이지에 현재 위치 표시' 여부 저장 (Global.isFirstPageCurrentLocation 값 저장)
+     */
+    fun saveIsFirstPageCurrentLocation() {
+        val context = WeatherBearApp.appContext
+        val prefs = context.getSharedPreferences(SP_WEATHERBEAR_KEY, MODE_PRIVATE)
+        val editor = prefs.edit()
+
+        editor.putBoolean(SP_FIRSTSCREEN_CURRENTLOC_SAVE_KEY, isFirstPageCurrentLocation)
+        editor.apply()
+    }
+
+    /**
+     * SharedPref에서 '첫번째 페이지에 현재 위치 표시' 여부 불러옴 (Global.isFirstPageCurrentLocation 에 불러옴)
+     */
+    fun loadIsFirstPageCurrentLocation() {
+        val context = WeatherBearApp.appContext
+        val prefs = context.getSharedPreferences(SP_WEATHERBEAR_KEY, MODE_PRIVATE)
+        isFirstPageCurrentLocation = prefs.getBoolean(SP_FIRSTSCREEN_CURRENTLOC_SAVE_KEY, false)
     }
 
     /**
