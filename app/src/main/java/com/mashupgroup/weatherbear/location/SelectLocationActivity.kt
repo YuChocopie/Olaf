@@ -60,7 +60,7 @@ class SelectLocationActivity : AppCompatActivity() {
         for(address in Global.addressList) {
             val newData = LocalViewModel()
             if(address.maxAddressLineIndex >= 0)
-                newData.localName = address.getAddressLine(0)
+                newData.localName = Global.createLocationString(address)
             locationList.add(newData)
         }
 
