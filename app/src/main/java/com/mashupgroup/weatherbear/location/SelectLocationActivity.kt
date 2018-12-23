@@ -22,9 +22,9 @@ class SelectLocationActivity : AppCompatActivity() {
             // 아이템이 길게 눌림 -> 아이템 삭제할지 물어보고 삭제
             addressToDelete = address
             AlertDialog.Builder(this@SelectLocationActivity)
-                    .setMessage("이 아이템을 삭제할까요?")
-                    .setPositiveButton("네", dialogClickListener)
-                    .setNegativeButton("아뇨", dialogClickListener)
+                    .setMessage(getString(R.string.msg_delete_this_address_q))
+                    .setPositiveButton(getString(R.string.yes), dialogClickListener)
+                    .setNegativeButton(getString(R.string.no), dialogClickListener)
                     .show()
         }
     }

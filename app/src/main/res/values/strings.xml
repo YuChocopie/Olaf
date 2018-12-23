@@ -35,6 +35,9 @@
     <string name="add_widget">Add widget</string>
     <string name="configure">Configure</string>
     <string name="request_fail">Request Fail</string>
+    <string name="msg_delete_this_address_q">Delete this address?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 
 </resources>
