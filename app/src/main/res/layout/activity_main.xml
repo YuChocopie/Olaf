@@ -64,6 +64,7 @@
         </com.mashupgroup.weatherbear.MainAppbarLayout>
 
         <android.support.v4.widget.NestedScrollView
+            android:id="@+id/mainScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/gray2"
