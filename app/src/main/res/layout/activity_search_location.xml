@@ -12,7 +12,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/location_list_bg"
+        android:fitsSystemWindows="true">
         <!-- Search -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:background="@android:color/white"
             android:visibility="gone" />
 
         <!-- 검색해보세요 -->
@@ -54,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@android:color/white"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
@@ -74,6 +78,7 @@
             android:layout_height="match_parent"
             android:visibility="gone"
             android:orientation="vertical"
+            android:background="@android:color/white"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
@@ -94,6 +99,7 @@
             android:layout_height="match_parent"
             android:visibility="gone"
             android:orientation="vertical"
+            android:background="@android:color/white"
             android:gravity="center">
             <ProgressBar
                 android:layout_width="wrap_content"
