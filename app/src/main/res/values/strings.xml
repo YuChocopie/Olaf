@@ -35,6 +35,7 @@
     <string name="add_widget">Add widget</string>
     <string name="configure">Configure</string>
     <string name="request_fail">Request Fail</string>
+    <string name="msg_heavy_snow">폭설</string>
 
 
 </resources>

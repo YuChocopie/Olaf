@@ -11,6 +11,9 @@
     <color name="gray1">#ebebeb</color>
     <color name="gray2">#f2f2f2</color>
 
+    <color name="Snow">#00ffffff</color>
+    <color name="heavySnow">#545a73</color>
+
     <color name="fineDustVeryBad">#c62828</color>
     <color name="fineDustBad">#ff8f00</color>
     <color name="fineDustNormal">#1eac5a</color>
