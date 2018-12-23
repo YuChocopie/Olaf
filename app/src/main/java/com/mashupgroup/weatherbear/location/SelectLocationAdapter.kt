@@ -1,6 +1,7 @@
 package com.mashupgroup.weatherbear.location
 
 import android.databinding.DataBindingUtil
+import android.location.Address
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import com.mashupgroup.weatherbear.databinding.ItemLocalListBinding
 import com.mashupgroup.weatherbear.viewmodels.LocalViewModel
 
 class SelectLocationAdapter(var itemLongPressListener: ISelectLocationItemListener) : RecyclerView.Adapter<SelectLocationAdapter.Companion.SelectItemVH>() {
-    var itemList = ArrayList<LocalViewModel>()
+    var itemList = ArrayList<SelectLocationItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectItemVH {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_local_list, parent, false)
@@ -26,26 +27,26 @@ class SelectLocationAdapter(var itemLongPressListener: ISelectLocationItemListen
         holder.bind(item, itemLongPressListener)
     }
 
-    fun setData(dataList : ArrayList<LocalViewModel>) {
+    fun setData(dataList : ArrayList<SelectLocationItem>) {
         itemList = dataList
         notifyDataSetChanged()
     }
 
     companion object {
         class SelectItemVH(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-            fun bind(vmItem : LocalViewModel, clickListener : ISelectLocationItemListener) {
+            fun bind(vmItem : SelectLocationItem, clickListener : ISelectLocationItemListener) {
                 // 아이템 뷰모델을 바인딩하고, 롱프레스 리스너를 연결한다
                 val binding: ItemLocalListBinding = DataBindingUtil.bind(itemView!!)!!
-                binding.localData = vmItem
+                binding.localData = vmItem.viewModel
                 itemView.setOnLongClickListener {
-                    clickListener.onLongPressItem()
+                    clickListener.onLongPressItem(vmItem.address)
                     true
                 }
             }
         }
 
         interface ISelectLocationItemListener {
-            fun onLongPressItem()
+            fun onLongPressItem(address: Address)
         }
     }
 
