@@ -7,21 +7,40 @@
     android:background="@color/location_list_bg"
     tools:context=".location.SelectLocationActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvLocationList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/chkAddCurrentLocation"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="첫 페이지에 실시간 현재위치 표시하기"
+            android:layout_marginStart="@dimen/location_list_item_side_margin"
+            android:layout_marginEnd="@dimen/location_list_item_side_margin"
+            android:layout_weight="0"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabtnAddLocation"
-        android:layout_width="70dp"
-        android:layout_height="@dimen/location_list_fabtn_size"
-        android:layout_marginEnd="@dimen/location_list_fabtn_margin"
-        android:layout_marginBottom="@dimen/location_list_fabtn_margin"
-        android:backgroundTint="@color/location_list_fabtn_bg"
-        android:src="@android:drawable/ic_input_add"
-        android:tint="@color/white0"
-        app:backgroundTint="@color/location_list_fabtn_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvLocationList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/location_list_item_side_margin"
+            android:layout_marginEnd="@dimen/location_list_item_side_margin"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            />
+    </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabtnAddLocation"
+            android:layout_width="70dp"
+            android:layout_height="@dimen/location_list_fabtn_size"
+            android:layout_marginEnd="@dimen/location_list_fabtn_margin"
+            android:layout_marginBottom="@dimen/location_list_fabtn_margin"
+            android:backgroundTint="@color/location_list_fabtn_bg"
+            android:src="@android:drawable/ic_input_add"
+            android:tint="@color/white0"
+            app:backgroundTint="@color/location_list_fabtn_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>
