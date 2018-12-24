@@ -35,11 +35,17 @@
                 android:hint="@string/search_location_type_here"
                 android:imeOptions="actionSearch" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnSearchLocation"
                 android:layout_weight="0"
                 android:layout_width="@dimen/location_search_button_size"
-                android:layout_height="match_parent"/>
+                android:layout_height="@dimen/location_search_button_size"
+                android:scaleType="fitCenter"
+                android:tint="@color/white0"
+                android:background="@null"
+                android:padding="@dimen/location_search_button_padding"
+                android:src="@drawable/ic_search"
+                />
         </LinearLayout>
 
         <!-- Result list -->

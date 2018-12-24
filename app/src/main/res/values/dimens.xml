@@ -16,7 +16,7 @@
     <dimen name="indicator_wrap_size">11dp</dimen>
     <dimen name="indicator_sel_padding">2dp</dimen>
     <dimen name="indicator_unsel_padding">3dp</dimen>
-    <dimen name="item_local_list_height">110dp</dimen>
+    <dimen name="item_local_list_height">80dp</dimen>
     <dimen name="item_local_list_icon">56dp</dimen>
     <dimen name="item_local_list_temperature_text">45sp</dimen>
     <dimen name="item_local_list_temperature_height">56dp</dimen>
@@ -25,9 +25,11 @@
     <dimen name="location_list_fabtn_margin">15dp</dimen>
     <dimen name="location_list_item_side_margin">15dp</dimen>
     <dimen name="location_list_item_between_margin">13dp</dimen>
+    <dimen name="location_list_sort_image_size">30dp</dimen>
 
     <dimen name="location_search_header_height">60dp</dimen>
     <dimen name="location_search_button_size">60dp</dimen>
+    <dimen name="location_search_button_padding">20dp</dimen>
     <dimen name="location_search_list_item_height">60dp</dimen>
     <dimen name="location_search_edittext_side_margin">14dp</dimen>
     <dimen name="location_search_middle_textview_width">330dp</dimen>

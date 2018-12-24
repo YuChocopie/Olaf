@@ -39,6 +39,7 @@
     <string name="msg_delete_this_address_q">Delete this address?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="select_location_chk_show_current_location_first_page">Show current location\'s information in the first page</string>
 
 
 </resources>
