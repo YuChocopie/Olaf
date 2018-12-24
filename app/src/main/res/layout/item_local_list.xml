@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="android.graphics.drawable.Drawable" />
-
         <import type="android.view.View" />
 
         <variable
@@ -14,180 +11,34 @@
             type="com.mashupgroup.weatherbear.viewmodels.LocalViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_local_list_height"
         android:layout_marginBottom="@dimen/location_list_item_between_margin"
         android:background="@drawable/circle"
-        android:backgroundTint="@color/whiteTransparent">
+        android:orientation="horizontal"
+        android:backgroundTint="@color/whiteTransparent"
+        android:gravity="center_vertical">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/localConstraint_1"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvLocalName"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="12sp"
+            android:text="@{localData.localName}"
+            android:textColor="#222222"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/localConstraint_2"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            tools:text="송파구" />
+        <ImageView
+            android:layout_weight="0"
+            android:layout_width="@dimen/location_list_sort_image_size"
+            android:layout_height="@dimen/location_list_sort_image_size"
+            android:tint="@color/white0"
+            android:src="@drawable/ic_hamburger"
+            android:layout_marginEnd="10dp"/>
 
-            <TextView
-                android:id="@+id/tvLocalTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:gravity="center_horizontal"
-                android:lineSpacingExtra="7sp"
-                android:text="@{localData.localTime}"
-                android:textColor="#222222"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="오후 8:14" />
-
-            <TextView
-                android:id="@+id/tvLocalName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/SIZE_5"
-                android:gravity="center_horizontal"
-                android:lineSpacingExtra="12sp"
-                android:text="@{localData.localName}"
-                android:textColor="#222222"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/tvLocalTime"
-                app:layout_constraintStart_toStartOf="@+id/tvLocalTime"
-                app:layout_constraintTop_toBottomOf="@+id/tvLocalTime"
-                tools:text="송파구" />
-
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/localConstraint_2"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/SIZE_24"
-            android:layout_marginTop="@dimen/SIZE_9"
-            android:layout_marginEnd="@dimen/SIZE_12"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/localConstraint_1"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivLocalWeatherShape"
-                android:layout_width="@dimen/item_local_list_icon"
-                android:layout_height="@dimen/item_local_list_icon"
-                android:layout_marginBottom="@dimen/SIZE_2"
-                android:src="@{localData.localWeatherShape}"
-                app:layout_constraintBottom_toBottomOf="@+id/tvLocalWeatherTemperature"
-                app:layout_constraintEnd_toStartOf="@+id/tvLocalWeatherTemperature"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@+id/loaclWeatherFineDustBox"
-                tools:src="@drawable/msg_thunder_rainy" />
-
-            <TextView
-                android:id="@+id/tvLocalWeatherTemperature"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/item_local_list_temperature_height"
-                android:layout_marginStart="@dimen/SIZE_5"
-                android:layout_marginEnd="@dimen/SIZE_7"
-                android:gravity="end|bottom"
-                android:lineSpacingExtra="21sp"
-                android:text="@{localData.localTemperature}"
-                android:textColor="@color/black2"
-                android:textSize="@dimen/item_local_list_temperature_text"
-                app:layout_constraintEnd_toStartOf="@id/localWeatherTemperatureText"
-                app:layout_constraintStart_toEndOf="@+id/ivLocalWeatherShape"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="-80" />
-
-            <TextView
-                android:id="@+id/localWeatherTemperatureText"
-                android:layout_width="@dimen/TEXT_SIZE_22"
-                android:layout_height="@dimen/SIZE_30"
-                android:layout_marginBottom="7dp"
-                android:gravity="center_horizontal"
-                android:lineSpacingExtra="12sp"
-                android:text="@string/c"
-                android:textColor="@color/black2"
-                android:textSize="@dimen/TEXT_SIZE_25"
-                app:layout_constraintBottom_toBottomOf="@+id/tvLocalWeatherTemperature"
-                app:layout_constraintEnd_toEndOf="@+id/loaclWeatherFineDustBox"
-                app:layout_constraintStart_toEndOf="@+id/tvLocalWeatherTemperature" />
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/loaclWeatherFineDustBox"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/TEXT_SIZE_23"
-                android:background="@drawable/weather_dust_box"
-                android:paddingStart="19dp"
-                android:paddingEnd="19dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivLocalWeatherShape">
-
-                <ImageView
-                    android:id="@+id/ivLocalFineDust"
-                    android:layout_width="@dimen/SIZE_15"
-                    android:layout_height="@dimen/SIZE_15"
-                    android:tint="@{localData.localFineDustColor}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/circle" />
-
-                <TextView
-                    android:id="@+id/localFineDustText"
-                    android:layout_width="@dimen/SIZE_56"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/SIZE_1"
-                    android:gravity="center"
-                    android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
-                    android:text="@string/fine_dust"
-                    android:textColor="@color/black6"
-                    android:textSize="@dimen/TEXT_SIZE_11"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/ivLocalFineDust"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvLocalFineDust"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/SIZE_2"
-                    android:gravity="center"
-                    android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
-                    android:text="@{localData.localFineDust}"
-                    android:textColor="@color/fineDustText"
-                    android:textSize="@dimen/TEXT_SIZE_11"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/localFineDustText"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="100㎍/m³" />
-
-                <TextView
-                    android:id="@+id/tvLocalFineDustText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/SIZE_2"
-                    android:gravity="center"
-                    android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
-                    android:text="@{localData.localFineDustText}"
-                    android:textColor="@color/fineDustText"
-                    android:textSize="@dimen/TEXT_SIZE_11"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tvLocalFineDust"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/fine_dust_bad" />
-
-
-            </android.support.constraint.ConstraintLayout>
-        </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </layout>

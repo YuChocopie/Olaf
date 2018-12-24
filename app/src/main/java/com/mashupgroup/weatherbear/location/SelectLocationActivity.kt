@@ -92,9 +92,8 @@ class SelectLocationActivity : AppCompatActivity() {
     private fun loadAndShowLocationsInfo() {
         val locationList = ArrayList<SelectLocationItem>()
         for(address in Global.addressList) {
-            val newData = SelectLocationItem(LocalViewModel(), address)
+            val newData = SelectLocationItem(LocalViewModel(Global.createLocationString(address)), address)
             if(address.maxAddressLineIndex >= 0)
-                newData.viewModel.localName = Global.createLocationString(address)
             locationList.add(newData)
         }
 
