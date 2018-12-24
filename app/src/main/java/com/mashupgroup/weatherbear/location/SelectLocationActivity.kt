@@ -49,7 +49,17 @@ class SelectLocationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_location)
 
+        // '위치 추가' floating action button 클릭시 리스너 등록
         fabtnAddLocation.setOnClickListener {onSearchLocationFABtnClicked() }
+
+        // '첫 페이지 현재 위치?' 체크 불러와서 체크처리하기
+        chkAddCurrentLocation.isChecked = Global.isFirstPageCurrentLocation
+        // '첫 페이지 현재 위치?' 체크 변경시 리스너 등록
+        chkAddCurrentLocation.setOnCheckedChangeListener { buttonView, isChecked ->
+            // '첫 페이지에 현재 위치 표시' 체크가 바뀔 때마다 저장한다
+            Global.isFirstPageCurrentLocation = isChecked
+            Global.saveIsFirstPageCurrentLocation()
+         }
 
         // 저장됐었던 위치 정보들을 불러온다
         loadAndShowLocationsInfo()

@@ -71,6 +71,8 @@ class MainActivity : AppCompatActivity() {
 
         // 유저가 저장했었던 주소를 Global.addressList에 불러오기
         Global.loadAddressList()
+        // 첫번째 페이지를 현재 위치로 표시할건지 유저가 저장했었던 값 Global.isFirstPageCurrentLocation에 불러오기
+        Global.loadIsFirstPageCurrentLocation()
 
         // 툴바 초기 세팅
         setToolbar()
