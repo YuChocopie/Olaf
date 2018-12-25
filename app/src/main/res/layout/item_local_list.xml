@@ -32,13 +32,5 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="송파구" />
-        <ImageView
-            android:layout_weight="0"
-            android:layout_width="@dimen/location_list_sort_image_size"
-            android:layout_height="@dimen/location_list_sort_image_size"
-            android:tint="@color/white0"
-            android:src="@drawable/ic_hamburger"
-            android:layout_marginEnd="10dp"/>
-
     </LinearLayout>
 </layout>
