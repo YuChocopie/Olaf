@@ -2,13 +2,10 @@ package com.mashupgroup.weatherbear
 
 import android.content.Context.MODE_PRIVATE
 import android.location.Address
-import android.location.Geocoder
 import com.google.gson.Gson
+import org.json.JSONArray
 import java.lang.Exception
-import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashSet
-import kotlin.collections.LinkedHashSet
 
 const val SP_WEATHERBEAR_KEY = "WeatherBearKey"
 const val SP_ADDR_SAVE_KEY = "AddressSaveKey"
@@ -32,13 +29,13 @@ object Global {
 
         // gson을 이용하여 addressList를 각각 json으로 직렬화한 후, 직렬화된 문자열을 저장한다
         val gson = Gson()
-        val saveJsonSet = LinkedHashSet<String>()
+        val addrJsonArr = JSONArray()
         for(address in addressList) {
             val addrJson = gson.toJson(address)
-            saveJsonSet.add(addrJson)
+            addrJsonArr.put(addrJson)
         }
 
-        editor.putStringSet(SP_ADDR_SAVE_KEY, saveJsonSet)
+        editor.putString(SP_ADDR_SAVE_KEY, addrJsonArr.toString())
 
         editor.apply()
     }
@@ -51,17 +48,17 @@ object Global {
         addressList.clear()
         val context = WeatherBearApp.appContext
 
-        val prefs = context.getSharedPreferences(SP_WEATHERBEAR_KEY, MODE_PRIVATE)
-        val addrJsonSet = prefs.getStringSet(SP_ADDR_SAVE_KEY, null) ?: return addressList
-
-        val gson = Gson()
-        for(addrJson in addrJsonSet) {
-            try {
-                val addr = gson.fromJson(addrJson, Address::class.java) ?: continue
-                addressList.add(addr)
-            } catch (e : Exception) {
-                e.printStackTrace()
+        try {
+            val prefs = context.getSharedPreferences(SP_WEATHERBEAR_KEY, MODE_PRIVATE)
+            val addrJsonArrString = prefs.getString(SP_ADDR_SAVE_KEY, null) ?: return addressList
+            val addrJsonArr = JSONArray(addrJsonArrString)
+            val gson = Gson()
+            for(i in 0..addrJsonArr.length()) {
+                    val addr = gson.fromJson(addrJsonArr.get(i).toString(), Address::class.java) ?: continue
+                    addressList.add(addr)
             }
+        } catch (e : Exception) {
+            e.printStackTrace()
         }
 
         return addressList
