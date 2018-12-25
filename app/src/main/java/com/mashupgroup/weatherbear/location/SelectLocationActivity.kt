@@ -7,6 +7,7 @@ import android.content.Intent
 import android.location.Address
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import com.mashupgroup.weatherbear.Global
 import com.mashupgroup.weatherbear.R
@@ -16,16 +17,28 @@ import kotlinx.android.synthetic.main.activity_select_location.*
 class SelectLocationActivity : AppCompatActivity() {
     val RESULT_CODE_SEARCH_LOCATION_ACTIVITY = 111
 
-    /** 위치 리스트의 한 아이템이 오래 눌렸을 때 불리는 콜백리스너 */
-    private val longListener = object : SelectLocationAdapter.Companion.ISelectLocationItemListener {
-        override fun onLongPressItem(address: Address) {
-            // 아이템이 길게 눌림 -> 아이템 삭제할지 물어보고 삭제
+    /** 위치 리스트의 아이템이 변경되었을 때(swipe/reorder) 불리는 콜백리스너 */
+    private val changedListener: SelectLocationAdapter.Companion.IItemChangedRequestListener =
+            object : SelectLocationAdapter.Companion.IItemChangedRequestListener {
+
+        // 삭제요청시 삭제할지 먼저 물어봄
+        override fun onRequestedItemRemove(address: Address) {
             addressToDelete = address
             AlertDialog.Builder(this@SelectLocationActivity)
                     .setMessage(getString(R.string.msg_delete_this_address_q))
                     .setPositiveButton(getString(R.string.yes), dialogClickListener)
                     .setNegativeButton(getString(R.string.no), dialogClickListener)
                     .show()
+        }
+
+        // 순서바뀐거라면 걍 순거바꾸고 저장
+        override fun onRequestedItemSwap() {
+            // 리스트 읽어와서 주소 싹다 다시저장
+            Global.addressList.clear()
+            for(addressItem: SelectLocationItem in mAdapter.itemList) {
+                Global.addressList.add(addressItem.address)
+            }
+            Global.saveAddressList()
         }
     }
 
@@ -37,13 +50,13 @@ class SelectLocationActivity : AppCompatActivity() {
 
             Global.addressList.remove(addressToDelete!!)
             Global.saveAddressList()
-            loadAndShowLocationsInfo()
         }
-
+        loadAndShowLocations()
         addressToDelete = null
     }
 
-    private val mAdapter = SelectLocationAdapter(longListener)
+    private val mAdapter = SelectLocationAdapter(changedListener)
+    private val mItemTouchHelper = SelectLocationItemTouchCallback(mAdapter)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +75,11 @@ class SelectLocationActivity : AppCompatActivity() {
          }
 
         // 저장됐었던 위치 정보들을 불러온다
-        loadAndShowLocationsInfo()
+        loadAndShowLocations()
         rvLocationList.adapter = mAdapter
+
+        // 오른쪽 햄버그 드래그시 위치 변경 헬퍼를 새로 만들어서 붙인다
+        ItemTouchHelper(mItemTouchHelper).attachToRecyclerView(rvLocationList)
     }
 
     private fun onSearchLocationFABtnClicked() {
@@ -85,11 +101,11 @@ class SelectLocationActivity : AppCompatActivity() {
                 // 검색 실패 또는 취소.
             }
 
-            loadAndShowLocationsInfo()
+            loadAndShowLocations()
         }
     }
 
-    private fun loadAndShowLocationsInfo() {
+    private fun loadAndShowLocations() {
         val locationList = ArrayList<SelectLocationItem>()
         for(address in Global.addressList) {
             val newData = SelectLocationItem(LocalViewModel(Global.createLocationString(address)), address)
