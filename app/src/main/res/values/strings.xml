@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">WeatherBear</string>
+    <string name="api_json">json</string>
+    <string name="api_daily">DAILY</string>
     <string name="body_temperature">체감온도 </string>
     <string name="c">℃</string>
     <string name="today_weather">Today\'s weather</string>
