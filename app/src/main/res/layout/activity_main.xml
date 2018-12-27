@@ -63,7 +63,7 @@
             </android.support.design.widget.CollapsingToolbarLayout>
         </com.mashupgroup.weatherbear.MainAppbarLayout>
 
-        <android.support.v4.widget.NestedScrollView
+        <com.mashupgroup.weatherbear.MainScrollView
             android:id="@+id/mainScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -78,7 +78,7 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </android.support.v4.widget.NestedScrollView>
+        </com.mashupgroup.weatherbear.MainScrollView>
     </android.support.design.widget.CoordinatorLayout>
 
 </layout>
