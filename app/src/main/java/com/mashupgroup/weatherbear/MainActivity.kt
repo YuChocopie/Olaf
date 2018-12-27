@@ -16,6 +16,7 @@ import android.location.Location
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener
 import android.os.Build
 import android.support.v4.app.ActivityCompat
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -38,9 +39,21 @@ class MainActivity : AppCompatActivity() {
     private val model = IsDayViewModel()
     private val weatherApiToken = BuildConfig.WEATHER_API_TOKEN
     private val airApiToken = BuildConfig.AIR_API_TOKEN
+    private val kakaoApiToken = BuildConfig.KAKAO_API_TOKEN
     private var lat = 0.0
     private var lon = 0.0
     lateinit var mainViewDataBinding : ActivityMainBinding
+
+    /* API */
+    private val airAPI = AirAPI()
+    private val airStationRetrofit = airAPI.createStationInfoRetrofit()
+    private val airStationInterface = airStationRetrofit.create(AirInterface::class.java)
+    private val airRetrofit = airAPI.createAirInfoRetrofit()
+    private val airInterface = airRetrofit.create(AirInterface::class.java)
+
+    val kakaoAPI = KakaoAPI()
+    val kakaoRetrofit = kakaoAPI.createTransRetrofit()
+    val kakaoInterface = kakaoRetrofit.create(KakaoInterface::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,24 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewDataBinding = setContentView(this, R.layout.activity_main)
 
-        var loactionListener = object : ILocationResultListener {
-            override fun onLocationReady(location: Location?, address: Address?) {
-
-                if(location == null) {
-                    Toast.makeText(this@MainActivity, R.string.err_str_location_ready, Toast.LENGTH_SHORT).show()
-                } else {
-                    lat = location.latitude
-                    lon = location.longitude
-
-                    updateTodayAir(IsDayViewModel(), lat,lon)
-                }
-            }
-        }
-
-        LocationHelper.addLocationResultListener(listener = loactionListener)
-        LocationHelper.requestLocation(this, true)
-
-        requestTodayWeather()
+        //requestTodayWeather()
 
         // 유저가 저장했었던 주소를 Global.addressList에 불러오기
         Global.loadAddressList()
@@ -110,6 +106,78 @@ class MainActivity : AppCompatActivity() {
             mainScrollView.scrollBy(0,0)
             false
         }
+
+        var loactionListener = object : ILocationResultListener {
+            override fun onLocationReady(location: Location?, address: Address?) {
+
+                if(location == null) {
+                    Toast.makeText(this@MainActivity, R.string.err_str_location_ready, Toast.LENGTH_SHORT).show()
+                } else {
+                    lat = location.latitude
+                    lon = location.longitude
+
+                    requestItemUpdate(vm1, location)
+                }
+            }
+        }
+
+        LocationHelper.addLocationResultListener(listener = loactionListener)
+        LocationHelper.requestLocation(this, true)
+
+
+    }
+
+    private fun requestItemUpdate(item: MainPagerItem, location: Location) {
+
+        /* Get TM Postion */
+        kakaoInterface.getPos(kakaoApiToken, location.longitude, location.latitude, "WGS84", "TM")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({coord->
+                    var tmX = coord.documents[0].x
+                    var tmY = coord.documents[0].y
+                    requestStationInfo(item, tmX, tmY)
+                }, { error->
+                    error.printStackTrace()
+                })
+    }
+
+    private fun requestStationInfo(item: MainPagerItem, tmX: String, tmY: String) {
+        /* Get StationInfo */
+        airStationInterface.getStation("json",tmX,tmY,airApiToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ stationInfo ->
+                    if(stationInfo != null) {
+                        // Air 정보 가져오기
+                        requestAirInfo(item, stationInfo.list[0].stationName)
+                    } else {
+
+                    }
+                }, { error ->
+                    error.printStackTrace()
+                })
+    }
+
+    private fun requestAirInfo(item: MainPagerItem, stationName: String) {
+        /* Get AirInfo */
+        airInterface.getAir(getString(R.string.api_json), 1, stationName, getString(R.string.api_daily), 1.3, airApiToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ airInfo ->
+                    Log.v("requestAirInfo", "${stationName} : ${airInfo.toString()}")
+                    val airItem = airInfo.list[0]
+
+                    item.vmInfo.todayDust = airItem.pm10Value
+                    item.vmInfo.todayUltraDust = airItem.pm25Value
+
+                    item.vmInfo.tomorrowDust = airItem.pm10Value24
+                    item.vmInfo.tomorrowUltraDust = airItem.pm25Value24
+
+                    mainPagerAdapter.notifyDataSetChanged()
+                }, { error ->
+                    error.printStackTrace()
+                })
     }
 
     /**
@@ -132,64 +200,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun requestTodayWeather() {
-        val weatherAPI: WeatherAPI = WeatherAPI()
-        val retrofit: Retrofit = weatherAPI.createTodayWeatherRetrofit()
-
-        val api = retrofit.create(WeatherInterface::class.java)
-
-        //TODO: lat, lon 값 수정 필요
-        api.getWeather(35.0, 135.0, weatherApiToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ weather: Weather? ->
-                    if (weather != null) {
-                        // 현재 기온
-                        tvTodayTime.text = String.format("%.1f", (weather.main
-                                .temp - 273))
-                    }
-                }, { error ->
-                    error.printStackTrace()
-                })
-    }
-
-    private fun updateTodayAirResponse(isDayViewModel : IsDayViewModel, air: Air, address: String) {
-        var pm10 = -1
-        var pm25 = -1
-
-        for (i in air.list) {
-            if(i.cityName.toRegex().find(address) != null) {
-                pm10 = i.pm10Value.toInt()
-                pm25 = i.pm25Value.toInt()
-                break;
-            }
-        }
-
-        if(pm10 != -1) {
-            // TODO:isDayViewModel에 pm10, pm25 적용 필요
-        }
-    }
-
-    private fun updateTodayAir(isDayViewModel : IsDayViewModel, lat : Double, lon : Double) {
-        val airAPI = AirAPI()
-        val retrofit: Retrofit = airAPI.createTodayAirRetrofit()
-
-        val addressChanger = AddressGetter()
-        val (state, address) = addressChanger.getStateAddress(this, lat,lon)
-
-        val api = retrofit.create(AirInterface::class.java)
-        api.getAir("JSON",state, "100","HOUR", airApiToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({air: Air? ->
-                    if (air != null)
-                        updateTodayAirResponse(isDayViewModel , air, address)
-                    else
-                        Toast.makeText(this@MainActivity, R.string.request_fail, Toast.LENGTH_SHORT).show()
-                }, { error ->
-                    error.printStackTrace()
-                })
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
