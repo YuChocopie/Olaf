@@ -101,12 +101,6 @@ class MainActivity : AppCompatActivity() {
         // ViewModel업데이트 (처음 아이템으로)
         setTopViewModelData(viewPager.currentItem)
 
-        // 하단 nestedScrollView 여기 touchDown시 스크롤상태 reset (좌우스크롤에 포커스를 줘서 더 좌우스크롤이 잘되게하기위해.. 잘 되는게 실제로 체감이 되나..?)
-        mainScrollView.setOnTouchListener { v, event ->
-            mainScrollView.scrollBy(0,0)
-            false
-        }
-
         var loactionListener = object : ILocationResultListener {
             override fun onLocationReady(location: Location?, address: Address?) {
 
