@@ -73,9 +73,6 @@ class MainActivity : AppCompatActivity() {
         // 툴바 초기 세팅
         setToolbar()
 
-        // 곰돌이 애니메이션 초기화 및 시작
-        BearAnimator.startAnimation(topBearBgWrapper)
-
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
         viewPager.addOnPageChangeListener(object : SimpleOnPageChangeListener() {
@@ -86,20 +83,7 @@ class MainActivity : AppCompatActivity() {
         })
         viewPager.adapter = mainPagerAdapter
 
-        var vm1 = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
-        var vm2 = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
-
-        vm1.vmBG.setBackground()
-        vm1.vmBear.setBear()
-        vm1.vmInfo.setDayView()
-
-        mainPagerAdapter.addData(vm1)
-        mainPagerAdapter.addData(vm2)
-        vm2.vmInfo.todayTemperature = "0"
-        viewPager.initIndicator()
-
-        // ViewModel업데이트 (처음 아이템으로)
-        setTopViewModelData(viewPager.currentItem)
+        initWithSavedAddressData()
 
         var loactionListener = object : ILocationResultListener {
             override fun onLocationReady(location: Location?, address: Address?) {
@@ -174,16 +158,36 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
+    /** 사용자가 저장해놨던 주소 목록을 가지고 Adapter(viewPager) 등 초기 세팅을 한다 **/
+    private fun initWithSavedAddressData() {
+        for(addr in Global.addressList) {
+            val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), addr)
+            // Todo : 여기에 addr에 맞는 각 ViewModel 세팅을 해야합니다. 아마 날씨 데이터를 불러와야할겁니다.
+            mainPagerAdapter.addData(item)
+        }
+
+        viewPager.initIndicator()
+
+        // ViewModel업데이트 (처음 아이템으로)
+        setTopViewModelData(viewPager.currentItem)
+    }
+
     /**
      *  화면 상단 곰, 바탕화면, 메시지 등을 갱신해주는 메서드
      *  ViewPager.adapter 안에있는 아이템의 뷰모델을 사용하여 갱신
      *  @param position MainPageAdapter에서 가져올 아이템 position
      */
     private fun setTopViewModelData(position : Int) {
+        if(position < 0 || position >= mainPagerAdapter.count) { return }
+        BearAnimator.stopAnimation(topBearBgWrapper)
+
         val data = mainPagerAdapter.itemList[position]
         mainViewDataBinding.setVariable(BR.bear, data.vmBear)
         mainViewDataBinding.setVariable(BR.bg, data.vmBG)
         tvSelectedLocation.text = createLocationString(data.address)
+
+        BearAnimator.startAnimation(topBearBgWrapper)
+
         // Todo : 현재 메시지 (오늘은 미세먼지가 심해요! 등) 갱신하는 코드도 있어야함
     }
 
