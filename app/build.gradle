@@ -25,6 +25,7 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'WEATHER_API_TOKEN', WeatherApiToken
         it.buildConfigField 'String', 'AIR_API_TOKEN', AirApiToken
+        it.buildConfigField 'String', 'KAKAO_API_TOKEN', KakaoApiToken
     }
 
     productFlavors {

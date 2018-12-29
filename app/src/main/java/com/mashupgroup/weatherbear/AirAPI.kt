@@ -10,8 +10,19 @@ import com.google.gson.Gson
 
 
 class AirAPI {
-    fun createTodayAirRetrofit() : Retrofit {
 
+    /** Station Information **/
+    fun createStationInfoRetrofit() : Retrofit {
+        var retrofit = Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://openapi.airkorea.or.kr/openapi/services/rest/MsrstnInfoInqireSvc/")
+                .build()
+        return retrofit!!
+    }
+
+    /** Air Information **/
+    fun createAirInfoRetrofit() : Retrofit {
         var retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
