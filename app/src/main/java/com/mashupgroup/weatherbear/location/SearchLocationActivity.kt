@@ -88,7 +88,7 @@ class SearchLocationActivity : AppCompatActivity(),
 
         val listViewModel = ArrayList<SearchItemViewModel>()
         for (addr in list) {
-            listViewModel.add(SearchItemViewModel(Global.createLocationString(addr), addr))
+            listViewModel.add(SearchItemViewModel(Global.createLocationString(addr, true), addr))
         }
         adapter.setData(listViewModel)
 

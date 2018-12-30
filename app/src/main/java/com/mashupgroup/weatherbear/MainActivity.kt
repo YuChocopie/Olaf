@@ -163,6 +163,12 @@ class MainActivity : AppCompatActivity() {
 
     /** 사용자가 저장해놨던 주소 목록을 가지고 Adapter(viewPager) 등 초기 세팅을 한다 **/
     private fun initWithSavedAddressData() {
+        // 첫번째 아이템이 현재 위치면 그거 추가합니다
+        if(Global.isFirstPageCurrentLocation) {
+            val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
+            mainPagerAdapter.addData(item)
+        }
+
         for(addr in Global.addressList) {
             val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), addr)
             // Todo : 여기에 addr에 맞는 각 ViewModel 세팅을 해야합니다. 아마 날씨 데이터를 불러와야할겁니다.
@@ -187,7 +193,7 @@ class MainActivity : AppCompatActivity() {
         val data = mainPagerAdapter.itemList[position]
         mainViewDataBinding.setVariable(BR.bear, data.vmBear)
         mainViewDataBinding.setVariable(BR.bg, data.vmBG)
-        tvSelectedLocation.text = createLocationString(data.address)
+        tvSelectedLocation.text = createLocationString(data.address, false)
 
         BearAnimator.startAnimation(topBearBgWrapper)
 
