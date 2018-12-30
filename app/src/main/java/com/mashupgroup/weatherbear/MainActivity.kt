@@ -94,7 +94,10 @@ class MainActivity : AppCompatActivity() {
                     lat = location.latitude
                     lon = location.longitude
 
-                    requestItemUpdate(vm1, location)
+                    // '첫번째 아이템이 현위치' 옵션이 켜져있다면 첫번째 아이템 갱신
+                    if(Global.isFirstPageCurrentLocation && mainPagerAdapter.count > 0) {
+                        requestItemUpdate(mainPagerAdapter.itemList[0], location)
+                    }
                 }
             }
         }
