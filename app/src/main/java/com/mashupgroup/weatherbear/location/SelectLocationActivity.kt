@@ -15,7 +15,8 @@ import com.mashupgroup.weatherbear.viewmodels.LocalViewModel
 import kotlinx.android.synthetic.main.activity_select_location.*
 
 class SelectLocationActivity : AppCompatActivity() {
-    val RESULT_CODE_SEARCH_LOCATION_ACTIVITY = 111
+    private val RESULT_CODE_SEARCH_LOCATION_ACTIVITY = 111
+    private var isItemChanged = false
 
     /** 위치 리스트의 아이템이 변경되었을 때(swipe/reorder) 불리는 콜백리스너 */
     private val changedListener: SelectLocationAdapter.Companion.IItemChangedRequestListener =
@@ -31,7 +32,7 @@ class SelectLocationActivity : AppCompatActivity() {
                     .show()
         }
 
-        // 순서바뀐거라면 걍 순거바꾸고 저장
+        // 순서바뀐거라면 걍 순서바꾸고 저장
         override fun onRequestedItemSwap() {
             // 리스트 읽어와서 주소 싹다 다시저장
             Global.addressList.clear()
@@ -39,6 +40,7 @@ class SelectLocationActivity : AppCompatActivity() {
                 Global.addressList.add(addressItem.address)
             }
             Global.saveAddressList()
+            isItemChanged = true
         }
     }
 
@@ -50,6 +52,7 @@ class SelectLocationActivity : AppCompatActivity() {
 
             Global.addressList.remove(addressToDelete!!)
             Global.saveAddressList()
+            isItemChanged = true
         }
         loadAndShowLocations()
         addressToDelete = null
@@ -72,6 +75,7 @@ class SelectLocationActivity : AppCompatActivity() {
             // '첫 페이지에 현재 위치 표시' 체크가 바뀔 때마다 저장한다
             Global.isFirstPageCurrentLocation = isChecked
             Global.saveIsFirstPageCurrentLocation()
+            isItemChanged = true
          }
 
         // 저장됐었던 위치 정보들을 불러온다
@@ -82,12 +86,23 @@ class SelectLocationActivity : AppCompatActivity() {
         ItemTouchHelper(mItemTouchHelper).attachToRecyclerView(rvLocationList)
     }
 
+    override fun onBackPressed() {
+        // 종료시 데이터 변경 여부에 대해 intent에 실어놓는다
+        val resultIntent = Intent()
+        resultIntent.putExtra("isItemChanged", isItemChanged)
+        setResult(RESULT_OK, resultIntent)
+
+        super.onBackPressed()
+    }
+
     private fun onSearchLocationFABtnClicked() {
         val intent = Intent(this, SearchLocationActivity::class.java)
         startActivityForResult(intent, RESULT_CODE_SEARCH_LOCATION_ACTIVITY)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
         if(requestCode == RESULT_CODE_SEARCH_LOCATION_ACTIVITY) {
             if(resultCode == Activity.RESULT_OK) {
                 // 검색 성공 및 결과 받아옴 (data intent안에 결과 있어야함)
@@ -95,6 +110,7 @@ class SelectLocationActivity : AppCompatActivity() {
                     val lat = intent.getDoubleExtra("lat", .0)
                     val long = intent.getDoubleExtra("long", .0)
                     val name = intent.getStringExtra("name")
+                    isItemChanged = true
                     Log.v("JUJINTEST", "$name, $lat, $long")
                 }
             } else {
@@ -108,7 +124,7 @@ class SelectLocationActivity : AppCompatActivity() {
     private fun loadAndShowLocations() {
         val locationList = ArrayList<SelectLocationItem>()
         for(address in Global.addressList) {
-            val newData = SelectLocationItem(LocalViewModel(Global.createLocationString(address)), address)
+            val newData = SelectLocationItem(LocalViewModel(Global.createLocationString(address, true)), address)
             if(address.maxAddressLineIndex >= 0)
             locationList.add(newData)
         }

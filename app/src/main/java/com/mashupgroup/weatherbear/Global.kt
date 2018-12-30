@@ -88,14 +88,16 @@ object Global {
     /**
      * Address객체를 주소 string (가장 근접한애)으로 변경
      */
-    fun createLocationString(address : Address) : String {
+    fun createLocationString(address : Address, isFull: Boolean) : String {
         var result = "No result"
         val stringBuilder = StringBuilder()
 
         if(address.maxAddressLineIndex >= 0) {
-            if(!address.countryName.isNullOrEmpty()) stringBuilder.append(address.countryName)
-            if(!address.adminArea.isNullOrEmpty()) stringBuilder.append(' ').append(address.adminArea)
-            if(!stringBuilder.isEmpty()) stringBuilder.append('\n')
+            if(isFull) {
+                if (!address.countryName.isNullOrEmpty()) stringBuilder.append(address.countryName)
+                if (!address.adminArea.isNullOrEmpty()) stringBuilder.append(' ').append(address.adminArea)
+                if (!stringBuilder.isEmpty()) stringBuilder.append('\n')
+            }
 
             if(!address.subAdminArea.isNullOrEmpty()) stringBuilder.append(' ').append(address.subAdminArea)
             if(!address.locality.isNullOrEmpty()) stringBuilder.append(' ').append(address.locality)
