@@ -5,10 +5,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.mashupgroup.weatherbear.models.weather.Weather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Retrofit
 import kotlinx.android.synthetic.main.activity_main.*
 import android.databinding.DataBindingUtil.setContentView
 import android.location.Address
@@ -25,14 +23,15 @@ import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
 import com.mashupgroup.weatherbear.location.ILocationResultListener
 import com.mashupgroup.weatherbear.location.LocationHelper
 import com.mashupgroup.weatherbear.location.SelectLocationActivity
-import com.mashupgroup.weatherbear.models.air.Air
 import com.mashupgroup.weatherbear.viewmodels.BackgroundViewModel
 import com.mashupgroup.weatherbear.viewmodels.BearViewModel
 import com.mashupgroup.weatherbear.viewmodels.IsDayViewModel
-import kotlinx.android.synthetic.main.item_today_time_weather.*
 import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
+import android.R.attr.data
+
+
 
 class MainActivity : AppCompatActivity() {
     var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this)
@@ -54,6 +53,8 @@ class MainActivity : AppCompatActivity() {
     val kakaoAPI = KakaoAPI()
     val kakaoRetrofit = kakaoAPI.createTransRetrofit()
     val kakaoInterface = kakaoRetrofit.create(KakaoInterface::class.java)
+
+    private val RESULT_CODE_ADDRESS_MANAGE_ACTIVITY = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -163,6 +164,9 @@ class MainActivity : AppCompatActivity() {
 
     /** 사용자가 저장해놨던 주소 목록을 가지고 Adapter(viewPager) 등 초기 세팅을 한다 **/
     private fun initWithSavedAddressData() {
+        // 초기화
+        mainPagerAdapter.itemList.clear()
+
         // 첫번째 아이템이 현재 위치면 그거 추가합니다
         if(Global.isFirstPageCurrentLocation) {
             val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
@@ -218,13 +222,27 @@ class MainActivity : AppCompatActivity() {
             R.id.mnu_select_location -> {
                 // 위치 선택 메뉴 클릭됨
                 val intent = Intent(this, SelectLocationActivity::class.java)
-                startActivity(intent)
+                startActivityForResult(intent, RESULT_CODE_ADDRESS_MANAGE_ACTIVITY)
             }
             R.id.mnu_info -> {
                 // 앱 정보 메뉴 클릭됨
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == RESULT_CODE_ADDRESS_MANAGE_ACTIVITY) {
+            if(resultCode == RESULT_OK) {
+                data?.let { intent ->
+                    if(intent.getBooleanExtra("isItemChanged", false)) {
+                        initWithSavedAddressData()
+                    }
+                }
+            }
+        }
     }
   
     //ACCESS_COARSE_LOCATION,ACCESS_FINE_LOCATION
