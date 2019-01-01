@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/main_bear_height"
             android:fitsSystemWindows="true"
+            android:background="@color/white0"
             android:theme="@style/Base.ThemeOverlay.AppCompat">
 
             <android.support.design.widget.CollapsingToolbarLayout

@@ -44,6 +44,24 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/weather_bear_head_widget_info" />
         </receiver>
+        <receiver android:name=".widget.WeatherBearHeadWidgetBg">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/weather_bear_head_widget_bg_info" />
+        </receiver>
+        <receiver android:name=".widget.WeatherBoxWidgetBg">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/weather_box_widget_bg_info" />
+        </receiver>
     </application>
 
 </manifest>

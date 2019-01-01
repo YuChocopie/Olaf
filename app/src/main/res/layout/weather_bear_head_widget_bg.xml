@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/circle"
+    android:backgroundTint="#43000000">
+
+    <ImageView
+        android:id="@+id/widgetBearHead"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_bear_head_03"/>
+
+    <ImageView
+        android:id="@+id/widgetBearFace"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_msg_bear_face_good" />
+
+    <ImageView
+        android:id="@+id/widgetBearFaceSnow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_msg_bear_head_snow"/>
+</RelativeLayout>

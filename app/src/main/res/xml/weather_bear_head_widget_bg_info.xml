@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialKeyguardLayout="@layout/weather_bear_head_widget"
-    android:initialLayout="@layout/weather_bear_head_widget"
+    android:initialKeyguardLayout="@layout/weather_bear_head_widget_bg"
+    android:initialLayout="@layout/weather_bear_head_widget_bg"
     android:minWidth="40dp"
     android:minHeight="40dp"
-    android:previewImage="@drawable/widget_bear_head"
+    android:previewImage="@drawable/ex_widget_bear_bg"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen" />

@@ -127,9 +127,9 @@ class IsDayViewModel {
     }
 
     private fun getTime() {
-        var date = Date()
-        var hTime = (date.hours)
-        todayTime = hTime in 7..17
+        val date = Date()
+        val hTime = (date.hours)
+        todayTime = hTime in 6..17
         Log.e("htime", hTime.toString())
         Log.e("htime", todayTime.toString())
     }

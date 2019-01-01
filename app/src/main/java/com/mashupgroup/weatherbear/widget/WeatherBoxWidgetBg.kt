@@ -14,19 +14,18 @@ import java.util.*
 /**
  * Implementation of App Widget functionality.
  */
-class WeatherBoxWidget : AppWidgetProvider() {
+class WeatherBoxWidgetBg : AppWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-
         var weather = "SNOW"
         //좋음,보통,나쁨.매우나쁨
-        var fineDustLevel = "매우나쁨"
-        var locationText = "서울시 중구"
-        var temperature = -13
+        var fineDustLevel = "나쁨"
+        var locationText = "서울시 강남  구"
+        var temperature = -12
 
-        // There may be multiple widgets active, so update all of them
+
         for (appWidgetId in appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId, weather, fineDustLevel,
+            updateAppWidget(context, appWidgetManager, appWidgetId,weather, fineDustLevel,
                     locationText, temperature)
         }
     }
@@ -46,7 +45,7 @@ class WeatherBoxWidget : AppWidgetProvider() {
                                      nLocationText: String, nTemperature: Int) {
 
             //홈스크린의 위젯 xml에 대한 인스턴스를 받아온다,
-            val remoteViews = RemoteViews(context.packageName, R.layout.weather_box_widget)
+            val remoteViews = RemoteViews(context.packageName, R.layout.weather_box_widget_bg)
             //main activity와 위젯간 데이터 교환의 매개채
             val intent = Intent(context, MainActivity::class.java)
             val pendingIntent = PendingIntent.getActivity(context,0,intent,0)
@@ -57,6 +56,7 @@ class WeatherBoxWidget : AppWidgetProvider() {
             remoteViews.setOnClickPendingIntent(R.id.tvWidgetFineDust,pendingIntent)
             remoteViews.setOnClickPendingIntent(R.id.tvWidgetWeather,pendingIntent)
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
+
 
             //SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
             val weather = nWeather
@@ -91,19 +91,19 @@ class WeatherBoxWidget : AppWidgetProvider() {
             }
 
 
-            val weatherBox = RemoteViews(context.packageName, R.layout.weather_box_widget)
+            val weatherBoxBg = RemoteViews(context.packageName, R.layout.weather_box_widget_bg)
 
-            weatherBox.setImageViewResource(R.id.widgetBearHeadBase, bearSkin)
-            weatherBox.setImageViewResource(R.id.widgetBearFace, bearFace)
-            weatherBox.setImageViewResource(R.id.widgetBearFaceSnow, bearSnow)
+            weatherBoxBg.setImageViewResource(R.id.widgetBearHeadBase, bearSkin)
+            weatherBoxBg.setImageViewResource(R.id.widgetBearFace, bearFace)
+            weatherBoxBg.setImageViewResource(R.id.widgetBearFaceSnow, bearSnow)
 
-            weatherBox.setTextViewText(R.id.tvWidgetFineDust, fineDustLevel)
-            weatherBox.setTextViewText(R.id.tvWidgetLocation, locationText)
-            weatherBox.setTextViewText(R.id.tvWidgetTemperature, temperature)
-            weatherBox.setTextViewText(R.id.tvWidgetWeather, weather)
+            weatherBoxBg.setTextViewText(R.id.tvWidgetFineDust, fineDustLevel)
+            weatherBoxBg.setTextViewText(R.id.tvWidgetLocation, locationText)
+            weatherBoxBg.setTextViewText(R.id.tvWidgetTemperature, temperature)
+            weatherBoxBg.setTextViewText(R.id.tvWidgetWeather, weather)
 
             // Instruct the widget manager to update the widget
-            appWidgetManager.updateAppWidget(appWidgetId, weatherBox)
+            appWidgetManager.updateAppWidget(appWidgetId, weatherBoxBg)
         }
 
         private fun bearHeadFace(fineDustLevel: String, weather: String, time: Boolean): Int {
@@ -120,7 +120,6 @@ class WeatherBoxWidget : AppWidgetProvider() {
             }
 
         }
-
     }
 }
 
