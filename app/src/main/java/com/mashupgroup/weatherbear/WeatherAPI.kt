@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class WeatherAPI {
 
-    fun createTodayWeatherRetrofit() : Retrofit {
+    fun createWeatherRetrofit() : Retrofit {
         Log.d("WeatherAPI", "createTodayWeatherRetrofit")
 
         var retrofit = Retrofit.Builder()
