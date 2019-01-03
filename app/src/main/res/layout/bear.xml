@@ -23,8 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/SIZE_20"
-            android:visibility="@{bear.snowBearVisibilty ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@+id/bear"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -33,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:visibility="@{bear.snowBearVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +43,7 @@
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
+                android:visibility="@{bear.snowBearVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="@+id/snowBearBody"
                 app:layout_constraintStart_toStartOf="@+id/snowBearBody"
                 app:layout_constraintTop_toTopOf="@+id/snowBearBody"
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="102dp"
                 android:layout_marginBottom="10dp"
+                android:visibility="@{bear.snowBearVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@+id/snowBearScarf"
                 app:layout_constraintStart_toStartOf="@+id/snowBearScarf"
                 app:srcCompat="@drawable/ic_msg_bear_snow_scarf_high" />
@@ -247,13 +249,10 @@
                 android:id="@+id/bear_sunglasses"
                 android:layout_width="105dp"
                 android:layout_height="64dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="18dp"
                 android:visibility="@{bear.bearSunglesesVisibilty ? View.VISIBLE : View.GONE}"
-                app:layout_constraintEnd_toEndOf="@+id/bear_body"
-                app:layout_constraintStart_toStartOf="@+id/bear_body"
-                app:layout_constraintTop_toTopOf="@+id/bear_head"
-                app:srcCompat="@drawable/ic_bear_sunglasses" />
+                app:srcCompat="@drawable/ic_bear_sunglasses"
+                tools:layout_editor_absoluteX="97dp"
+                tools:layout_editor_absoluteY="38dp" />
 
             <ImageView
                 android:id="@+id/bear_pet_small"
@@ -261,7 +260,7 @@
                 android:layout_height="23dp"
                 android:layout_marginEnd="68dp"
                 android:layout_marginBottom="252dp"
-                android:visibility="@{bear.bearPetVisibilty ? View.VISIBLE : View.INVISIBLE}"
+                android:visibility="@{bear.bearPetVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@+id/bear_body"
                 app:layout_constraintEnd_toStartOf="@+id/bear_head"
                 app:srcCompat="@drawable/ic_msg_dirt" />
