@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mashupgroup.weatherbear.models.weather.Weather
 import android.support.design.widget.CoordinatorLayout.Behavior.setTag
+import android.util.Log
 import com.mashupgroup.weatherbear.R.id.view
 import com.mashupgroup.weatherbear.databinding.ItemWeatherBinding
 
@@ -32,10 +33,68 @@ class MainPagerAdapter : PagerAdapter {
         val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
                 as LayoutInflater
 
+
         val binding:ItemWeatherBinding = DataBindingUtil.inflate(layoutInflater, R.layout
                 .item_weather, container, false)
         binding.isDayData = itemList[position].vmInfo
         container.addView(binding.getRoot())
+
+
+        //선그래프
+        val dayTimeTemperture = intArrayOf(15, 3, 7, 8, -14, 1, 3, 6)
+        //기존온도보다 30도 높게줬다..영하-50이여도 그릴 수 있게
+        val plusTime = 50
+        val LineTemperture= dayTimeTemperture
+        var dayMaxTemperture = -100
+        var dayMinTemperture = 100
+        for (i in 0 until LineTemperture.size) {
+            LineTemperture[i]=LineTemperture[i]+plusTime
+            if(dayMaxTemperture<LineTemperture[i]) {
+                dayMaxTemperture = LineTemperture[i]
+            }
+            if(dayMinTemperture>LineTemperture[i]) {
+                dayMinTemperture = LineTemperture[i]
+            }
+        }
+
+
+        val weekHighTempture= intArrayOf(5, 3, 7, 8, 5, 4, 3, 6)
+        val weekLowTempture= intArrayOf(0, 0, 0, 0, -3, -1, -3, -6)
+        //기존온도보다 30도 높게줬다..영하-50이여도 그릴 수 있게
+        var weekMaxTemperture = -100
+        var weekMinTemperture = 100
+        for (i in 0 until weekHighTempture.size) {
+            weekHighTempture[i]=weekHighTempture[i]
+            weekLowTempture[i]=weekLowTempture[i]
+            if(weekMaxTemperture<weekHighTempture[i]) {
+                weekMaxTemperture = weekHighTempture[i]
+            }
+            if(weekMinTemperture>weekLowTempture[i]) {
+                weekMinTemperture = weekLowTempture[i]
+            }
+        }
+
+        val weekGraphView = binding.root.findViewById(R.id.GraphViewWeek) as? GraphViewWeek
+        val dayGraphView = binding.root.findViewById(R.id.GraphViewTime) as? GraphViewDay
+        Log.e("12313","111111"+dayGraphView.toString()+"222"+weekGraphView.toString())
+
+        //단위는 1씩, 원점은 0, 총 10줄로 나누어진 그래프를 그린다
+        if (weekGraphView != null) {
+            weekGraphView.setPoints(weekHighTempture, weekLowTempture,0.87, weekMaxTemperture, weekMinTemperture)
+            weekGraphView.drawForBeforeDrawView()
+        }
+        //단위는 1씩, 원점은 0, 총 10줄로 나누어진 그래프를 그린다
+        if (dayGraphView != null) {
+            dayGraphView.setPoints(LineTemperture, 0.7, plusTime, dayMaxTemperture, dayMinTemperture)
+            dayGraphView.drawForBeforeDrawView()
+        }
+
+
+
+
+
+
+
         return binding.getRoot()
     }
 

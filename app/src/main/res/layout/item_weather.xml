@@ -19,13 +19,15 @@
             layout="@layout/item_today_weather"
             bind:isDayData="@{isDayData}" />
 
-        <include layout="@layout/item_today_temperatures" />
+        <include layout="@layout/item_today_temperatures"
+            bind:isDayData="@{isDayData}" />
 
         <include
             layout="@layout/item_tomorrow_weather"
             bind:isDayData="@{isDayData}" />
 
-        <include layout="@layout/item_weekly_weather" />
+        <include layout="@layout/item_weekly_weather"
+            bind:isDayData="@{isDayData}" />
 
     </LinearLayout>
 </layout>
