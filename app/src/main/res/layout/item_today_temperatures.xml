@@ -1,83 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/todayTemperatures"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/item_weather_box_hight"
-    android:layout_marginTop="@dimen/item_weather_box_margin_top"
-    android:background="@drawable/weather_box">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/TodayTemperaturesText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/weather_box_tv_margin_top"
-        android:text="@string/today_temperatures"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <LinearLayout
+        <import type="android.graphics.drawable.Drawable" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isDayData"
+            type="com.mashupgroup.weatherbear.viewmodels.IsDayViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/todayTemperatures"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/SIZE_120"
-        android:layout_margin="@dimen/SIZE_5"
-        android:orientation="horizontal"
-        android:weightSum="8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="@dimen/item_weather_box_hight"
+        android:layout_marginTop="@dimen/item_weather_box_margin_top"
+        android:background="@drawable/weather_box">
 
-        <include
-            layout="@layout/item_today_time_weather"
+        <TextView
+            android:id="@+id/TodayTemperaturesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_marginTop="@dimen/weather_box_tv_margin_top"
+            android:text="@string/today_temperatures"
+            android:textColor="@color/black2"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            layout="@layout/item_today_time_weather"
-            android:layout_width="wrap_content"
+        <com.mashupgroup.weatherbear.GraphViewDay
+            android:id="@+id/GraphViewTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/layoutLinearlayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TodayTemperaturesText"
+            app:lineColor="#707070"
+            app:lineThickness="2dp"
+            app:pointSize="8dp"
+            app:textColor="#858585"
+            app:textGap="10dp"
+            app:textSize="11sp" />
+
+        <LinearLayout
+            android:id="@+id/layoutLinearlayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:weightSum="8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <include
-            layout="@layout/item_today_time_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            <include
+                android:id="@+id/item_today_time_weather1"
+                layout="@layout/item_today_time_weather"
+                android:layout_width="21dp"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
 
-        <include
-            layout="@layout/item_today_time_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <include
-            layout="@layout/item_today_time_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <include
-            layout="@layout/item_today_time_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <include
-            layout="@layout/item_today_time_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <include
-            layout="@layout/item_today_time_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            <include
+                android:id="@+id/item_today_time_weather2"
+                layout="@layout/item_today_time_weather"
+                android:layout_width="@dimen/SIZE_24"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
 
 
-    </LinearLayout>
+            <include
+                android:id="@+id/item_today_time_weather3"
+                layout="@layout/item_today_time_weather"
+                android:layout_width="@dimen/SIZE_24"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
 
-</android.support.constraint.ConstraintLayout>
+
+            <include
+                android:id="@+id/item_today_time_weather4"
+                layout="@layout/item_today_time_weather"
+                android:layout_width="@dimen/SIZE_24"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+
+
+            <include
+                android:id="@+id/item_today_time_weather5"
+                layout="@layout/item_today_time_weather"
+                android:layout_width="@dimen/SIZE_24"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+
+
+            <include
+                android:id="@+id/item_today_time_weather6"
+                layout="@layout/item_today_time_weather"
+                android:layout_width="@dimen/SIZE_24"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+
+
+            <include
+                android:id="@+id/item_today_time_weather7"
+                layout="@layout/item_today_time_weather"
+                android:layout_width="@dimen/SIZE_24"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+
+            <include
+                android:id="@+id/item_today_time_weather8"
+                layout="@layout/item_today_time_weather"
+                android:layout_width="@dimen/SIZE_24"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
