@@ -1,5 +1,6 @@
 package com.mashupgroup.weatherbear
 
+import com.mashupgroup.weatherbear.models.weather.Forecast
 import com.mashupgroup.weatherbear.models.weather.Weather
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -12,4 +13,10 @@ interface WeatherInterface {
             @Query("lat") lat: Double,
             @Query("lon") lon: Double,
             @Query("appid") appid: String): Observable<Weather>
+
+    @GET("forecast")
+    fun getForecast(
+            @Query("lat") lat: Double,
+            @Query("lon") lon: Double,
+            @Query("appid") appid: String): Observable<Forecast>
 }

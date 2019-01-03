@@ -30,7 +30,9 @@ import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
 import android.R.attr.data
-
+import com.mashupgroup.weatherbear.models.weather.Forecast
+import com.mashupgroup.weatherbear.models.weather.Weather
+import java.text.SimpleDateFormat
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +51,12 @@ class MainActivity : AppCompatActivity() {
     private val airStationInterface = airStationRetrofit.create(AirInterface::class.java)
     private val airRetrofit = airAPI.createAirInfoRetrofit()
     private val airInterface = airRetrofit.create(AirInterface::class.java)
+
+    private val weatherAPI = WeatherAPI()
+    private val weatherRetrofit = weatherAPI.createWeatherRetrofit()
+    private val weatherInterface = weatherRetrofit.create(WeatherInterface::class.java)
+
+
 
     val kakaoAPI = KakaoAPI()
     val kakaoRetrofit = kakaoAPI.createTransRetrofit()
@@ -109,6 +117,28 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
+        Log.v("csh Weather", weatherInfo.toString())
+
+        /* 여기가 오늘의 날씨  */
+        /* weatherInfo */
+
+    }
+
+    private fun requestForecastResponse(item: MainPagerItem, forecastInfo: Forecast) {
+        Log.v("csh Forecast", forecastInfo.toString())
+
+        /* 여기가 5일치 날씨 */
+        /* forecastInfo */
+
+        for(i in forecastInfo.list) {
+            val dv = java.lang.Long.valueOf(i.dt) * 1000// its need to be in milisecond
+            val df = java.util.Date(dv)
+            val vv = SimpleDateFormat("MM dd, yyyy hh:mm a").format(df)
+
+        }
+    }
+
     private fun requestItemUpdate(item: MainPagerItem, location: Location) {
 
         /* Get TM Postion */
@@ -122,6 +152,47 @@ class MainActivity : AppCompatActivity() {
                 }, { error->
                     error.printStackTrace()
                 })
+
+        /* Get Weather */
+        weatherInterface.getWeather(location.latitude, location.longitude, weatherApiToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ weatherInfo ->
+                    if(weatherInfo != null) {
+                        requestWeatherResponse(item, weatherInfo)
+
+                    } else {
+
+
+                    }
+
+                }, {
+
+                })
+
+
+
+        /* Get Forecast */
+        weatherInterface.getForecast(location.latitude, location.longitude, weatherApiToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ forecastInfo ->
+                    if(forecastInfo != null) {
+                        requestForecastResponse(item, forecastInfo)
+
+                    } else {
+
+                    }
+
+                }, {
+
+                })
+
+    }
+
+    private fun requestWeatherInfo(item: MainPagerItem, tmX: String, tmY: String) {
+        /* Get WeatherInfo */
+        weatherInterface
     }
 
     private fun requestStationInfo(item: MainPagerItem, tmX: String, tmY: String) {
