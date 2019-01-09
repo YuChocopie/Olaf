@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    android:gravity="center"
+    android:weightSum="2">
+
+
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tvWeek"
+        android:layout_width="@dimen/SIZE_24"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingExtra="6sp"
+        android:text="화"
+        android:textColor="@color/black2"
+        android:textSize="12sp"/>
+    <ImageView
+        android:layout_weight="1"
+        android:id="@+id/ivTodayTimeWeather"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:srcCompat="@drawable/msg_snow" />
+
+</LinearLayout>

@@ -147,26 +147,26 @@
             <ImageView
                 android:id="@+id/ivMountain"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/main_topbar_height"
-                android:layout_gravity="bottom|center"
-                android:scaleType="fitEnd"
+                android:layout_height="500dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
                 android:src="@{bg.farMountain}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/Mountain"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/SIZE_8"
-                android:scaleType="centerCrop"
+                android:layout_marginBottom="56dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/msg_bg_mountatin"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ivMountain"
-                app:layout_constraintVertical_bias="0.69" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/ivMountainSnow"
@@ -201,8 +201,10 @@
                 android:visibility="@{bg.SnowVisibility ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_back_snow_02" />
 
         </android.support.constraint.ConstraintLayout>

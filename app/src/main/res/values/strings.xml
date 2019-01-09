@@ -19,9 +19,9 @@
     <string name="now">Now</string>
     <string name="msg_snow">눈 내림</string>
     <string name="msg_wind">Windy</string>
-    <string name="msg_sunny">맑음 (낮)</string>
+    <string name="msg_sunny">맑음</string>
     <string name="msg_sunny_night">맑음 (밤)</string>
-    <string name="msg_cloud">구름 낀 날(낮)</string>
+    <string name="msg_cloud">구름 낀 날</string>
     <string name="msg_cloud_night">구름 낀 날(밤)</string>
     <string name="msg_rain">Rain</string>
     <string name="msg_thunder">번개</string>

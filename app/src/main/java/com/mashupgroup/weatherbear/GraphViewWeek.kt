@@ -115,9 +115,9 @@ class GraphViewWeek(context: Context, attrs: AttributeSet) : View(context, attrs
                 val yHigh = mPointYHigh!![i].toFloat()
                 val yLow = mPointYLow!![i].toFloat()
 
-                canvas.drawText("" + mPointsHigh!![i] + "°", x, yHigh-5, mTextPaint!!)
-                canvas.drawText("" + mPointsLow!![i] + "°", x, yLow+30, mTextPaint!!)
-                canvas.drawLine(x, yHigh, x, yLow, mLinePaint!!)
+                canvas.drawText("" + mPointsHigh!![i] + "°", x, yHigh-35, mTextPaint!!)
+                canvas.drawText("" + mPointsLow!![i] + "°", x, yLow+20, mTextPaint!!)
+                canvas.drawLine(x, yHigh-20, x, yLow-20, mLinePaint!!)
             }
 
         }

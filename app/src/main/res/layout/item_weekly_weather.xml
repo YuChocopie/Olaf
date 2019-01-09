@@ -19,6 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_weather_box_hight_2"
         android:layout_marginTop="@dimen/item_weather_box_margin_top"
+        android:paddingLeft="@dimen/SIZE_30"
+        android:paddingRight="@dimen/SIZE_30"
         android:background="@drawable/weather_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -31,23 +33,68 @@
             android:text="@string/weekly_weather"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@color/black2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layoutLinearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:baselineAligned="false"
+            android:gravity="center"
+            android:weightSum="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/WeeklyWeatherText">
+
+            <include
+                layout="@layout/item_week_weather_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/item_week_weather_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/item_week_weather_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/item_week_weather_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/item_week_weather_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <com.mashupgroup.weatherbear.GraphViewWeek
             android:id="@+id/GraphViewWeek"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginStart="@dimen/SIZE_56"
-            android:layout_marginEnd="@dimen/SIZE_56"
+            android:layout_marginTop="@dimen/SIZE_3"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutLinearlayout"
             app:lineColor="#858585"
             app:lineThickness="3dp"
-            app:textColor="#858585"
-            app:textSize="12sp" />
+            app:textColor="#737272"
+            app:textSize="14sp" />
     </android.support.constraint.ConstraintLayout>
 </layout>

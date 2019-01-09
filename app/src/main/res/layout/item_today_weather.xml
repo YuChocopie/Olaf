@@ -51,7 +51,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:tintMode="add"/>
+                android:tintMode="add"
+                android:tint="@{isDayData.todayWeatherShapeTint}"/>
 
             <TextView
                 android:id="@+id/tvDayWeatherShape"
@@ -176,7 +177,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.todayDust}"
-                    android:textColor="@color/fineDustText"
+                    android:textColor="@{isDayData.todayDustColor}"
                     android:textSize="@dimen/TEXT_SIZE_11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/TodayWeatherFineDustText"
@@ -191,7 +192,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.todayDustText}"
-                    android:textColor="@color/fineDustText"
+                    android:textColor="@{isDayData.todayDustColor}"
                     android:textSize="@dimen/TEXT_SIZE_11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tvFineDust"
@@ -244,7 +245,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.todayUltraDust}"
-                    android:textColor="@color/fineDustVeryBad"
+                    android:textColor="@{isDayData.todayUltraDustColor}"
                     android:textSize="@dimen/TEXT_SIZE_11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/UltrafineDustText"
@@ -259,7 +260,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.todayUltraDustText}"
-                    android:textColor="@color/fineDustVeryBad"
+                    android:textColor="@{isDayData.todayUltraDustColor}"
                     android:textSize="@dimen/TEXT_SIZE_11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvUltrafineDust"

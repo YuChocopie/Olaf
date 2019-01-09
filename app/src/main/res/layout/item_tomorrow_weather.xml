@@ -68,6 +68,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:tintMode="add"
                 android:tint="@{isDayData.tomorrowWeatherShapeTint}"/>
 
             <TextView
@@ -193,7 +194,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.tomorrowDust}"
-                    android:textColor="@color/fineDustText"
+                    android:textColor="@{isDayData.tomorrowDustColor}"
                     android:textSize="@dimen/TEXT_SIZE_11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/TodayWeatherFineDustText"
@@ -208,7 +209,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.tomorrowDustText}"
-                    android:textColor="@color/fineDustText"
+                    android:textColor="@{isDayData.tomorrowDustColor}"
                     android:textSize="@dimen/TEXT_SIZE_11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tvFineDust"
@@ -261,7 +262,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="6sp"
                     android:text="@{isDayData.tomorrowUltraDust}"
-                    android:textColor="@color/fineDustVeryBad"
+                    android:textColor="@{isDayData.tomorrowUltraDustColor}"
                     android:textSize="@dimen/TEXT_SIZE_11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/UltrafineDustText"
@@ -276,7 +277,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="6sp"
                     android:text="@{isDayData.tomorrowUltraDustText}"
-                    android:textColor="@color/fineDustVeryBad"
+                    android:textColor="@{isDayData.tomorrowUltraDustColor}"
                     android:textSize="@dimen/TEXT_SIZE_11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvUltrafineDust"

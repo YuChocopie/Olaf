@@ -78,7 +78,7 @@ class GraphViewDay(context: Context, attrs: AttributeSet) : View(context, attrs)
     fun draw() {
         val path = Path()
 
-        val height = height
+        val height = height * 0.92
         val points = mPoints
 
         //x축 점 사이의 거리
