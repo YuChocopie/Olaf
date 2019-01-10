@@ -59,7 +59,8 @@
             android:weightSum="8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:baselineAligned="false">
 
             <include
                 android:id="@+id/item_today_time_weather1"

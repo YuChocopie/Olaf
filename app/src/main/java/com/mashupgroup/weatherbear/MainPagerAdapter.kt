@@ -58,8 +58,8 @@ class MainPagerAdapter : PagerAdapter {
         }
 
 
-        val weekHighTempture= intArrayOf(5, 3, 7, 8, 5, 4, 3, 6)
-        val weekLowTempture= intArrayOf(0, 0, 0, 0, -3, -1, -3, -6)
+        val weekHighTempture= intArrayOf(5, 3, 7, 8, 5)
+        val weekLowTempture= intArrayOf(0, -3, 0, 0, -3)
         //기존온도보다 30도 높게줬다..영하-50이여도 그릴 수 있게
         var weekMaxTemperture = -100
         var weekMinTemperture = 100
@@ -78,14 +78,14 @@ class MainPagerAdapter : PagerAdapter {
         val dayGraphView = binding.root.findViewById(R.id.GraphViewTime) as? GraphViewDay
         Log.e("12313","111111"+dayGraphView.toString()+"222"+weekGraphView.toString())
 
-        //단위는 1씩, 원점은 0, 총 10줄로 나누어진 그래프를 그린다
         if (weekGraphView != null) {
-            weekGraphView.setPoints(weekHighTempture, weekLowTempture,0.87, weekMaxTemperture, weekMinTemperture)
+            weekGraphView.setPoints(weekHighTempture, weekLowTempture,0.7, weekMaxTemperture,
+                    weekMinTemperture)
             weekGraphView.drawForBeforeDrawView()
         }
-        //단위는 1씩, 원점은 0, 총 10줄로 나누어진 그래프를 그린다
         if (dayGraphView != null) {
-            dayGraphView.setPoints(LineTemperture, 0.7, plusTime, dayMaxTemperture, dayMinTemperture)
+            dayGraphView.setPoints(LineTemperture, 0.74, plusTime, dayMaxTemperture,
+                    dayMinTemperture)
             dayGraphView.drawForBeforeDrawView()
         }
 

@@ -1,14 +1,16 @@
 package com.mashupgroup.weatherbear.viewmodels
 
+import android.util.Log
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.WeatherBearApp
+import java.util.*
 
 
 class BearViewModel {
 
     var fineDustData: Int = 1
     // SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
-    var weatherData = "SNOW"
+    var weatherData = "HEAVY_SNOW"
 
     /*
         미세먼지 단계 4단계
@@ -34,24 +36,34 @@ class BearViewModel {
       시간 : 낮="true" 밤="false" */
 
     enum class Weather(var text: String) {
-        SNOW("snow"), RAINY("rainy"), THUNDER_RAINY("thunder rainy"),
-        WIND("wind"), CLOUD("cloud"), SUNNY("sunny"),HEAVY_SNOW("heavy_snow")}
+        SNOW("SNOW"), RAINY("RAINY"), THUNDER_RAINY("THUNDER_RAINY"),
+        WIND("WIND"), CLOUD("CLOUD"), SUNNY("SUNNY"), HEAVY_SNOW("HEAVY_SNOW")
+    }
 
     var weather = Weather.SNOW.text
     var resource = WeatherBearApp.appContext.resources
     var bearSkinColor = resource.getColor(R.color.bearBad)
     var bearSnowColor = resource.getColor(R.color.bearSnowbad)
-    var bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_bad)
-    var bearSnowVisibilty = true
+    var bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_sleep)
+    var bearSnowVisibilty = false
     var bearLegVisibilty = false
-    var bearPetVisibilty = true
+    var bearPetVisibilty = false
     var bearSunglesesVisibilty = false
     var bearumbrellaVisibilty = false
-    var snowBearVisibilty = true
+    var snowBearVisibilty = false
     var isDayTime: Boolean = true
 
     //폭설일 경우 눈사람으로 변경
     fun setBear() {
+         bearSnowVisibilty = false
+         bearLegVisibilty = false
+         bearPetVisibilty = false
+         bearSunglesesVisibilty = false
+         bearumbrellaVisibilty = false
+         snowBearVisibilty = false
+         isDayTime = false
+
+        getTime()
         snowBearVisibilty = true
         if (weatherData == Weather.HEAVY_SNOW.text) {
         } else {
@@ -67,6 +79,11 @@ class BearViewModel {
         bearFace()
         bearPet()
         bearSunglesses()
+    }
+
+    private fun getTime() {
+        val date = Date().hours
+        isDayTime = date in 6..17
     }
 
     fun bearSkin() {
@@ -108,7 +125,9 @@ class BearViewModel {
     private fun bearLeg() {
         if (weatherData == Weather.RAINY.text || weatherData == Weather.THUNDER_RAINY.text) {
             //TODO: 우산 애니매이션 시작, 비옴
-            bearumbrellaVisibilty = true
+            if (isDayTime) {
+                bearumbrellaVisibilty = true
+            }
             bearLegVisibilty = true
         } else {
             if (isDayTime) {

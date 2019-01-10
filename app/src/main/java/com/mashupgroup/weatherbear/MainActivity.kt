@@ -30,6 +30,8 @@ import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
 import android.R.attr.data
+import android.annotation.SuppressLint
+import com.mashupgroup.weatherbear.Global.addressList
 import com.mashupgroup.weatherbear.models.weather.Forecast
 import com.mashupgroup.weatherbear.models.weather.Weather
 import java.text.SimpleDateFormat
@@ -100,6 +102,7 @@ class MainActivity : AppCompatActivity() {
                 if(location == null) {
                     Toast.makeText(this@MainActivity, R.string.err_str_location_ready, Toast.LENGTH_SHORT).show()
                 } else {
+
                     lat = location.latitude
                     lon = location.longitude
 
@@ -110,6 +113,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+//        val location_test = Location("")
+//        location_test.latitude = 37.544016
+//        location_test.longitude = 126.995924
+//        requestItemUpdate(mainPagerAdapter.itemList[0], location_test)
 
         LocationHelper.addLocationResultListener(listener = loactionListener)
         LocationHelper.requestLocation(this, true)
@@ -119,14 +126,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
         Log.v("csh Weather", weatherInfo.toString())
+        Log.e("loglogweather", "123"+weatherInfo.weather[0].main)
+        var weather:String = "SNOW"
+        if (weatherInfo.weather[0].main == "Haze")
+            weather = "RAINY"
+        //곰의 모습 data
+        item.vmBear.weatherData=weather
+        item.vmBear.setBear()
+        //곰 배경데이터
+        item.vmBG.weatherData=weather
+        item.vmBG.setBackground()
+        //날씨 boxData
+        item.vmInfo.todayWeatherData = weather
+        item.vmInfo.tomorrowWeatherData = weather
+        item.vmInfo.setDayView()
 
         /* 여기가 오늘의 날씨  */
         /* weatherInfo */
-
     }
 
     private fun requestForecastResponse(item: MainPagerItem, forecastInfo: Forecast) {
         Log.v("csh Forecast", forecastInfo.toString())
+
+//        날씨 boxData.. 내일의 날씨
+        item.vmInfo.tomorrowWeatherData = "RAIN"
+        item.vmInfo.setDayView()
 
         /* 여기가 5일치 날씨 */
         /* forecastInfo */
@@ -139,6 +163,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("CheckResult")
     private fun requestItemUpdate(item: MainPagerItem, location: Location) {
 
         /* Get TM Postion */
@@ -148,6 +173,7 @@ class MainActivity : AppCompatActivity() {
                 .subscribe({coord->
                     var tmX = coord.documents[0].x
                     var tmY = coord.documents[0].y
+
                     requestStationInfo(item, tmX, tmY)
                 }, { error->
                     error.printStackTrace()
@@ -169,7 +195,6 @@ class MainActivity : AppCompatActivity() {
                 }, {
 
                 })
-
 
 
         /* Get Forecast */
@@ -195,6 +220,7 @@ class MainActivity : AppCompatActivity() {
         weatherInterface
     }
 
+    @SuppressLint("CheckResult")
     private fun requestStationInfo(item: MainPagerItem, tmX: String, tmY: String) {
         /* Get StationInfo */
         airStationInterface.getStation("json",tmX,tmY,airApiToken)
@@ -212,6 +238,7 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
+    @SuppressLint("CheckResult")
     private fun requestAirInfo(item: MainPagerItem, stationName: String) {
         /* Get AirInfo */
         airInterface.getAir(getString(R.string.api_json), 1, stationName, getString(R.string.api_daily), 1.3, airApiToken)
@@ -221,11 +248,18 @@ class MainActivity : AppCompatActivity() {
                     Log.v("requestAirInfo", "${stationName} : ${airInfo.toString()}")
                     val airItem = airInfo.list[0]
 
-                    item.vmInfo.todayDust = airItem.pm10Value
-                    item.vmInfo.todayUltraDust = airItem.pm25Value
+                    //곰의 모습 data
+                    item.vmBear.fineDustData=airItem.pm10Grade1h.toInt()
+                    item.vmBear.setBear()
 
-                    item.vmInfo.tomorrowDust = airItem.pm10Value24
-                    item.vmInfo.tomorrowUltraDust = airItem.pm25Value24
+                    //날씨 boxData
+                    item.vmInfo.todayDustLevelData = airItem.pm10Grade1h.toInt()
+                    item.vmInfo.todayDustData = airItem.pm10Value+"up"
+                    item.vmInfo.todayUltraDustData = airItem.pm25Value+"up"
+                    item.vmInfo.tomorrowDustLevelData = airItem.pm25Grade.toInt()
+                    item.vmInfo.tomorrowDustData = airItem.pm10Value24+"up"
+                    item.vmInfo.tomorrowUltraDustData = airItem.pm25Value24+"up"
+                    item.vmInfo.setDayView()
 
                     mainPagerAdapter.notifyDataSetChanged()
                 }, { error ->
@@ -247,6 +281,35 @@ class MainActivity : AppCompatActivity() {
         for(addr in Global.addressList) {
             val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), addr)
             // Todo : 여기에 addr에 맞는 각 ViewModel 세팅을 해야합니다. 아마 날씨 데이터를 불러와야할겁니다.
+
+            // SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
+//            곰의 모습 data
+            item.vmBear.fineDustData=3
+            item.vmBear.weatherData="SNOW"
+            item.vmBear.setBear()
+
+            //곰 배경데이터
+            item.vmBG.weatherData="HEAVY_SNOW"
+            item.vmBG.setBackground()
+
+            //날씨 boxData
+            item.vmInfo.tomorrowUltraDustData
+            item.vmInfo.todayWeatherData = "CLOUD"
+            item.vmInfo.todayTemperatureData = "5"
+            item.vmInfo.todayBodyTemperatureData = "1"
+//            item.vmInfo.todayDustLevelData = 2
+//            item.vmInfo.todayDustData = "100up"
+//            item.vmInfo.todayUltraDustData = "100up"
+
+            item.vmInfo.tomorrowWetherTextData = "오늘보다 선선해요"
+            item.vmInfo.tomorrowWeatherData = "RAIN"
+            item.vmInfo.tomorrowTemperatureData = "3"
+            item.vmInfo.tomorrowBodyTemperatureData = "1"
+//            item.vmInfo.tomorrowDustLevelData = 2
+//            item.vmInfo.tomorrowDustData = "100up"
+//            item.vmInfo.tomorrowUltraDustData = "100up"
+            item.vmInfo.setDayView()
+
             mainPagerAdapter.addData(item)
         }
 
@@ -268,6 +331,11 @@ class MainActivity : AppCompatActivity() {
         val data = mainPagerAdapter.itemList[position]
         mainViewDataBinding.setVariable(BR.bear, data.vmBear)
         mainViewDataBinding.setVariable(BR.bg, data.vmBG)
+
+        val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
+        item.vmBG.setBackground()
+        item.vmBear.setBear()
+
         tvSelectedLocation.text = createLocationString(data.address, false)
 
         BearAnimator.startAnimation(topBearBgWrapper)
