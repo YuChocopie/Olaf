@@ -297,11 +297,15 @@ class MainActivity : AppCompatActivity() {
 
                     //날씨 boxData
                     item.vmInfo.todayDustLevelData = airItem.pm10Grade1h.toInt()
-                    item.vmInfo.todayDustData = airItem.pm10Value + "up"
-                    item.vmInfo.todayUltraDustData = airItem.pm25Value + "up"
+                    item.vmInfo.todayUltraDustLevelData = airItem.pm25Grade1h.toInt()
+                    item.vmInfo.todayDustData = airItem.pm10Value + "㎍/㎥"
+                    item.vmInfo.todayUltraDustData = airItem.pm25Value + "㎍/㎥"
+                    item.vmInfo.todayUltraDustData = airItem.pm25Value + "㎍/㎥"
+
                     item.vmInfo.tomorrowDustLevelData = airItem.pm25Grade.toInt()
-                    item.vmInfo.tomorrowDustData = airItem.pm10Value24 + "up"
-                    item.vmInfo.tomorrowUltraDustData = airItem.pm25Value24 + "up"
+                    item.vmInfo.tomorrowUltraDustLevelData = airItem.pm25Grade.toInt()
+                    item.vmInfo.tomorrowDustData = airItem.pm10Value24 + "㎍/㎥"
+                    item.vmInfo.tomorrowUltraDustData = airItem.pm25Value24 + "㎍/㎥"
                     item.vmInfo.setDayView()
 
                     mainPagerAdapter.notifyDataSetChanged()

@@ -12,6 +12,7 @@ class IsDayViewModel {
     //SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY
     var todayWeatherData = "CLOUD"
     var todayDustLevelData = 2
+    var todayUltraDustLevelData = 2
     var todayTemperatureData = "3"
     var todayBodyTemperatureData = "1"
     var todayDustData = "100up"
@@ -20,9 +21,10 @@ class IsDayViewModel {
 
     var tomorrowWetherTextData = "오늘보다 선선해요"
     var tomorrowWeatherData = "RAIN"
-    var tomorrowDustLevelData = 2
     var tomorrowTemperatureData = "3"
     var tomorrowBodyTemperatureData = "1"
+    var tomorrowDustLevelData = 2
+    var tomorrowUltraDustLevelData = 1
     var tomorrowDustData = "100up"
     var tomorrowUltraDustData = "100up"
 
@@ -193,24 +195,34 @@ class IsDayViewModel {
             DustLevel.GOOD.level -> {
                 todayDustText = DustLevel.GOOD.text
                 todayDustColor = DustLevel.GOOD.color
-                todayUltraDustText = DustLevel.GOOD.text
-                todayUltraDustColor = DustLevel.GOOD.color
             }
             DustLevel.NOMAL.level -> {
                 todayDustText = DustLevel.NOMAL.text
                 todayDustColor = DustLevel.NOMAL.color
-                todayUltraDustText = DustLevel.NOMAL.text
-                todayUltraDustColor = DustLevel.NOMAL.color
             }
             DustLevel.BAD.level -> {
                 todayDustText = DustLevel.BAD.text
                 todayDustColor = DustLevel.BAD.color
-                todayUltraDustText = DustLevel.BAD.text
-                todayUltraDustColor = DustLevel.BAD.color
             }
             DustLevel.VERYBAD.level -> {
                 todayDustText = DustLevel.VERYBAD.text
                 todayDustColor = DustLevel.VERYBAD.color
+            }
+        }
+        when (todayUltraDustLevelData) {
+            DustLevel.GOOD.level -> {
+                todayUltraDustText = DustLevel.GOOD.text
+                todayUltraDustColor = DustLevel.GOOD.color
+            }
+            DustLevel.NOMAL.level -> {
+                todayUltraDustText = DustLevel.NOMAL.text
+                todayUltraDustColor = DustLevel.NOMAL.color
+            }
+            DustLevel.BAD.level -> {
+                todayUltraDustText = DustLevel.BAD.text
+                todayUltraDustColor = DustLevel.BAD.color
+            }
+            DustLevel.VERYBAD.level -> {
                 todayUltraDustText = DustLevel.VERYBAD.text
                 todayUltraDustColor = DustLevel.VERYBAD.color
             }
@@ -262,24 +274,34 @@ class IsDayViewModel {
             DustLevel.GOOD.level -> {
                 tomorrowDustText = DustLevel.GOOD.text
                 tomorrowDustColor = DustLevel.GOOD.color
-                tomorrowUltraDustText = DustLevel.GOOD.text
-                tomorrowUltraDustColor = DustLevel.GOOD.color
             }
             DustLevel.NOMAL.level -> {
                 tomorrowDustText = DustLevel.NOMAL.text
                 tomorrowDustColor = DustLevel.NOMAL.color
-                tomorrowUltraDustText = DustLevel.NOMAL.text
-                tomorrowUltraDustColor = DustLevel.NOMAL.color
             }
             DustLevel.BAD.level -> {
                 tomorrowDustText = DustLevel.BAD.text
                 tomorrowDustColor = DustLevel.BAD.color
-                tomorrowUltraDustText = DustLevel.BAD.text
-                tomorrowUltraDustColor = DustLevel.BAD.color
             }
             DustLevel.VERYBAD.level -> {
                 tomorrowDustText = DustLevel.VERYBAD.text
                 tomorrowDustColor = DustLevel.VERYBAD.color
+            }
+        }
+        when (tomorrowUltraDustLevelData) {
+            DustLevel.GOOD.level -> {
+                tomorrowUltraDustText = DustLevel.GOOD.text
+                tomorrowUltraDustColor = DustLevel.GOOD.color
+            }
+            DustLevel.NOMAL.level -> {
+                tomorrowUltraDustText = DustLevel.NOMAL.text
+                tomorrowUltraDustColor = DustLevel.NOMAL.color
+            }
+            DustLevel.BAD.level -> {
+                tomorrowUltraDustText = DustLevel.BAD.text
+                tomorrowUltraDustColor = DustLevel.BAD.color
+            }
+            DustLevel.VERYBAD.level -> {
                 tomorrowUltraDustText = DustLevel.VERYBAD.text
                 tomorrowUltraDustColor = DustLevel.VERYBAD.color
             }
