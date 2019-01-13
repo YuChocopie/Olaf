@@ -32,12 +32,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
-import android.R.attr.data
 import android.view.View
-import android.annotation.SuppressLint
-import com.mashupgroup.weatherbear.Global.addressList
-import com.mashupgroup.weatherbear.models.weather.Forecast
-import com.mashupgroup.weatherbear.models.weather.Weather
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -349,32 +344,16 @@ class MainActivity : AppCompatActivity() {
             val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), addr)
             // Todo : 여기에 addr에 맞는 각 ViewModel 세팅을 해야합니다. 아마 날씨 데이터를 불러와야할겁니다.
 
-            // SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
-//            곰의 모습 data
-            item.vmBear.fineDustData = 3
-            item.vmBear.weatherData = "SNOW"
-            item.vmBear.setBear()
-
-            //곰 배경데이터
-            item.vmBG.weatherData = "HEAVY_SNOW"
-            item.vmBG.setBackground()
-
             //날씨 boxData
             item.vmInfo.tomorrowUltraDustData
             item.vmInfo.todayWeatherData = "CLOUD"
             item.vmInfo.todayTemperatureData = "5"
             item.vmInfo.todayBodyTemperatureData = "1"
-//            item.vmInfo.todayDustLevelData = 2
-//            item.vmInfo.todayDustData = "100up"
-//            item.vmInfo.todayUltraDustData = "100up"
 
             item.vmInfo.tomorrowWetherTextData = "오늘보다 선선해요"
             item.vmInfo.tomorrowWeatherData = "RAIN"
             item.vmInfo.tomorrowTemperatureData = "3"
             item.vmInfo.tomorrowBodyTemperatureData = "1"
-//            item.vmInfo.tomorrowDustLevelData = 2
-//            item.vmInfo.tomorrowDustData = "100up"
-//            item.vmInfo.tomorrowUltraDustData = "100up"
             item.vmInfo.setDayView()
 
             mainPagerAdapter.addData(item)
