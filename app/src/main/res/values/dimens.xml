@@ -46,6 +46,8 @@
 
     <dimen name="widget_margin">4dp</dimen>
 
+    <dimen name="main_no_address_msg_margin_top">150dp</dimen>
+
     <dimen name="SIZE_1">1dp</dimen>
     <dimen name="SIZE_2">2dp</dimen>
     <dimen name="SIZE_3">3dp</dimen>
