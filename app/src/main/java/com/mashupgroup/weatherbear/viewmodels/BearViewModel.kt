@@ -10,7 +10,7 @@ class BearViewModel {
 
     var fineDustData: Int = 1
     // SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
-    var weatherData = "HEAVY_SNOW"
+    var weatherData = "SUNNY"
 
     /*
         미세먼지 단계 4단계
@@ -46,7 +46,7 @@ class BearViewModel {
     var bearSnowColor = resource.getColor(R.color.bearSnowbad)
     var bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_sleep)
     var bearSnowVisibilty = false
-    var bearLegVisibilty = false
+    var bearLegVisibilty = true
     var bearPetVisibilty = false
     var bearSunglesesVisibilty = false
     var bearumbrellaVisibilty = false
@@ -55,13 +55,7 @@ class BearViewModel {
 
     //폭설일 경우 눈사람으로 변경
     fun setBear() {
-         bearSnowVisibilty = false
-         bearLegVisibilty = false
-         bearPetVisibilty = false
-         bearSunglesesVisibilty = false
-         bearumbrellaVisibilty = false
-         snowBearVisibilty = false
-         isDayTime = false
+        Log.e("weatherData", "BearView" + weatherData)
 
         getTime()
         snowBearVisibilty = true
@@ -123,6 +117,7 @@ class BearViewModel {
     }
 
     private fun bearLeg() {
+        bearLegVisibilty = true
         if (weatherData == Weather.RAINY.text || weatherData == Weather.THUNDER_RAINY.text) {
             //TODO: 우산 애니매이션 시작, 비옴
             if (isDayTime) {
@@ -134,8 +129,6 @@ class BearViewModel {
                 if (fineDustData >= 3) {
                     bearLegVisibilty = false
                 }
-            } else {
-                bearLegVisibilty = true
             }
         }
     }
