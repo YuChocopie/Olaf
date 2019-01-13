@@ -134,10 +134,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-//        val location_test = Location("")
-//        location_test.latitude = 37.544016
-//        location_test.longitude = 126.995924
-//        requestItemUpdate(mainPagerAdapter.itemList[0], location_test)
 
         LocationHelper.addLocationResultListener(listener = loactionListener)
         LocationHelper.requestLocation(this, true)
@@ -342,7 +338,12 @@ class MainActivity : AppCompatActivity() {
 
         for (addr in Global.addressList) {
             val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), addr)
-            // Todo : 여기에 addr에 맞는 각 ViewModel 세팅을 해야합니다. 아마 날씨 데이터를 불러와야할겁니다.
+
+            // 각 아이템의 위치정보에 따라 데이터를 요청합니다.
+            val location = Location("")
+            location.longitude = addr.longitude
+            location.latitude = addr.latitude
+            requestItemUpdate(item, location)
 
             //날씨 boxData
             item.vmInfo.tomorrowUltraDustData
