@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
 import java.util.*
 import android.R.attr.data
-
+import android.view.View
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +42,9 @@ class MainActivity : AppCompatActivity() {
     private var lat = 0.0
     private var lon = 0.0
     lateinit var mainViewDataBinding : ActivityMainBinding
+
+    private val noAddressBearVM = BearViewModel()
+    private val noAddressBgVM = BackgroundViewModel()
 
     /* API */
     private val airAPI = AirAPI()
@@ -74,6 +77,14 @@ class MainActivity : AppCompatActivity() {
         // 툴바 초기 세팅
         setToolbar()
 
+        // '주소없음' 뷰모델 설정
+        noAddressBearVM.weather = BearViewModel.Weather.SUNNY.text
+        noAddressBearVM.fineDustData = 1
+        noAddressBearVM.setBear()
+        noAddressBearVM.updeteBear()
+        noAddressBgVM.weather = BackgroundViewModel.Weather.SUNNY.text
+        noAddressBgVM.setBackground()
+
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
         viewPager.addOnPageChangeListener(object : SimpleOnPageChangeListener() {
@@ -84,7 +95,18 @@ class MainActivity : AppCompatActivity() {
         })
         viewPager.adapter = mainPagerAdapter
 
-        initWithSavedAddressData()
+        // 불러올 위치가 없으면 메시지를 띄움. 불러올 위치가 있으면 데이터 세팅
+        if (!Global.isFirstPageCurrentLocation && Global.addressList.size == 0) {
+            showNoAddress()
+        } else {
+            initWithSavedAddressData()
+        }
+
+        // 불러올 위치가 없을 때 띄워줄 메시지에 터치리스너 추가
+        tvMainEmpty.setOnClickListener {
+            val intent = Intent(this, SelectLocationActivity::class.java)
+            startActivityForResult(intent, RESULT_CODE_ADDRESS_MANAGE_ACTIVITY)
+        }
 
         var loactionListener = object : ILocationResultListener {
             override fun onLocationReady(location: Location?, address: Address?) {
@@ -162,8 +184,27 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
+    /** 사용자가 저장한 주소 목록이 없을 때 메시지를 띄운다 */
+    private fun showNoAddress() {
+        mainCoordinatorLayout.post {
+            mainScrollView.visibility = View.GONE
+            tvMainEmpty.visibility = View.VISIBLE
+        }
+
+        // Fake 곰 viewModel 설정
+        BearAnimator.stopAnimation(topBearBgWrapper)
+        mainViewDataBinding.setVariable(BR.bear, noAddressBearVM)
+        mainViewDataBinding.setVariable(BR.bg, noAddressBgVM)
+        BearAnimator.startAnimation(topBearBgWrapper)
+    }
+
     /** 사용자가 저장해놨던 주소 목록을 가지고 Adapter(viewPager) 등 초기 세팅을 한다 **/
     private fun initWithSavedAddressData() {
+        mainCoordinatorLayout.post {
+            mainScrollView.visibility = View.VISIBLE
+            tvMainEmpty.visibility = View.GONE
+        }
+
         // 초기화
         mainPagerAdapter.itemList.clear()
 
@@ -238,8 +279,12 @@ class MainActivity : AppCompatActivity() {
             if(resultCode == RESULT_OK) {
                 data?.let { intent ->
                     if(intent.getBooleanExtra("isItemChanged", false)) {
-                        initWithSavedAddressData()
-                    }
+                        // 불러올 위치가 없으면 메시지를 띄움. 불러올 위치가 있으면 데이터 세팅
+                        if (!Global.isFirstPageCurrentLocation && Global.addressList.size == 0) {
+                            showNoAddress()
+                        } else {
+                            initWithSavedAddressData()
+                        }                    }
                 }
             }
         }

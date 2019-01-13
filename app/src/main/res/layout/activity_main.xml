@@ -16,6 +16,7 @@
     </data>
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/mainCoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
@@ -62,6 +63,16 @@
                     android:orientation="horizontal" />
             </android.support.design.widget.CollapsingToolbarLayout>
         </com.mashupgroup.weatherbear.MainAppbarLayout>
+
+        <!-- 'Add location' button for empty list -->
+        <TextView
+            android:id="@+id/tvMainEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/main_no_address_msg_margin_top"
+            android:text="@string/main_no_address_added_touch_here_to_add"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <com.mashupgroup.weatherbear.MainScrollView
             android:id="@+id/mainScrollView"

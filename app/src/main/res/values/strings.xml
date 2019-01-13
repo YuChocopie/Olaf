@@ -42,6 +42,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="select_location_chk_show_current_location_first_page">Show current location\'s information in the first page</string>
+    <string name="main_no_address_added_touch_here_to_add">No user address is added.\nTouch here to add your addresses.</string>
 
 
 </resources>
