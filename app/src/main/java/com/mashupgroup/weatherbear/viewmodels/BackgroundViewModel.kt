@@ -6,7 +6,7 @@ import com.mashupgroup.weatherbear.WeatherBearApp
 
 class BackgroundViewModel {
 
-    var weatherData = "RAINY"
+    var weatherData = "SUNNY"
 
     /*
     배경 : 맑음, 흐림
