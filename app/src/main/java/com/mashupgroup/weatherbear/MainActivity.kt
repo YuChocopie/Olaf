@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.mashupgroup.weatherbear.Global.createLocationString
 import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
@@ -31,8 +32,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
-import java.util.*
-import android.view.View
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -120,7 +119,7 @@ class MainActivity : AppCompatActivity() {
         var loactionListener = object : ILocationResultListener {
             override fun onLocationReady(location: Location?, address: Address?) {
 
-                if(location == null) {
+                if (location == null) {
                     Toast.makeText(this@MainActivity, R.string.err_str_location_ready, Toast.LENGTH_SHORT).show()
                 } else {
 
@@ -128,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                     lon = location.longitude
 
                     // '첫번째 아이템이 현위치' 옵션이 켜져있다면 첫번째 아이템 갱신
-                    if(Global.isFirstPageCurrentLocation && mainPagerAdapter.count > 0) {
+                    if (Global.isFirstPageCurrentLocation && mainPagerAdapter.count > 0) {
                         requestItemUpdate(mainPagerAdapter.itemList[0], location)
                     }
                 }
@@ -293,13 +292,14 @@ class MainActivity : AppCompatActivity() {
 
                     //날씨 boxData
                     item.vmInfo.todayDustLevelData = airItem.pm10Grade1h.toInt()
-                    item.vmInfo.todayUltraDustLevelData = airItem.pm25Grade1h.toInt()
+                    item.vmInfo.todayUltraDustLevelData = checkUltraDustLevel(
+                            airItem.pm25Value.toInt())
                     item.vmInfo.todayDustData = airItem.pm10Value + "㎍/㎥"
                     item.vmInfo.todayUltraDustData = airItem.pm25Value + "㎍/㎥"
-                    item.vmInfo.todayUltraDustData = airItem.pm25Value + "㎍/㎥"
 
-                    item.vmInfo.tomorrowDustLevelData = airItem.pm25Grade.toInt()
-                    item.vmInfo.tomorrowUltraDustLevelData = airItem.pm25Grade.toInt()
+                    item.vmInfo.tomorrowDustLevelData = airItem.pm10Grade.toInt()
+                    item.vmInfo.tomorrowUltraDustLevelData = checkUltraDustLevel(
+                            airItem.pm25Value24.toInt())
                     item.vmInfo.tomorrowDustData = airItem.pm10Value24 + "㎍/㎥"
                     item.vmInfo.tomorrowUltraDustData = airItem.pm25Value24 + "㎍/㎥"
                     item.vmInfo.setDayView()
@@ -308,6 +308,18 @@ class MainActivity : AppCompatActivity() {
                 }, { error ->
                     error.printStackTrace()
                 })
+    }
+
+    private fun checkUltraDustLevel(ultraDust: Int): Int {
+        if (ultraDust < 16) {
+            return 1
+        } else if (ultraDust in 16..50) {
+            return 2
+        } else if (ultraDust in 51..100) {
+            return 3
+        } else {
+            return 4
+        }
     }
 
     /** 사용자가 저장한 주소 목록이 없을 때 메시지를 띄운다 */
@@ -350,15 +362,7 @@ class MainActivity : AppCompatActivity() {
             requestItemUpdate(item, location)
 
             //날씨 boxData
-            item.vmInfo.tomorrowUltraDustData
-            item.vmInfo.todayWeatherData = "CLOUD"
-            item.vmInfo.todayTemperatureData = "5"
-            item.vmInfo.todayBodyTemperatureData = "1"
-
-            item.vmInfo.tomorrowWetherTextData = "오늘보다 선선해요"
-            item.vmInfo.tomorrowWeatherData = "RAIN"
-            item.vmInfo.tomorrowTemperatureData = "3"
-            item.vmInfo.tomorrowBodyTemperatureData = "1"
+            item.vmInfo.tomorrowWetherBoxTextData = "데이터를 넣어야해요"
             item.vmInfo.setDayView()
 
             mainPagerAdapter.addData(item)
@@ -377,7 +381,8 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setTopViewModelData(position: Int) {
         if (position < 0 || position >= mainPagerAdapter.count) {
-            return }
+            return
+        }
         BearAnimator.stopAnimation(topBearBgWrapper)
 
         val data = mainPagerAdapter.itemList[position]
@@ -429,13 +434,14 @@ class MainActivity : AppCompatActivity() {
             if (resultCode == RESULT_OK) {
                 data?.let { intent ->
 
-                    if(intent.getBooleanExtra("isItemChanged", false)) {
+                    if (intent.getBooleanExtra("isItemChanged", false)) {
                         // 불러올 위치가 없으면 메시지를 띄움. 불러올 위치가 있으면 데이터 세팅
                         if (!Global.isFirstPageCurrentLocation && Global.addressList.size == 0) {
                             showNoAddress()
                         } else {
                             initWithSavedAddressData()
-                        }                    }
+                        }
+                    }
                 }
             }
         }

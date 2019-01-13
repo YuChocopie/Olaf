@@ -5,7 +5,7 @@
     <string name="today_weather">오늘의 날씨</string>
     <string name="tomorrow_weather">내일의 날씨</string>
     <string name="weekly_weather">주간 날씨</string>
-    <string name="fine_dust_very_bad">아주 나쁨</string>
+    <string name="fine_dust_very_bad">매우 나쁨</string>
     <string name="fine_dust_bad">나쁨</string>
     <string name="fine_dust_normal">보통</string>
     <string name="now">현재</string>

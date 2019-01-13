@@ -10,23 +10,26 @@ import java.util.*
 class IsDayViewModel {
 
     //SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY
-    var todayWeatherData = "CLOUD"
-    var todayDustLevelData = 2
-    var todayUltraDustLevelData = 2
-    var todayTemperatureData = "3"
-    var todayBodyTemperatureData = "1"
-    var todayDustData = "100up"
-    var todayUltraDustData = "100up"
+    //데이터가 안받아지는 경우 아래와 같이..
+    var todayWeatherData = "SUNNY"
+    var todayDustLevelData = 0
+    var todayUltraDustLevelData = 0
+    var todayTemperatureData = "?"
+    var todayBodyTemperatureData = WeatherBearApp.appContext.resources
+            .getText(R.string.noData) as String
+    var todayDustData = ""
+    var todayUltraDustData = ""
     var todayTime: Boolean = true
 
-    var tomorrowWetherTextData = "오늘보다 선선해요"
-    var tomorrowWeatherData = "RAIN"
-    var tomorrowTemperatureData = "3"
-    var tomorrowBodyTemperatureData = "1"
-    var tomorrowDustLevelData = 2
-    var tomorrowUltraDustLevelData = 1
-    var tomorrowDustData = "100up"
-    var tomorrowUltraDustData = "100up"
+    var tomorrowWetherBoxTextData = "내일의 정보가 없어요"
+    var tomorrowWeatherData = "null"
+    var tomorrowTemperatureData = "?"
+    var tomorrowBodyTemperatureData = WeatherBearApp.appContext.resources
+            .getText(R.string.noData) as String
+    var tomorrowDustLevelData = 0
+    var tomorrowUltraDustLevelData = 0
+    var tomorrowDustData = ""
+    var tomorrowUltraDustData = ""
 
     /*
     날씨 :Image, text
@@ -84,31 +87,36 @@ class IsDayViewModel {
     }
 
 
-    var todayWeatherShape = Weather.SNOW.image
+    var todayWeatherShape =  Weather.SUNNY.image
     var todayWeatherShapeTint = WeatherBearApp.appContext.resources.getColor(R.color.Snow)
-    var todayWeatherText = Weather.SNOW.text
-    var todayTemperature = "3"
-    var todayBodyTemperature = "1"
-    var todayDustText = DustLevel.BAD.text
-    var todayDustColor = DustLevel.BAD.color
-    var todayDust = "100up"
-    var todayUltraDust = "100up"
-    var todayUltraDustText = DustLevel.BAD.text
-    var todayUltraDustColor = DustLevel.BAD.color
+    var todayWeatherText = Weather.SUNNY.text
+    var todayTemperature = " "
+    var todayBodyTemperature = WeatherBearApp.appContext.resources.getText(R.string.noData) as
+            String
+    var todayDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as
+            String
+    var todayDustColor = DustLevel.GOOD.color
+    var todayDust = " "
+    var todayUltraDust = " "
+    var todayUltraDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as
+            String
+    var todayUltraDustColor = DustLevel.GOOD.color
 
-    var tomorrowWetherText = "오늘보다 선선해요"
-    var tomorrowWeatherShapeTint = WeatherBearApp.appContext.resources.getColor(R.color.Snow)
     var tomorrowWeatherShape = Weather.SNOW.image
-    var tomorrowWeatherText = Weather.SNOW.text
-    var tomorrowTemperature = "3"
-    var tomorrowBodyTemperature = "1"
-    var tomorrowDust = "100up"
-    var tomorrowDustText = DustLevel.BAD.text
-    var tomorrowDustColor = DustLevel.BAD.color
-    var tomorrowUltraDust = "100up"
-    var tomorrowUltraDustText = DustLevel.BAD.text
-    var tomorrowUltraDustColor = DustLevel.BAD.color
-
+    var tomorrowWeatherShapeTint = WeatherBearApp.appContext.resources.getColor(R.color.Snow)
+    var tomorrowWeatherBoxText =  "오늘은 좀 선선해요"
+    var tomorrowWeatherText = Weather.SUNNY.text
+    var tomorrowTemperature = " "
+    var tomorrowBodyTemperature = WeatherBearApp.appContext.resources
+            .getText(R.string.noData) as String
+    var tomorrowDust = " "
+    var tomorrowDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as
+            String
+    var tomorrowDustColor = DustLevel.GOOD.color
+    var tomorrowUltraDust = " "
+    var tomorrowUltraDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as
+            String
+    var tomorrowUltraDustColor = DustLevel.GOOD.color
 
     fun setDayView() {
         getTime()
@@ -117,7 +125,7 @@ class IsDayViewModel {
         todayDust = todayDustData
         todayUltraDust = todayUltraDustData
 
-        tomorrowWetherText = tomorrowWetherTextData
+        tomorrowWeatherBoxText = tomorrowWetherBoxTextData
         tomorrowTemperature = tomorrowTemperatureData
         tomorrowBodyTemperature = tomorrowBodyTemperatureData
         tomorrowDust = tomorrowDustData
@@ -192,6 +200,10 @@ class IsDayViewModel {
             }
         }
         when (todayDustLevelData) {
+            0 -> {
+                todayDustText = WeatherBearApp.appContext.resources.getText(R.string.noData)
+                        as String
+            }
             DustLevel.GOOD.level -> {
                 todayDustText = DustLevel.GOOD.text
                 todayDustColor = DustLevel.GOOD.color
@@ -210,6 +222,10 @@ class IsDayViewModel {
             }
         }
         when (todayUltraDustLevelData) {
+            0 -> {
+                todayUltraDustText = WeatherBearApp.appContext.resources.getText(R.string.noData)
+                        as String
+            }
             DustLevel.GOOD.level -> {
                 todayUltraDustText = DustLevel.GOOD.text
                 todayUltraDustColor = DustLevel.GOOD.color
@@ -271,6 +287,10 @@ class IsDayViewModel {
             }
         }
         when (tomorrowDustLevelData) {
+            0 -> {
+                tomorrowDustText = WeatherBearApp.appContext.resources.getText(R.string.noData)
+                        as String
+            }
             DustLevel.GOOD.level -> {
                 tomorrowDustText = DustLevel.GOOD.text
                 tomorrowDustColor = DustLevel.GOOD.color
@@ -289,6 +309,10 @@ class IsDayViewModel {
             }
         }
         when (tomorrowUltraDustLevelData) {
+            0 -> {
+                tomorrowUltraDustText = WeatherBearApp.appContext.resources.getText(R.string.noData)
+                        as String
+            }
             DustLevel.GOOD.level -> {
                 tomorrowUltraDustText = DustLevel.GOOD.text
                 tomorrowUltraDustColor = DustLevel.GOOD.color
