@@ -10,7 +10,7 @@ class BearViewModel {
 
     var fineDustData: Int = 1
     // SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
-    var weatherData = "SUNNY"
+    var weatherData = "HEAVY_SNOW"
 
     /*
         미세먼지 단계 4단계
