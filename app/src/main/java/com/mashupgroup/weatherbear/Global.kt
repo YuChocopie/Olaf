@@ -94,17 +94,27 @@ object Global {
 
         if(address.maxAddressLineIndex >= 0) {
             if(isFull) {
-                if (!address.countryName.isNullOrEmpty()) stringBuilder.append(address.countryName)
-                if (!address.adminArea.isNullOrEmpty()) stringBuilder.append(' ').append(address.adminArea)
+                if (!address.countryName.isNullOrEmpty())
+                    stringBuilder.append(address.countryName)
                 if (!stringBuilder.isEmpty()) stringBuilder.append('\n')
             }
 
-            if(!address.subAdminArea.isNullOrEmpty()) stringBuilder.append(' ').append(address.subAdminArea)
-            if(!address.locality.isNullOrEmpty()) stringBuilder.append(' ').append(address.locality)
-            if(!address.subLocality.isNullOrEmpty()) stringBuilder.append(' ').append(address.subLocality)
+            if (!address.adminArea.isNullOrEmpty() && address.adminArea != address.countryName)
+                stringBuilder.append(' ').append(address.adminArea)
+            if(!address.subAdminArea.isNullOrEmpty() && address.subAdminArea != address.adminArea)
+                stringBuilder.append(' ').append(address.subAdminArea)
+            if(!address.locality.isNullOrEmpty() && address.locality != address.subAdminArea)
+                stringBuilder.append(' ').append(address.locality)
+            if(!address.subLocality.isNullOrEmpty() && address.subLocality != address.locality)
+                stringBuilder.append(' ').append(address.subLocality)
 
-            if(!address.thoroughfare.isNullOrEmpty()) stringBuilder.append(' ').append(address.thoroughfare)
-            else if(!address.featureName.isNullOrEmpty()) stringBuilder.append(' ').append(address.featureName)
+            if(!address.thoroughfare.isNullOrEmpty() && address.thoroughfare != address.subLocality)
+                stringBuilder.append(' ').append(address.thoroughfare)
+            else if(!address.featureName.isNullOrEmpty() &&
+                    address.featureName != address.thoroughfare &&
+                    address.featureName != address.subLocality &&
+                    address.featureName != address.locality)
+                stringBuilder.append(' ').append(address.featureName)
             //if(!address.subThoroughfare.isNullOrEmpty()) stringBuilder.append(' ').append(address.subThoroughfare)
             result = stringBuilder.toString()
         }
