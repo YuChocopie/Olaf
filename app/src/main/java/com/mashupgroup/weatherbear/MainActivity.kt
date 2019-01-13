@@ -199,6 +199,7 @@ class MainActivity : AppCompatActivity() {
             val df = java.util.Date(dv)
             val vv = SimpleDateFormat("MM dd, yyyy hh:mm a").format(df)
 
+            // i.main.temp (Default는 켈빈이므로 temp - 273.15 해야 섭씨온도가 나옵니다!)
         }
     }
 
