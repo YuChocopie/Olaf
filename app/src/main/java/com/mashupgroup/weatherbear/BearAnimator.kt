@@ -1,5 +1,6 @@
 package com.mashupgroup.weatherbear
 
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -67,48 +68,55 @@ object BearAnimator {
         snow_bear = AnimationUtils.loadAnimation(appContext, R.anim.snow_bear)
     }
 
+    private fun View.startAnimationIfVisible(anim : Animation) {
+        if(this.visibility == View.VISIBLE)
+            this.startAnimation(anim)
+        else
+            this.clearAnimation()
+    }
+
     fun startAnimation(topBearViewGroup: ViewGroup) {
         //snowman
-        topBearViewGroup.snowBear?.startAnimation(snow_bear)
+        topBearViewGroup.snowBear?.startAnimationIfVisible(snow_bear)
         //양 귀 흔들기
-        topBearViewGroup.bear_ear_right?.startAnimation(bear_ear_r)
-        topBearViewGroup.bear_ear_left?.startAnimation(bear_ear_l)
+        topBearViewGroup.bear_ear_right?.startAnimationIfVisible(bear_ear_r)
+        topBearViewGroup.bear_ear_left?.startAnimationIfVisible(bear_ear_l)
         // 양 팔 흔들기
-        topBearViewGroup.bear_leg?.startAnimation(leg_frong)
-        topBearViewGroup.bear_leg_front_good?.startAnimation(leg_frong_good)
+        topBearViewGroup.bear_leg?.startAnimationIfVisible(leg_frong)
+        topBearViewGroup.bear_leg_front_good?.startAnimationIfVisible(leg_frong_good)
         //스카프 흔들리기
-        topBearViewGroup.bear_scarf_high?.startAnimation(scarh_high)
-        topBearViewGroup.bear_scarf_low?.startAnimation(scarh_low)
+        topBearViewGroup.bear_scarf_high?.startAnimationIfVisible(scarh_high)
+        topBearViewGroup.bear_scarf_low?.startAnimationIfVisible(scarh_low)
         //snowman 스카프 흔들리기
-        topBearViewGroup.snowBearScarfHigh?.startAnimation(scarh_high)
-        topBearViewGroup.snowBearScarfLow?.startAnimation(scarh_low)
+        topBearViewGroup.snowBearScarfHigh?.startAnimationIfVisible(scarh_high)
+        topBearViewGroup.snowBearScarfLow?.startAnimationIfVisible(scarh_low)
         // 비올 때 우산과 팔 동시움직임
-        topBearViewGroup.bear_umbrella?.startAnimation(umbrella)
+        topBearViewGroup.bear_umbrella?.startAnimationIfVisible(umbrella)
         //미세먼지 농도 높을 때 마스크와 마스크 발 동시.
-        topBearViewGroup.bear_leg_front_bad?.startAnimation(leg_frong_bad)
-        topBearViewGroup.handkerchief?.startAnimation(bear_mask)
+        topBearViewGroup.bear_leg_front_bad?.startAnimationIfVisible(leg_frong_bad)
+        topBearViewGroup.handkerchief?.startAnimationIfVisible(bear_mask)
         //먼지 펫 움직이기
-        topBearViewGroup.bear_pet?.startAnimation(pet)
-        topBearViewGroup.bear_pet_small?.startAnimation(pet)
-        topBearViewGroup.bear_pet_w?.startAnimation(pet)
+        topBearViewGroup.bear_pet?.startAnimationIfVisible(pet)
+        topBearViewGroup.bear_pet_small?.startAnimationIfVisible(pet)
+        topBearViewGroup.bear_pet_w?.startAnimationIfVisible(pet)
 
         //눈내림
-        topBearViewGroup.ivSnow1?.startAnimation(snow1)
-        topBearViewGroup.ivSnow1_2?.startAnimation(snow1_1)
-        topBearViewGroup.ivSnow2?.startAnimation(snow2)
-        topBearViewGroup.ivSnow2_2?.startAnimation(snow2_2)
+        topBearViewGroup.ivSnow1?.startAnimationIfVisible(snow1)
+        topBearViewGroup.ivSnow1_2?.startAnimationIfVisible(snow1_1)
+        topBearViewGroup.ivSnow2?.startAnimationIfVisible(snow2)
+        topBearViewGroup.ivSnow2_2?.startAnimationIfVisible(snow2_2)
 
         // 비내림
-        topBearViewGroup.ivRain1?.startAnimation(rain1)
-        topBearViewGroup.ivRain2?.startAnimation(rain2)
-        topBearViewGroup.ivRain2_3?.startAnimation(rain3)
+        topBearViewGroup.ivRain1?.startAnimationIfVisible(rain1)
+        topBearViewGroup.ivRain2?.startAnimationIfVisible(rain2)
+        topBearViewGroup.ivRain2_3?.startAnimationIfVisible(rain3)
 
         // 구름
-        topBearViewGroup.ivCloud1?.startAnimation(cloud1)
-        topBearViewGroup.ivCloud1_2?.startAnimation(cloud1)
-        topBearViewGroup.ivCloud2?.startAnimation(cloud2)
-        topBearViewGroup.ivCloud2_2?.startAnimation(cloud2)
-        topBearViewGroup.ivCloud3?.startAnimation(cloud3)
+        topBearViewGroup.ivCloud1?.startAnimationIfVisible(cloud1)
+        topBearViewGroup.ivCloud1_2?.startAnimationIfVisible(cloud1)
+        topBearViewGroup.ivCloud2?.startAnimationIfVisible(cloud2)
+        topBearViewGroup.ivCloud2_2?.startAnimationIfVisible(cloud2)
+        topBearViewGroup.ivCloud3?.startAnimationIfVisible(cloud3)
     }
 
     fun stopAnimation(topBearViewGroup: ViewGroup) {
