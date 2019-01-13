@@ -249,10 +249,13 @@
                 android:id="@+id/bear_sunglasses"
                 android:layout_width="105dp"
                 android:layout_height="64dp"
+                android:layout_marginTop="@dimen/SIZE_15"
                 android:visibility="@{bear.bearSunglesesVisibilty ? View.VISIBLE : View.GONE}"
-                app:srcCompat="@drawable/ic_bear_sunglasses"
-                tools:layout_editor_absoluteX="97dp"
-                tools:layout_editor_absoluteY="38dp" />
+                app:layout_constraintEnd_toEndOf="@id/bear_head"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="@id/bear_head"
+                app:layout_constraintTop_toTopOf="@id/bear_head"
+                app:srcCompat="@drawable/ic_bear_sunglasses" />
 
             <ImageView
                 android:id="@+id/bear_pet_small"

@@ -1,19 +1,17 @@
 package com.mashupgroup.weatherbear
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
 import android.databinding.DataBindingUtil.setContentView
 import android.location.Address
 import android.location.Location
-import android.support.v4.view.ViewPager.SimpleOnPageChangeListener
 import android.os.Build
+import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import android.support.v4.view.ViewPager.SimpleOnPageChangeListener
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -23,18 +21,18 @@ import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
 import com.mashupgroup.weatherbear.location.ILocationResultListener
 import com.mashupgroup.weatherbear.location.LocationHelper
 import com.mashupgroup.weatherbear.location.SelectLocationActivity
+import com.mashupgroup.weatherbear.models.weather.Forecast
+import com.mashupgroup.weatherbear.models.weather.Weather
 import com.mashupgroup.weatherbear.viewmodels.BackgroundViewModel
 import com.mashupgroup.weatherbear.viewmodels.BearViewModel
 import com.mashupgroup.weatherbear.viewmodels.IsDayViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
-import java.util.*
-import android.R.attr.data
-import android.annotation.SuppressLint
-import com.mashupgroup.weatherbear.Global.addressList
-import com.mashupgroup.weatherbear.models.weather.Forecast
-import com.mashupgroup.weatherbear.models.weather.Weather
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     private val kakaoApiToken = BuildConfig.KAKAO_API_TOKEN
     private var lat = 0.0
     private var lon = 0.0
-    lateinit var mainViewDataBinding : ActivityMainBinding
+    lateinit var mainViewDataBinding: ActivityMainBinding
 
     /* API */
     private val airAPI = AirAPI()
@@ -57,7 +55,6 @@ class MainActivity : AppCompatActivity() {
     private val weatherAPI = WeatherAPI()
     private val weatherRetrofit = weatherAPI.createWeatherRetrofit()
     private val weatherInterface = weatherRetrofit.create(WeatherInterface::class.java)
-
 
 
     val kakaoAPI = KakaoAPI()
@@ -87,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
         viewPager.addOnPageChangeListener(object : SimpleOnPageChangeListener() {
-            override fun onPageSelected(position : Int) {
+            override fun onPageSelected(position: Int) {
                 // ViewPager 페이지가 바뀔 때마다 불림. 데이터 갱신
                 setTopViewModelData(position)
             }
@@ -126,15 +123,37 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
         Log.v("csh Weather", weatherInfo.toString())
-        Log.e("loglogweather", "123"+weatherInfo.weather[0].main)
-        var weather:String = "SNOW"
-        if (weatherInfo.weather[0].main == "Haze")
-            weather = "RAINY"
+        Log.e("loglogweather", "123" + weatherInfo.weather[0].id)
+        var weather: String = "SUNNY"
+        val weatherId = weatherInfo.weather[0].id
+        when (weatherId / 100) {
+            2 -> weather = "THUNDER_RAINY"
+            3 -> weather = "RAINY"
+            6 -> {
+                weather = "SNOW"
+                if (weatherId == 621 || weatherId == 622) {
+                    weather = "HEAVY_SNOW"
+                }
+            }
+            7 -> {
+                weather = "CLOUD"
+                if (weatherId == 731 || weatherId == 781) {
+                    weather = "WIND"
+                }
+            }
+            8 -> {
+                weather = "CLOUD"
+                if (weatherId == 800) {
+                    weather = "SUNNY"
+                }
+            }
+        }
+
         //곰의 모습 data
-        item.vmBear.weatherData=weather
+        item.vmBear.weatherData = weather
         item.vmBear.setBear()
         //곰 배경데이터
-        item.vmBG.weatherData=weather
+        item.vmBG.weatherData = weather
         item.vmBG.setBackground()
         //날씨 boxData
         item.vmInfo.todayWeatherData = weather
@@ -155,7 +174,7 @@ class MainActivity : AppCompatActivity() {
         /* 여기가 5일치 날씨 */
         /* forecastInfo */
 
-        for(i in forecastInfo.list) {
+        for (i in forecastInfo.list) {
             val dv = java.lang.Long.valueOf(i.dt) * 1000// its need to be in milisecond
             val df = java.util.Date(dv)
             val vv = SimpleDateFormat("MM dd, yyyy hh:mm a").format(df)
@@ -170,12 +189,12 @@ class MainActivity : AppCompatActivity() {
         kakaoInterface.getPos(kakaoApiToken, location.longitude, location.latitude, "WGS84", "TM")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({coord->
+                .subscribe({ coord ->
                     var tmX = coord.documents[0].x
                     var tmY = coord.documents[0].y
 
                     requestStationInfo(item, tmX, tmY)
-                }, { error->
+                }, { error ->
                     error.printStackTrace()
                 })
 
@@ -184,7 +203,7 @@ class MainActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ weatherInfo ->
-                    if(weatherInfo != null) {
+                    if (weatherInfo != null) {
                         requestWeatherResponse(item, weatherInfo)
 
                     } else {
@@ -202,7 +221,7 @@ class MainActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ forecastInfo ->
-                    if(forecastInfo != null) {
+                    if (forecastInfo != null) {
                         requestForecastResponse(item, forecastInfo)
 
                     } else {
@@ -223,11 +242,11 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("CheckResult")
     private fun requestStationInfo(item: MainPagerItem, tmX: String, tmY: String) {
         /* Get StationInfo */
-        airStationInterface.getStation("json",tmX,tmY,airApiToken)
+        airStationInterface.getStation("json", tmX, tmY, airApiToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ stationInfo ->
-                    if(stationInfo != null) {
+                    if (stationInfo != null) {
                         // Air 정보 가져오기
                         requestAirInfo(item, stationInfo.list[0].stationName)
                     } else {
@@ -249,16 +268,16 @@ class MainActivity : AppCompatActivity() {
                     val airItem = airInfo.list[0]
 
                     //곰의 모습 data
-                    item.vmBear.fineDustData=airItem.pm10Grade1h.toInt()
+                    item.vmBear.fineDustData = airItem.pm10Grade1h.toInt()
                     item.vmBear.setBear()
 
                     //날씨 boxData
                     item.vmInfo.todayDustLevelData = airItem.pm10Grade1h.toInt()
-                    item.vmInfo.todayDustData = airItem.pm10Value+"up"
-                    item.vmInfo.todayUltraDustData = airItem.pm25Value+"up"
+                    item.vmInfo.todayDustData = airItem.pm10Value + "up"
+                    item.vmInfo.todayUltraDustData = airItem.pm25Value + "up"
                     item.vmInfo.tomorrowDustLevelData = airItem.pm25Grade.toInt()
-                    item.vmInfo.tomorrowDustData = airItem.pm10Value24+"up"
-                    item.vmInfo.tomorrowUltraDustData = airItem.pm25Value24+"up"
+                    item.vmInfo.tomorrowDustData = airItem.pm10Value24 + "up"
+                    item.vmInfo.tomorrowUltraDustData = airItem.pm25Value24 + "up"
                     item.vmInfo.setDayView()
 
                     mainPagerAdapter.notifyDataSetChanged()
@@ -273,23 +292,23 @@ class MainActivity : AppCompatActivity() {
         mainPagerAdapter.itemList.clear()
 
         // 첫번째 아이템이 현재 위치면 그거 추가합니다
-        if(Global.isFirstPageCurrentLocation) {
+        if (Global.isFirstPageCurrentLocation) {
             val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
             mainPagerAdapter.addData(item)
         }
 
-        for(addr in Global.addressList) {
+        for (addr in Global.addressList) {
             val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), addr)
             // Todo : 여기에 addr에 맞는 각 ViewModel 세팅을 해야합니다. 아마 날씨 데이터를 불러와야할겁니다.
 
             // SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
 //            곰의 모습 data
-            item.vmBear.fineDustData=3
-            item.vmBear.weatherData="SNOW"
+            item.vmBear.fineDustData = 3
+            item.vmBear.weatherData = "SNOW"
             item.vmBear.setBear()
 
             //곰 배경데이터
-            item.vmBG.weatherData="HEAVY_SNOW"
+            item.vmBG.weatherData = "HEAVY_SNOW"
             item.vmBG.setBackground()
 
             //날씨 boxData
@@ -324,8 +343,9 @@ class MainActivity : AppCompatActivity() {
      *  ViewPager.adapter 안에있는 아이템의 뷰모델을 사용하여 갱신
      *  @param position MainPageAdapter에서 가져올 아이템 position
      */
-    private fun setTopViewModelData(position : Int) {
-        if(position < 0 || position >= mainPagerAdapter.count) { return }
+    private fun setTopViewModelData(position: Int) {
+        if (position < 0 || position >= mainPagerAdapter.count) {
+            return }
         BearAnimator.stopAnimation(topBearBgWrapper)
 
         val data = mainPagerAdapter.itemList[position]
@@ -373,17 +393,17 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == RESULT_CODE_ADDRESS_MANAGE_ACTIVITY) {
-            if(resultCode == RESULT_OK) {
+        if (requestCode == RESULT_CODE_ADDRESS_MANAGE_ACTIVITY) {
+            if (resultCode == RESULT_OK) {
                 data?.let { intent ->
-                    if(intent.getBooleanExtra("isItemChanged", false)) {
+                    if (intent.getBooleanExtra("isItemChanged", false)) {
                         initWithSavedAddressData()
                     }
                 }
             }
         }
     }
-  
+
     //ACCESS_COARSE_LOCATION,ACCESS_FINE_LOCATION
     fun checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= 23) {
