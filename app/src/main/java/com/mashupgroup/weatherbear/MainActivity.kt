@@ -142,6 +142,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
         Log.v("csh Weather", weatherInfo.toString())
+
         var weather = "SUNNY"
         var temp: Double = weatherInfo.main.temp - 273.15
         weather = weatherCalculation(weatherInfo.weather[0].id)
@@ -160,8 +161,6 @@ class MainActivity : AppCompatActivity() {
         item.vmInfo.setDayView()
 
         item.graphArray.set(0, temp.toInt())
-        Log.e("weatherDatatemp", "temp 0  " + temp.toInt())
-
 
         item.vmInfo.setDayView()
         /* 여기가 오늘의 날씨  */
@@ -170,7 +169,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun requestForecastResponse(item: MainPagerItem, forecastInfo: Forecast) {
-        Log.v("csh Forecast", forecastInfo.toString())
         /* 여기가 5일치 날씨 */
         /* forecastInfo */
         //해당장소의시간
@@ -182,48 +180,78 @@ class MainActivity : AppCompatActivity() {
             noonTime++
             !count
         }
+
+        var weather: String = "SUNNY"
+        val temp: Double = forecastInfo.list[noonTime].main.temp.toDouble() - 273.15
+        weather = weatherCalculation(forecastInfo.list[noonTime].weather[0].id)
+
+        //날씨 boxData
+        item.vmInfo.currentTime = hTime
+        item.vmInfo.tomorrowWeatherData = weather
+        item.vmInfo.tomorrowBodyTemperatureData = bodyTemperatureCalculation(temp,
+                forecastInfo.list[noonTime].wind.speed.toDouble()).toString()
+        item.vmInfo.tomorrowTemperatureData = (temp.toInt()).toString()
+        //오늘의 날씨 그래프
+        item.vmInfo.todayAfterWeatherData01 = weatherCalculation(forecastInfo.list[0]
+                .weather[0].id)
+        item.vmInfo.todayAfterWeatherData02 = weatherCalculation(forecastInfo.list[1]
+                .weather[0].id)
+        item.vmInfo.todayAfterWeatherData03 = weatherCalculation(forecastInfo.list[2]
+                .weather[0].id)
+        item.vmInfo.todayAfterWeatherData04 = weatherCalculation(forecastInfo.list[3]
+                .weather[0].id)
+        item.vmInfo.todayAfterWeatherData05 = weatherCalculation(forecastInfo.list[4]
+                .weather[0].id)
+        item.vmInfo.todayAfterWeatherData06 = weatherCalculation(forecastInfo.list[5]
+                .weather[0].id)
+        item.vmInfo.todayAfterWeatherData07 = weatherCalculation(forecastInfo.list[6]
+                .weather[0].id)
+        item.vmInfo.tomorrowWetherBoxTextData = tomorrowWeatherText((forecastInfo.list[0].main
+                .temp.toDouble() - 273.15).toInt(), temp.toInt(), weather)
+        item.graphArray.set(1, (forecastInfo.list[1].main.temp.toDouble() - 273.15).toInt())
+        item.graphArray.set(2, (forecastInfo.list[2].main.temp.toDouble() - 273.15).toInt())
+        item.graphArray.set(3, (forecastInfo.list[3].main.temp.toDouble() - 273.15).toInt())
+        item.graphArray.set(4, (forecastInfo.list[4].main.temp.toDouble() - 273.15).toInt())
+        item.graphArray.set(5, (forecastInfo.list[5].main.temp.toDouble() - 273.15).toInt())
+        item.graphArray.set(6, (forecastInfo.list[6].main.temp.toDouble() - 273.15).toInt())
+
+
+        item.vmInfo.setDayView()
         for (i in forecastInfo.list) {
-            var weather: String = "SUNNY"
-            val temp: Double = forecastInfo.list[noonTime].main.temp.toDouble() - 273.15
-            weather = weatherCalculation(forecastInfo.list[noonTime].weather[0].id)
-
-            //날씨 boxData
-            item.vmInfo.currentTime = hTime
-            item.vmInfo.tomorrowWeatherData = weather
-            item.vmInfo.tomorrowBodyTemperatureData = bodyTemperatureCalculation(temp,
-                    forecastInfo.list[noonTime].wind.speed.toDouble()).toString()
-            item.vmInfo.tomorrowTemperatureData = (temp.toInt()).toString()
-            //오늘의 날씨 그래프
-            item.vmInfo.todayAfterWeatherData01 = weatherCalculation(forecastInfo.list[0]
-                    .weather[0].id)
-            item.vmInfo.todayAfterWeatherData02 = weatherCalculation(forecastInfo.list[1]
-                    .weather[0].id)
-            item.vmInfo.todayAfterWeatherData03 = weatherCalculation(forecastInfo.list[2]
-                    .weather[0].id)
-            item.vmInfo.todayAfterWeatherData04 = weatherCalculation(forecastInfo.list[3]
-                    .weather[0].id)
-            item.vmInfo.todayAfterWeatherData05 = weatherCalculation(forecastInfo.list[4]
-                    .weather[0].id)
-            item.vmInfo.todayAfterWeatherData06 = weatherCalculation(forecastInfo.list[5]
-                    .weather[0].id)
-            item.vmInfo.todayAfterWeatherData07 = weatherCalculation(forecastInfo.list[6]
-                    .weather[0].id)
-            item.graphArray.set(1, (forecastInfo.list[1].main.temp.toDouble() - 273.15).toInt())
-            item.graphArray.set(2, (forecastInfo.list[2].main.temp.toDouble() - 273.15).toInt())
-            item.graphArray.set(3, (forecastInfo.list[3].main.temp.toDouble() - 273.15).toInt())
-            item.graphArray.set(4, (forecastInfo.list[4].main.temp.toDouble() - 273.15).toInt())
-            item.graphArray.set(5, (forecastInfo.list[5].main.temp.toDouble() - 273.15).toInt())
-            item.graphArray.set(6, (forecastInfo.list[6].main.temp.toDouble() - 273.15).toInt())
-
-            item.vmInfo.setDayView()
-
             val dv = java.lang.Long.valueOf(i.dt) * 1000// its need to be in milisecond
             val df = java.util.Date(dv)
-            val vv = SimpleDateFormat("MM dd, yyyy hh:mm a").format(df)
-
-            // i.main.temp (Default는 켈빈이므로 temp - 273.15 해야 섭씨온도가 나옵니다!)
+//            val vv = SimpleDateFormat("MM dd, yyyy hh:mm a").format(df)
+//             i.main.temp (Default는 켈빈이므로 temp - 273.15 해야 섭씨온도가 나옵니다!)
         }
     }
+
+    private fun tomorrowWeatherText(currendTemp: Int, tomorrowTemp: Int, tomorrowWeather: String): String {
+        if (tomorrowWeather == "HEAVY_SNOW") {
+            return "내일은 눈이 아주 많이와요~"
+        } else if (tomorrowWeather == "SNOW") {
+            return "내일은 눈이와요~"
+        } else if (tomorrowWeather == "RAINY") {
+            return "내일은 바가와요 우산을 챙기세요"
+        }
+        if (currendTemp < 5 && currendTemp > tomorrowTemp) {
+            return "내일은 오늘보다 추워요"
+        } else if (currendTemp < 15 && currendTemp < tomorrowTemp) {
+            return "내일은 오늘보다 따듯해요"
+        } else if (currendTemp < 15 && currendTemp > tomorrowTemp) {
+            return "내일은 오늘보다 쌀쌀해요"
+        } else if (currendTemp < 25 && currendTemp > tomorrowTemp) {
+            return "내일은 오늘보다 선선해요"
+        } else if (currendTemp > 25 && currendTemp > tomorrowTemp) {
+            return "내일은 오늘보다 시원해요"
+        } else if (currendTemp > 2 && currendTemp < tomorrowTemp) {
+            return "내일은 오늘보다 시원해요"
+        }
+        if (currendTemp > tomorrowTemp) {
+            return "내일은 날씨가 " + (currendTemp - tomorrowTemp) + "도 낮아요"
+        } else
+            return "내일은 날씨가 " + (tomorrowTemp - currendTemp) + "도 "
+    }
+
 
     private fun bodyTemperatureCalculation(temp: Double, speed: Double): Int {
         val v = Math.pow(speed, 0.16)
