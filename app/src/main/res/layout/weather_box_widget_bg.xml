@@ -50,8 +50,9 @@
 
             <ImageView
                 android:id="@+id/widgetLocationIcon"
-                android:layout_width="@dimen/SIZE_20"
-                android:layout_height="@dimen/SIZE_20"
+                android:layout_width="@dimen/SIZE_13"
+                android:layout_height="@dimen/SIZE_13"
+                android:layout_marginStart="@dimen/SIZE_2"
                 android:layout_below="@id/widgetBearHead"
                 android:layout_alignStart="@+id/widgetBearHead"
                 android:layout_alignTop="@id/tvWidgetLocation"
@@ -167,6 +168,7 @@
                 android:id="@+id/tvWidgetWeather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/SIZE_3"
                 android:layout_below="@+id/widgetView2"
                 android:layout_alignStart="@id/widgetView2"
                 android:layout_alignEnd="@id/widgetView2"

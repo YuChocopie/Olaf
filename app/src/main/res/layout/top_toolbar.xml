@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="@dimen/top_selected_location_icon_size"
             android:layout_height="@dimen/top_selected_location_icon_size"
-            android:background="@color/white0" />
+            android:src="@drawable/ic_arrow" />
 
         <TextView
             android:id="@+id/tvSelectedLocation"

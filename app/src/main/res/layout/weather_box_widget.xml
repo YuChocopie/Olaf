@@ -48,13 +48,13 @@
 
             <ImageView
                 android:id="@+id/widgetLocationIcon"
-                android:layout_width="@dimen/SIZE_20"
+                android:layout_width="@dimen/SIZE_13"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/widgetBearHead"
                 android:layout_alignStart="@+id/widgetBearHead"
                 android:layout_alignTop="@id/tvWidgetLocation"
                 android:layout_alignBottom="@id/tvWidgetLocation"
-                android:src="@android:drawable/btn_star_big_on" />
+                android:src="@drawable/ic_arrow" />
 
             <TextView
                 android:id="@+id/tvWidgetLocation"
