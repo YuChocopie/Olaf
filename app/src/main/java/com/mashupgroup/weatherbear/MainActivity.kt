@@ -143,6 +143,7 @@ class MainActivity : AppCompatActivity() {
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
         Log.v("csh Weather", weatherInfo.toString())
         var weather = "SUNNY"
+        var weather: String = "SUNNY"
         var temp: Double = weatherInfo.main.temp - 273.15
         weather = weatherCalculation(weatherInfo.weather[0].id)
         //곰의 모습 data
@@ -163,6 +164,7 @@ class MainActivity : AppCompatActivity() {
         Log.e("weatherDatatemp", "temp 0  " + temp.toInt())
 
 
+        item.vmInfo.setDayView()
         /* 여기가 오늘의 날씨  */
         /* weatherInfo */
     }
@@ -222,6 +224,39 @@ class MainActivity : AppCompatActivity() {
 
             // i.main.temp (Default는 켈빈이므로 temp - 273.15 해야 섭씨온도가 나옵니다!)
         }
+    }
+    private fun bodyTemperatureCalculation(temp: Double, speed: Double): Int {
+        val v= Math.pow(speed,0.16)
+        return (13.12 + 0.6215 * temp - 11.37 * v + 0.3965 * v * temp).toInt()
+    }
+
+    private fun weatherCalculation(weatherId: Int): String {
+        when (weatherId / 100) {
+            2 -> return "THUNDER_RAINY"
+            3 -> return "RAINY"
+            6 -> {
+                if (weatherId == 621 || weatherId == 622) {
+                    return "HEAVY_SNOW"
+                } else {
+                    return "SNOW"
+                }
+            }
+            7 -> {
+                if (weatherId == 731 || weatherId == 781) {
+                    return "WIND"
+                } else {
+                    return "CLOUD"
+                }
+            }
+            8 -> {
+                if (weatherId == 800) {
+                    return "SUNNY"
+                } else {
+                    return "CLOUD"
+                }
+            }
+        }
+        return "SUNNY"
     }
 
     private fun bodyTemperatureCalculation(temp: Double, speed: Double): Int {
