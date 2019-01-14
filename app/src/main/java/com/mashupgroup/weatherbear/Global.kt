@@ -78,11 +78,15 @@ object Global {
 
     /**
      * SharedPref에서 '첫번째 페이지에 현재 위치 표시' 여부 불러옴 (Global.isFirstPageCurrentLocation 에 불러옴)
+     * 19.01.14 : 실시간 위치 받아오는건 법률적 이슈(위치기반서비스신고)도 있고 해서, 일단은 TBD (To be decision) 상태로 보류. 대신, 위치 검색시 '현재 위치 추가' 기능을 넣기로
      */
     fun loadIsFirstPageCurrentLocation() {
+        isFirstPageCurrentLocation = false  // FirstPage Current Location : TBD
+        /*
         val context = WeatherBearApp.appContext
         val prefs = context.getSharedPreferences(SP_WEATHERBEAR_KEY, MODE_PRIVATE)
         isFirstPageCurrentLocation = prefs.getBoolean(SP_FIRSTSCREEN_CURRENTLOC_SAVE_KEY, false)
+        */
     }
 
     /**
