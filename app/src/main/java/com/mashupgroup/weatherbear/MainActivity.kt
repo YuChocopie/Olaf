@@ -38,7 +38,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this)
-    private val model = IsDayViewModel()
     private val weatherApiToken = BuildConfig.WEATHER_API_TOKEN
     private val airApiToken = BuildConfig.AIR_API_TOKEN
     private val kakaoApiToken = BuildConfig.KAKAO_API_TOKEN
@@ -65,6 +64,8 @@ class MainActivity : AppCompatActivity() {
     val kakaoRetrofit = kakaoAPI.createTransRetrofit()
     val kakaoInterface = kakaoRetrofit.create(KakaoInterface::class.java)
 
+    var dayTimeTemperture = intArrayOf(0, 0, 0, 0, 0, 0, 0)
+
     private val RESULT_CODE_ADDRESS_MANAGE_ACTIVITY = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,10 +73,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val permissionModule = PermissionModule()
         permissionModule.setupPermissions(this, this)
+        checkLocationPermission()
 
         mainViewDataBinding = setContentView(this, R.layout.activity_main)
-
-        //requestTodayWeather()
 
         // 유저가 저장했었던 주소를 Global.addressList에 불러오기
         Global.loadAddressList()
@@ -93,28 +93,6 @@ class MainActivity : AppCompatActivity() {
         noAddressBgVM.weather = BackgroundViewModel.Weather.SUNNY.text
         noAddressBgVM.setBackground()
 
-        // ViewPager 초기화
-        viewPager.initialize(mainIndicator)
-        viewPager.addOnPageChangeListener(object : SimpleOnPageChangeListener() {
-            override fun onPageSelected(position: Int) {
-                // ViewPager 페이지가 바뀔 때마다 불림. 데이터 갱신
-                setTopViewModelData(position)
-            }
-        })
-        viewPager.adapter = mainPagerAdapter
-
-        // 불러올 위치가 없으면 메시지를 띄움. 불러올 위치가 있으면 데이터 세팅
-        if (!Global.isFirstPageCurrentLocation && Global.addressList.size == 0) {
-            showNoAddress()
-        } else {
-            initWithSavedAddressData()
-        }
-
-        // 불러올 위치가 없을 때 띄워줄 메시지에 터치리스너 추가
-        tvMainEmpty.setOnClickListener {
-            val intent = Intent(this, SelectLocationActivity::class.java)
-            startActivityForResult(intent, RESULT_CODE_ADDRESS_MANAGE_ACTIVITY)
-        }
 
         var loactionListener = object : ILocationResultListener {
             override fun onLocationReady(location: Location?, address: Address?) {
@@ -138,11 +116,33 @@ class MainActivity : AppCompatActivity() {
         LocationHelper.requestLocation(this, true)
 
 
+        // ViewPager 초기화
+        viewPager.initialize(mainIndicator)
+        viewPager.addOnPageChangeListener(object : SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                // ViewPager 페이지가 바뀔 때마다 불림. 데이터 갱신
+                setTopViewModelData(position)
+            }
+        })
+        viewPager.adapter = mainPagerAdapter
+
+        // 불러올 위치가 없으면 메시지를 띄움. 불러올 위치가 있으면 데이터 세팅
+        if (!Global.isFirstPageCurrentLocation && Global.addressList.size == 0) {
+            showNoAddress()
+        } else {
+            initWithSavedAddressData()
+        }
+
+        // 불러올 위치가 없을 때 띄워줄 메시지에 터치리스너 추가
+        tvMainEmpty.setOnClickListener {
+            val intent = Intent(this, SelectLocationActivity::class.java)
+            startActivityForResult(intent, RESULT_CODE_ADDRESS_MANAGE_ACTIVITY)
+        }
     }
 
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
         Log.v("csh Weather", weatherInfo.toString())
-        var weather: String = "SUNNY"
+        var weather = "SUNNY"
         var temp: Double = weatherInfo.main.temp - 273.15
         weather = weatherCalculation(weatherInfo.weather[0].id)
         //곰의 모습 data
@@ -156,7 +156,13 @@ class MainActivity : AppCompatActivity() {
         item.vmInfo.todayBodyTemperatureData = bodyTemperatureCalculation(temp, weatherInfo.wind
                 .speed).toString()
         item.vmInfo.todayTemperatureData = (temp.toInt()).toString()
+        item.vmInfo.todayAfterWeatherData00 = weather
         item.vmInfo.setDayView()
+
+        item.graphArray.set(0, temp.toInt())
+        Log.e("weatherDatatemp", "temp 0  " + temp.toInt())
+
+
         /* 여기가 오늘의 날씨  */
         /* weatherInfo */
     }
@@ -166,11 +172,12 @@ class MainActivity : AppCompatActivity() {
         Log.v("csh Forecast", forecastInfo.toString())
         /* 여기가 5일치 날씨 */
         /* forecastInfo */
-        //내일 정오시간의 데이터를 받아옵니다
+        //해당장소의시간
         val hTime = Date().hours
-        var noonTime = (36 - hTime)/3
+        //내일 정오시간의 데이터를 받아옵니다
+        var noonTime = (36 - hTime) / 3
         val count = true
-        if (hTime%3>0 && count){
+        if (hTime % 3 > 0 && count) {
             noonTime++
             !count
         }
@@ -180,10 +187,33 @@ class MainActivity : AppCompatActivity() {
             weather = weatherCalculation(forecastInfo.list[noonTime].weather[0].id)
 
             //날씨 boxData
+            item.vmInfo.currentTime = hTime
             item.vmInfo.tomorrowWeatherData = weather
             item.vmInfo.tomorrowBodyTemperatureData = bodyTemperatureCalculation(temp,
                     forecastInfo.list[noonTime].wind.speed.toDouble()).toString()
             item.vmInfo.tomorrowTemperatureData = (temp.toInt()).toString()
+            //오늘의 날씨 그래프
+            item.vmInfo.todayAfterWeatherData01 = weatherCalculation(forecastInfo.list[0]
+                    .weather[0].id)
+            item.vmInfo.todayAfterWeatherData02 = weatherCalculation(forecastInfo.list[1]
+                    .weather[0].id)
+            item.vmInfo.todayAfterWeatherData03 = weatherCalculation(forecastInfo.list[2]
+                    .weather[0].id)
+            item.vmInfo.todayAfterWeatherData04 = weatherCalculation(forecastInfo.list[3]
+                    .weather[0].id)
+            item.vmInfo.todayAfterWeatherData05 = weatherCalculation(forecastInfo.list[4]
+                    .weather[0].id)
+            item.vmInfo.todayAfterWeatherData06 = weatherCalculation(forecastInfo.list[5]
+                    .weather[0].id)
+            item.vmInfo.todayAfterWeatherData07 = weatherCalculation(forecastInfo.list[6]
+                    .weather[0].id)
+            item.graphArray.set(1, (forecastInfo.list[1].main.temp.toDouble() - 273.15).toInt())
+            item.graphArray.set(2, (forecastInfo.list[2].main.temp.toDouble() - 273.15).toInt())
+            item.graphArray.set(3, (forecastInfo.list[3].main.temp.toDouble() - 273.15).toInt())
+            item.graphArray.set(4, (forecastInfo.list[4].main.temp.toDouble() - 273.15).toInt())
+            item.graphArray.set(5, (forecastInfo.list[5].main.temp.toDouble() - 273.15).toInt())
+            item.graphArray.set(6, (forecastInfo.list[6].main.temp.toDouble() - 273.15).toInt())
+
             item.vmInfo.setDayView()
 
             val dv = java.lang.Long.valueOf(i.dt) * 1000// its need to be in milisecond
@@ -193,8 +223,9 @@ class MainActivity : AppCompatActivity() {
             // i.main.temp (Default는 켈빈이므로 temp - 273.15 해야 섭씨온도가 나옵니다!)
         }
     }
+
     private fun bodyTemperatureCalculation(temp: Double, speed: Double): Int {
-        val v= Math.pow(speed,0.16)
+        val v = Math.pow(speed, 0.16)
         return (13.12 + 0.6215 * temp - 11.37 * v + 0.3965 * v * temp).toInt()
     }
 
@@ -277,11 +308,6 @@ class MainActivity : AppCompatActivity() {
 
                 })
 
-    }
-
-    private fun requestWeatherInfo(item: MainPagerItem, tmX: String, tmY: String) {
-        /* Get WeatherInfo */
-        weatherInterface
     }
 
     @SuppressLint("CheckResult")
@@ -374,19 +400,20 @@ class MainActivity : AppCompatActivity() {
 
         // 첫번째 아이템이 현재 위치면 그거 추가합니다
         if (Global.isFirstPageCurrentLocation) {
-            val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
+            val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(),
+                    Address(Locale.getDefault()), dayTimeTemperture)
             mainPagerAdapter.addData(item)
         }
 
         for (addr in Global.addressList) {
-            val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), addr)
+            val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(),
+                    addr, dayTimeTemperture)
 
             // 각 아이템의 위치정보에 따라 데이터를 요청합니다.
             val location = Location("")
             location.longitude = addr.longitude
             location.latitude = addr.latitude
             requestItemUpdate(item, location)
-
             //날씨 boxData
             item.vmInfo.tomorrowWetherBoxTextData = "데이터를 넣어야해요"
             item.vmInfo.setDayView()
@@ -414,13 +441,11 @@ class MainActivity : AppCompatActivity() {
         val data = mainPagerAdapter.itemList[position]
         mainViewDataBinding.setVariable(BR.bear, data.vmBear)
         mainViewDataBinding.setVariable(BR.bg, data.vmBG)
-
-        val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(), Address(Locale.getDefault()))
+        val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(),
+                Address(Locale.getDefault()), dayTimeTemperture)
         item.vmBG.setBackground()
         item.vmBear.setBear()
-
         tvSelectedLocation.text = createLocationString(data.address, false)
-
         BearAnimator.startAnimation(topBearBgWrapper)
 
         // Todo : 현재 메시지 (오늘은 미세먼지가 심해요! 등) 갱신하는 코드도 있어야함
@@ -505,4 +530,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-

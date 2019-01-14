@@ -1,10 +1,8 @@
 package com.mashupgroup.weatherbear.viewmodels
 
 import android.graphics.drawable.Drawable
-import android.util.Log
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.WeatherBearApp
-import java.util.*
 
 
 class IsDayViewModel {
@@ -19,6 +17,8 @@ class IsDayViewModel {
             .getText(R.string.noData) as String
     var todayDustData = ""
     var todayUltraDustData = ""
+
+    var currentTime: Int = 12
     var todayTime: Boolean = true
 
     var tomorrowWetherBoxTextData = "내일의 정보가 없어요"
@@ -30,6 +30,15 @@ class IsDayViewModel {
     var tomorrowUltraDustLevelData = 0
     var tomorrowDustData = ""
     var tomorrowUltraDustData = ""
+
+    var todayAfterWeatherData00 = "SNOW"
+    var todayAfterWeatherData01 = "SNOW"
+    var todayAfterWeatherData02 = "SNOW"
+    var todayAfterWeatherData03 = "SNOW"
+    var todayAfterWeatherData04 = "SNOW"
+    var todayAfterWeatherData05 = "SNOW"
+    var todayAfterWeatherData06 = "SNOW"
+    var todayAfterWeatherData07 = "SNOW"
 
     /*
     날씨 :Image, text
@@ -87,36 +96,59 @@ class IsDayViewModel {
     }
 
 
-    var todayWeatherShape =  Weather.SUNNY.image
+    var todayWeatherShape = Weather.SUNNY.image
     var todayWeatherShapeTint = WeatherBearApp.appContext.resources.getColor(R.color.Snow)
     var todayWeatherText = Weather.SUNNY.text
     var todayTemperature = " "
-    var todayBodyTemperature = WeatherBearApp.appContext.resources.getText(R.string.noData) as
-            String
-    var todayDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as
-            String
+    var todayBodyTemperature = WeatherBearApp.appContext.resources.getText(R.string.noData) as String
+    var todayDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as String
     var todayDustColor = DustLevel.GOOD.color
     var todayDust = " "
     var todayUltraDust = " "
-    var todayUltraDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as
-            String
+    var todayUltraDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as String
     var todayUltraDustColor = DustLevel.GOOD.color
 
     var tomorrowWeatherShape = Weather.SUNNY.image
     var tomorrowWeatherShapeTint = WeatherBearApp.appContext.resources.getColor(R.color.Snow)
-    var tomorrowWeatherBoxText =  "오늘은 좀 선선해요"
+    var tomorrowWeatherBoxText = "오늘은 좀 선선해요"
     var tomorrowWeatherText = Weather.SUNNY.text
     var tomorrowTemperature = " "
     var tomorrowBodyTemperature = WeatherBearApp.appContext.resources
             .getText(R.string.noData) as String
     var tomorrowDust = " "
-    var tomorrowDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as
-            String
+    var tomorrowDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as String
     var tomorrowDustColor = DustLevel.GOOD.color
     var tomorrowUltraDust = " "
-    var tomorrowUltraDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as
-            String
+    var tomorrowUltraDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as String
     var tomorrowUltraDustColor = DustLevel.GOOD.color
+
+    var ivTodayTimeWeather00 = Weather.SUNNY.image
+    var ivTodayTimeWeather01 = Weather.SUNNY.image
+    var ivTodayTimeWeather02 = Weather.SUNNY.image
+    var ivTodayTimeWeather03 = Weather.SUNNY.image
+    var ivTodayTimeWeather04 = Weather.SUNNY.image
+    var ivTodayTimeWeather05 = Weather.SUNNY.image
+    var ivTodayTimeWeather06 = Weather.SUNNY.image
+    var ivTodayTimeWeather07 = Weather.SUNNY.image
+
+    var graphTime: Int = 0
+    var checkNightTime: Int = 0
+    var tvTodayTime00 = currentTime.toString()
+    var tvTodayTime01 = todayTimeGraph()
+    var tvTodayTime02 = todayTimeGraph()
+    var tvTodayTime03 = todayTimeGraph()
+    var tvTodayTime04 = todayTimeGraph()
+    var tvTodayTime05 = todayTimeGraph()
+    var tvTodayTime06 = todayTimeGraph()
+    var tvTodayTime07 = todayTimeGraph()
+
+    fun todayTimeGraph(): String {
+        graphTime = (graphTime / 3 + 1) * 3
+        if (graphTime > 24 || graphTime < 10)
+            return "0" + (graphTime % 24)
+        return graphTime.toString()
+    }
+
 
     fun setDayView() {
         getTime()
@@ -133,13 +165,76 @@ class IsDayViewModel {
 
         setTodayWeather()
         setTomorrowWeather()
-
+        setTodayTimeWeather()
     }
 
     private fun getTime() {
-        val hTime = (Date().hours)
-        todayTime = hTime in 6..17
+        todayTime = currentTime in 6..17
     }
+
+    private fun setTodayTimeWeather() {
+        graphTime = currentTime
+        checkNightTime = currentTime
+        if (currentTime < 10)
+            tvTodayTime00 = "0" + currentTime
+        else
+            tvTodayTime00 = currentTime.toString()
+        tvTodayTime01 = todayTimeGraph()
+        tvTodayTime02 = todayTimeGraph()
+        tvTodayTime03 = todayTimeGraph()
+        tvTodayTime04 = todayTimeGraph()
+        tvTodayTime05 = todayTimeGraph()
+        tvTodayTime06 = todayTimeGraph()
+        tvTodayTime07 = todayTimeGraph()
+
+        ivTodayTimeWeather00 = todayWetherGraph(todayAfterWeatherData00)
+        ivTodayTimeWeather01 = todayWetherGraph(todayAfterWeatherData01)
+        ivTodayTimeWeather02 = todayWetherGraph(todayAfterWeatherData02)
+        ivTodayTimeWeather03 = todayWetherGraph(todayAfterWeatherData03)
+        ivTodayTimeWeather04 = todayWetherGraph(todayAfterWeatherData04)
+        ivTodayTimeWeather05 = todayWetherGraph(todayAfterWeatherData05)
+        ivTodayTimeWeather06 = todayWetherGraph(todayAfterWeatherData06)
+        ivTodayTimeWeather07 = todayWetherGraph(todayAfterWeatherData07)
+    }
+
+    private fun todayWetherGraph(todayAfterWeatherData: String): Drawable {
+        if (checkNightTime < 6 || checkNightTime > 17) {
+            when (todayAfterWeatherData) {
+                Weather.CLOUD.weatherText -> {
+                    return Weather.CLOUD_NIGHT.image
+                }
+                Weather.SUNNY.weatherText -> {
+                    return Weather.SUNNY_NIGHT.image
+                }
+            }
+        }
+        checkNightTime = ((checkNightTime / 3 + 1) * 3) % 24
+        when (todayAfterWeatherData) {
+            Weather.SNOW.weatherText -> {
+                return Weather.SNOW.image
+            }
+            Weather.HEAVY_SNOW.weatherText -> {
+                return Weather.HEAVY_SNOW.image
+            }
+            Weather.RAINY.weatherText -> {
+                return Weather.RAINY.image
+            }
+            Weather.THUNDER_RAINY.weatherText -> {
+                return Weather.THUNDER_RAINY.image
+            }
+            Weather.WIND.weatherText -> {
+                return Weather.WIND.image
+            }
+            Weather.CLOUD.weatherText -> {
+                return Weather.CLOUD.image
+            }
+            Weather.SUNNY.weatherText -> {
+                return Weather.SUNNY.image
+            }
+        }
+        return Weather.CLOUD.image
+    }
+
 
     fun setTodayWeather() {
         if (!todayTime) {

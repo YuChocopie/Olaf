@@ -55,8 +55,6 @@ class BearViewModel {
 
     //폭설일 경우 눈사람으로 변경
     fun setBear() {
-        Log.e("weatherData", "BearView" + weatherData)
-
         getTime()
         snowBearVisibilty = true
         if (weatherData == Weather.HEAVY_SNOW.text) {
