@@ -82,8 +82,14 @@ class SelectLocationActivity : AppCompatActivity() {
         loadAndShowLocations()
         rvLocationList.adapter = mAdapter
 
-        // 오른쪽 햄버그 드래그시 위치 변경 헬퍼를 새로 만들어서 붙인다
+        // 드래그시 위치 변경 헬퍼를 새로 만들어서 붙인다
         ItemTouchHelper(mItemTouchHelper).attachToRecyclerView(rvLocationList)
+
+        // 만약 위치 아이템이 한개도 없으면, 바로 위치 추가 액티비티를 띄운다
+        if(mAdapter.itemList.size == 0) {
+            val intent = Intent(this, SearchLocationActivity::class.java)
+            startActivityForResult(intent, RESULT_CODE_SEARCH_LOCATION_ACTIVITY)
+        }
     }
 
     override fun onBackPressed() {
