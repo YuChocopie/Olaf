@@ -7,6 +7,8 @@ import com.mashupgroup.weatherbear.WeatherBearApp
 class BackgroundViewModel {
 
     var weatherData = "WIND"
+    var fineDustLevel = 2
+    var tvMainWeatherMessage = "오늘은 날씨가 좋아요"
 
     /*
     배경 : 맑음, 흐림
@@ -41,8 +43,11 @@ class BackgroundViewModel {
     var cloudVisibility: Boolean = false
     var mountainSnowVisibility: Boolean = true
     var mountainSnow: Drawable = Snow.SNOW.mountainSnow
+    var message = " "
 
     fun setBackground() {
+        setWeatherMessage()
+        tvMainWeatherMessage = message
         cloudVisibility = false
         rainVisibility = false
         snowVisibility = false
@@ -72,6 +77,31 @@ class BackgroundViewModel {
                     mountainSnow = Snow.SNOW.mountainSnow
                 }
             }
+        }
+    }
+
+    private fun setWeatherMessage() {
+        when (weatherData) {
+            Weather.SNOW.text -> message += WeatherBearApp.appContext.resources.getString(R.string
+                    .today_weather) + WeatherBearApp.appContext.resources.getString(R.string
+                    .msg_snow)
+            Weather.HEAVY_SNOW.text -> message += WeatherBearApp.appContext.resources.getString(R
+                    .string.today_weather) + WeatherBearApp.appContext.resources.getString(R.string
+                    .msg_heavy_snow)
+            Weather.RAINY.text -> message += WeatherBearApp.appContext.resources.getString(R
+                    .string.today_weather) + WeatherBearApp.appContext.resources.getString(R.string
+                    .msg_rain)
+            Weather.THUNDER_RAINY.text -> message += WeatherBearApp.appContext.resources.
+                    getString(R.string.today_weather) + WeatherBearApp.appContext.resources.getString(R.string
+                    .msg_thunder_rainy
+            )
+        }
+        message += "Air quality is"
+        when (fineDustLevel) {
+            1 -> message += "good"
+            2 -> message += "modeate"
+            3 -> message += "unhealthy"
+            4 -> message += "hazardous"
         }
     }
 }

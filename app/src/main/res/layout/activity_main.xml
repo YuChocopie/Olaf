@@ -50,7 +50,8 @@
                     android:layout_height="@dimen/main_topbar_height"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@id/toolbar">
-                    <include layout="@layout/top_toolbar" />
+                    <include layout="@layout/top_toolbar"
+                        bind:bg="@{bg}"/>
                 </android.support.v7.widget.Toolbar>
 
                 <!-- ViewPager indicator -->

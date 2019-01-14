@@ -371,6 +371,8 @@ class MainActivity : AppCompatActivity() {
                     item.vmBear.fineDustData = airItem.pm10Grade1h.toInt()
                     item.vmBear.setBear()
 
+                    item.vmBG.fineDustLevel = airItem.pm10Grade1h.toInt()
+                    item.vmBG.setBackground()
                     //날씨 boxData
                     item.vmInfo.todayDustLevelData = airItem.pm10Grade1h.toInt()
                     item.vmInfo.todayUltraDustLevelData = checkUltraDustLevel(
