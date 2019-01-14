@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -56,74 +55,205 @@
             android:id="@+id/layoutLinearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:weightSum="8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:baselineAligned="false">
-
-            <include
-                android:id="@+id/item_today_time_weather1"
-                layout="@layout/item_today_time_weather"
-                android:layout_width="21dp"
-                android:layout_height="54dp"
-                android:layout_weight="1" />
-
-            <include
-                android:id="@+id/item_today_time_weather2"
-                layout="@layout/item_today_time_weather"
+            app:layout_constraintStart_toStartOf="parent">
+            <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:layout_weight="1" />
-
-
-            <include
-                android:id="@+id/item_today_time_weather3"
-                layout="@layout/item_today_time_weather"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/ivTodayTimeWeather0"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@{isDayData.ivTodayTimeWeather00}" />
+                <TextView
+                    android:id="@+id/tvTodayTime0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@{isDayData.tvTodayTime00}"
+                    android:textColor="@color/black6"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivTodayTimeWeather1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@{isDayData.ivTodayTimeWeather01}" />
+
+                <TextView
+                    android:id="@+id/tvTodayTime01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@{isDayData.tvTodayTime01}"
+                    android:textColor="@color/black6"
+                    android:textSize="15sp" />
+            </LinearLayout>
 
 
-            <include
-                android:id="@+id/item_today_time_weather4"
-                layout="@layout/item_today_time_weather"
+            <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:layout_weight="1" />
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/ivTodayTimeWeather2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@{isDayData.ivTodayTimeWeather02}"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvTodayTime02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@{isDayData.tvTodayTime02}"
+                    android:textColor="@color/black6"
+                    android:textSize="15sp" />
+            </LinearLayout>
 
 
-            <include
-                android:id="@+id/item_today_time_weather5"
-                layout="@layout/item_today_time_weather"
+            <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:layout_weight="1" />
+                android:orientation="vertical"
+                android:layout_weight="1">
 
+                <ImageView
+                    android:id="@+id/ivTodayTimeWeather3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@{isDayData.ivTodayTimeWeather03}"
+                    android:layout_gravity="center"/>
 
-            <include
-                android:id="@+id/item_today_time_weather6"
-                layout="@layout/item_today_time_weather"
+                <TextView
+                    android:id="@+id/tvTodayTime03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@{isDayData.tvTodayTime03}"
+                    android:textColor="@color/black6"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:layout_weight="1" />
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/ivTodayTimeWeather4"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@{isDayData.ivTodayTimeWeather04}"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvTodayTime04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@{isDayData.tvTodayTime04}"
+                    android:textColor="@color/black6"
+                    android:textSize="15sp" />
+            </LinearLayout>
 
 
-            <include
-                android:id="@+id/item_today_time_weather7"
-                layout="@layout/item_today_time_weather"
+            <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:layout_weight="1" />
+                android:orientation="vertical"
+                android:layout_weight="1">
 
-            <include
-                android:id="@+id/item_today_time_weather8"
-                layout="@layout/item_today_time_weather"
+                <ImageView
+                    android:id="@+id/ivTodayTimeWeather5"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@{isDayData.ivTodayTimeWeather05}"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvTodayTime05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@{isDayData.tvTodayTime05}"
+                    android:textColor="@color/black6"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:layout_weight="1" />
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/ivTodayTimeWeather6"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@{isDayData.ivTodayTimeWeather06}"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvTodayTime06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@{isDayData.tvTodayTime06}"
+                    android:textColor="@color/black6"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="@dimen/SIZE_24"
+                android:layout_height="54dp"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/ivTodayTimeWeather7"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@{isDayData.ivTodayTimeWeather07}"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvTodayTime07"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@{isDayData.tvTodayTime07}"
+                    android:textColor="@color/black6"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
 
         </LinearLayout>
-
     </android.support.constraint.ConstraintLayout>
 </layout>
