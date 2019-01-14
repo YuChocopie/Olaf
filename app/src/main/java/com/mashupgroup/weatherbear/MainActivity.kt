@@ -430,13 +430,13 @@ class MainActivity : AppCompatActivity() {
         // 첫번째 아이템이 현재 위치면 그거 추가합니다
         if (Global.isFirstPageCurrentLocation) {
             val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(),
-                    Address(Locale.getDefault()), dayTimeTemperture)
+                    Address(Locale.getDefault()), dayTimeTemperture.copyOf())
             mainPagerAdapter.addData(item)
         }
 
         for (addr in Global.addressList) {
             val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(),
-                    addr, dayTimeTemperture)
+                    addr, dayTimeTemperture.copyOf())
 
             // 각 아이템의 위치정보에 따라 데이터를 요청합니다.
             val location = Location("")
@@ -471,7 +471,7 @@ class MainActivity : AppCompatActivity() {
         mainViewDataBinding.setVariable(BR.bear, data.vmBear)
         mainViewDataBinding.setVariable(BR.bg, data.vmBG)
         val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(),
-                Address(Locale.getDefault()), dayTimeTemperture)
+                Address(Locale.getDefault()), dayTimeTemperture.copyOf())
         item.vmBG.setBackground()
         item.vmBear.setBear()
         tvSelectedLocation.text = createLocationString(data.address, false)
