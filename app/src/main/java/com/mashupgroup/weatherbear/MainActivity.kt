@@ -142,32 +142,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
         Log.v("csh Weather", weatherInfo.toString())
-        Log.e("loglogweather", "123" + weatherInfo.weather[0].id)
         var weather: String = "SUNNY"
-        val weatherId = weatherInfo.weather[0].id
-        when (weatherId / 100) {
-            2 -> weather = "THUNDER_RAINY"
-            3 -> weather = "RAINY"
-            6 -> {
-                weather = "SNOW"
-                if (weatherId == 621 || weatherId == 622) {
-                    weather = "HEAVY_SNOW"
-                }
-            }
-            7 -> {
-                weather = "CLOUD"
-                if (weatherId == 731 || weatherId == 781) {
-                    weather = "WIND"
-                }
-            }
-            8 -> {
-                weather = "CLOUD"
-                if (weatherId == 800) {
-                    weather = "SUNNY"
-                }
-            }
-        }
-
+        var temp: Double = weatherInfo.main.temp - 273.15
+        weather = weatherCalculation(weatherInfo.weather[0].id)
         //곰의 모습 data
         item.vmBear.weatherData = weather
         item.vmBear.setBear()
@@ -176,30 +153,78 @@ class MainActivity : AppCompatActivity() {
         item.vmBG.setBackground()
         //날씨 boxData
         item.vmInfo.todayWeatherData = weather
-        item.vmInfo.tomorrowWeatherData = weather
+        item.vmInfo.todayBodyTemperatureData = bodyTemperatureCalculation(temp, weatherInfo.wind
+                .speed).toString()
+        item.vmInfo.todayTemperatureData = (temp.toInt()).toString()
         item.vmInfo.setDayView()
-
         /* 여기가 오늘의 날씨  */
         /* weatherInfo */
     }
 
+
     private fun requestForecastResponse(item: MainPagerItem, forecastInfo: Forecast) {
         Log.v("csh Forecast", forecastInfo.toString())
-
-//        날씨 boxData.. 내일의 날씨
-        item.vmInfo.tomorrowWeatherData = "RAIN"
-        item.vmInfo.setDayView()
-
         /* 여기가 5일치 날씨 */
         /* forecastInfo */
-
+        //내일 정오시간의 데이터를 받아옵니다
+        val hTime = Date().hours
+        var noonTime = (36 - hTime)/3
+        val count = true
+        if (hTime%3>0 && count){
+            noonTime++
+            !count
+        }
         for (i in forecastInfo.list) {
+            var weather: String = "SUNNY"
+            val temp: Double = forecastInfo.list[noonTime].main.temp.toDouble() - 273.15
+            weather = weatherCalculation(forecastInfo.list[noonTime].weather[0].id)
+
+            //날씨 boxData
+            item.vmInfo.tomorrowWeatherData = weather
+            item.vmInfo.tomorrowBodyTemperatureData = bodyTemperatureCalculation(temp,
+                    forecastInfo.list[noonTime].wind.speed.toDouble()).toString()
+            item.vmInfo.tomorrowTemperatureData = (temp.toInt()).toString()
+            item.vmInfo.setDayView()
+
             val dv = java.lang.Long.valueOf(i.dt) * 1000// its need to be in milisecond
             val df = java.util.Date(dv)
             val vv = SimpleDateFormat("MM dd, yyyy hh:mm a").format(df)
 
             // i.main.temp (Default는 켈빈이므로 temp - 273.15 해야 섭씨온도가 나옵니다!)
         }
+    }
+    private fun bodyTemperatureCalculation(temp: Double, speed: Double): Int {
+        val v= Math.pow(speed,0.16)
+        return (13.12 + 0.6215 * temp - 11.37 * v + 0.3965 * v * temp).toInt()
+    }
+
+    private fun weatherCalculation(weatherId: Int): String {
+        when (weatherId / 100) {
+            2 -> return "THUNDER_RAINY"
+            3 -> return "RAINY"
+            6 -> {
+                if (weatherId == 621 || weatherId == 622) {
+                    return "HEAVY_SNOW"
+                } else {
+                    return "SNOW"
+                }
+            }
+            7 -> {
+                if (weatherId == 731 || weatherId == 781) {
+                    return "WIND"
+                } else {
+                    return "CLOUD"
+                }
+            }
+            8 -> {
+                if (weatherId == 800) {
+                    return "SUNNY"
+                } else {
+                    return "CLOUD"
+                }
+            }
+        }
+        return "SUNNY"
     }
 
     @SuppressLint("CheckResult")

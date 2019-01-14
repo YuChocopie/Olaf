@@ -102,7 +102,7 @@ class IsDayViewModel {
             String
     var todayUltraDustColor = DustLevel.GOOD.color
 
-    var tomorrowWeatherShape = Weather.SNOW.image
+    var tomorrowWeatherShape = Weather.SUNNY.image
     var tomorrowWeatherShapeTint = WeatherBearApp.appContext.resources.getColor(R.color.Snow)
     var tomorrowWeatherBoxText =  "오늘은 좀 선선해요"
     var tomorrowWeatherText = Weather.SUNNY.text
@@ -137,11 +137,8 @@ class IsDayViewModel {
     }
 
     private fun getTime() {
-        val date = Date()
-        val hTime = (date.hours)
+        val hTime = (Date().hours)
         todayTime = hTime in 6..17
-        Log.e("htime", hTime.toString())
-        Log.e("htime", todayTime.toString())
     }
 
     fun setTodayWeather() {
