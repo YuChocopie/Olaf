@@ -21,7 +21,8 @@
             android:buttonTint="@color/white0"
             android:layout_marginStart="@dimen/location_list_item_side_margin"
             android:layout_marginEnd="@dimen/location_list_item_side_margin"
-            android:layout_weight="0"/>
+            android:layout_weight="0"
+            android:visibility="gone"/>         <!-- Current location at first page : TBD -->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvLocationList"
@@ -30,6 +31,7 @@
             android:layout_weight="1"
             android:layout_marginStart="@dimen/location_list_item_side_margin"
             android:layout_marginEnd="@dimen/location_list_item_side_margin"
+            android:layout_marginTop="@dimen/location_list_item_side_margin"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             />
     </LinearLayout>
