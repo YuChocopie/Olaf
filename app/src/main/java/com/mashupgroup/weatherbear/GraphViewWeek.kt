@@ -76,7 +76,6 @@ class GraphViewWeek(context: Context, attrs: AttributeSet) : View(context, attrs
         mPointX = IntArray(length)
         mPointYHigh = IntArray(length)
         mPointYLow = IntArray(length)
-        Log.e("123123", IntArray(length).toString() + " ccc")
 
         for (i in 0 until length) {
             //막대 좌표를 구한다

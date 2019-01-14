@@ -132,7 +132,6 @@ class IsDayViewModel {
     var ivTodayTimeWeather07 = Weather.SUNNY.image
 
     var graphTime: Int = 0
-    var checkNightTime: Int = 0
     var tvTodayTime00 = currentTime.toString()
     var tvTodayTime01 = todayTimeGraph()
     var tvTodayTime02 = todayTimeGraph()
@@ -174,7 +173,6 @@ class IsDayViewModel {
 
     private fun setTodayTimeWeather() {
         graphTime = currentTime
-        checkNightTime = currentTime
         if (currentTime < 10)
             tvTodayTime00 = "0" + currentTime
         else
@@ -187,17 +185,18 @@ class IsDayViewModel {
         tvTodayTime06 = todayTimeGraph()
         tvTodayTime07 = todayTimeGraph()
 
-        ivTodayTimeWeather00 = todayWetherGraph(todayAfterWeatherData00)
-        ivTodayTimeWeather01 = todayWetherGraph(todayAfterWeatherData01)
-        ivTodayTimeWeather02 = todayWetherGraph(todayAfterWeatherData02)
-        ivTodayTimeWeather03 = todayWetherGraph(todayAfterWeatherData03)
-        ivTodayTimeWeather04 = todayWetherGraph(todayAfterWeatherData04)
-        ivTodayTimeWeather05 = todayWetherGraph(todayAfterWeatherData05)
-        ivTodayTimeWeather06 = todayWetherGraph(todayAfterWeatherData06)
-        ivTodayTimeWeather07 = todayWetherGraph(todayAfterWeatherData07)
+        ivTodayTimeWeather00 = todayWetherGraph(todayAfterWeatherData00,0)
+        ivTodayTimeWeather01 = todayWetherGraph(todayAfterWeatherData01,1)
+        ivTodayTimeWeather02 = todayWetherGraph(todayAfterWeatherData02,2)
+        ivTodayTimeWeather03 = todayWetherGraph(todayAfterWeatherData03,3)
+        ivTodayTimeWeather04 = todayWetherGraph(todayAfterWeatherData04,4)
+        ivTodayTimeWeather05 = todayWetherGraph(todayAfterWeatherData05,5)
+        ivTodayTimeWeather06 = todayWetherGraph(todayAfterWeatherData06,6)
+        ivTodayTimeWeather07 = todayWetherGraph(todayAfterWeatherData07,7)
     }
 
-    private fun todayWetherGraph(todayAfterWeatherData: String): Drawable {
+    private fun todayWetherGraph(todayAfterWeatherData: String,num : Int): Drawable {
+        var checkNightTime = ((currentTime / 3 + num) * 3) % 24
         if (checkNightTime < 6 || checkNightTime > 17) {
             when (todayAfterWeatherData) {
                 Weather.CLOUD.weatherText -> {
@@ -208,7 +207,6 @@ class IsDayViewModel {
                 }
             }
         }
-        checkNightTime = ((checkNightTime / 3 + 1) * 3) % 24
         when (todayAfterWeatherData) {
             Weather.SNOW.weatherText -> {
                 return Weather.SNOW.image
