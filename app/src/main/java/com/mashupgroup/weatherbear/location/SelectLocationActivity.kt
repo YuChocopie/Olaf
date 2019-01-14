@@ -29,6 +29,7 @@ class SelectLocationActivity : AppCompatActivity() {
                     .setMessage(getString(R.string.msg_delete_this_address_q))
                     .setPositiveButton(getString(R.string.yes), dialogClickListener)
                     .setNegativeButton(getString(R.string.no), dialogClickListener)
+                    .setCancelable(false)
                     .show()
         }
 

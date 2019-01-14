@@ -415,6 +415,10 @@ class MainActivity : AppCompatActivity() {
         mainViewDataBinding.setVariable(BR.bear, noAddressBearVM)
         mainViewDataBinding.setVariable(BR.bg, noAddressBgVM)
         BearAnimator.startAnimation(topBearBgWrapper)
+
+        // 초기화
+        mainPagerAdapter.itemList.clear()
+        viewPager.initIndicator()
     }
 
     /** 사용자가 저장해놨던 주소 목록을 가지고 Adapter(viewPager) 등 초기 세팅을 한다 **/
