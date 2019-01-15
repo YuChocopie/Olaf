@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     val kakaoRetrofit = kakaoAPI.createTransRetrofit()
     val kakaoInterface = kakaoRetrofit.create(KakaoInterface::class.java)
 
-    var dayTimeTemperture = intArrayOf(0, 0, 0, 0, 0, 0, 0)
+    var dayTimeTemperture = intArrayOf(0,1, 4, 6, 4, 0, 2)
 
     private val RESULT_CODE_ADDRESS_MANAGE_ACTIVITY = 123
 
@@ -180,7 +180,6 @@ class MainActivity : AppCompatActivity() {
             noonTime++
             !count
         }
-
         var weather: String = "SUNNY"
         val temp: Double = forecastInfo.list[noonTime].main.temp.toDouble() - 273.15
         weather = weatherCalculation(forecastInfo.list[noonTime].weather[0].id)
