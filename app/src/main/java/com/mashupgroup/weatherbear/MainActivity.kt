@@ -165,6 +165,9 @@ class MainActivity : AppCompatActivity() {
         item.vmInfo.setDayView()
         /* 여기가 오늘의 날씨  */
         /* weatherInfo */
+
+        // 상단 곰돌이 뷰 업데이트 (날씨 정보가 어쨌든 확인되면 바로 갱신한다)
+        setTopViewModelData(viewPager.currentItem)
     }
 
 
