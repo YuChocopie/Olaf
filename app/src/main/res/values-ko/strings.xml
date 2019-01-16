@@ -50,6 +50,7 @@
     <string name="msg_top_rainy">비가 와요</string>
     <string name="msg_top_snowy">눈이 와요</string>
     <string name="msg_top_cloudy">흐려요</string>
+    <string name="msg_top_thunder">천둥번개가 쳐요</string>
     <string name="msg_top_air_good">좋아요</string>
     <string name="msg_top_air_normal">그저 그래요</string>
     <string name="msg_top_air_bad">나빠요</string>

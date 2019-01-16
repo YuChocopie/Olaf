@@ -51,6 +51,7 @@
     <string name="msg_top_rainy">rainy</string>
     <string name="msg_top_snowy">snowy</string>
     <string name="msg_top_cloudy">cloudy</string>
+    <string name="msg_top_thunder">thunderstorms</string>
     <string name="msg_top_air_good">good</string>
     <string name="msg_top_air_normal">moderate</string>
     <string name="msg_top_air_bad">unhealthy</string>

@@ -81,27 +81,23 @@ class BackgroundViewModel {
     }
 
     private fun setWeatherMessage() {
-        when (weatherData) {
-            Weather.SNOW.text -> message += WeatherBearApp.appContext.resources.getString(R.string
-                    .today_weather) + WeatherBearApp.appContext.resources.getString(R.string
-                    .msg_snow)
-            Weather.HEAVY_SNOW.text -> message += WeatherBearApp.appContext.resources.getString(R
-                    .string.today_weather) + WeatherBearApp.appContext.resources.getString(R.string
-                    .msg_heavy_snow)
-            Weather.RAINY.text -> message += WeatherBearApp.appContext.resources.getString(R
-                    .string.today_weather) + WeatherBearApp.appContext.resources.getString(R.string
-                    .msg_rain)
-            Weather.THUNDER_RAINY.text -> message += WeatherBearApp.appContext.resources.
-                    getString(R.string.today_weather) + WeatherBearApp.appContext.resources.getString(R.string
-                    .msg_thunder_rainy
-            )
+        val weatherMsg: String = when (weatherData) {
+            Weather.SNOW.text -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_snowy)
+            Weather.HEAVY_SNOW.text -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_snowy)
+            Weather.RAINY.text -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_rainy)
+            Weather.THUNDER_RAINY.text -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_thunder)
+            Weather.SUNNY.text -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_sunny)
+            Weather.CLOUD.text -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_cloudy)
+            else -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_unknown)
         }
-        message += "Air quality is"
-        when (fineDustLevel) {
-            1 -> message += "good"
-            2 -> message += "modeate"
-            3 -> message += "unhealthy"
-            4 -> message += "hazardous"
+        val airMsg: String = when (fineDustLevel) {
+            1 -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_air_good)
+            2 -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_air_normal)
+            3 -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_air_bad)
+            4 -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_air_worst)
+            else -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_unknown)
         }
+
+        message = String.format(WeatherBearApp.appContext.resources.getString(R.string.msg_top_weather_ps_air_quality_ps), weatherMsg, airMsg)
     }
 }
