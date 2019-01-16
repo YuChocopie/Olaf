@@ -28,7 +28,7 @@
     <string name="msg_thunder_rainy">Thunder&amp;rain</string>
     <string name="mnu_location">Select location</string>
     <string name="mnu_info">About this app</string>
-    <string name="err_str_location_ready">Location error occured</string>
+    <string name="err_str_location_ready">Location error occurred</string>
     <string name="search_location_error">Temporary cannot search locations</string>
     <string name="search_location_letssearch">Let\'s search your location :)</string>
     <string name="search_location_no_result">No result.\nTry again with another keyword.</string>
@@ -46,7 +46,7 @@
     <string name="noWeatherData">No weather data</string>
     <string name="noData">No data</string>
     <string name="noTomorrowData">There is no data for tomorrow!</string>
-    <string name="msg_top_weather_ps_air_quality_ps">Today weather is %s. Air quality is %s.</string>
+    <string name="msg_top_weather_ps_air_quality_ps">Today weather is %s.\nAir quality is %s.</string>
     <string name="msg_top_sunny">sunny</string>
     <string name="msg_top_rainy">rainy</string>
     <string name="msg_top_snowy">snowy</string>
@@ -55,4 +55,5 @@
     <string name="msg_top_air_normal">moderate</string>
     <string name="msg_top_air_bad">unhealthy</string>
     <string name="msg_top_air_worst">hazard</string>
+    <string name="msg_top_unknown">unknown</string>
 </resources>
