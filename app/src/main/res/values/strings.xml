@@ -32,7 +32,7 @@
     <string name="search_location_error">Temporary cannot search locations</string>
     <string name="search_location_letssearch">Let\'s search your location :)</string>
     <string name="search_location_no_result">No result.\nTry again with another keyword.</string>
-    <string name="search_location_type_here">Type your location here to search.</string>
+    <string name="search_location_type_here">Type an address here to search.</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="configure">Configure</string>
@@ -57,4 +57,6 @@
     <string name="msg_top_air_bad">unhealthy</string>
     <string name="msg_top_air_worst">hazard</string>
     <string name="msg_top_unknown">unknown</string>
+    <string name="msg_add_location_from_gps_q">Do you want to add the address from current your GPS location?</string>
+    <string name="msg_acquiring_your_location_gps">Acquiring your location from GPS..</string>
 </resources>

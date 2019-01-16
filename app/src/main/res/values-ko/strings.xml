@@ -56,4 +56,6 @@
     <string name="msg_top_air_bad">나빠요</string>
     <string name="msg_top_air_worst">아주 나빠요</string>
     <string name="msg_top_unknown">모르겠어요</string>
+    <string name="msg_add_location_from_gps_q">현재 GPS 위치로부터 주소를 추가하시겠습니까?</string>
+    <string name="msg_acquiring_your_location_gps">GPS 주소를 가져오는 중..</string>
 </resources>

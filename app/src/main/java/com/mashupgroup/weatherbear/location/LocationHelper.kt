@@ -67,11 +67,11 @@ object LocationHelper {
      * Address.getCountryName으로 나라 이름, getLocality로 지역 이름 등을 가져올 수 있다.
      * @param activityContext
      *      Activity context
-     * @param usingGps
-     *      true이면 GPS로 위치 요청, false이면 Network상태로 위치 요청
+     * @param includeLatestLocation
+     *      true이면 최근에 얻었던 위치를 먼저 반환 후 갱신된 위치를 다시 반환, false면 갱신된 위치만 반환
      * @return 요청 실패시(권한X, 또는 이미 요청중) false, 성공시 true 반환
      */
-    fun requestLocation(activityContext: Activity): Boolean {
+    fun requestLocation(activityContext: Activity, includeLatestLocation: Boolean): Boolean {
         if (isLocationRequestedCurrently) {
             Log.v(this.javaClass.name, "Requesting location is already in progress.")
             return false
@@ -102,8 +102,10 @@ object LocationHelper {
             lastLocation = location
 
             // 등록된 모든 리스너에게 위치정보를 뿌림
-            for(listener in mLocationResultListenerList) {
-                listener.onLocationReady(lastLocation, getLastSavedAddress())
+            if(includeLatestLocation) {
+                for (listener in mLocationResultListenerList) {
+                    listener.onLocationReady(lastLocation, getLastSavedAddress())
+                }
             }
         }
 

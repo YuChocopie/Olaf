@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         LocationHelper.addLocationResultListener(listener = loactionListener)
-        LocationHelper.requestLocation(this)
+        LocationHelper.requestLocation(this, true)
     }
 
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {

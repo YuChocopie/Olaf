@@ -22,12 +22,21 @@
             android:background="@color/location_list_bg"
             android:orientation="horizontal">
 
+            <ImageButton
+                android:id="@+id/btnFromGps"
+                android:layout_weight="0"
+                android:layout_width="@dimen/location_search_button_size"
+                android:layout_height="@dimen/location_search_button_size"
+                android:scaleType="fitCenter"
+                android:tint="@color/white0"
+                android:background="@null"
+                android:padding="@dimen/location_search_button_padding"
+                android:src="@drawable/ic_search" />  <!-- TODO : 이거 android:src 아이콘.. GPS현재위치 아이콘 구해서 그걸로 바꿔야해.. -->
+
             <EditText
                 android:id="@+id/etSearchLocation"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/location_search_edittext_side_margin"
-                android:layout_marginEnd="@dimen/location_search_edittext_side_margin"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:textColor="@color/white0"
