@@ -98,7 +98,7 @@ object LocationHelper {
 
         // 마지막에 받아온 GPS정보가 남아있다면 일단 걔부터 뿌림
         val lastKnownLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-        lastKnownLocation.let { location ->
+        lastKnownLocation?.let { location ->
             lastLocation = location
 
             // 등록된 모든 리스너에게 위치정보를 뿌림
