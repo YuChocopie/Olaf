@@ -28,6 +28,7 @@
             android:layout_height="@dimen/main_bear_height"
             android:fitsSystemWindows="true"
             android:background="@color/white0"
+            app:layout_behavior="com.mashupgroup.weatherbear.FixAppBarLayoutBehavior"
             android:theme="@style/Base.ThemeOverlay.AppCompat">
 
             <android.support.design.widget.CollapsingToolbarLayout
@@ -76,7 +77,7 @@
             android:text="@string/main_no_address_added_touch_here_to_add"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <com.mashupgroup.weatherbear.MainScrollView
+        <android.support.v4.widget.NestedScrollView
             android:id="@+id/mainScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -91,7 +92,7 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </com.mashupgroup.weatherbear.MainScrollView>
+        </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
 
 </layout>
