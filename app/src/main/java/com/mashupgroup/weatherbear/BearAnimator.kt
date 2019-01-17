@@ -75,7 +75,7 @@ object BearAnimator {
             this.clearAnimation()
     }
 
-    fun startAnimation(topBearViewGroup: ViewGroup) {
+    fun updateAnimation(topBearViewGroup: ViewGroup) {
         //snowman
         topBearViewGroup.snowBear?.startAnimationIfVisible(snow_bear)
         //양 귀 흔들기
@@ -117,49 +117,5 @@ object BearAnimator {
         topBearViewGroup.ivCloud2?.startAnimationIfVisible(cloud2)
         topBearViewGroup.ivCloud2_2?.startAnimationIfVisible(cloud2)
         topBearViewGroup.ivCloud3?.startAnimationIfVisible(cloud3)
-    }
-
-    fun stopAnimation(topBearViewGroup: ViewGroup) {
-        //눈사람 흔들리기
-        topBearViewGroup.snowBear?.clearAnimation()
-        //양 귀 흔들기
-        topBearViewGroup.bear_ear_right?.clearAnimation()
-        topBearViewGroup.bear_ear_left?.clearAnimation()
-        // 양 팔 흔들기
-        topBearViewGroup.bear_leg?.clearAnimation()
-        topBearViewGroup.bear_leg_front_good?.clearAnimation()
-        //스카프 흔들리기
-        topBearViewGroup.bear_scarf_high?.clearAnimation()
-        topBearViewGroup.bear_scarf_low?.clearAnimation()
-         //snowman 스카프 흔들리기
-        topBearViewGroup.snowBearScarfHigh?.clearAnimation()
-        topBearViewGroup.snowBearScarfLow?.clearAnimation()
-        // 비올 때 우산과 팔 동시움직임
-        topBearViewGroup.bear_umbrella?.clearAnimation()
-        //미세먼지 농도 높을 때 마스크와 마스크 발 동시.
-        topBearViewGroup.bear_leg_front_bad?.clearAnimation()
-        topBearViewGroup.handkerchief?.clearAnimation()
-        //먼지 펫 움직이기
-        topBearViewGroup.bear_pet?.clearAnimation()
-        topBearViewGroup.bear_pet_small?.clearAnimation()
-        topBearViewGroup.bear_pet_w?.clearAnimation()
-
-        //눈내림
-        topBearViewGroup.ivSnow1?.clearAnimation()
-        topBearViewGroup.ivSnow1_2?.clearAnimation()
-        topBearViewGroup.ivSnow2?.clearAnimation()
-        topBearViewGroup.ivSnow2_2?.clearAnimation()
-
-        // 비내림
-        topBearViewGroup.ivRain1?.clearAnimation()
-        topBearViewGroup.ivRain2?.clearAnimation()
-        topBearViewGroup.ivRain2_3?.clearAnimation()
-
-        // 구름
-        topBearViewGroup.ivCloud1?.clearAnimation()
-        topBearViewGroup.ivCloud1_2?.clearAnimation()
-        topBearViewGroup.ivCloud2?.clearAnimation()
-        topBearViewGroup.ivCloud2_2?.clearAnimation()
-        topBearViewGroup.ivCloud3?.clearAnimation()
     }
 }

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.databinding.DataBindingUtil.setContentView
+import android.databinding.OnRebindCallback
 import android.location.Address
 import android.location.Location
 import android.os.Build
@@ -32,7 +33,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -75,7 +75,16 @@ class MainActivity : AppCompatActivity() {
         permissionModule.setupPermissions(this, this)
         checkLocationPermission()
 
+        // 바인딩 객체 세팅
         mainViewDataBinding = setContentView(this, R.layout.activity_main)
+        // 바인딩이 완료될 때마다(뷰의 visibility등 모조리 바뀐 후) 곰돌이/배경의 애니메이션 재생상태 업데이트
+        mainViewDataBinding.addOnRebindCallback(object : OnRebindCallback<ActivityMainBinding>() {
+            override fun onBound(binding: ActivityMainBinding?) {
+                // 모든 바인딩이 완료된 후에 이 콜백이 호출된다. 애니메이션은 모든 바인딩이 완료된 후에 업데이트되어야한다.
+                BearAnimator.updateAnimation(topBearBgWrapper)
+                super.onBound(binding)
+            }
+        })
 
         // 유저가 저장했었던 주소를 Global.addressList에 불러오기
         Global.loadAddressList()
@@ -420,10 +429,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Fake 곰 viewModel 설정
-        BearAnimator.stopAnimation(topBearBgWrapper)
         mainViewDataBinding.setVariable(BR.bear, noAddressBearVM)
         mainViewDataBinding.setVariable(BR.bg, noAddressBgVM)
-        BearAnimator.startAnimation(topBearBgWrapper)
 
         // 초기화
         mainPagerAdapter.itemList.clear()
@@ -478,17 +485,13 @@ class MainActivity : AppCompatActivity() {
         if (position < 0 || position >= mainPagerAdapter.count) {
             return
         }
-        BearAnimator.stopAnimation(topBearBgWrapper)
 
-        val data = mainPagerAdapter.itemList[position]
-        mainViewDataBinding.setVariable(BR.bear, data.vmBear)
-        mainViewDataBinding.setVariable(BR.bg, data.vmBG)
-        val item = MainPagerItem(BearViewModel(), BackgroundViewModel(), IsDayViewModel(),
-                Address(Locale.getDefault()), dayTimeTemperture.copyOf())
-        item.vmBG.setBackground()
-        item.vmBear.setBear()
-        tvSelectedLocation.text = createLocationString(data.address, false)
-        BearAnimator.startAnimation(topBearBgWrapper)
+        val item = mainPagerAdapter.itemList[position]
+
+        mainViewDataBinding.setVariable(BR.bear, item.vmBear)
+        mainViewDataBinding.setVariable(BR.bg, item.vmBG)
+
+        tvSelectedLocation.text = createLocationString(item.address, false)
     }
 
     private fun setToolbar() {
