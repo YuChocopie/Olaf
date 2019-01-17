@@ -28,11 +28,11 @@
     <string name="msg_thunder_rainy">Thunder&amp;rain</string>
     <string name="mnu_location">Select location</string>
     <string name="mnu_info">About this app</string>
-    <string name="err_str_location_ready">Location error occured</string>
+    <string name="err_str_location_ready">Location error occurred</string>
     <string name="search_location_error">Temporary cannot search locations</string>
     <string name="search_location_letssearch">Let\'s search your location :)</string>
     <string name="search_location_no_result">No result.\nTry again with another keyword.</string>
-    <string name="search_location_type_here">Type your location here to search.</string>
+    <string name="search_location_type_here">Type an address here to search.</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="configure">Configure</string>
@@ -46,13 +46,17 @@
     <string name="noWeatherData">No weather data</string>
     <string name="noData">No data</string>
     <string name="noTomorrowData">There is no data for tomorrow!</string>
-    <string name="msg_top_weather_ps_air_quality_ps">Today weather is %s. Air quality is %s.</string>
+    <string name="msg_top_weather_ps_air_quality_ps">Today weather is %s.\nAir quality is %s.</string>
     <string name="msg_top_sunny">sunny</string>
     <string name="msg_top_rainy">rainy</string>
     <string name="msg_top_snowy">snowy</string>
     <string name="msg_top_cloudy">cloudy</string>
+    <string name="msg_top_thunder">thunderstorms</string>
     <string name="msg_top_air_good">good</string>
     <string name="msg_top_air_normal">moderate</string>
     <string name="msg_top_air_bad">unhealthy</string>
     <string name="msg_top_air_worst">hazard</string>
+    <string name="msg_top_unknown">unknown</string>
+    <string name="msg_add_location_from_gps_q">Do you want to add the address from current your GPS location?</string>
+    <string name="msg_acquiring_your_location_gps">Acquiring your location from GPS..</string>
 </resources>

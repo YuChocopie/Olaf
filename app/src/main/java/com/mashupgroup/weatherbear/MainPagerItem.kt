@@ -10,9 +10,9 @@ class MainPagerItem(_vmBear: BearViewModel,
                     _vmInfo: IsDayViewModel,
                     _address:   Address,
                     _graphArray: IntArray) {
-    val vmBear : BearViewModel = _vmBear
-    val vmBG : BackgroundViewModel = _vmBG
-    val vmInfo : IsDayViewModel = _vmInfo
-    val address : Address = _address
+    var vmBear : BearViewModel = _vmBear
+    var vmBG : BackgroundViewModel = _vmBG
+    var vmInfo : IsDayViewModel = _vmInfo
+    var address : Address = _address
     var graphArray : IntArray = _graphArray
 }

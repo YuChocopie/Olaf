@@ -1,9 +1,13 @@
 package com.mashupgroup.weatherbear.location
 
+import android.app.AlertDialog
+import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -35,6 +39,7 @@ class SearchLocationActivity : AppCompatActivity(),
         rvSearchLocationResult.adapter = adapter
 
         btnSearchLocation.setOnClickListener { searchLocation(etSearchLocation.text.toString()) }
+        btnFromGps.setOnClickListener{ searchFromGps() }
 
         // 키보드에서 엔터키를 치면 검색을 수행하도록
         etSearchLocation.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
@@ -93,6 +98,34 @@ class SearchLocationActivity : AppCompatActivity(),
         adapter.setData(listViewModel)
 
         updateLayoutVisibility(false, true, false, false)
+    }
+
+    /** GPS를 이용한 현재 위치를 검색한다 */
+    fun searchFromGps() {
+        val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
+            if(which == DialogInterface.BUTTON_POSITIVE) {
+                LocationHelper.addLocationResultListener(locationListener)
+                LocationHelper.requestLocation(this, false)
+                ProgressDialog.show(this@SearchLocationActivity, "", getString(R.string.msg_acquiring_your_location_gps))
+            }
+        }
+
+        AlertDialog.Builder(this@SearchLocationActivity)
+                .setMessage(getString(R.string.msg_add_location_from_gps_q))
+                .setPositiveButton(getString(R.string.yes), dialogClickListener)
+                .setNegativeButton(getString(R.string.no), dialogClickListener)
+                .setCancelable(false)
+                .show()
+    }
+
+    private val locationListener = object : ILocationResultListener {
+        override fun onLocationReady(location: Location?, address: Address?) {
+            if(address != null) {
+                onResultItemClick(address)
+            } else {
+                Toast.makeText(this@SearchLocationActivity, getString(R.string.unable_get_locaiton), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onResultItemClick(address: Address) {

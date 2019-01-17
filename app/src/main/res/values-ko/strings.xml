@@ -45,13 +45,17 @@
     <string name="noWeatherData">날씨 정보 없음</string>
     <string name="noData">정보가 없습니다</string>
     <string name="noTomorrowData">내일의 정보가 없어요!</string>
-    <string name="msg_top_weather_ps_air_quality_ps">오늘의 날씨는 %s. 미세먼지는 %s.</string>
+    <string name="msg_top_weather_ps_air_quality_ps">오늘의 날씨는 %s.\n미세먼지는 %s.</string>
     <string name="msg_top_sunny">맑아요</string>
     <string name="msg_top_rainy">비가 와요</string>
     <string name="msg_top_snowy">눈이 와요</string>
     <string name="msg_top_cloudy">흐려요</string>
+    <string name="msg_top_thunder">천둥번개가 쳐요</string>
     <string name="msg_top_air_good">좋아요</string>
     <string name="msg_top_air_normal">그저 그래요</string>
     <string name="msg_top_air_bad">나빠요</string>
     <string name="msg_top_air_worst">아주 나빠요</string>
+    <string name="msg_top_unknown">모르겠어요</string>
+    <string name="msg_add_location_from_gps_q">현재 GPS 위치로부터 주소를 추가하시겠습니까?</string>
+    <string name="msg_acquiring_your_location_gps">GPS 주소를 가져오는 중..</string>
 </resources>

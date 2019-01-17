@@ -93,28 +93,9 @@ class MainActivity : AppCompatActivity() {
         noAddressBgVM.weather = BackgroundViewModel.Weather.SUNNY.text
         noAddressBgVM.setBackground()
 
-
-        var loactionListener = object : ILocationResultListener {
-            override fun onLocationReady(location: Location?, address: Address?) {
-
-                if (location == null) {
-                    Toast.makeText(this@MainActivity, R.string.err_str_location_ready, Toast.LENGTH_SHORT).show()
-                } else {
-
-                    lat = location.latitude
-                    lon = location.longitude
-
-                    // '첫번째 아이템이 현위치' 옵션이 켜져있다면 첫번째 아이템 갱신
-                    if (Global.isFirstPageCurrentLocation && mainPagerAdapter.count > 0) {
-                        requestItemUpdate(mainPagerAdapter.itemList[0], location)
-                    }
-                }
-            }
+        if (Global.isFirstPageCurrentLocation) {
+            requestCurrentLocationAndUpdateFirstPage()
         }
-
-        LocationHelper.addLocationResultListener(listener = loactionListener)
-        LocationHelper.requestLocation(this, true)
-
 
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
@@ -138,6 +119,30 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SelectLocationActivity::class.java)
             startActivityForResult(intent, RESULT_CODE_ADDRESS_MANAGE_ACTIVITY)
         }
+    }
+
+    private fun requestCurrentLocationAndUpdateFirstPage() {
+        val loactionListener = object : ILocationResultListener {
+            override fun onLocationReady(location: Location?, address: Address?) {
+
+                if (location == null || address == null) {
+                    Toast.makeText(this@MainActivity, R.string.err_str_location_ready, Toast.LENGTH_SHORT).show()
+                    return
+                }
+
+                lat = location.latitude
+                lon = location.longitude
+
+                // '첫번째 아이템이 현위치' 옵션이 켜져있다면 첫번째 아이템 갱신
+                if (Global.isFirstPageCurrentLocation && mainPagerAdapter.count > 0) {
+                    mainPagerAdapter.itemList[0].address = address
+                    requestItemUpdate(mainPagerAdapter.itemList[0], location)
+                }
+            }
+        }
+
+        LocationHelper.addLocationResultListener(listener = loactionListener)
+        LocationHelper.requestLocation(this, true)
     }
 
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
@@ -165,6 +170,9 @@ class MainActivity : AppCompatActivity() {
         item.vmInfo.setDayView()
         /* 여기가 오늘의 날씨  */
         /* weatherInfo */
+
+        // 상단 곰돌이 뷰 업데이트 (날씨 정보가 어쨌든 확인되면 바로 갱신한다)
+        setTopViewModelData(viewPager.currentItem)
     }
 
 
@@ -481,8 +489,6 @@ class MainActivity : AppCompatActivity() {
         item.vmBear.setBear()
         tvSelectedLocation.text = createLocationString(data.address, false)
         BearAnimator.startAnimation(topBearBgWrapper)
-
-        // Todo : 현재 메시지 (오늘은 미세먼지가 심해요! 등) 갱신하는 코드도 있어야함
     }
 
     private fun setToolbar() {
