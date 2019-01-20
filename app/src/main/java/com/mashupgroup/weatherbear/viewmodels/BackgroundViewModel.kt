@@ -3,13 +3,13 @@ package com.mashupgroup.weatherbear.viewmodels
 import android.graphics.drawable.Drawable
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.WeatherBearApp
+import java.util.*
 
 class BackgroundViewModel {
 
     var weatherData = "WIND"
     var fineDustLevel = 2
     var tvMainWeatherMessage = "오늘은 날씨가 좋아요"
-
     /*
     배경 : 맑음, 흐림
     배경산 : 맑음,흐림
@@ -97,7 +97,13 @@ class BackgroundViewModel {
             4 -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_air_worst)
             else -> WeatherBearApp.appContext.resources.getString(R.string.msg_top_unknown)
         }
-
-        message = String.format(WeatherBearApp.appContext.resources.getString(R.string.msg_top_weather_ps_air_quality_ps), weatherMsg, airMsg)
+        val randomTime = Date().minutes
+        if (randomTime % 2 == 1) {
+            message = String.format(WeatherBearApp.appContext.resources.getString(R.string
+                    .msg_top_weather_ps), weatherMsg)
+        } else {
+            message = String.format(WeatherBearApp.appContext.resources.getString(R.string
+                    .msg_top_air_quality_ps), airMsg)
+        }
     }
 }
