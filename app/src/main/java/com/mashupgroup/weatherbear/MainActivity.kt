@@ -144,10 +144,12 @@ class MainActivity : AppCompatActivity() {
         Log.v("csh Weather", weatherInfo.toString())
 
         var weather = "SUNNY"
+        val hTime = Date().hours
         var temp: Double = weatherInfo.main.temp - 273.15
         weather = weatherCalculation(weatherInfo.weather[0].id)
         //곰의 모습 data
         item.vmBear.weatherData = weather
+        item.vmBear.currentTime = hTime
         item.vmBear.setBear()
         //곰 배경데이터
         item.vmBG.weatherData = weather

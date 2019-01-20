@@ -3,7 +3,6 @@ package com.mashupgroup.weatherbear.viewmodels
 import android.util.Log
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.WeatherBearApp
-import java.util.*
 
 
 class BearViewModel {
@@ -11,6 +10,7 @@ class BearViewModel {
     var fineDustData: Int = 1
     // SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
     var weatherData = "HEAVY_SNOW"
+    var currentTime: Int = 12
 
     /*
         미세먼지 단계 4단계
@@ -43,9 +43,8 @@ class BearViewModel {
     var weather = Weather.SNOW.text
     var resource = WeatherBearApp.appContext.resources
     var bearSkinColor = resource.getColor(R.color.bearBad)
-    var bearSnowColor = resource.getColor(R.color.bearSnowbad)
-    var bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_sleep)
-    var bearSnowVisibilty = false
+    var bearSnow = resource.getDrawable(R.drawable.ic_msg_bear_head_snow_good)
+    var bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_good)
     var bearLegVisibilty = true
     var bearPetVisibilty = false
     var bearSunglesesVisibilty = false
@@ -55,7 +54,8 @@ class BearViewModel {
 
     //폭설일 경우 눈사람으로 변경
     fun setBear() {
-        getTime()
+        isDayTime = currentTime in 6..17
+
         snowBearVisibilty = true
         if (weatherData == Weather.HEAVY_SNOW.text) {
         } else {
@@ -73,11 +73,6 @@ class BearViewModel {
         bearSunglesses()
     }
 
-    private fun getTime() {
-        val date = Date().hours
-        isDayTime = date in 6..17
-    }
-
     fun bearSkin() {
         when (fineDustData) {
             1 -> bearSkinColor = resource.getColor(R.color.bearGood)
@@ -90,19 +85,18 @@ class BearViewModel {
     private fun bearSnow() {
         when (weatherData) {
             Weather.HEAVY_SNOW.text, Weather.SNOW.text -> {
-                bearSnowVisibilty = true
                 when (fineDustData) {
-                    1 -> bearSnowColor = resource.getColor((R.color.bearSnowGood))
-                    2, 3, 4 -> bearSnowColor = resource.getColor((R.color.bearSnowbad))
+                    1 -> bearSnow = resource.getDrawable(R.drawable.ic_msg_bear_head_snow_good)
+                    2, 3, 4 -> bearSnow = resource.getDrawable(R.drawable.ic_msg_bear_head_snow)
                 }
             }
             else -> {
-                bearSnowVisibilty = false
-            }
+                bearSnow = resource.getDrawable(R.drawable.ic_msg_bear_head_snow_none)            }
         }
     }
 
     private fun bearFace() {
+        Log.e("time",""+currentTime+isDayTime)
         if (isDayTime) {
             when (fineDustData) {
                 1, 2 -> bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_good)
