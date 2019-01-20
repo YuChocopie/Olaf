@@ -42,7 +42,6 @@
             android:layout_height="@dimen/location_list_fabtn_size"
             android:layout_marginEnd="@dimen/location_list_fabtn_margin"
             android:layout_marginBottom="@dimen/location_list_fabtn_margin"
-            android:backgroundTint="@color/location_list_fabtn_bg"
             android:src="@android:drawable/ic_input_add"
             android:tint="@color/white0"
             app:backgroundTint="@color/location_list_fabtn_bg"
