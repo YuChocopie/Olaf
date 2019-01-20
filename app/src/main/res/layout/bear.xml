@@ -32,22 +32,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_msg_bear_snowbear"
                 android:visibility="@{bear.snowBearVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_msg_bear_snowbear" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/snowBearScarf"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
+                android:src="@drawable/ic_msg_bear_snow_scarf"
                 android:visibility="@{bear.snowBearVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="@+id/snowBearBody"
                 app:layout_constraintStart_toStartOf="@+id/snowBearBody"
-                app:layout_constraintTop_toTopOf="@+id/snowBearBody"
-                app:srcCompat="@drawable/ic_msg_bear_snow_scarf" />
+                app:layout_constraintTop_toTopOf="@+id/snowBearBody" />
 
             <ImageView
                 android:id="@+id/snowBearScarfHigh"
@@ -55,10 +55,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="102dp"
                 android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_msg_bear_snow_scarf_high"
                 android:visibility="@{bear.snowBearVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@+id/snowBearScarf"
-                app:layout_constraintStart_toStartOf="@+id/snowBearScarf"
-                app:srcCompat="@drawable/ic_msg_bear_snow_scarf_high" />
+                app:layout_constraintStart_toStartOf="@+id/snowBearScarf" />
 
             <ImageView
                 android:id="@+id/snowBearScarfLow"
@@ -66,9 +66,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="35dp"
+                android:src="@drawable/ic_msg_bear_snow_scarf_low"
                 app:layout_constraintStart_toStartOf="@+id/snowBearScarfHigh"
-                app:layout_constraintTop_toTopOf="@+id/snowBearScarfHigh"
-                app:srcCompat="@drawable/ic_msg_bear_snow_scarf_low" />
+                app:layout_constraintTop_toTopOf="@+id/snowBearScarfHigh" />
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
@@ -87,34 +87,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/SIZE_20"
+                android:src="@drawable/ic_msg_bear_body"
                 android:tint="@{bear.bearSkinColor}"
                 android:tintMode="multiply"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_msg_bear_body" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/bear_ear_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="70dp"
+                android:src="@drawable/ic_msg_bear_ear_left"
                 android:tint="@{bear.bearSkinColor}"
                 android:tintMode="multiply"
                 app:layout_constraintEnd_toEndOf="@+id/bear_head"
-                app:layout_constraintTop_toTopOf="@+id/bear_head"
-                app:srcCompat="@drawable/ic_msg_bear_ear_left" />
+                app:layout_constraintTop_toTopOf="@+id/bear_head" />
 
             <ImageView
                 android:id="@+id/bear_ear_right"
                 android:layout_width="32dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70dp"
+                android:src="@drawable/ic_msg_bear_ear_right"
                 android:tint="@{bear.bearSkinColor}"
                 android:tintMode="multiply"
                 app:layout_constraintStart_toStartOf="@+id/bear_head"
-                app:layout_constraintTop_toTopOf="@+id/bear_head"
-                app:srcCompat="@drawable/ic_msg_bear_ear_right" />
+                app:layout_constraintTop_toTopOf="@+id/bear_head" />
 
 
             <ImageView
@@ -122,12 +122,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="180dp"
+                android:src="@drawable/ic_msg_bear_head"
                 android:tint="@{bear.bearSkinColor}"
                 android:tintMode="multiply"
                 app:layout_constraintBottom_toBottomOf="@+id/bear_body"
                 app:layout_constraintEnd_toEndOf="@+id/bear_body"
                 app:layout_constraintStart_toStartOf="@+id/bear_body"
-                app:srcCompat="@drawable/ic_msg_bear_head"
                 tools:ignore="MissingConstraints" />
 
 
@@ -147,23 +147,21 @@
                 android:id="@+id/bear_head_snow"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:tint="@{bear.bearSnowColor}"
+                android:src="@{bear.bearSnow}"
                 android:tintMode="multiply"
-                android:visibility="@{bear.bearSnowVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@+id/bear_head"
                 app:layout_constraintEnd_toEndOf="@+id/bear_head"
-                app:layout_constraintStart_toStartOf="@+id/bear_head"
-                app:srcCompat="@drawable/ic_msg_bear_head_snow_good" />
+                app:layout_constraintStart_toStartOf="@+id/bear_head" />
 
             <ImageView
                 android:id="@+id/bear_scarf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="84dp"
+                android:src="@drawable/ic_msg_bear_snow_scarf"
                 app:layout_constraintEnd_toEndOf="@+id/bear_body"
                 app:layout_constraintStart_toStartOf="@+id/bear_body"
-                app:layout_constraintTop_toTopOf="@+id/bear_head"
-                app:srcCompat="@drawable/ic_msg_bear_snow_scarf" />
+                app:layout_constraintTop_toTopOf="@+id/bear_head" />
 
             <ImageView
                 android:id="@+id/bear_scarf_high"
@@ -171,9 +169,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="130dp"
                 android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_msg_bear_snow_scarf_high"
                 app:layout_constraintBottom_toBottomOf="@+id/bear_scarf"
-                app:layout_constraintStart_toStartOf="@+id/bear_scarf"
-                app:srcCompat="@drawable/ic_msg_bear_snow_scarf_high" />
+                app:layout_constraintStart_toStartOf="@+id/bear_scarf" />
 
             <ImageView
                 android:id="@+id/bear_scarf_low"
@@ -181,32 +179,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="35dp"
+                android:src="@drawable/ic_msg_bear_snow_scarf_low"
                 app:layout_constraintStart_toStartOf="@+id/bear_scarf_high"
-                app:layout_constraintTop_toTopOf="@+id/bear_scarf_high"
-                app:srcCompat="@drawable/ic_msg_bear_snow_scarf_low" />
+                app:layout_constraintTop_toTopOf="@+id/bear_scarf_high" />
 
             <ImageView
                 android:id="@+id/handkerchief"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
+                android:src="@drawable/ic_msg_handkerchief"
                 android:visibility="@{bear.bearLegVisibilty ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="@+id/bear_head"
                 app:layout_constraintStart_toStartOf="@+id/bear_head"
-                app:layout_constraintTop_toTopOf="@+id/bear_head"
-                app:srcCompat="@drawable/ic_msg_handkerchief" />
+                app:layout_constraintTop_toTopOf="@+id/bear_head" />
 
             <ImageView
                 android:id="@+id/bear_leg_front_bad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:src="@drawable/ic_msg_bear_leg_front"
                 android:tint="@{bear.bearSkinColor}"
                 android:tintMode="multiply"
                 android:visibility="@{bear.bearLegVisibilty ? View.GONE : View.VISIBLE}"
                 app:layout_constraintStart_toStartOf="@+id/bear_body"
-                app:layout_constraintTop_toTopOf="@+id/bear_scarf_low"
-                app:srcCompat="@drawable/ic_msg_bear_leg_front" />
+                app:layout_constraintTop_toTopOf="@+id/bear_scarf_low" />
 
 
             <ImageView
@@ -215,22 +213,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/SIZE_13"
                 android:layout_marginBottom="194dp"
+                android:src="@drawable/ic_msg_bear_umbrella"
                 android:visibility="@{bear.bearumbrellaVisibilty  ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@+id/bear_body"
-                app:layout_constraintEnd_toStartOf="@+id/bear_head"
-                app:srcCompat="@drawable/ic_msg_bear_umbrella" />
+                app:layout_constraintEnd_toStartOf="@+id/bear_head" />
 
             <ImageView
                 android:id="@+id/bear_leg_front_good"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="78dp"
+                android:src="@drawable/ic_msg_bear_leg_2"
                 android:tint="@{bear.bearSkinColor}"
                 android:tintMode="multiply"
                 android:visibility="@{bear.bearLegVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toStartOf="@+id/bear_leg"
-                app:layout_constraintTop_toTopOf="@+id/bear_leg"
-                app:srcCompat="@drawable/ic_msg_bear_leg_2" />
+                app:layout_constraintTop_toTopOf="@+id/bear_leg" />
 
 
             <ImageView
@@ -239,23 +237,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="106dp"
+                android:src="@drawable/ic_msg_bear_leg"
                 android:tint="@{bear.bearSkinColor}"
                 android:tintMode="multiply"
                 app:layout_constraintBottom_toBottomOf="@+id/bear_body"
-                app:layout_constraintEnd_toEndOf="@+id/bear_scarf_low"
-                app:srcCompat="@drawable/ic_msg_bear_leg" />
+                app:layout_constraintEnd_toEndOf="@+id/bear_scarf_low" />
 
             <ImageView
                 android:id="@+id/bear_sunglasses"
                 android:layout_width="105dp"
                 android:layout_height="64dp"
                 android:layout_marginTop="@dimen/SIZE_15"
+                android:src="@drawable/ic_bear_sunglasses"
                 android:visibility="@{bear.bearSunglesesVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="@id/bear_head"
                 app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="@id/bear_head"
-                app:layout_constraintTop_toTopOf="@id/bear_head"
-                app:srcCompat="@drawable/ic_bear_sunglasses" />
+                app:layout_constraintTop_toTopOf="@id/bear_head" />
 
             <ImageView
                 android:id="@+id/bear_pet_small"
@@ -263,10 +261,10 @@
                 android:layout_height="23dp"
                 android:layout_marginEnd="68dp"
                 android:layout_marginBottom="252dp"
+                android:src="@drawable/ic_msg_dirt"
                 android:visibility="@{bear.bearPetVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@+id/bear_body"
-                app:layout_constraintEnd_toStartOf="@+id/bear_head"
-                app:srcCompat="@drawable/ic_msg_dirt" />
+                app:layout_constraintEnd_toStartOf="@+id/bear_head" />
 
             <ImageView
                 android:id="@+id/bear_pet"
@@ -274,10 +272,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_msg_dirt"
                 android:visibility="@{bear.bearPetVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toTopOf="@+id/bear_leg"
-                app:layout_constraintEnd_toStartOf="@+id/bear_head"
-                app:srcCompat="@drawable/ic_msg_dirt" />
+                app:layout_constraintEnd_toStartOf="@+id/bear_head" />
 
             <ImageView
                 android:id="@+id/bear_pet_w"
@@ -285,10 +283,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_msg_dirt_w"
                 android:visibility="@{bear.bearPetVisibilty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toTopOf="@+id/bear_scarf_high"
-                app:layout_constraintStart_toEndOf="@+id/bear_ear_right"
-                app:srcCompat="@drawable/ic_msg_dirt_w" />
+                app:layout_constraintStart_toEndOf="@+id/bear_ear_right" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
