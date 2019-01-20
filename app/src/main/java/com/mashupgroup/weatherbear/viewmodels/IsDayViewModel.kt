@@ -142,9 +142,9 @@ class IsDayViewModel {
     var tvTodayTime07 = todayTimeGraph()
 
     fun todayTimeGraph(): String {
-        graphTime = (graphTime / 3 + 1) * 3
-        if (graphTime > 24 || graphTime < 10)
-            return "0" + (graphTime % 24)
+        graphTime = ((graphTime / 3 + 1) * 3) % 24
+        if (graphTime < 10)
+            return "0" + (graphTime)
         return graphTime.toString()
     }
 
@@ -185,17 +185,17 @@ class IsDayViewModel {
         tvTodayTime06 = todayTimeGraph()
         tvTodayTime07 = todayTimeGraph()
 
-        ivTodayTimeWeather00 = todayWetherGraph(todayAfterWeatherData00,0)
-        ivTodayTimeWeather01 = todayWetherGraph(todayAfterWeatherData01,1)
-        ivTodayTimeWeather02 = todayWetherGraph(todayAfterWeatherData02,2)
-        ivTodayTimeWeather03 = todayWetherGraph(todayAfterWeatherData03,3)
-        ivTodayTimeWeather04 = todayWetherGraph(todayAfterWeatherData04,4)
-        ivTodayTimeWeather05 = todayWetherGraph(todayAfterWeatherData05,5)
-        ivTodayTimeWeather06 = todayWetherGraph(todayAfterWeatherData06,6)
-        ivTodayTimeWeather07 = todayWetherGraph(todayAfterWeatherData07,7)
+        ivTodayTimeWeather00 = todayWetherGraph(todayAfterWeatherData00, 0)
+        ivTodayTimeWeather01 = todayWetherGraph(todayAfterWeatherData01, 1)
+        ivTodayTimeWeather02 = todayWetherGraph(todayAfterWeatherData02, 2)
+        ivTodayTimeWeather03 = todayWetherGraph(todayAfterWeatherData03, 3)
+        ivTodayTimeWeather04 = todayWetherGraph(todayAfterWeatherData04, 4)
+        ivTodayTimeWeather05 = todayWetherGraph(todayAfterWeatherData05, 5)
+        ivTodayTimeWeather06 = todayWetherGraph(todayAfterWeatherData06, 6)
+        ivTodayTimeWeather07 = todayWetherGraph(todayAfterWeatherData07, 7)
     }
 
-    private fun todayWetherGraph(todayAfterWeatherData: String,num : Int): Drawable {
+    private fun todayWetherGraph(todayAfterWeatherData: String, num: Int): Drawable {
         var checkNightTime = ((currentTime / 3 + num) * 3) % 24
         if (checkNightTime < 6 || checkNightTime > 17) {
             when (todayAfterWeatherData) {

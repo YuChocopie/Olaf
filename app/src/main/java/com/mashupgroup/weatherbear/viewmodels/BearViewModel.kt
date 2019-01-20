@@ -96,7 +96,6 @@ class BearViewModel {
     }
 
     private fun bearFace() {
-        Log.e("time",""+currentTime+isDayTime)
         if (isDayTime) {
             when (fineDustData) {
                 1, 2 -> bearFaceImage = resource.getDrawable(R.drawable.ic_msg_bear_face_good)

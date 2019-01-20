@@ -33,6 +33,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     val kakaoRetrofit = kakaoAPI.createTransRetrofit()
     val kakaoInterface = kakaoRetrofit.create(KakaoInterface::class.java)
 
-    var dayTimeTemperture = intArrayOf(0,1, 4, 6, 4, 0, 2)
+    var dayTimeTemperture = intArrayOf(0, 1, 4, 6, 4, 0, 2, 0)
 
     private val RESULT_CODE_ADDRESS_MANAGE_ACTIVITY = 123
 
@@ -156,14 +157,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
         Log.v("csh Weather", weatherInfo.toString())
-
         var weather = "SUNNY"
-        val hTime = Date().hours
         var temp: Double = weatherInfo.main.temp - 273.15
         weather = weatherCalculation(weatherInfo.weather[0].id)
         //곰의 모습 data
         item.vmBear.weatherData = weather
-        item.vmBear.currentTime = hTime
         item.vmBear.setBear()
         //곰 배경데이터
         item.vmBG.weatherData = weather
@@ -188,14 +186,27 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun requestForecastResponse(item: MainPagerItem, forecastInfo: Forecast) {
-        /* 여기가 5일치 날씨 */
-        /* forecastInfo */
+//        Log.e("times2", forecastInfo.list[0].weather.coord.lon.toString())
+        /* 여기가 5일치 날씨 forecastInfo */
         //해당장소의시간
-        val hTime = Date().hours
+        val tz: TimeZone = TimeZone.getTimeZone("Greenwich")
+        val date = Date()
+        val df = SimpleDateFormat("HH")
+        df.timeZone = tz
+
+        var currentTime = Date().hours
+        if (forecastInfo.city.coord.lon < 0) {
+            currentTime = df.format(date).toInt() - 1 + (forecastInfo.city.coord.lon.toInt() / 15)
+
+        } else {
+            currentTime = df.format(date).toInt() + 1 + (forecastInfo.city.coord.lon.toInt() /
+                    15)
+        }
+
         //내일 정오시간의 데이터를 받아옵니다
-        var noonTime = (36 - hTime) / 3
+        var noonTime = (36 - currentTime) / 3
         val count = true
-        if (hTime % 3 > 0 && count) {
+        if (currentTime % 3 > 0 && count) {
             noonTime++
             !count
         }
@@ -203,8 +214,12 @@ class MainActivity : AppCompatActivity() {
         val temp: Double = forecastInfo.list[noonTime].main.temp.toDouble() - 273.15
         weather = weatherCalculation(forecastInfo.list[noonTime].weather[0].id)
 
+        //곰의 모습 data
+        item.vmBear.currentTime = currentTime
+        item.vmBear.setBear()
+
         //날씨 boxData
-        item.vmInfo.currentTime = hTime
+        item.vmInfo.currentTime = currentTime
         item.vmInfo.tomorrowWeatherData = weather
         item.vmInfo.tomorrowBodyTemperatureData = bodyTemperatureCalculation(temp,
                 forecastInfo.list[noonTime].wind.speed.toDouble()).toString()
@@ -235,12 +250,12 @@ class MainActivity : AppCompatActivity() {
 
 
         item.vmInfo.setDayView()
-        for (i in forecastInfo.list) {
-            val dv = java.lang.Long.valueOf(i.dt) * 1000// its need to be in milisecond
-            val df = java.util.Date(dv)
-//            val vv = SimpleDateFormat("MM dd, yyyy hh:mm a").format(df)
-//             i.main.temp (Default는 켈빈이므로 temp - 273.15 해야 섭씨온도가 나옵니다!)
-        }
+//        for (i in forecastInfo.list) {
+//            val dv = java.lang.Long.valueOf(i.dt) * 1000// its need to be in milisecond
+//            val df = java.util.Date(dv)
+////            val vv = SimpleDateFormat("MM dd, yyyy hh:mm a").format(df)
+////             i.main.temp (Default는 켈빈이므로 temp - 273.15 해야 섭씨온도가 나옵니다!)
+//        }
     }
 
     private fun tomorrowWeatherText(currendTemp: Int, tomorrowTemp: Int, tomorrowWeather: String): String {
