@@ -163,14 +163,14 @@ abstract class WeatherBearWidgetCommon : AppWidgetProvider() {
                 .subscribe({ airInfo ->
                     data.isDustLevelUpdated = true
                     Log.v("requestAirInfo", "$stationName : $airInfo")
-                    val ultraDust = airInfo.list[0].pm10Value.toInt()
-                    data.fineDustLevel =
-                            when {
-                                ultraDust < 16 -> WdgFineDustLvl.GOOD
-                                ultraDust in 16..50 -> WdgFineDustLvl.NORMAL
-                                ultraDust in 51..100 -> WdgFineDustLvl.BAD
-                                else -> WdgFineDustLvl.WORST
-                            }
+                    val dustLevel = airInfo.list[0].pm10Grade.toInt()
+                    data.fineDustLevel = when(dustLevel) {
+                        1 -> WdgFineDustLvl.GOOD
+                        2 -> WdgFineDustLvl.NORMAL
+                        3 -> WdgFineDustLvl.BAD
+                        4 -> WdgFineDustLvl.WORST
+                        else -> WdgFineDustLvl.NO_DATA
+                    }
                     updateWeatherData(data)
 
                 }, { err -> err.printStackTrace() })
