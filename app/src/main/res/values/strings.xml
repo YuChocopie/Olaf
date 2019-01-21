@@ -46,7 +46,8 @@
     <string name="noWeatherData">No weather data</string>
     <string name="noData">No data</string>
     <string name="noTomorrowData">There is no data for tomorrow!</string>
-    <string name="msg_top_weather_ps_air_quality_ps">Today weather is %s.\nAir quality is %s.</string>
+    <string name="msg_top_weather_ps">Today\'s weather %s.</string>
+    <string name="msg_top_air_quality_ps">Today\'s air quality %s.</string>
     <string name="msg_top_sunny">sunny</string>
     <string name="msg_top_rainy">rainy</string>
     <string name="msg_top_snowy">snowy</string>
