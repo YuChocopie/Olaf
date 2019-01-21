@@ -124,4 +124,17 @@ object Global {
         }
         return result
     }
+
+    /**
+        address 객체가 가지고있는 가장 작은 행정지역 단위 문자열을 가져옴(단, 최소 throughfare)
+     */
+    fun getSmallestLocationString(address: Address): String {
+        if(!address.thoroughfare.isNullOrEmpty()) return address.thoroughfare
+        if(!address.subLocality.isNullOrEmpty()) return address.subLocality
+        if(!address.locality.isNullOrEmpty()) return address.locality
+        if(!address.subAdminArea.isNullOrEmpty()) return address.subAdminArea
+        if(!address.adminArea.isNullOrEmpty()) return address.adminArea
+        if(!address.countryName.isNullOrEmpty()) return address.countryName
+        return "No data"
+    }
 }

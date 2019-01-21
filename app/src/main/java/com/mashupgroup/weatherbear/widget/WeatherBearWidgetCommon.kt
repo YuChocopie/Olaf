@@ -74,12 +74,13 @@ abstract class WeatherBearWidgetCommon : AppWidgetProvider() {
                 updateWeatherData(widgetWeatherData)
             }
 
-            // 저장된 장소가 있으므로 장소 가져옴
+            // 저장된 장소가 있으므로 장소(첫번째꺼) 가져옴
             val addrFirst: Address = addrList[0]
             val location = Location(LocationManager.GPS_PROVIDER)
             location.latitude = addrFirst.latitude
             location.longitude = addrFirst.longitude
-            widgetWeatherData.locationText = Global.createLocationString(addrFirst, false)
+            widgetWeatherData.locationText = Global.getSmallestLocationString(addrFirst)
+
             requestDataFromServer(widgetWeatherData, location)
 
         } else {
