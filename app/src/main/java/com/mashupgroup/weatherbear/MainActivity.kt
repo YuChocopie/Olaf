@@ -2,6 +2,8 @@ package com.mashupgroup.weatherbear
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.databinding.DataBindingUtil.setContentView
@@ -28,6 +30,7 @@ import com.mashupgroup.weatherbear.models.weather.Weather
 import com.mashupgroup.weatherbear.viewmodels.BackgroundViewModel
 import com.mashupgroup.weatherbear.viewmodels.BearViewModel
 import com.mashupgroup.weatherbear.viewmodels.IsDayViewModel
+import com.mashupgroup.weatherbear.widget.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -129,6 +132,24 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SelectLocationActivity::class.java)
             startActivityForResult(intent, RESULT_CODE_ADDRESS_MANAGE_ACTIVITY)
         }
+    }
+
+
+    override fun onDestroy() {
+
+        // 앱이 닫힐 때(onDestroy) 모든 위젯을 강제로 업데이트한다
+        arrayOf( WeatherBoxWidget::class.java,
+                 WeatherBoxWidgetBg::class.java,
+                 WeatherBearHeadWidget::class.java,
+                 WeatherBearHeadWidgetBg::class.java).forEach { className ->
+            val intent = Intent(this, className)
+            intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+            val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(ComponentName(application, className))
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+            sendBroadcast(intent)
+        }
+
+        super.onDestroy()
     }
 
     private fun requestCurrentLocationAndUpdateFirstPage() {
