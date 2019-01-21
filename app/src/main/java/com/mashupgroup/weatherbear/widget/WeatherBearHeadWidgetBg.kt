@@ -2,7 +2,6 @@ package com.mashupgroup.weatherbear.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
-import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
@@ -14,34 +13,16 @@ import java.util.*
 /**
  * Implementation of App Widget functionality.
  */
-class WeatherBearHeadWidgetBg : AppWidgetProvider() {
+class WeatherBearHeadWidgetBg : WeatherBearWidgetCommon() {
 
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        var weather = "HEAVY_SNOW"
-        var fineDustLevel = "좋음"
-        // There may be multiple widgets active, so update all of them
-        for (appWidgetId in appWidgetIds) updateAppWidget(context,
-                appWidgetManager, appWidgetId,
-                weather, fineDustLevel)
-    }
-
-    override fun onEnabled(context: Context) {
-        // Enter relevant functionality for when the first widget is created
-    }
-
-    override fun onDisabled(context: Context) {
-        // Enter relevant functionality for when the last widget is disabled
-    }
-
-    internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager,
-                                 appWidgetId: Int, nWeather: String, nFineDustLevel: String) {
+    override fun updateAppWidget(weatherData : WidgetWeatherData, context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
 
 
         //SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY, HEAVY_SNOW
         //미세먼지 : 좋음,보통,나쁨.매우나쁨
         //낮:true 밤:false
-        val weather = nWeather
-        val fineDustLevel = nFineDustLevel
+        val weather = weatherData.weather
+        val fineDustLevel = weatherData.fineDustLevel
         var time = true
         val date = Date().hours
         time = date in 6..17
@@ -58,21 +39,22 @@ class WeatherBearHeadWidgetBg : AppWidgetProvider() {
         remoteViews.setOnClickPendingIntent(R.id.widgetBearHead, pendingIntent)
         appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
 
-        when (fineDustLevel) {
-            "좋음" -> bearSkin = (R.drawable.ic_bear_head_01)
-            "보통" -> bearSkin = (R.drawable.ic_bear_head_02)
-            "나쁨" -> bearSkin = (R.drawable.ic_bear_head_03)
-            "매우나쁨" -> bearSkin = (R.drawable.ic_bear_head_04)
+        bearSkin = when (fineDustLevel) {
+            WdgFineDustLvl.GOOD -> (R.drawable.ic_bear_head_01)
+            WdgFineDustLvl.NORMAL -> (R.drawable.ic_bear_head_02)
+            WdgFineDustLvl.BAD -> (R.drawable.ic_bear_head_03)
+            WdgFineDustLvl.WORST -> (R.drawable.ic_bear_head_04)
+            else -> (R.drawable.ic_bear_head_01) //unknown
         }
 
         if (time) {
             bearFace = R.drawable.ic_msg_bear_face_good
-            if (fineDustLevel == "나쁨" || fineDustLevel == "매우나쁨") {
+            if (fineDustLevel == WdgFineDustLvl.BAD || fineDustLevel == WdgFineDustLvl.WORST) {
                 bearFace = R.drawable.ic_msg_bear_face_bad
             }
-            if (weather == "SNOW" || weather == "HEAVY_SNOW") {
+            if (weather == WdgWeather.SNOW) {
                 bearSnow = (R.drawable.ic_msg_bear_head_snow)
-                if (fineDustLevel == "좋음") {
+                if (fineDustLevel == WdgFineDustLvl.GOOD) {
                     bearSnow = (R.drawable.ic_msg_bear_head_snow_good)
                 }
             } else
