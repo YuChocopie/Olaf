@@ -84,28 +84,26 @@ abstract class WeatherBearWidgetCommon : AppWidgetProvider() {
             requestDataFromServer(widgetWeatherData, location)
 
         } else {
+            // 저장된 장소가 없으므로 no data 처리
             widgetWeatherData.isDustLevelUpdated = true
             widgetWeatherData.isWeatherUpdated = true
-            // 저장된 장소가 없으므로 no data 처리
             updateWeatherData(widgetWeatherData)
         }
     }
 
     private fun updateWeatherData(data: WidgetWeatherData) {
         if(savedContext == null || savedAppWidgetManager == null || savedAppWidgetIds == null) return
-
-        // 데이터 업데이트 다 됐는지 확인
-        if(!(data.isDustLevelUpdated && data.isWeatherUpdated)) {
-            return  // 미세먼지와 날씨 둘 다 불러온상태가 아니면 무시데쓰요
-        }
+        // 날씨 업데이트되면 한번, 미세먼지 업데이트되면 한번 해서 총 두번 호출될것임
 
         for (appWidgetId in savedAppWidgetIds!!)         // 모든 활성화된 위젯 업데이트
             updateAppWidget(data, savedContext!!, savedAppWidgetManager!!, appWidgetId)
 
-        // 저장된 임시객체 메모리해제
-        savedAppWidgetIds = null
-        savedAppWidgetManager = null
-        savedContext = null
+        // 저장된 임시객체 메모리해제(모든 데이터가 다 불러와졌을때)
+        if(data.isWeatherUpdated && data.isDustLevelUpdated) {
+            savedAppWidgetIds = null
+            savedAppWidgetManager = null
+            savedContext = null
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -136,6 +134,7 @@ abstract class WeatherBearWidgetCommon : AppWidgetProvider() {
                                  else data.weather = WdgWeather.CLOUDY
                             else -> data.weather = WdgWeather.SUNNY
                         }
+                        data.temperature = (it.main.temp - 273.15).toInt()
                         updateWeatherData(data)
                     }
                 }, { err -> err.printStackTrace() })

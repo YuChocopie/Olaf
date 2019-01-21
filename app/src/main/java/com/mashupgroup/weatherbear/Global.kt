@@ -135,6 +135,7 @@ object Global {
         if(!address.subAdminArea.isNullOrEmpty()) return address.subAdminArea
         if(!address.adminArea.isNullOrEmpty()) return address.adminArea
         if(!address.countryName.isNullOrEmpty()) return address.countryName
+        if(!address.featureName.isNullOrEmpty()) return address.featureName // feature는 정말 최소행정단위인데, 가끔 '북극'같은경우 feature만 있는경우가있어서..
         return "No data"
     }
 }
