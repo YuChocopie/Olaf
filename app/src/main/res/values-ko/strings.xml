@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WeatherBear</string>
+    <string name="app_name">웨더베어</string>
     <string name="c">℃</string>
     <string name="today_weather">오늘의 날씨</string>
     <string name="tomorrow_weather">내일의 날씨</string>
@@ -59,4 +59,7 @@
     <string name="msg_top_unknown">모르겠어요.</string>
     <string name="msg_add_location_from_gps_q">현재 GPS 위치로부터 주소를 추가하시겠습니까?</string>
     <string name="msg_acquiring_your_location_gps">GPS 주소를 가져오는 중..</string>
+    <string name="info_developers">고은이\n김유정\n김주진\n최상희</string>
+    <string name="info_open_app_info">앱 정보 열기</string>
+    <string name="info_opensource"><u>오픈소스 라이센스</u></string>
 </resources>

@@ -554,6 +554,8 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.mnu_info -> {
                 // 앱 정보 메뉴 클릭됨
+                val intent = Intent(this, InfoActivity::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)

@@ -48,6 +48,8 @@
 
     <dimen name="main_no_address_msg_margin_top">150dp</dimen>
 
+    <dimen name="info_item_margin">25dp</dimen>
+
     <dimen name="SIZE_1">1dp</dimen>
     <dimen name="SIZE_2">2dp</dimen>
     <dimen name="SIZE_3">3dp</dimen>
