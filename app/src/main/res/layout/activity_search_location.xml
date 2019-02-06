@@ -31,7 +31,7 @@
                 android:tint="@color/white0"
                 android:background="@null"
                 android:padding="@dimen/location_search_button_padding"
-                android:src="@drawable/ic_search" />  <!-- TODO : 이거 android:src 아이콘.. GPS현재위치 아이콘 구해서 그걸로 바꿔야해.. -->
+                android:src="@drawable/ic_gps" />  <!-- TODO : 이거 android:src 아이콘.. GPS현재위치 아이콘 구해서 그걸로 바꿔야해.. -->
 
             <EditText
                 android:id="@+id/etSearchLocation"
