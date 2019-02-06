@@ -21,6 +21,7 @@
     <string name="yes">네</string>
     <string name="no">아뇨</string>
     <string name="select_location_chk_show_current_location_first_page">첫 페이지에 현재 위치에 대한 정보 표시하기</string>
+    <string name="select_location_no_location_please_add">추가된 위치가 없습니다.\n아래 \'더하기\'버튼을 눌러서 추가해보세요.</string>
     <string name="main_no_address_added_touch_here_to_add">사용자 위치가 없습니다.\n여기를 터치해서 위치를 추가해보세요.</string>
     <string name="tomorrow">내일</string>
     <string name="unable_get_locaiton">위치정보를 받아올 수 없습니다.</string>

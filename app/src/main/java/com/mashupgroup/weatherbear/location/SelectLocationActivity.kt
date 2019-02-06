@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
+import android.view.View.*
 import com.mashupgroup.weatherbear.Global
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.viewmodels.LocalViewModel
@@ -57,6 +58,15 @@ class SelectLocationActivity : AppCompatActivity() {
         }
         loadAndShowLocations()
         addressToDelete = null
+
+        // 만약 위치 아이템이 한개도 없으면, 위치가 없쪙 메시지를 띄운다
+        if(mAdapter.itemList.size == 0) {
+            tvNoLocation.visibility = VISIBLE
+            locationListWrapper.visibility = GONE
+        } else {
+            tvNoLocation.visibility = GONE
+            locationListWrapper.visibility = VISIBLE
+        }
     }
 
     private val mAdapter = SelectLocationAdapter(changedListener)
@@ -100,6 +110,19 @@ class SelectLocationActivity : AppCompatActivity() {
         setResult(RESULT_OK, resultIntent)
 
         super.onBackPressed()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // 만약 위치 아이템이 한개도 없으면, 위치가 없쪙 메시지를 띄운다
+        if(mAdapter.itemList.size == 0) {
+            tvNoLocation.visibility = VISIBLE
+            locationListWrapper.visibility = GONE
+        } else {
+            tvNoLocation.visibility = GONE
+            locationListWrapper.visibility = VISIBLE
+        }
     }
 
     private fun onSearchLocationFABtnClicked() {
