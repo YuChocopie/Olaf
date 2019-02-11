@@ -18,6 +18,7 @@
         android:id="@+id/topBearBgWrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bear_height"
+        android:paddingBottom="21dp"
         android:fitsSystemWindows="true">
 
         <include

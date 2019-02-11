@@ -8,7 +8,7 @@
     <dimen name="today_weather_shape">96dp</dimen>
 
     <dimen name="main_topbar_height">200dp</dimen>
-    <dimen name="main_bear_height">450dp</dimen>
+    <dimen name="main_bear_height">470dp</dimen>
 
     <dimen name="weather_box_tv_margin_top">7dp</dimen>
     <dimen name="weather_box_tv_height">25dp</dimen>
