@@ -223,6 +223,7 @@ class MainActivity : AppCompatActivity() {
             currentTime = df.format(date).toInt() + 1 + (forecastInfo.city.coord.lon.toInt() /
                     15)
         }
+        currentTime %= 24
 
         //내일 정오시간의 데이터를 받아옵니다
         var noonTime = (36 - currentTime) / 3
