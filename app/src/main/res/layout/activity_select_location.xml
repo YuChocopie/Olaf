@@ -9,6 +9,7 @@
     tools:context=".location.SelectLocationActivity">
 
     <LinearLayout
+        android:id="@+id/locationListWrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -36,13 +37,25 @@
             />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvNoLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/select_location_no_location_please_add"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabtnAddLocation"
             android:layout_width="70dp"
             android:layout_height="@dimen/location_list_fabtn_size"
             android:layout_marginEnd="@dimen/location_list_fabtn_margin"
             android:layout_marginBottom="@dimen/location_list_fabtn_margin"
-            android:src="@android:drawable/ic_input_add"
+            android:src="@drawable/add"
             android:tint="@color/white0"
             app:backgroundTint="@color/location_list_fabtn_bg"
             app:layout_constraintBottom_toBottomOf="parent"
