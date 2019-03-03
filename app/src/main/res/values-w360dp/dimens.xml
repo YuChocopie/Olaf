@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="weather_box_circle">15dp</dimen>
+    <dimen name="weather_box_text">11sp</dimen>
+    <dimen name="weather_box_textX">60dp</dimen>
+
+</resources>

@@ -109,4 +109,7 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
 
     <dimen name="top_ballon_height">83dp</dimen>
+    <dimen name="weather_box_circle">12dp</dimen>
+    <dimen name="weather_box_text">9sp</dimen>
+    <dimen name="weather_box_textX">50dp</dimen>
 </resources>

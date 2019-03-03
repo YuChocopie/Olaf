@@ -39,7 +39,8 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/todayWeatherConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_weather_box_hight"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TodayWeatherText">
 
             <ImageView
@@ -70,12 +71,10 @@
                 android:id="@+id/view"
                 android:layout_width="@dimen/SIZE_1"
                 android:layout_height="@dimen/SIZE_110"
-                android:layout_marginEnd="@dimen/SIZE_8"
+                android:layout_marginStart="112dp"
+                android:layout_marginBottom="8dp"
                 android:background="@color/gray0"
-                android:foregroundGravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.33"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,8 +144,8 @@
 
                 <ImageView
                     android:id="@+id/ivFineDust"
-                    android:layout_width="@dimen/SIZE_15"
-                    android:layout_height="@dimen/SIZE_15"
+                    android:layout_width="@dimen/weather_box_circle"
+                    android:layout_height="@dimen/weather_box_circle"
                     android:layout_marginStart="@dimen/SIZE_15"
                     android:tint="@{isDayData.todayDustColor}"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -156,14 +155,14 @@
 
                 <TextView
                     android:id="@+id/TodayWeatherFineDustText"
-                    android:layout_width="@dimen/SIZE_56"
+                    android:layout_width="@dimen/weather_box_textX"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/SIZE_1"
                     android:gravity="right"
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@string/fine_dust"
                     android:textColor="@color/black6"
-                    android:textSize="@dimen/TEXT_SIZE_11"
+                    android:textSize="@dimen/weather_box_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivFineDust"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -177,7 +176,7 @@
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.todayDust}"
                     android:textColor="@{isDayData.todayDustColor}"
-                    android:textSize="@dimen/TEXT_SIZE_11"
+                    android:textSize="@dimen/weather_box_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/TodayWeatherFineDustText"
                     app:layout_constraintTop_toTopOf="parent"
@@ -192,7 +191,7 @@
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.todayDustText}"
                     android:textColor="@{isDayData.todayDustColor}"
-                    android:textSize="@dimen/TEXT_SIZE_11"
+                    android:textSize="@dimen/weather_box_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tvFineDust"
                     app:layout_constraintTop_toTopOf="parent"
@@ -213,8 +212,8 @@
 
                 <ImageView
                     android:id="@+id/ivUltrafineDust"
-                    android:layout_width="@dimen/SIZE_15"
-                    android:layout_height="@dimen/SIZE_15"
+                    android:layout_width="@dimen/weather_box_circle"
+                    android:layout_height="@dimen/weather_box_circle"
                     android:layout_marginStart="@dimen/SIZE_15"
                     android:tint="@{isDayData.todayUltraDustColor}"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -224,14 +223,14 @@
 
                 <TextView
                     android:id="@+id/UltrafineDustText"
-                    android:layout_width="@dimen/SIZE_56"
+                    android:layout_width="@dimen/weather_box_textX"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/SIZE_1"
-                    android:gravity="right"
+                    android:gravity="right|center_vertical"
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@string/ultrafine_dust"
                     android:textColor="@color/black6"
-                    android:textSize="@dimen/TEXT_SIZE_11"
+                    android:textSize="@dimen/weather_box_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivUltrafineDust"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -245,7 +244,7 @@
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.todayUltraDust}"
                     android:textColor="@{isDayData.todayUltraDustColor}"
-                    android:textSize="@dimen/TEXT_SIZE_11"
+                    android:textSize="@dimen/weather_box_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/UltrafineDustText"
                     app:layout_constraintTop_toTopOf="parent"
@@ -260,7 +259,7 @@
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@{isDayData.todayUltraDustText}"
                     android:textColor="@{isDayData.todayUltraDustColor}"
-                    android:textSize="@dimen/TEXT_SIZE_11"
+                    android:textSize="@dimen/weather_box_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvUltrafineDust"
                     app:layout_constraintTop_toTopOf="parent"
