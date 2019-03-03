@@ -181,12 +181,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
         Log.v("csh Weather", weatherInfo.toString())
+        /* 여기가 오늘의 날씨  */
+        /* weatherInfo */
         var weather = "SUNNY"
         var temp: Double = weatherInfo.main.temp - 273.15
         weather = weatherCalculation(weatherInfo.weather[0].id)
-        //곰의 모습 data
-        item.vmBear.weatherData = weather
-        item.vmBear.setBear()
         //곰 배경데이터
         item.vmBG.weatherData = weather
         item.vmBG.setBackground()
@@ -196,13 +195,13 @@ class MainActivity : AppCompatActivity() {
                 .speed).toString()
         item.vmInfo.todayTemperatureData = (temp.toInt()).toString()
         item.vmInfo.todayAfterWeatherData00 = weather
-        item.vmInfo.setDayView()
 
         item.graphArray.set(0, temp.toInt())
         item.vmInfo.setDayView()
-        /* 여기가 오늘의 날씨  */
-        /* weatherInfo */
 
+        //곰의 모습 data
+        item.vmBear.weatherData = weather
+        item.vmBear.setBear()
         // 상단 곰돌이 뷰 업데이트 (날씨 정보가 어쨌든 확인되면 바로 갱신한다)
         setTopViewModelData(viewPager.currentItem)
     }
@@ -272,13 +271,6 @@ class MainActivity : AppCompatActivity() {
         item.graphArray.set(5, (forecastInfo.list[5].main.temp.toDouble() - 273.15).toInt())
         item.graphArray.set(6, (forecastInfo.list[6].main.temp.toDouble() - 273.15).toInt())
         item.graphArray.set(7, (forecastInfo.list[7].main.temp.toDouble() - 273.15).toInt())
-
-//        if (item.graphArray[0]==100 || item.graphArray[1]==100) {
-//            Log.e("123", "false0")
-//            item.vmInfo.visibleTodayTimeWeatherData = false
-//        }else {
-//            item.vmInfo.visibleTodayTimeWeatherData = true
-//        }
 
         item.vmInfo.setDayView()
 //        for (i in forecastInfo.list) {
@@ -451,6 +443,7 @@ class MainActivity : AppCompatActivity() {
                     item.vmInfo.tomorrowUltraDustData = airItem.pm25Value24 + "㎍/㎥"
                     item.vmInfo.setDayView()
 
+                    setTopViewModelData(viewPager.currentItem)
                     mainPagerAdapter.notifyDataSetChanged()
                 }, { error ->
                     error.printStackTrace()

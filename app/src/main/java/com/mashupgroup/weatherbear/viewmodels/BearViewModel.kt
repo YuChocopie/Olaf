@@ -59,8 +59,8 @@ class BearViewModel {
         snowBearVisibilty = true
         if (weatherData == Weather.HEAVY_SNOW.text) {
         } else {
-            snowBearVisibilty = false
             updeteBear()
+            snowBearVisibilty = false
         }
     }
 
