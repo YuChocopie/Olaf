@@ -54,6 +54,11 @@ class SearchLocationActivity : AppCompatActivity(),
         etSearchLocation.addTextChangedListener(this)
     }
 
+    override fun onDestroy() {
+        LocationHelper.removeLocationResultListener(locationListener)
+        super.onDestroy()
+    }
+
     private fun updateLayoutVisibility(letsSearch : Boolean, searchResult : Boolean, noResult : Boolean, searching : Boolean) {
         if(letsSearch) layoutLetsSearch.visibility = View.VISIBLE
         else layoutLetsSearch.visibility = View.GONE
@@ -110,7 +115,10 @@ class SearchLocationActivity : AppCompatActivity(),
                 AlertDialog.Builder(this@SearchLocationActivity)
                         .setMessage(getString(R.string.msg_acquiring_your_location_gps))
                         .setCancelable(false)
-                        .setNegativeButton(R.string.cancel) { _, _ -> LocationHelper.cancelRequestLocation() }
+                        .setNegativeButton(R.string.cancel) { _, _ ->
+                            LocationHelper.cancelRequestLocation()
+                            LocationHelper.removeLocationResultListener(locationListener)
+                        }
                         .show()
             }
         }
@@ -125,6 +133,7 @@ class SearchLocationActivity : AppCompatActivity(),
 
     private val locationListener = object : ILocationResultListener {
         override fun onLocationReady(location: Location?, address: Address?) {
+            LocationHelper.removeLocationResultListener(this)
             if(address != null) {
                 onResultItemClick(address)
             } else {
