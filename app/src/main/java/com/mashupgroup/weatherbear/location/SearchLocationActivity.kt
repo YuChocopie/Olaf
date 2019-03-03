@@ -71,7 +71,7 @@ class SearchLocationActivity : AppCompatActivity(),
     /**
      * 주어진 주소로부터 위치를 검색하고, 결과가 있을 경우 리사이클러뷰에 결과를 넣는다
      */
-    fun searchLocation(text : String) {
+    private fun searchLocation(text : String) {
         if(text.isNullOrEmpty()) return;
 
         updateLayoutVisibility(false, false, false, true)
@@ -101,12 +101,17 @@ class SearchLocationActivity : AppCompatActivity(),
     }
 
     /** GPS를 이용한 현재 위치를 검색한다 */
-    fun searchFromGps() {
-        val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
+    private fun searchFromGps() {
+        val dialogClickListener = DialogInterface.OnClickListener { _, which ->
             if(which == DialogInterface.BUTTON_POSITIVE) {
+                // 위치 요청 및 요청중 다이얼로그 띄우기
                 LocationHelper.addLocationResultListener(locationListener)
                 LocationHelper.requestLocation(this, false)
-                ProgressDialog.show(this@SearchLocationActivity, "", getString(R.string.msg_acquiring_your_location_gps))
+                AlertDialog.Builder(this@SearchLocationActivity)
+                        .setMessage(getString(R.string.msg_acquiring_your_location_gps))
+                        .setCancelable(false)
+                        .setNegativeButton(R.string.cancel) { _, _ -> LocationHelper.cancelRequestLocation() }
+                        .show()
             }
         }
 

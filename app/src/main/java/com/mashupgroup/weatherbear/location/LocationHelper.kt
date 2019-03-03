@@ -126,6 +126,11 @@ object LocationHelper {
         return true
     }
 
+    /** 만약 위치를 요청중일 경우 이게 호출되면 호출중인 리스너를 제거한다 */
+    fun cancelRequestLocation() {
+        mLocationManager.removeUpdates(mLocationListener)
+    }
+
     /** LocationManager에 위치 요청할 때 사용할 내부적인 리스너 */
     private val mLocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
