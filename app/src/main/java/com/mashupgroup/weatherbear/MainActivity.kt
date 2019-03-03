@@ -30,7 +30,10 @@ import com.mashupgroup.weatherbear.models.weather.Weather
 import com.mashupgroup.weatherbear.viewmodels.BackgroundViewModel
 import com.mashupgroup.weatherbear.viewmodels.BearViewModel
 import com.mashupgroup.weatherbear.viewmodels.IsDayViewModel
-import com.mashupgroup.weatherbear.widget.*
+import com.mashupgroup.weatherbear.widget.WeatherBearHeadWidget
+import com.mashupgroup.weatherbear.widget.WeatherBearHeadWidgetBg
+import com.mashupgroup.weatherbear.widget.WeatherBoxWidget
+import com.mashupgroup.weatherbear.widget.WeatherBoxWidgetBg
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -64,11 +67,11 @@ class MainActivity : AppCompatActivity() {
     private val weatherInterface = weatherRetrofit.create(WeatherInterface::class.java)
 
 
-    val kakaoAPI = KakaoAPI()
-    val kakaoRetrofit = kakaoAPI.createTransRetrofit()
-    val kakaoInterface = kakaoRetrofit.create(KakaoInterface::class.java)
+    private val kakaoAPI = KakaoAPI()
+    private val kakaoRetrofit = kakaoAPI.createTransRetrofit()
+    private val kakaoInterface = kakaoRetrofit.create(KakaoInterface::class.java)!!
 
-    var dayTimeTemperture = intArrayOf(0, 1, 4, 6, 4, 0, 2, 0)
+    private var dayTimeTemperture = intArrayOf(100, 100, 0, 0, 0, 0, 0, 0)
 
     private val RESULT_CODE_ADDRESS_MANAGE_ACTIVITY = 123
 
@@ -138,10 +141,10 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
 
         // 앱이 닫힐 때(onDestroy) 모든 위젯을 강제로 업데이트한다
-        arrayOf( WeatherBoxWidget::class.java,
-                 WeatherBoxWidgetBg::class.java,
-                 WeatherBearHeadWidget::class.java,
-                 WeatherBearHeadWidgetBg::class.java).forEach { className ->
+        arrayOf(WeatherBoxWidget::class.java,
+                WeatherBoxWidgetBg::class.java,
+                WeatherBearHeadWidget::class.java,
+                WeatherBearHeadWidgetBg::class.java).forEach { className ->
             val intent = Intent(this, className)
             intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
             val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(ComponentName(application, className))
@@ -196,7 +199,6 @@ class MainActivity : AppCompatActivity() {
         item.vmInfo.setDayView()
 
         item.graphArray.set(0, temp.toInt())
-
         item.vmInfo.setDayView()
         /* 여기가 오늘의 날씨  */
         /* weatherInfo */
@@ -269,7 +271,14 @@ class MainActivity : AppCompatActivity() {
         item.graphArray.set(4, (forecastInfo.list[4].main.temp.toDouble() - 273.15).toInt())
         item.graphArray.set(5, (forecastInfo.list[5].main.temp.toDouble() - 273.15).toInt())
         item.graphArray.set(6, (forecastInfo.list[6].main.temp.toDouble() - 273.15).toInt())
+        item.graphArray.set(7, (forecastInfo.list[7].main.temp.toDouble() - 273.15).toInt())
 
+//        if (item.graphArray[0]==100 || item.graphArray[1]==100) {
+//            Log.e("123", "false0")
+//            item.vmInfo.visibleTodayTimeWeatherData = false
+//        }else {
+//            item.vmInfo.visibleTodayTimeWeatherData = true
+//        }
 
         item.vmInfo.setDayView()
 //        for (i in forecastInfo.list) {

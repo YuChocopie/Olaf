@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_weather_box_hight"
         android:layout_marginTop="@dimen/item_weather_box_margin_top"
-        android:background="@drawable/weather_box">
+        android:background="@drawable/weather_box"
+        android:visibility="@{isDayData.visibleTodayTimeWeather ? View.VISIBLE : View.GONE}">
 
         <TextView
             android:id="@+id/TodayTemperaturesText"
@@ -37,8 +38,8 @@
             android:id="@+id/GraphViewTime"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/SIZE_2"
             android:layout_marginStart="@dimen/SIZE_5"
+            android:layout_marginTop="@dimen/SIZE_2"
             android:layout_marginEnd="@dimen/SIZE_5"
             android:layout_marginBottom="@dimen/SIZE_2"
             app:layout_constraintBottom_toTopOf="@+id/layoutLinearlayout"
@@ -56,24 +57,27 @@
             android:id="@+id/layoutLinearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
             android:layout_marginStart="@dimen/SIZE_7"
             android:layout_marginEnd="@dimen/SIZE_7"
+            android:baselineAligned="false"
             android:weightSum="8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
             <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <ImageView
                     android:id="@+id/ivTodayTimeWeather0"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
                     android:src="@{isDayData.ivTodayTimeWeather00}" />
+
                 <TextView
                     android:id="@+id/tvTodayTime0"
                     android:layout_width="wrap_content"
@@ -84,6 +88,7 @@
                     android:textColor="@color/black6"
                     android:textSize="15sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
@@ -112,15 +117,15 @@
             <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivTodayTimeWeather2"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@{isDayData.ivTodayTimeWeather02}"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@{isDayData.ivTodayTimeWeather02}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime02"
@@ -137,15 +142,15 @@
             <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivTodayTimeWeather3"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@{isDayData.ivTodayTimeWeather03}"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@{isDayData.ivTodayTimeWeather03}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime03"
@@ -161,15 +166,15 @@
             <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivTodayTimeWeather4"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@{isDayData.ivTodayTimeWeather04}"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@{isDayData.ivTodayTimeWeather04}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime04"
@@ -186,15 +191,15 @@
             <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivTodayTimeWeather5"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@{isDayData.ivTodayTimeWeather05}"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@{isDayData.ivTodayTimeWeather05}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime05"
@@ -210,15 +215,15 @@
             <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivTodayTimeWeather6"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@{isDayData.ivTodayTimeWeather06}"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@{isDayData.ivTodayTimeWeather06}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime06"
@@ -235,15 +240,15 @@
             <LinearLayout
                 android:layout_width="@dimen/SIZE_24"
                 android:layout_height="54dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivTodayTimeWeather7"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@{isDayData.ivTodayTimeWeather07}"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@{isDayData.ivTodayTimeWeather07}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime07"

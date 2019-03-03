@@ -76,10 +76,17 @@ class MainPagerAdapter : PagerAdapter {
                     weekMinTemperture)
             weekGraphView.drawForBeforeDrawView()
         }
-        if (dayGraphView != null) {
-            dayGraphView.setPoints(LineTemperture, 0.74, plusTime, dayMaxTemperture,
-                    dayMinTemperture)
-            dayGraphView.drawForBeforeDrawView()
+        if (LineTemperture[1] != 100 && LineTemperture[0] != 100) {
+            itemList[position].vmInfo.visibleTodayTimeWeatherData = true
+            itemList[position].vmInfo.setDayView()
+            if (dayGraphView != null) {
+                dayGraphView.setPoints(LineTemperture, 0.74, plusTime, dayMaxTemperture,
+                        dayMinTemperture)
+                dayGraphView.drawForBeforeDrawView()
+            }
+        } else {
+            itemList[position].vmInfo.visibleTodayTimeWeatherData = false
+            itemList[position].vmInfo.setDayView()
         }
 
         return binding.root

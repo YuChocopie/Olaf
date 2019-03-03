@@ -9,6 +9,7 @@ class IsDayViewModel {
 
     //SNOW, RAINY, THUNDER_RAINY, WIND, CLOUD, SUNNY
     //데이터가 안받아지는 경우 아래와 같이..
+    var visibleTodayTimeWeatherData = false
     var todayWeatherData = "SUNNY"
     var todayDustLevelData = 0
     var todayUltraDustLevelData = 0
@@ -39,6 +40,7 @@ class IsDayViewModel {
     var todayAfterWeatherData05 = "SNOW"
     var todayAfterWeatherData06 = "SNOW"
     var todayAfterWeatherData07 = "SNOW"
+    var visibleTodayTimeWeather = false
 
     /*
     날씨 :Image, text
@@ -162,9 +164,13 @@ class IsDayViewModel {
         tomorrowDust = tomorrowDustData
         tomorrowUltraDust = tomorrowUltraDustData
 
+        if (visibleTodayTimeWeatherData) {
+            visibleTodayTimeWeather = visibleTodayTimeWeatherData
+            setTodayTimeWeather()
+        }
+//        visibleTodayTimeWeather = visibleTodayTimeWeatherData
         setTodayWeather()
         setTomorrowWeather()
-        setTodayTimeWeather()
     }
 
     private fun getTime() {
