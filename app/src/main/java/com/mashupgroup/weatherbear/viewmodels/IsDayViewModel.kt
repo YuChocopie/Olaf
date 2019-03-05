@@ -32,14 +32,7 @@ class IsDayViewModel {
     var tomorrowDustData = ""
     var tomorrowUltraDustData = ""
 
-    var todayAfterWeatherData00 = "SNOW"
-    var todayAfterWeatherData01 = "SNOW"
-    var todayAfterWeatherData02 = "SNOW"
-    var todayAfterWeatherData03 = "SNOW"
-    var todayAfterWeatherData04 = "SNOW"
-    var todayAfterWeatherData05 = "SNOW"
-    var todayAfterWeatherData06 = "SNOW"
-    var todayAfterWeatherData07 = "SNOW"
+    var todayAfterWeatherDatas = MutableList(8) { "SNOW" }
     var visibleTodayTimeWeather = false
 
     /*
@@ -124,24 +117,12 @@ class IsDayViewModel {
     var tomorrowUltraDustText = WeatherBearApp.appContext.resources.getText(R.string.noData) as String
     var tomorrowUltraDustColor = DustLevel.GOOD.color
 
-    var ivTodayTimeWeather00 = Weather.SUNNY.image
-    var ivTodayTimeWeather01 = Weather.SUNNY.image
-    var ivTodayTimeWeather02 = Weather.SUNNY.image
-    var ivTodayTimeWeather03 = Weather.SUNNY.image
-    var ivTodayTimeWeather04 = Weather.SUNNY.image
-    var ivTodayTimeWeather05 = Weather.SUNNY.image
-    var ivTodayTimeWeather06 = Weather.SUNNY.image
-    var ivTodayTimeWeather07 = Weather.SUNNY.image
+    var ivTodayTimeWeathers = MutableList(8) { Weather.SUNNY.image }
 
     var graphTime: Int = 0
-    var tvTodayTime00 = currentTime.toString()
-    var tvTodayTime01 = todayTimeGraph()
-    var tvTodayTime02 = todayTimeGraph()
-    var tvTodayTime03 = todayTimeGraph()
-    var tvTodayTime04 = todayTimeGraph()
-    var tvTodayTime05 = todayTimeGraph()
-    var tvTodayTime06 = todayTimeGraph()
-    var tvTodayTime07 = todayTimeGraph()
+    var tvTodayTimes = MutableList(8) { todayTimeGraph() }.apply {
+        this[0] = currentTime.toString()
+    }
 
     fun todayTimeGraph(): String {
         graphTime = ((graphTime / 3 + 1) * 3) % 24
@@ -179,26 +160,15 @@ class IsDayViewModel {
 
     private fun setTodayTimeWeather() {
         graphTime = currentTime
-        if (currentTime < 10)
-            tvTodayTime00 = "0" + currentTime
-        else
-            tvTodayTime00 = currentTime.toString()
-        tvTodayTime01 = todayTimeGraph()
-        tvTodayTime02 = todayTimeGraph()
-        tvTodayTime03 = todayTimeGraph()
-        tvTodayTime04 = todayTimeGraph()
-        tvTodayTime05 = todayTimeGraph()
-        tvTodayTime06 = todayTimeGraph()
-        tvTodayTime07 = todayTimeGraph()
+        for (i in 0..7) {
+            if (i == 0) {
+                tvTodayTimes[i] = if (currentTime < 10) "0" + currentTime else currentTime.toString()
+            } else {
+                tvTodayTimes[i] = todayTimeGraph()
+            }
 
-        ivTodayTimeWeather00 = todayWetherGraph(todayAfterWeatherData00, 0)
-        ivTodayTimeWeather01 = todayWetherGraph(todayAfterWeatherData01, 1)
-        ivTodayTimeWeather02 = todayWetherGraph(todayAfterWeatherData02, 2)
-        ivTodayTimeWeather03 = todayWetherGraph(todayAfterWeatherData03, 3)
-        ivTodayTimeWeather04 = todayWetherGraph(todayAfterWeatherData04, 4)
-        ivTodayTimeWeather05 = todayWetherGraph(todayAfterWeatherData05, 5)
-        ivTodayTimeWeather06 = todayWetherGraph(todayAfterWeatherData06, 6)
-        ivTodayTimeWeather07 = todayWetherGraph(todayAfterWeatherData07, 7)
+            ivTodayTimeWeathers[i] = todayWetherGraph(todayAfterWeatherDatas[i], i)
+        }
     }
 
     private fun todayWetherGraph(todayAfterWeatherData: String, num: Int): Drawable {
