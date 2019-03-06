@@ -248,15 +248,15 @@ class MainActivity : AppCompatActivity() {
                 forecastInfo.list[noonTime].wind.speed.toDouble()).toString()
         item.vmInfo.tomorrowTemperatureData = (temp.toInt()).toString()
         //오늘의 날씨 그래프
-        forecastInfo.list.subList(0, 6).forEachIndexed { index, forecastWeather ->
-            item.vmInfo.todayAfterWeatherDatas[index] = weatherCalculation(forecastWeather.weather[0].id)
+        forecastInfo.list.subList(0, 7).forEachIndexed { index, forecastWeather ->
+            item.vmInfo.todayAfterWeatherDatas[index + 1] = weatherCalculation(forecastWeather.weather[0].id)
         }
 
         item.vmInfo.tomorrowWetherBoxTextData = tomorrowWeatherText((forecastInfo.list[0].main
                 .temp.toDouble() - 273.15).toInt(), temp.toInt(), weather)
 
-        forecastInfo.list.subList(1, 7).forEachIndexed { index, forecastWeather ->
-            item.graphArray[index] = (forecastWeather.main.temp.toDouble() - 273.15).toInt()
+        forecastInfo.list.subList(1, 8).forEachIndexed { index, forecastWeather ->
+            item.graphArray[index + 1] = (forecastWeather.main.temp.toDouble() - 273.15).toInt()
         }
 
         item.vmInfo.setDayView()
