@@ -2,10 +2,11 @@ package com.mashupgroup.weatherbear
 
 import android.content.Context.MODE_PRIVATE
 import android.location.Address
+import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
 import java.lang.Exception
-import kotlin.collections.ArrayList
 
 const val SP_WEATHERBEAR_KEY = "WeatherBearKey"
 const val SP_ADDR_SAVE_KEY = "AddressSaveKey"
@@ -28,14 +29,7 @@ object Global {
         val editor = prefs.edit()
 
         // gson을 이용하여 addressList를 각각 json으로 직렬화한 후, 직렬화된 문자열을 저장한다
-        val gson = Gson()
-        val addrJsonArr = JSONArray()
-        for(address in addressList) {
-            val addrJson = gson.toJson(address)
-            addrJsonArr.put(addrJson)
-        }
-
-        editor.putString(SP_ADDR_SAVE_KEY, addrJsonArr.toString())
+        editor.putString(SP_ADDR_SAVE_KEY, Gson().toJson(addressList))
 
         editor.apply()
     }
@@ -51,12 +45,7 @@ object Global {
         try {
             val prefs = context.getSharedPreferences(SP_WEATHERBEAR_KEY, MODE_PRIVATE)
             val addrJsonArrString = prefs.getString(SP_ADDR_SAVE_KEY, null) ?: return addressList
-            val addrJsonArr = JSONArray(addrJsonArrString)
-            val gson = Gson()
-            for(i in 0..addrJsonArr.length()) {
-                    val addr = gson.fromJson(addrJsonArr.get(i).toString(), Address::class.java) ?: continue
-                    addressList.add(addr)
-            }
+            addressList = Gson().fromJson(addrJsonArrString, (object: TypeToken<ArrayList<Address>>(){}).type)
         } catch (e : Exception) {
             e.printStackTrace()
         }
