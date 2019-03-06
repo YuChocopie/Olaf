@@ -76,7 +76,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@{isDayData.ivTodayTimeWeather00}" />
+                    android:src="@{isDayData.ivTodayTimeWeathers[0]}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime0"
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:lineSpacingExtra="7sp"
-                    android:text="@{isDayData.tvTodayTime00}"
+                    android:text="@{isDayData.tvTodayTimes[0]}"
                     android:textColor="@color/black6"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -100,7 +100,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@{isDayData.ivTodayTimeWeather01}" />
+                    android:src="@{isDayData.ivTodayTimeWeathers[1]}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime01"
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:lineSpacingExtra="7sp"
-                    android:text="@{isDayData.tvTodayTime01}"
+                    android:text="@{isDayData.tvTodayTimes[1]}"
                     android:textColor="@color/black6"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -125,7 +125,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@{isDayData.ivTodayTimeWeather02}" />
+                    android:src="@{isDayData.ivTodayTimeWeathers[2]}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime02"
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:lineSpacingExtra="7sp"
-                    android:text="@{isDayData.tvTodayTime02}"
+                    android:text="@{isDayData.tvTodayTimes[2]}"
                     android:textColor="@color/black6"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -150,7 +150,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@{isDayData.ivTodayTimeWeather03}" />
+                    android:src="@{isDayData.ivTodayTimeWeathers[3]}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime03"
@@ -158,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:lineSpacingExtra="7sp"
-                    android:text="@{isDayData.tvTodayTime03}"
+                    android:text="@{isDayData.tvTodayTimes[3]}"
                     android:textColor="@color/black6"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -174,7 +174,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@{isDayData.ivTodayTimeWeather04}" />
+                    android:src="@{isDayData.ivTodayTimeWeathers[4]}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime04"
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:lineSpacingExtra="7sp"
-                    android:text="@{isDayData.tvTodayTime04}"
+                    android:text="@{isDayData.tvTodayTimes[4]}"
                     android:textColor="@color/black6"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -199,7 +199,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@{isDayData.ivTodayTimeWeather05}" />
+                    android:src="@{isDayData.ivTodayTimeWeathers[5]}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime05"
@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:lineSpacingExtra="7sp"
-                    android:text="@{isDayData.tvTodayTime05}"
+                    android:text="@{isDayData.tvTodayTimes[5]}"
                     android:textColor="@color/black6"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -223,7 +223,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@{isDayData.ivTodayTimeWeather06}" />
+                    android:src="@{isDayData.ivTodayTimeWeathers[6]}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime06"
@@ -231,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:lineSpacingExtra="7sp"
-                    android:text="@{isDayData.tvTodayTime06}"
+                    android:text="@{isDayData.tvTodayTimes[6]}"
                     android:textColor="@color/black6"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -248,7 +248,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@{isDayData.ivTodayTimeWeather07}" />
+                    android:src="@{isDayData.ivTodayTimeWeathers[7]}" />
 
                 <TextView
                     android:id="@+id/tvTodayTime07"
@@ -256,7 +256,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:lineSpacingExtra="7sp"
-                    android:text="@{isDayData.tvTodayTime07}"
+                    android:text="@{isDayData.tvTodayTimes[7]}"
                     android:textColor="@color/black6"
                     android:textSize="15sp" />
             </LinearLayout>

@@ -194,7 +194,7 @@ class MainActivity : AppCompatActivity() {
         item.vmInfo.todayBodyTemperatureData = bodyTemperatureCalculation(temp, weatherInfo.wind
                 .speed).toString()
         item.vmInfo.todayTemperatureData = (temp.toInt()).toString()
-        item.vmInfo.todayAfterWeatherData00 = weather
+        item.vmInfo.todayAfterWeatherDatas[0] = weather
 
         item.graphArray.set(0, temp.toInt())
         item.vmInfo.setDayView()
@@ -248,29 +248,16 @@ class MainActivity : AppCompatActivity() {
                 forecastInfo.list[noonTime].wind.speed.toDouble()).toString()
         item.vmInfo.tomorrowTemperatureData = (temp.toInt()).toString()
         //오늘의 날씨 그래프
-        item.vmInfo.todayAfterWeatherData01 = weatherCalculation(forecastInfo.list[0]
-                .weather[0].id)
-        item.vmInfo.todayAfterWeatherData02 = weatherCalculation(forecastInfo.list[1]
-                .weather[0].id)
-        item.vmInfo.todayAfterWeatherData03 = weatherCalculation(forecastInfo.list[2]
-                .weather[0].id)
-        item.vmInfo.todayAfterWeatherData04 = weatherCalculation(forecastInfo.list[3]
-                .weather[0].id)
-        item.vmInfo.todayAfterWeatherData05 = weatherCalculation(forecastInfo.list[4]
-                .weather[0].id)
-        item.vmInfo.todayAfterWeatherData06 = weatherCalculation(forecastInfo.list[5]
-                .weather[0].id)
-        item.vmInfo.todayAfterWeatherData07 = weatherCalculation(forecastInfo.list[6]
-                .weather[0].id)
+        forecastInfo.list.subList(0, 7).forEachIndexed { index, forecastWeather ->
+            item.vmInfo.todayAfterWeatherDatas[index + 1] = weatherCalculation(forecastWeather.weather[0].id)
+        }
+
         item.vmInfo.tomorrowWetherBoxTextData = tomorrowWeatherText((forecastInfo.list[0].main
                 .temp.toDouble() - 273.15).toInt(), temp.toInt(), weather)
-        item.graphArray.set(1, (forecastInfo.list[1].main.temp.toDouble() - 273.15).toInt())
-        item.graphArray.set(2, (forecastInfo.list[2].main.temp.toDouble() - 273.15).toInt())
-        item.graphArray.set(3, (forecastInfo.list[3].main.temp.toDouble() - 273.15).toInt())
-        item.graphArray.set(4, (forecastInfo.list[4].main.temp.toDouble() - 273.15).toInt())
-        item.graphArray.set(5, (forecastInfo.list[5].main.temp.toDouble() - 273.15).toInt())
-        item.graphArray.set(6, (forecastInfo.list[6].main.temp.toDouble() - 273.15).toInt())
-        item.graphArray.set(7, (forecastInfo.list[7].main.temp.toDouble() - 273.15).toInt())
+
+        forecastInfo.list.subList(1, 8).forEachIndexed { index, forecastWeather ->
+            item.graphArray[index + 1] = (forecastWeather.main.temp.toDouble() - 273.15).toInt()
+        }
 
         item.vmInfo.setDayView()
 //        for (i in forecastInfo.list) {
