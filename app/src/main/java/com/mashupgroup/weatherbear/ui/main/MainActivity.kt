@@ -218,6 +218,7 @@ class MainActivity : AppCompatActivity() {
         item.vmBear.setBear()
         // 상단 곰돌이 뷰 업데이트 (날씨 정보가 어쨌든 확인되면 바로 갱신한다)
         setTopViewModelData(viewPager.currentItem)
+        mainPagerAdapter.notifyDataSetChanged()
     }
 
 
@@ -225,6 +226,7 @@ class MainActivity : AppCompatActivity() {
 //        Log.e("times2", forecastInfo.list[0].weather.coord.lon.toString())
         /* 여기가 5일치 날씨 forecastInfo */
         //해당장소의시간
+        Log.v("TAG", "forecast: ${forecastInfo.toString()}")
         val tz: TimeZone = TimeZone.getTimeZone("Greenwich")
         val date = Date()
         val df = SimpleDateFormat("HH")
@@ -280,6 +282,7 @@ class MainActivity : AppCompatActivity() {
 ////            val vv = SimpleDateFormat("MM dd, yyyy hh:mm a").format(df)
 ////             i.main.temp (Default는 켈빈이므로 temp - 273.15 해야 섭씨온도가 나옵니다!)
 //        }
+        mainPagerAdapter.notifyDataSetChanged()
     }
 
     private fun tomorrowWeatherText(currendTemp: Int, tomorrowTemp: Int, tomorrowWeather: String): String {
@@ -433,7 +436,7 @@ class MainActivity : AppCompatActivity() {
 
             mainPagerAdapter.addData(item)
         }
-
+        mainPagerAdapter.notifyDataSetChanged()
         viewPager.initIndicator()
 
         // ViewModel업데이트 (처음 아이템으로)

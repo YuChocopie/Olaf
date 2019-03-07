@@ -109,7 +109,6 @@ class MainPagerAdapter : PagerAdapter {
      */
     fun addData(data: MainPagerItem) {
         itemList.add(data)
-        notifyDataSetChanged()
     }
 
     override fun getItemPosition(`object`: Any): Int {
