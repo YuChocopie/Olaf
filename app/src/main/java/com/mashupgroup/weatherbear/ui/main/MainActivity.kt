@@ -22,8 +22,9 @@ import android.view.View
 import android.widget.Toast
 import com.mashupgroup.weatherbear.*
 import com.mashupgroup.weatherbear.Global.createLocationString
-import com.mashupgroup.weatherbear.api.*
+import com.mashupgroup.weatherbear.data.DataRepository
 import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
+import com.mashupgroup.weatherbear.models.air.Air
 import com.mashupgroup.weatherbear.ui.location.ILocationResultListener
 import com.mashupgroup.weatherbear.ui.location.LocationHelper
 import com.mashupgroup.weatherbear.ui.location.SelectLocationActivity
@@ -37,8 +38,6 @@ import com.mashupgroup.weatherbear.widget.WeatherBearHeadWidget
 import com.mashupgroup.weatherbear.widget.WeatherBearHeadWidgetBg
 import com.mashupgroup.weatherbear.widget.WeatherBoxWidget
 import com.mashupgroup.weatherbear.widget.WeatherBoxWidgetBg
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
@@ -57,22 +56,6 @@ class MainActivity : AppCompatActivity() {
 
     private val noAddressBearVM = BearViewModel()
     private val noAddressBgVM = BackgroundViewModel()
-
-    /* API */
-    private val airAPI = AirAPI()
-    private val airStationRetrofit = airAPI.createStationInfoRetrofit()
-    private val airStationInterface = airStationRetrofit.create(AirInterface::class.java)
-    private val airRetrofit = airAPI.createAirInfoRetrofit()
-    private val airInterface = airRetrofit.create(AirInterface::class.java)
-
-    private val weatherAPI = WeatherAPI()
-    private val weatherRetrofit = weatherAPI.createWeatherRetrofit()
-    private val weatherInterface = weatherRetrofit.create(WeatherInterface::class.java)
-
-
-    private val kakaoAPI = KakaoAPI()
-    private val kakaoRetrofit = kakaoAPI.createTransRetrofit()
-    private val kakaoInterface = kakaoRetrofit.create(KakaoInterface::class.java)!!
 
     private var dayTimeTemperture = intArrayOf(100, 100, 0, 0, 0, 0, 0, 0)
 
@@ -182,8 +165,36 @@ class MainActivity : AppCompatActivity() {
         LocationHelper.requestLocation(this, true)
     }
 
+    private fun requestAirResponse(item: MainPagerItem, airInfo: Air) {
+        Log.v("TAG", "airInfo: ${airInfo.toString()}")
+        val airItem = airInfo.list[0]
+
+        //곰의 모습 data
+        item.vmBear.fineDustData = airItem.pm10Grade1h.toInt()
+        item.vmBear.setBear()
+
+        item.vmBG.fineDustLevel = airItem.pm10Grade1h.toInt()
+        item.vmBG.setBackground()
+        //날씨 boxData
+        item.vmInfo.todayDustLevelData = airItem.pm10Grade1h.toInt()
+        item.vmInfo.todayUltraDustLevelData = checkUltraDustLevel(
+                airItem.pm25Value.toInt())
+        item.vmInfo.todayDustData = airItem.pm10Value + "㎍/㎥"
+        item.vmInfo.todayUltraDustData = airItem.pm25Value + "㎍/㎥"
+
+        item.vmInfo.tomorrowDustLevelData = airItem.pm10Grade.toInt()
+        item.vmInfo.tomorrowUltraDustLevelData = checkUltraDustLevel(
+                airItem.pm25Value24.toInt())
+        item.vmInfo.tomorrowDustData = airItem.pm10Value24 + "㎍/㎥"
+        item.vmInfo.tomorrowUltraDustData = airItem.pm25Value24 + "㎍/㎥"
+        item.vmInfo.setDayView()
+
+        setTopViewModelData(viewPager.currentItem)
+        mainPagerAdapter.notifyDataSetChanged()
+    }
+
     private fun requestWeatherResponse(item: MainPagerItem, weatherInfo: Weather) {
-        Log.v("csh Weather", weatherInfo.toString())
+        Log.v("TAG", "weather: ${weatherInfo.toString()}")
         /* 여기가 오늘의 날씨  */
         /* weatherInfo */
         var weather = "SUNNY"
@@ -337,108 +348,30 @@ class MainActivity : AppCompatActivity() {
     private fun requestItemUpdate(item: MainPagerItem, location: Location) {
 
         /* Get TM Postion */
-        kakaoInterface.getPos(kakaoApiToken, location.longitude, location.latitude, "WGS84", "TM")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ coord ->
-                    var tmX = coord.documents[0].x
-                    var tmY = coord.documents[0].y
-
-                    requestStationInfo(item, tmX, tmY)
+        DataRepository.getAirInfo(location)
+                .subscribe({ airInfo ->
+                    requestAirResponse(item, airInfo)
                 }, { error ->
                     error.printStackTrace()
                 })
 
         /* Get Weather */
-        weatherInterface.getWeather(location.latitude, location.longitude, weatherApiToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        DataRepository.getWeather(location)
                 .subscribe({ weatherInfo ->
-                    if (weatherInfo != null) {
-                        requestWeatherResponse(item, weatherInfo)
-
-                    } else {
-
-
-                    }
-
-                }, {
-
+                    requestWeatherResponse(item, weatherInfo)
+                }, { error ->
+                    error.printStackTrace()
                 })
-
 
         /* Get Forecast */
-        weatherInterface.getForecast(location.latitude, location.longitude, weatherApiToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        DataRepository.getForecast(location)
                 .subscribe({ forecastInfo ->
-                    if (forecastInfo != null) {
-                        requestForecastResponse(item, forecastInfo)
-
-                    } else {
-
-                    }
-
-                }, {
-
-                })
-
-    }
-
-    @SuppressLint("CheckResult")
-    private fun requestStationInfo(item: MainPagerItem, tmX: String, tmY: String) {
-        /* Get StationInfo */
-        airStationInterface.getStation("json", tmX, tmY, airApiToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ stationInfo ->
-                    if (stationInfo != null) {
-                        // Air 정보 가져오기
-                        requestAirInfo(item, stationInfo.list[0].stationName)
-                    } else {
-
-                    }
+                    requestForecastResponse(item, forecastInfo)
                 }, { error ->
                     error.printStackTrace()
                 })
     }
 
-    @SuppressLint("CheckResult")
-    private fun requestAirInfo(item: MainPagerItem, stationName: String) {
-        /* Get AirInfo */
-        airInterface.getAir(getString(R.string.api_json), 1, stationName, getString(R.string.api_daily), 1.3, airApiToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ airInfo ->
-                    Log.v("requestAirInfo", "${stationName} : ${airInfo.toString()}")
-                    val airItem = airInfo.list[0]
-
-                    //곰의 모습 data
-                    item.vmBear.fineDustData = airItem.pm10Grade1h.toInt()
-                    item.vmBear.setBear()
-
-                    item.vmBG.fineDustLevel = airItem.pm10Grade1h.toInt()
-                    item.vmBG.setBackground()
-                    //날씨 boxData
-                    item.vmInfo.todayDustLevelData = airItem.pm10Grade1h.toInt()
-                    item.vmInfo.todayUltraDustLevelData = checkUltraDustLevel(
-                            airItem.pm25Value.toInt())
-                    item.vmInfo.todayDustData = airItem.pm10Value + "㎍/㎥"
-                    item.vmInfo.todayUltraDustData = airItem.pm25Value + "㎍/㎥"
-
-                    item.vmInfo.tomorrowDustLevelData = airItem.pm10Grade.toInt()
-                    item.vmInfo.tomorrowUltraDustLevelData = checkUltraDustLevel(
-                            airItem.pm25Value24.toInt())
-                    item.vmInfo.tomorrowDustData = airItem.pm10Value24 + "㎍/㎥"
-                    item.vmInfo.tomorrowUltraDustData = airItem.pm25Value24 + "㎍/㎥"
-                    item.vmInfo.setDayView()
-
-                    setTopViewModelData(viewPager.currentItem)
-                    mainPagerAdapter.notifyDataSetChanged()
-                }, { error ->
-                    error.printStackTrace()
-                })
-    }
 
     private fun checkUltraDustLevel(ultraDust: Int): Int {
         if (ultraDust < 16) {
