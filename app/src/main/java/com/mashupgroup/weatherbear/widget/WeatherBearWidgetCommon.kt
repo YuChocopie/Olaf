@@ -9,6 +9,8 @@ import android.location.Location
 import android.location.LocationManager
 import android.util.Log
 import com.mashupgroup.weatherbear.*
+import com.mashupgroup.weatherbear.api.*
+import com.mashupgroup.weatherbear.Global
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

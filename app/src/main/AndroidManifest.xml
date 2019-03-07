@@ -16,16 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".InfoActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.info.InfoActivity"></activity>
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".location.SelectLocationActivity" />
-        <activity android:name=".location.SearchLocationActivity" />
+        <activity android:name="com.mashupgroup.weatherbear.ui.location.SelectLocationActivity" />
+        <activity android:name="com.mashupgroup.weatherbear.ui.location.SearchLocationActivity" />
 
         <receiver android:name=".widget.WeatherBoxWidget">
             <intent-filter>

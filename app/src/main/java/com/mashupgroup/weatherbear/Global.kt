@@ -2,10 +2,8 @@ package com.mashupgroup.weatherbear
 
 import android.content.Context.MODE_PRIVATE
 import android.location.Address
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.json.JSONArray
 import java.lang.Exception
 
 const val SP_WEATHERBEAR_KEY = "WeatherBearKey"
