@@ -24,6 +24,7 @@ import com.mashupgroup.weatherbear.*
 import com.mashupgroup.weatherbear.Global.createLocationString
 import com.mashupgroup.weatherbear.data.DataRepository
 import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
+import com.mashupgroup.weatherbear.models.air.AirItem
 import com.mashupgroup.weatherbear.models.air.AirResponse
 import com.mashupgroup.weatherbear.ui.location.ILocationResultListener
 import com.mashupgroup.weatherbear.ui.location.LocationHelper
@@ -165,10 +166,7 @@ class MainActivity : AppCompatActivity() {
         LocationHelper.requestLocation(this, true)
     }
 
-    private fun requestAirResponse(item: MainPagerItem, airInfo: AirResponse) {
-        Log.v("TAG", "airInfo: ${airInfo.toString()}")
-        val airItem = airInfo.list[0]
-
+    private fun requestAirResponse(item: MainPagerItem, airItem: AirItem) {
         //곰의 모습 data
         item.vmBear.fineDustData = airItem.pm10Grade1h.toInt()
         item.vmBear.setBear()
@@ -352,8 +350,8 @@ class MainActivity : AppCompatActivity() {
 
         /* Get TM Postion */
         DataRepository.getAirInfo(location)
-                .subscribe({ airInfo ->
-                    requestAirResponse(item, airInfo)
+                .subscribe({ items ->
+                    requestAirResponse(item, items[0])
                 }, { error ->
                     error.printStackTrace()
                 })

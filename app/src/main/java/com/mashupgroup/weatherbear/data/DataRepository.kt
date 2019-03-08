@@ -15,7 +15,10 @@ object DataRepository {
 
     private val remoteSource: WeatherBearRemoteSource = WeatherBearRemoteSource()
 
-    fun getAirInfo(location: Location): Observable<AirResponse> = remoteSource.getAirInfo(location)
+    fun getAirInfo(location: Location): Observable<List<AirItem>> = remoteSource.getAirInfo(location)
+            .map { it.list }
+            .observeOn(AndroidSchedulers.mainThread())
+
 
     fun getWeather(location: Location): Observable<Weather> = remoteSource.getWeather(location)
             .subscribeOn(Schedulers.io())

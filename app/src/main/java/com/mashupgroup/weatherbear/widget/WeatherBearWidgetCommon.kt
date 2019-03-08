@@ -96,9 +96,9 @@ abstract class WeatherBearWidgetCommon : AppWidgetProvider() {
 
         /* Get TM Postion */
         DataRepository.getAirInfo(location)
-                .subscribe({ airInfo ->
+                .subscribe({ items ->
                     data.isDustLevelUpdated = true
-                    val dustLevel = airInfo.list[0].pm10Grade.toInt()
+                    val dustLevel = items[0].pm10Grade.toInt()
                     data.fineDustLevel = when(dustLevel) {
                         1 -> WdgFineDustLvl.GOOD
                         2 -> WdgFineDustLvl.NORMAL
