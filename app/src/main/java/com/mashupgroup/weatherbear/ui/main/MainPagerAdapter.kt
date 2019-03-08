@@ -9,13 +9,8 @@ import android.view.ViewGroup
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.databinding.ItemWeatherBinding
 
-class MainPagerAdapter : PagerAdapter {
-    private var context: Context
+class MainPagerAdapter : PagerAdapter() {
     var itemList = ArrayList<MainPagerItem>(); private set
-
-    constructor(context: Context) {
-        this.context = context
-    }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
@@ -26,11 +21,8 @@ class MainPagerAdapter : PagerAdapter {
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
-                as LayoutInflater
-
-
-        val binding: ItemWeatherBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_weather, container, false)
+        val binding: ItemWeatherBinding = DataBindingUtil.inflate(LayoutInflater.from(container.context),
+                R.layout.item_weather, container, false)
         binding.isDayData = itemList[position].vmInfo
         container.addView(binding.getRoot())
 

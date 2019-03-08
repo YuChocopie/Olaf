@@ -48,7 +48,7 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter(this)
+    var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter()
     private val weatherApiToken = BuildConfig.WEATHER_API_TOKEN
     private val airApiToken = BuildConfig.AIR_API_TOKEN
     private val kakaoApiToken = BuildConfig.KAKAO_API_TOKEN
