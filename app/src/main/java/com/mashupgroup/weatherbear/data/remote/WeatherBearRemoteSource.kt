@@ -2,8 +2,8 @@ package com.mashupgroup.weatherbear.data.remote
 
 import android.location.Location
 import com.mashupgroup.weatherbear.BuildConfig
-import com.mashupgroup.weatherbear.models.air.Air
-import com.mashupgroup.weatherbear.models.air.Station
+import com.mashupgroup.weatherbear.models.air.AirResponse
+import com.mashupgroup.weatherbear.models.air.StationResponse
 import com.mashupgroup.weatherbear.models.kakao.Coord
 import com.mashupgroup.weatherbear.models.weather.Forecast
 import com.mashupgroup.weatherbear.models.weather.Weather
@@ -58,36 +58,32 @@ class WeatherBearRemoteSource {
                 .create(TranscoordService::class.java)
     }
 
-    fun getAirInfo(location: Location): Observable<Air> = transcoordService
+    fun getAirInfo(location: Location): Observable<AirResponse> = transcoordService
             .getPos(location.longitude, location.latitude)
             .subscribeOn(Schedulers.io())
             .concatMap { airService.getStation(it.documents[0].x, it.documents[0].y) }
             .concatMap { airService.getAir(it.list[0].stationName) }
-            .observeOn(AndroidSchedulers.mainThread())
 
 
     fun getWeather(location: Location): Observable<Weather> = weatherService
             .getWeather(location.latitude, location.longitude)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+
 
     fun getForecast(location: Location): Observable<Forecast> = weatherService
             .getForecast(location.latitude, location.longitude)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
 
 }
 
 interface AirService {
 
-    /** Get Station with TM Position **/
+    /** Get StationResponse with TM Position **/
     @GET("MsrstnInfoInqireSvc/getNearbyMsrstnList?_returnType=json&ServiceKey=${BuildConfig.AIR_API_TOKEN}")
     fun getStation(
             @Query("tmX") tmX: String,
-            @Query("tmY") tmY: String): Observable<Station>
+            @Query("tmY") tmY: String): Observable<StationResponse>
 
     @GET("ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?_returnType=json&ServiceKey=${BuildConfig.AIR_API_TOKEN}&numOfRows=1&dataTerm=DAILY&ver=1.3")
-    fun getAir(@Query("stationName") stationName: String): Observable<Air>
+    fun getAir(@Query("stationName") stationName: String): Observable<AirResponse>
 }
 
 interface WeatherService {

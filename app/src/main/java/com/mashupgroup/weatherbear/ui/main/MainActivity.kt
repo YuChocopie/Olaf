@@ -24,7 +24,7 @@ import com.mashupgroup.weatherbear.*
 import com.mashupgroup.weatherbear.Global.createLocationString
 import com.mashupgroup.weatherbear.data.DataRepository
 import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
-import com.mashupgroup.weatherbear.models.air.Air
+import com.mashupgroup.weatherbear.models.air.AirResponse
 import com.mashupgroup.weatherbear.ui.location.ILocationResultListener
 import com.mashupgroup.weatherbear.ui.location.LocationHelper
 import com.mashupgroup.weatherbear.ui.location.SelectLocationActivity
@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity() {
         LocationHelper.requestLocation(this, true)
     }
 
-    private fun requestAirResponse(item: MainPagerItem, airInfo: Air) {
+    private fun requestAirResponse(item: MainPagerItem, airInfo: AirResponse) {
         Log.v("TAG", "airInfo: ${airInfo.toString()}")
         val airItem = airInfo.list[0]
 
