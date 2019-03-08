@@ -49,11 +49,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var mainPagerAdapter: MainPagerAdapter = MainPagerAdapter()
-    private val weatherApiToken = BuildConfig.WEATHER_API_TOKEN
-    private val airApiToken = BuildConfig.AIR_API_TOKEN
-    private val kakaoApiToken = BuildConfig.KAKAO_API_TOKEN
-    private var lat = 0.0
-    private var lon = 0.0
     lateinit var mainViewDataBinding: ActivityMainBinding
 
     private val noAddressBearVM = BearViewModel()
@@ -151,9 +146,6 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, R.string.err_str_location_ready, Toast.LENGTH_SHORT).show()
                     return
                 }
-
-                lat = location.latitude
-                lon = location.longitude
 
                 // '첫번째 아이템이 현위치' 옵션이 켜져있다면 첫번째 아이템 갱신
                 if (Global.isFirstPageCurrentLocation && mainPagerAdapter.count > 0) {
