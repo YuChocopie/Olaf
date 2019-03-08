@@ -25,7 +25,6 @@ import com.mashupgroup.weatherbear.Global.createLocationString
 import com.mashupgroup.weatherbear.data.DataRepository
 import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
 import com.mashupgroup.weatherbear.models.air.AirItem
-import com.mashupgroup.weatherbear.models.air.AirResponse
 import com.mashupgroup.weatherbear.ui.location.ILocationResultListener
 import com.mashupgroup.weatherbear.ui.location.LocationHelper
 import com.mashupgroup.weatherbear.ui.location.SelectLocationActivity
@@ -39,6 +38,8 @@ import com.mashupgroup.weatherbear.widget.WeatherBearHeadWidget
 import com.mashupgroup.weatherbear.widget.WeatherBearHeadWidgetBg
 import com.mashupgroup.weatherbear.widget.WeatherBoxWidget
 import com.mashupgroup.weatherbear.widget.WeatherBoxWidgetBg
+import com.uber.autodispose.AutoDispose
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bear.*
 import kotlinx.android.synthetic.main.top_toolbar.*
@@ -350,6 +351,7 @@ class MainActivity : AppCompatActivity() {
 
         /* Get TM Postion */
         DataRepository.getAirInfo(location)
+                .`as`(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(this)))
                 .subscribe({ items ->
                     requestAirResponse(item, items[0])
                 }, { error ->
@@ -358,6 +360,7 @@ class MainActivity : AppCompatActivity() {
 
         /* Get Weather */
         DataRepository.getWeather(location)
+                .`as`(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(this)))
                 .subscribe({ weatherInfo ->
                     requestWeatherResponse(item, weatherInfo)
                 }, { error ->
@@ -366,6 +369,7 @@ class MainActivity : AppCompatActivity() {
 
         /* Get Forecast */
         DataRepository.getForecast(location)
+                .`as`(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(this)))
                 .subscribe({ forecastInfo ->
                     requestForecastResponse(item, forecastInfo)
                 }, { error ->
