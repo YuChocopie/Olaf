@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="bear"
             type="com.mashupgroup.weatherbear.ui.main.viewmodel.BearViewModel" />
@@ -15,7 +14,7 @@
             type="com.mashupgroup.weatherbear.ui.main.viewmodel.BackgroundViewModel" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/mainCoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +30,7 @@
             app:layout_behavior="com.mashupgroup.weatherbear.ui.main.FixAppBarLayoutBehavior"
             android:theme="@style/Base.ThemeOverlay.AppCompat">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -46,7 +45,7 @@
                     bind:bear="@{bear}"
                     bind:bg="@{bg}" />
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/main_topbar_height"
@@ -54,7 +53,7 @@
                     app:popupTheme="@id/toolbar">
                     <include layout="@layout/top_toolbar"
                         bind:bg="@{bg}"/>
-                </android.support.v7.widget.Toolbar>
+                </androidx.appcompat.widget.Toolbar>
 
                 <!-- ViewPager indicator -->
                 <com.mashupgroup.weatherbear.ui.main.MainIndicator
@@ -66,7 +65,7 @@
                     android:layout_marginBottom="@dimen/SIZE_7"
                     android:gravity="center"
                     android:orientation="horizontal" />
-            </android.support.design.widget.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.mashupgroup.weatherbear.ui.main.MainAppbarLayout>
 
         <!-- 'Add location' button for empty list -->
@@ -79,7 +78,7 @@
             android:text="@string/main_no_address_added_touch_here_to_add"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/mainScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -94,7 +93,7 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </android.support.v4.widget.NestedScrollView>
-    </android.support.design.widget.CoordinatorLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

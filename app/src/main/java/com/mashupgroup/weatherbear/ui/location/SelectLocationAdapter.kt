@@ -1,11 +1,11 @@
 package com.mashupgroup.weatherbear.ui.location
 
-import android.databinding.DataBindingUtil
 import android.location.Address
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.databinding.ItemLocalListBinding
 import java.util.*
@@ -48,7 +48,7 @@ class SelectLocationAdapter(var itemRemoveListener: IItemChangedRequestListener)
     }
 
     companion object {
-        class SelectItemVH(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        class SelectItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             fun bind(vmItem : SelectLocationItem) {
                 // 아이템 뷰모델을 바인딩하고, 롱프레스 리스너를 연결한다
                 val binding: ItemLocalListBinding = DataBindingUtil.bind(itemView!!)!!

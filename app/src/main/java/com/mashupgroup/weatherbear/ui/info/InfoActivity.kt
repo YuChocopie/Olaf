@@ -1,12 +1,12 @@
 package com.mashupgroup.weatherbear.ui.info
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_info.*
 import android.content.Intent
 import android.content.ActivityNotFoundException
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import com.mashupgroup.weatherbear.R
+import kotlinx.android.synthetic.main.activity_info.*
 
 
 class InfoActivity : AppCompatActivity() {

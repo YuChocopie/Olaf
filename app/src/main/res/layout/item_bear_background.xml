@@ -14,11 +14,11 @@
             type="com.mashupgroup.weatherbear.ui.main.viewmodel.BackgroundViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bear_height">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/main_bear_height"
             android:background="@{bg.bg}"
@@ -207,8 +207,8 @@
                 app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_back_snow_02" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -1,11 +1,10 @@
 package com.mashupgroup.weatherbear.ui.main
 
-import android.content.Context
-import android.databinding.DataBindingUtil
-import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.viewpager.widget.PagerAdapter
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.databinding.ItemWeatherBinding
 

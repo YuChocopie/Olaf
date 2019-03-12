@@ -14,11 +14,11 @@
             type="com.mashupgroup.weatherbear.ui.main.viewmodel.BearViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/snowBear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,9 +69,9 @@
                 android:src="@drawable/ic_msg_bear_snow_scarf_low"
                 app:layout_constraintStart_toStartOf="@+id/snowBearScarfHigh"
                 app:layout_constraintTop_toTopOf="@+id/snowBearScarfHigh" />
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -288,6 +288,6 @@
                 app:layout_constraintBottom_toTopOf="@+id/bear_scarf_high"
                 app:layout_constraintStart_toEndOf="@+id/bear_ear_right" />
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

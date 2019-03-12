@@ -13,7 +13,7 @@
             type="com.mashupgroup.weatherbear.ui.main.viewmodel.IsDayViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/todayTemperatures"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_weather_box_hight"
@@ -263,5 +263,5 @@
 
 
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

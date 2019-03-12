@@ -5,11 +5,11 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.location.Address
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.View.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.mashupgroup.weatherbear.Global
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.ui.location.viewmodel.LocalViewModel

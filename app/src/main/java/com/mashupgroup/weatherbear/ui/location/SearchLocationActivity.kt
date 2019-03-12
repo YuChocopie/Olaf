@@ -3,11 +3,9 @@ package com.mashupgroup.weatherbear.ui.location
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -17,6 +15,8 @@ import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.mashupgroup.weatherbear.Global
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.databinding.ActivitySearchLocationBinding

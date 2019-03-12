@@ -2,11 +2,11 @@ package com.mashupgroup.weatherbear.ui.main
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.design.widget.AppBarLayout
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import com.google.android.material.appbar.AppBarLayout
 import com.mashupgroup.weatherbear.R
 import kotlinx.android.synthetic.main.top_bear.view.*
 
@@ -43,31 +43,30 @@ class MainAppbarLayout : AppBarLayout {
             }
         )
 
-        addOnOffsetChangedListener { _, verticalOffset ->
-            run {
-                when {
-                    verticalOffset == 0 -> {
-                        // Expanded
-                        currentState = STATE.EXPANDED
+        addOnOffsetChangedListener(OnOffsetChangedListener { _, verticalOffset ->
+            when {
+                verticalOffset == 0 -> {
+                    // Expanded
+                    currentState = STATE.EXPANDED
+                }
+                Math.abs(verticalOffset) >= totalScrollRange -> {
+                    // Collapsed
+                    if(currentState != STATE.COLLAPSED) {
+                        bearWrapper.startAnimation(animFadeOut)
                     }
-                    Math.abs(verticalOffset) >= totalScrollRange -> {
-                        // Collapsed
-                        if(currentState != STATE.COLLAPSED) {
-                            bearWrapper.startAnimation(animFadeOut)
-                        }
 
-                        currentState = STATE.COLLAPSED
+                    currentState = STATE.COLLAPSED
+                }
+                else -> {
+                    // Middle of scroll
+                    if(currentState == STATE.COLLAPSED) {
+                        bearWrapper.startAnimation(animFadeIn)
                     }
-                    else -> {
-                        // Middle of scroll
-                        if(currentState == STATE.COLLAPSED) {
-                            bearWrapper.startAnimation(animFadeIn)
-                        }
 
-                        currentState = STATE.IDLE
-                    }
+                    currentState = STATE.IDLE
                 }
             }
-        }
+        })
+
     }
 }
