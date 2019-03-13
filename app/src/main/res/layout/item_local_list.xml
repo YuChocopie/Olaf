@@ -8,7 +8,7 @@
 
         <variable
             name="localData"
-            type="com.mashupgroup.weatherbear.viewmodels.LocalViewModel" />
+            type="com.mashupgroup.weatherbear.ui.location.viewmodel.LocalViewModel" />
     </data>
 
     <LinearLayout
