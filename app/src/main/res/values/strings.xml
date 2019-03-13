@@ -63,6 +63,7 @@
     <string name="msg_add_location_from_gps_q">Do you want to add the address from current your GPS location?</string>
     <string name="msg_acquiring_your_location_gps">Acquiring your location from GPS..</string>
     <string name="info_developers">Euni Goh\nJujin Kim\nSanghee Choi\nYujeong Kim</string>
+    <string name="info_contributors" translatable="false">Contributors:\nbigstark</string>
     <string name="info_open_app_info">Open app info</string>
     <string name="info_opensource"><u>Open source licences</u></string>
 </resources>
