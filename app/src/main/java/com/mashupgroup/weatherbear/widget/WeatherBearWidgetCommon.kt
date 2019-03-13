@@ -56,6 +56,7 @@ abstract class WeatherBearWidgetCommon : AppWidgetProvider() {
                 widgetWeatherData.isDustLevelUpdated = true
                 widgetWeatherData.isWeatherUpdated = true
                 updateWeatherData(widgetWeatherData)
+                return
             }
 
             // 저장된 장소가 있으므로 장소(첫번째꺼) 가져옴
