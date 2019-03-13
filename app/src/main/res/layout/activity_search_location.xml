@@ -4,10 +4,10 @@
     xmlns:bind="http://schemas.android.com/tools">
     <data>
         <import type="android.databinding.ObservableArrayList" />
-        <import type="com.mashupgroup.weatherbear.viewmodels.SearchItemViewModel" />
+        <import type="com.mashupgroup.weatherbear.ui.location.viewmodel.SearchItemViewModel" />
         <variable
             name="searchResultList"
-            type="com.mashupgroup.weatherbear.viewmodels.SearchItemViewModel" />
+            type="com.mashupgroup.weatherbear.ui.location.viewmodel.SearchItemViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,27 +7,11 @@ import android.content.Context
 import android.location.Address
 import android.location.Location
 import android.location.LocationManager
-import android.util.Log
 import com.mashupgroup.weatherbear.*
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.mashupgroup.weatherbear.Global
+import com.mashupgroup.weatherbear.data.DataRepository
 
 abstract class WeatherBearWidgetCommon : AppWidgetProvider() {
-    /* API */
-    private val weatherApiToken = BuildConfig.WEATHER_API_TOKEN
-    private val airApiToken = BuildConfig.AIR_API_TOKEN
-    private val kakaoApiToken = BuildConfig.KAKAO_API_TOKEN
-    private val airAPI = AirAPI()
-    private val airStationRetrofit = airAPI.createStationInfoRetrofit()
-    private val airStationInterface = airStationRetrofit.create(AirInterface::class.java)
-    private val airRetrofit = airAPI.createAirInfoRetrofit()
-    private val airInterface = airRetrofit.create(AirInterface::class.java)
-    private val weatherAPI = WeatherAPI()
-    private val weatherRetrofit = weatherAPI.createWeatherRetrofit()
-    private val weatherInterface = weatherRetrofit.create(WeatherInterface::class.java)
-    private val kakaoAPI = KakaoAPI()
-    private val kakaoRetrofit = kakaoAPI.createTransRetrofit()
-    private val kakaoInterface = kakaoRetrofit.create(KakaoInterface::class.java)
 
     enum class WdgFineDustLvl { GOOD, NORMAL, BAD, WORST, NO_DATA }
     enum class WdgWeather { SUNNY, SNOW, RAIN, CLOUDY, THUNDER, NO_DATA }
@@ -111,59 +95,10 @@ abstract class WeatherBearWidgetCommon : AppWidgetProvider() {
         if(savedContext == null || savedAppWidgetManager == null || savedAppWidgetIds == null) return
 
         /* Get TM Postion */
-        kakaoInterface.getPos(kakaoApiToken, location.longitude, location.latitude, "WGS84", "TM")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( { coord -> coord?.let { requestStationInfo(data, coord.documents[0].x, coord.documents[0].y, savedContext!!) } },
-                            { err -> err.printStackTrace() })
-
-        /* Get WdgWeather */
-        weatherInterface.getWeather(location.latitude, location.longitude, weatherApiToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( { weatherInfo ->
-                    weatherInfo?.let {
-                        data.isWeatherUpdated = true
-                        val weatherId = it.weather[0].id
-                        when (weatherId / 100) {
-                            2 -> data.weather = WdgWeather.THUNDER
-                            3 -> data.weather = WdgWeather.RAIN
-                            6 -> data.weather = WdgWeather.SNOW
-                            7 -> data.weather = WdgWeather.CLOUDY
-                            8 -> if (weatherId == 800) data.weather = WdgWeather.SUNNY
-                                 else data.weather = WdgWeather.CLOUDY
-                            else -> data.weather = WdgWeather.SUNNY
-                        }
-                        data.temperature = (it.main.temp - 273.15).toInt()
-                        updateWeatherData(data)
-                    }
-                }, { err -> err.printStackTrace() })
-    }
-
-    @SuppressLint("CheckResult")
-    private fun requestStationInfo(data: WidgetWeatherData, tmX: String, tmY: String, context: Context) {
-        if(savedContext == null || savedAppWidgetManager == null || savedAppWidgetIds == null) return
-
-        /* Get StationInfo */
-        airStationInterface.getStation("json", tmX, tmY, airApiToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( { stationInfo -> stationInfo?.let{ station -> requestAirInfo(data, station.list[0].stationName, context) } },
-                            { err -> err.printStackTrace() })
-    }
-
-    @SuppressLint("CheckResult")
-    private fun requestAirInfo(data: WidgetWeatherData, stationName: String, context: Context) {
-        if(savedContext == null || savedAppWidgetManager == null || savedAppWidgetIds == null) return
-
-        /* Get AirInfo */
-        airInterface.getAir(context.getString(R.string.api_json), 1, stationName, context.getString(R.string.api_daily), 1.3, airApiToken)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ airInfo ->
+        DataRepository.getAirInfo(location)
+                .subscribe({ items ->
                     data.isDustLevelUpdated = true
-                    Log.v("requestAirInfo", "$stationName : $airInfo")
-                    val dustLevel = airInfo.list[0].pm10Grade.toInt()
+                    val dustLevel = items[0].pm10Grade.toInt()
                     data.fineDustLevel = when(dustLevel) {
                         1 -> WdgFineDustLvl.GOOD
                         2 -> WdgFineDustLvl.NORMAL
@@ -172,8 +107,29 @@ abstract class WeatherBearWidgetCommon : AppWidgetProvider() {
                         else -> WdgFineDustLvl.NO_DATA
                     }
                     updateWeatherData(data)
+                }, { error ->
+                    error.printStackTrace()
+                })
 
-                }, { err -> err.printStackTrace() })
+        /* Get WdgWeather */
+        DataRepository.getWeather(location)
+                .subscribe({ weatherInfo ->
+                    data.isWeatherUpdated = true
+                    val weatherId = weatherInfo.weather[0].id
+                    when (weatherId / 100) {
+                        2 -> data.weather = WdgWeather.THUNDER
+                        3 -> data.weather = WdgWeather.RAIN
+                        6 -> data.weather = WdgWeather.SNOW
+                        7 -> data.weather = WdgWeather.CLOUDY
+                        8 -> if (weatherId == 800) data.weather = WdgWeather.SUNNY
+                        else data.weather = WdgWeather.CLOUDY
+                        else -> data.weather = WdgWeather.SUNNY
+                    }
+                    data.temperature = (weatherInfo.main.temp - 273.15).toInt()
+                    updateWeatherData(data)
+                }, { error ->
+                    error.printStackTrace()
+                })
     }
 
     override fun onEnabled(context: Context) {

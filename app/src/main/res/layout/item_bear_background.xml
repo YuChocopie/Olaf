@@ -11,7 +11,7 @@
 
         <variable
             name="bg"
-            type="com.mashupgroup.weatherbear.viewmodels.BackgroundViewModel" />
+            type="com.mashupgroup.weatherbear.ui.main.viewmodel.BackgroundViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

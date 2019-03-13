@@ -5,7 +5,7 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
-import com.mashupgroup.weatherbear.MainActivity
+import com.mashupgroup.weatherbear.ui.main.MainActivity
 
 import com.mashupgroup.weatherbear.R
 import java.util.*

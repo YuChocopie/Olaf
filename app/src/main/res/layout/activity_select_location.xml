@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/location_list_bg"
     android:fitsSystemWindows="true"
-    tools:context=".location.SelectLocationActivity">
+    tools:context=".ui.location.SelectLocationActivity">
 
     <LinearLayout
         android:id="@+id/locationListWrapper"

@@ -68,7 +68,7 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <com.mashupgroup.weatherbear.GraphViewWeek
+    <com.mashupgroup.weatherbear.ui.main.GraphViewWeek
         android:id="@+id/GraphViewWeek"
         android:layout_width="0dp"
         android:layout_height="100dp"

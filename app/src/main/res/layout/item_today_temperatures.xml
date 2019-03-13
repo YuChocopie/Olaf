@@ -10,7 +10,7 @@
 
         <variable
             name="isDayData"
-            type="com.mashupgroup.weatherbear.viewmodels.IsDayViewModel" />
+            type="com.mashupgroup.weatherbear.ui.main.viewmodel.IsDayViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -34,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.mashupgroup.weatherbear.GraphViewDay
+        <com.mashupgroup.weatherbear.ui.main.GraphViewDay
             android:id="@+id/GraphViewTime"
             android:layout_width="match_parent"
             android:layout_height="0dp"
