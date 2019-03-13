@@ -9,5 +9,6 @@ object Constants {
     const val RESULT_CODE_SEARCH_LOCATION_ACTIVITY = 111
 
     const val RES_KEY_SEL_LOCATION_IS_ITEM_CHANGED = "isItemChanged"
+    const val RES_KEY_SEL_LOCATION_CLICKED_ADDR_IDX = "clickedAddrIdx"
 
 }

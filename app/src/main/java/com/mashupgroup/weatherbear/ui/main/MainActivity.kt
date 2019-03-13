@@ -22,6 +22,7 @@ import android.view.View
 import android.widget.Toast
 import com.mashupgroup.weatherbear.*
 import com.mashupgroup.weatherbear.Constants.RESULT_CODE_ADDRESS_MANAGE_ACTIVITY
+import com.mashupgroup.weatherbear.Constants.RES_KEY_SEL_LOCATION_CLICKED_ADDR_IDX
 import com.mashupgroup.weatherbear.Constants.RES_KEY_SEL_LOCATION_IS_ITEM_CHANGED
 import com.mashupgroup.weatherbear.Global.createLocationString
 import com.mashupgroup.weatherbear.data.DataRepository
@@ -498,6 +499,12 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             initWithSavedAddressData()
                         }
+                    }
+
+                    // 위치관리 액티비티에서 항목을 '선택'했다면, 해당 주소로 바로 이동
+                    val clickedAddrIdx = intent.getIntExtra(RES_KEY_SEL_LOCATION_CLICKED_ADDR_IDX, -1)
+                    if (clickedAddrIdx >= 0 && mainPagerAdapter.itemList.size > clickedAddrIdx) {
+                        viewPager.currentItem = clickedAddrIdx
                     }
                 }
             }
