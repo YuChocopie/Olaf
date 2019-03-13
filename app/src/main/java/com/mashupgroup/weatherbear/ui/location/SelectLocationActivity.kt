@@ -10,13 +10,14 @@ import android.os.Bundle
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.View.*
+import com.mashupgroup.weatherbear.Constants.RESULT_CODE_SEARCH_LOCATION_ACTIVITY
+import com.mashupgroup.weatherbear.Constants.RES_KEY_SEL_LOCATION_IS_ITEM_CHANGED
 import com.mashupgroup.weatherbear.Global
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.ui.location.viewmodel.LocalViewModel
 import kotlinx.android.synthetic.main.activity_select_location.*
 
 class SelectLocationActivity : AppCompatActivity() {
-    private val RESULT_CODE_SEARCH_LOCATION_ACTIVITY = 111
     private var isItemChanged = false
 
     /** 위치 리스트의 아이템이 변경되었을 때(swipe/reorder) 불리는 콜백리스너 */
@@ -106,7 +107,7 @@ class SelectLocationActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // 종료시 데이터 변경 여부에 대해 intent에 실어놓는다
         val resultIntent = Intent()
-        resultIntent.putExtra("isItemChanged", isItemChanged)
+        resultIntent.putExtra(RES_KEY_SEL_LOCATION_IS_ITEM_CHANGED, isItemChanged)
         setResult(RESULT_OK, resultIntent)
 
         super.onBackPressed()

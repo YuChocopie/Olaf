@@ -4,11 +4,10 @@ import android.content.Context.MODE_PRIVATE
 import android.location.Address
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.mashupgroup.weatherbear.Constants.SP_ADDR_SAVE_KEY
+import com.mashupgroup.weatherbear.Constants.SP_FIRSTSCREEN_CURRENTLOC_SAVE_KEY
+import com.mashupgroup.weatherbear.Constants.SP_WEATHERBEAR_KEY
 import java.lang.Exception
-
-const val SP_WEATHERBEAR_KEY = "WeatherBearKey"
-const val SP_ADDR_SAVE_KEY = "AddressSaveKey"
-const val SP_FIRSTSCREEN_CURRENTLOC_SAVE_KEY = "FirstScreenCurrentLocationSaveKey"
 
 /**
  * 모든 클래스에서 참조할 수 있는 도우미 싱글톤 클래스

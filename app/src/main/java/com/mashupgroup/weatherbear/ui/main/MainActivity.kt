@@ -21,6 +21,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.mashupgroup.weatherbear.*
+import com.mashupgroup.weatherbear.Constants.RESULT_CODE_ADDRESS_MANAGE_ACTIVITY
+import com.mashupgroup.weatherbear.Constants.RES_KEY_SEL_LOCATION_IS_ITEM_CHANGED
 import com.mashupgroup.weatherbear.Global.createLocationString
 import com.mashupgroup.weatherbear.data.DataRepository
 import com.mashupgroup.weatherbear.databinding.ActivityMainBinding
@@ -55,8 +57,6 @@ class MainActivity : AppCompatActivity() {
     private val noAddressBgVM = BackgroundViewModel()
 
     private var dayTimeTemperture = intArrayOf(100, 100, 0, 0, 0, 0, 0, 0)
-
-    private val RESULT_CODE_ADDRESS_MANAGE_ACTIVITY = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -491,7 +491,7 @@ class MainActivity : AppCompatActivity() {
             if (resultCode == RESULT_OK) {
                 data?.let { intent ->
 
-                    if (intent.getBooleanExtra("isItemChanged", false)) {
+                    if (intent.getBooleanExtra(RES_KEY_SEL_LOCATION_IS_ITEM_CHANGED, false)) {
                         // 불러올 위치가 없으면 메시지를 띄움. 불러올 위치가 있으면 데이터 세팅
                         if (!Global.isFirstPageCurrentLocation && Global.addressList.size == 0) {
                             showNoAddress()
