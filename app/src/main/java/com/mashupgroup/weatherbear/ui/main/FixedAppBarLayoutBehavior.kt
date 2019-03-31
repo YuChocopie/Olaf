@@ -17,11 +17,11 @@
 package com.mashupgroup.weatherbear.ui.main
 
 import android.content.Context
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CoordinatorLayout
-import android.support.v4.view.ViewCompat
+import androidx.core.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.appbar.AppBarLayout
 
 /*
 AppBarLayout의 동작에 문제가 있는 것 같아서, 동작을 수정한 Behavior를 AppBarLayout에 적용 (구글치니깐 나오네)

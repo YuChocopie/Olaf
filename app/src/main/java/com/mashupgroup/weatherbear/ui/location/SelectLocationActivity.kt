@@ -5,14 +5,11 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.location.Address
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.View.*
-import com.mashupgroup.weatherbear.Constants.RESULT_CODE_SEARCH_LOCATION_ACTIVITY
-import com.mashupgroup.weatherbear.Constants.RES_KEY_SEL_LOCATION_CLICKED_ADDR_IDX
-import com.mashupgroup.weatherbear.Constants.RES_KEY_SEL_LOCATION_IS_ITEM_CHANGED
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.mashupgroup.weatherbear.Global
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.ui.location.viewmodel.LocalViewModel

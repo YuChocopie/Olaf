@@ -14,7 +14,7 @@
             type="com.mashupgroup.weatherbear.ui.main.viewmodel.BackgroundViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBearBgWrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bear_height"
@@ -44,5 +44,5 @@
 
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

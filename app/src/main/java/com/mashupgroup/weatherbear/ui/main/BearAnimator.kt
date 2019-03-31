@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.WeatherBearApp
 import kotlinx.android.synthetic.main.bear.view.*
@@ -77,7 +78,7 @@ object BearAnimator {
             this.clearAnimation()
     }
 
-    fun updateAnimation(topBearViewGroup: ViewGroup) {
+    fun updateAnimation(topBearViewGroup: View) {
         //snowman
         topBearViewGroup.snowBear?.startAnimationIfVisible(snow_bear)
         //양 귀 흔들기

@@ -6,20 +6,21 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.databinding.DataBindingUtil.setContentView
-import android.databinding.OnRebindCallback
 import android.location.Address
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.view.ViewPager.SimpleOnPageChangeListener
-import android.support.v7.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.OnRebindCallback
+import androidx.viewpager.widget.ViewPager
 import com.mashupgroup.weatherbear.*
 import com.mashupgroup.weatherbear.Constants.RESULT_CODE_ADDRESS_MANAGE_ACTIVITY
 import com.mashupgroup.weatherbear.Constants.RES_KEY_SEL_LOCATION_CLICKED_ADDR_IDX
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         checkLocationPermission()
 
         // 바인딩 객체 세팅
-        mainViewDataBinding = setContentView(this, R.layout.activity_main)
+        mainViewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         // 바인딩이 완료될 때마다(뷰의 visibility등 모조리 바뀐 후) 곰돌이/배경의 애니메이션 재생상태 업데이트
         mainViewDataBinding.addOnRebindCallback(object : OnRebindCallback<ActivityMainBinding>() {
             override fun onBound(binding: ActivityMainBinding?) {
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
         // ViewPager 초기화
         viewPager.initialize(mainIndicator)
-        viewPager.addOnPageChangeListener(object : SimpleOnPageChangeListener() {
+        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 // ViewPager 페이지가 바뀔 때마다 불림. 데이터 갱신
                 setTopViewModelData(position)
@@ -457,7 +458,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar as Toolbar)
         supportActionBar?.let {
             it.title = ""
         }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/tools">
     <data>
-        <import type="android.databinding.ObservableArrayList" />
+        <import type="androidx.databinding.ObservableArrayList" />
         <import type="com.mashupgroup.weatherbear.ui.location.viewmodel.SearchItemViewModel" />
         <variable
             name="searchResultList"
@@ -58,11 +58,11 @@
         </LinearLayout>
 
         <!-- Result list -->
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSearchLocationResult"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:background="@android:color/white"
             android:visibility="gone" />
 

@@ -14,7 +14,7 @@
             type="com.mashupgroup.weatherbear.ui.main.viewmodel.IsDayViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_weather_box_hight"
         android:background="@drawable/weather_box">
@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/todayWeatherConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -135,7 +135,7 @@
                 app:layout_constraintStart_toEndOf="@+id/DayWeatherSensibleTemperatureText"
                 tools:text="-12" />
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/dayWeatherFineDustBox"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/TEXT_SIZE_23"
@@ -202,9 +202,9 @@
                     tools:text="@string/fine_dust_bad" />
 
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/UltrafineDustBox"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/TEXT_SIZE_23"
@@ -271,7 +271,7 @@
                     tools:text="@string/fine_dust_very_bad" />
 
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tvIsDay"
@@ -288,6 +288,6 @@
                 android:textSize="@dimen/TEXT_SIZE_10"
                 app:layout_constraintBottom_toTopOf="@+id/DayWeatherSensibleTemperatureText"
                 app:layout_constraintStart_toStartOf="@+id/DayWeatherSensibleTemperatureText" />
-        </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

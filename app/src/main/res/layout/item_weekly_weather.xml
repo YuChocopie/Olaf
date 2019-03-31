@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/weeklyWeather"
@@ -83,4 +83,4 @@
         app:lineThickness="3dp"
         app:textColor="#737272"
         app:textSize="14sp" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.ConstraintLayout>
