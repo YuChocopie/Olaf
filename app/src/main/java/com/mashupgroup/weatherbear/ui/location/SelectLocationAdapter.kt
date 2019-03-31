@@ -10,7 +10,7 @@ import com.mashupgroup.weatherbear.R
 import com.mashupgroup.weatherbear.databinding.ItemLocalListBinding
 import java.util.*
 
-class SelectLocationAdapter(var itemRemoveListener: IItemChangedRequestListener) :
+class SelectLocationAdapter(private var itemEventListener: IItemChangedRequestListener) :
         RecyclerView.Adapter<SelectLocationAdapter.Companion.SelectItemVH>(),
         SelectLocationItemTouchCallback.IOnItemEditListener {
     var itemList = ArrayList<SelectLocationItem>()
@@ -27,7 +27,7 @@ class SelectLocationAdapter(var itemRemoveListener: IItemChangedRequestListener)
     override fun onBindViewHolder(holder: SelectItemVH, position: Int) {
         val item = itemList[position]
         holder.bind(item)
-
+        holder.itemView.setOnClickListener { itemEventListener.onItemClicked(position) }
     }
 
     fun setData(dataList : ArrayList<SelectLocationItem>) {
@@ -39,12 +39,12 @@ class SelectLocationAdapter(var itemRemoveListener: IItemChangedRequestListener)
     override fun onItemMoved(posFrom: Int, posTo: Int) {
         Collections.swap(itemList, posFrom, posTo)
         notifyItemMoved(posFrom, posTo)
-        itemRemoveListener.onRequestedItemSwap()
+        itemEventListener.onRequestedItemSwap()
     }
 
     // When Item is swiped out
     override fun onItemSwiped(pos: Int) {
-        itemRemoveListener.onRequestedItemRemove(itemList[pos].address)
+        itemEventListener.onRequestedItemRemove(itemList[pos].address)
     }
 
     companion object {
@@ -53,12 +53,13 @@ class SelectLocationAdapter(var itemRemoveListener: IItemChangedRequestListener)
                 // 아이템 뷰모델을 바인딩하고, 롱프레스 리스너를 연결한다
                 val binding: ItemLocalListBinding = DataBindingUtil.bind(itemView!!)!!
                 binding.localData = vmItem.viewModel
-              }
+            }
         }
 
         interface IItemChangedRequestListener {
             fun onRequestedItemSwap()
             fun onRequestedItemRemove(address: Address)
+            fun onItemClicked(idx: Int)
         }
     }
 }

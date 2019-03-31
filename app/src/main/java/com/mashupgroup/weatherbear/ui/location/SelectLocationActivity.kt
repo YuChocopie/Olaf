@@ -16,12 +16,20 @@ import com.mashupgroup.weatherbear.ui.location.viewmodel.LocalViewModel
 import kotlinx.android.synthetic.main.activity_select_location.*
 
 class SelectLocationActivity : AppCompatActivity() {
-    private val RESULT_CODE_SEARCH_LOCATION_ACTIVITY = 111
     private var isItemChanged = false
 
-    /** 위치 리스트의 아이템이 변경되었을 때(swipe/reorder) 불리는 콜백리스너 */
-    private val changedListener: SelectLocationAdapter.Companion.IItemChangedRequestListener =
+    /** 위치 리스트의 아이템이 변경되었을 때(swipe/reorder), 또는 클릭됐을 때 불리는 콜백리스너 */
+    private val itemEventListener: SelectLocationAdapter.Companion.IItemChangedRequestListener =
             object : SelectLocationAdapter.Companion.IItemChangedRequestListener {
+
+        // 클릭되면 해당 항목 바로 보여줌 (메인액티비티로 돌아가서)
+        override fun onItemClicked(idx: Int) {
+            val resultIntent = Intent()
+            resultIntent.putExtra(RES_KEY_SEL_LOCATION_IS_ITEM_CHANGED, isItemChanged)
+            resultIntent.putExtra(RES_KEY_SEL_LOCATION_CLICKED_ADDR_IDX, idx)
+            setResult(RESULT_OK, resultIntent)
+            finish()
+        }
 
         // 삭제요청시 삭제할지 먼저 물어봄
         override fun onRequestedItemRemove(address: Address) {
@@ -69,7 +77,7 @@ class SelectLocationActivity : AppCompatActivity() {
         }
     }
 
-    private val mAdapter = SelectLocationAdapter(changedListener)
+    private val mAdapter = SelectLocationAdapter(itemEventListener)
     private val mItemTouchHelper = SelectLocationItemTouchCallback(mAdapter)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,7 +114,8 @@ class SelectLocationActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // 종료시 데이터 변경 여부에 대해 intent에 실어놓는다
         val resultIntent = Intent()
-        resultIntent.putExtra("isItemChanged", isItemChanged)
+        resultIntent.putExtra(RES_KEY_SEL_LOCATION_IS_ITEM_CHANGED, isItemChanged)
+        resultIntent.putExtra(RES_KEY_SEL_LOCATION_CLICKED_ADDR_IDX, -1)
         setResult(RESULT_OK, resultIntent)
 
         super.onBackPressed()

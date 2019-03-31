@@ -48,11 +48,11 @@
                 android:layout_width="@dimen/today_weather_shape"
                 android:layout_height="@dimen/today_weather_shape"
                 android:src="@{isDayData.todayWeatherShape}"
+                android:tint="@{isDayData.todayWeatherShapeTint}"
+                android:tintMode="add"
                 app:layout_constraintEnd_toStartOf="@+id/view"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:tintMode="add"
-                android:tint="@{isDayData.todayWeatherShapeTint}"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvDayWeatherShape"
@@ -81,22 +81,26 @@
             <TextView
                 android:id="@+id/tvDayWeatherTemperature"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/SIZE_50"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/SIZE_16"
-                android:gravity="end"
+                android:gravity="end|bottom"
                 android:lineSpacingExtra="@dimen/TEXT_SIZE_19"
                 android:text="@{isDayData.todayTemperature}"
                 android:textColor="@color/black2"
                 android:textSize="@dimen/TEXT_SIZE_40"
+                app:layout_constraintBottom_toTopOf="@+id/dayWeatherFineDustBox"
                 app:layout_constraintEnd_toStartOf="@+id/DayWeatherTemperatureText"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toEndOf="@id/view"
                 app:layout_constraintTop_toTopOf="@id/ivDayWeatherShape"
+                app:layout_constraintVertical_chainStyle="packed"
                 tools:text="-80" />
 
             <TextView
                 android:id="@+id/DayWeatherTemperatureText"
                 android:layout_width="@dimen/TEXT_SIZE_22"
                 android:layout_height="@dimen/SIZE_30"
+                android:layout_marginStart="@dimen/SIZE_5"
                 android:gravity="center_horizontal"
                 android:lineSpacingExtra="@dimen/TEXT_SIZE_9"
                 android:text="@string/c"
@@ -138,6 +142,7 @@
                 android:layout_marginTop="@dimen/SIZE_10"
                 android:layout_marginEnd="@dimen/SIZE_15"
                 android:background="@drawable/weather_dust_box"
+                app:layout_constraintBottom_toTopOf="@+id/UltrafineDustBox"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvDayWeatherTemperature"
                 app:layout_constraintTop_toBottomOf="@+id/tvDayWeatherTemperature">
@@ -155,10 +160,9 @@
 
                 <TextView
                     android:id="@+id/TodayWeatherFineDustText"
-                    android:layout_width="@dimen/weather_box_textX"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/SIZE_1"
-                    android:gravity="right"
+                    android:layout_marginStart="@dimen/SIZE_13"
                     android:lineSpacingExtra="@dimen/TEXT_SIZE_6"
                     android:text="@string/fine_dust"
                     android:textColor="@color/black6"
@@ -206,6 +210,7 @@
                 android:layout_height="@dimen/TEXT_SIZE_23"
                 android:layout_marginTop="@dimen/SIZE_5"
                 android:background="@drawable/weather_dust_box"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/dayWeatherFineDustBox"
                 app:layout_constraintStart_toStartOf="@+id/dayWeatherFineDustBox"
                 app:layout_constraintTop_toBottomOf="@+id/dayWeatherFineDustBox">
@@ -223,7 +228,7 @@
 
                 <TextView
                     android:id="@+id/UltrafineDustText"
-                    android:layout_width="@dimen/weather_box_textX"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/SIZE_1"
                     android:gravity="right|center_vertical"
@@ -270,12 +275,14 @@
 
             <TextView
                 android:id="@+id/tvIsDay"
-                android:layout_width="@dimen/SIZE_40"
-                android:layout_height="@dimen/SIZE_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/SIZE_2"
                 android:background="@drawable/ic_msg_now"
                 android:gravity="center"
                 android:lineSpacingExtra="@dimen/TEXT_SIZE_5"
+                android:paddingStart="@dimen/SIZE_5"
+                android:paddingEnd="@dimen/SIZE_5"
                 android:text="@string/now"
                 android:textColor="@color/white0"
                 android:textSize="@dimen/TEXT_SIZE_10"
